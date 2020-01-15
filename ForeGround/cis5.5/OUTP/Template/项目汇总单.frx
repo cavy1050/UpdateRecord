@@ -1,0 +1,787 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" StartReportEvent="_StartReport" ReportInfo.Created="09/23/2014 23:35:17" ReportInfo.Modified="01/11/2020 13:23:20" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="false">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using System.Data.SqlClient;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    string  queryText=&quot;&quot;;
+    private readonly string MZCISDBConnString = @&quot;Data Source=172.20.0.40\MZ;Initial Catalog=CISDB;UID=sa; PWD=sql2k8;&quot;;
+    private readonly string MZDBConnString= @&quot;Data Source=172.20.0.40\MZ;Initial Catalog=THIS_MZ;UID=sa; PWD=sql2k8;&quot;;
+    
+    private void Text_price(object sender, EventArgs e)
+    {
+      decimal jyprice = ((Decimal)Report.GetColumnValue(&quot;检验申请单明细.Price&quot;));
+      decimal jcprice = ((Decimal)Report.GetColumnValue(&quot;检查申请单明细.Price&quot;));
+      Text10.Text =  Math.Round(jyprice,2).ToString();
+      Text9.Text =  Math.Round(jcprice,2).ToString();
+    }
+    private void PageHeader2_BeforePrint(object sender, EventArgs e)
+    {
+      String configX005;
+      //Text22.Text=&quot;日期：&quot;+DateTime.Now.ToString(&quot;yyyy年MM月dd日&quot;);
+      
+      //取参数
+      queryText=&quot;SELECT config FROM dbo.YY_CONFIG (nolock) WHERE id='&quot;+&quot;X005'&quot;;
+      using (SqlConnection conn = new SqlConnection(MZDBConnString))
+      {
+        using (SqlCommand cmd = new SqlCommand(queryText, conn))
+        {
+          conn.Open();
+          configX005 = cmd.ExecuteScalar().ToString();
+        }
+      }
+      
+      if (configX005.IndexOf(Trim(Report.GetColumnValue(&quot;PatBasicInfo.Ghksdm&quot;).ToString()))&gt;-1)
+      {
+        Barcode2.Visible=true;
+      }
+      else
+      {
+        Barcode2.Visible=false;
+      }     
+    }  
+    
+    private void Data2_BeforePrint(object sender, EventArgs e)
+    {
+
+     
+      
+      int index=1;
+      String separatorstr=String.Empty;
+      String jyksxx=String.Empty;
+      String jyksmcstr=&quot;检验科|大公馆检验科|黄水检验科&quot;;
+      String jyksxxstr=Report.GetColumnValue(&quot;检验申请单明细.Description&quot;).ToString();
+      String[] jyksmcs = jyksmcstr.Split('|');   
+                
+
+      
+      int statrindex=0;
+      int endindex=0;
+      
+      foreach (String jyksmc in jyksmcs)
+      {
+        if (jyksmc== Report.GetColumnValue(&quot;检验申请单明细.Ksmc&quot;).ToString())
+        {
+          if (  jyksxxstr.Trim()==  String.Empty)
+          {
+            jyksxx=String.Empty;
+          }
+          else
+          {
+            endindex=jyksxxstr.IndexOf(separatorstr.PadLeft(index,'|'));
+            jyksxx=jyksxxstr.Substring(0,endindex);
+            for (int i=index;i&gt;=1;i--)
+            {
+              if (jyksxx.IndexOf(separatorstr.PadLeft(i-1,'|'))&gt;0)
+              {
+                statrindex=jyksxx.IndexOf(separatorstr.PadLeft(i-1,'|'))+(i-1);
+                break;
+              }
+              else
+              {
+                statrindex=0;
+              }
+            } 
+            jyksxx=jyksxx.Substring(statrindex,jyksxx.Length-statrindex);
+          }
+          index++;
+        }
+      }
+      
+      Text6.Text=jyksxx;
+    }
+
+    private void Data3_BeforePrint(object sender, EventArgs e)
+    {       
+      int index;
+      int statrindex;
+      int endindex;
+            
+      String separatorstr=String.Empty;
+      String jcksxx=String.Empty;
+      String[] jcksmcstrs=new String[]{&quot;超声组|大公馆超声科|黄水超声科&quot;,&quot;放射组|大公馆放射科|黄水放射科&quot;,&quot;心电组&quot;};
+      String jcksxxstr=Report.GetColumnValue(&quot;检查申请单明细.Description&quot;).ToString(); 
+      
+      foreach (String jcksmcstr in jcksmcstrs)
+      {
+        index=1;
+        statrindex=0;
+        endindex=0;
+        
+        String[] jcksmcs = jcksmcstr.Split('|');
+        foreach (String jcksmc in jcksmcs)
+        {
+          if (jcksmc== Report.GetColumnValue(&quot;检查申请单明细.Ksmc&quot;).ToString())
+          {
+            if (  jcksxxstr.Trim()==  String.Empty)
+            {
+              jcksxx=String.Empty;
+            }
+            else
+            {
+              endindex=jcksxxstr.IndexOf(separatorstr.PadLeft(index,'|'));
+              jcksxx=jcksxxstr.Substring(0,endindex);
+              for (int i=index;i&gt;=1;i--)
+              {
+                if (jcksxx.IndexOf(separatorstr.PadLeft(i-1,'|'))&gt;0)
+                {
+                  statrindex=jcksxx.IndexOf(separatorstr.PadLeft(i-1,'|'))+(i-1);
+                  break;
+                }
+                else
+                {
+                  statrindex=0;
+                }
+              } 
+              jcksxx=jcksxx.Substring(statrindex,jcksxx.Length-statrindex);
+            }
+          }
+          index++;
+        }
+      }
+      
+      Text8.Text=jcksxx;
+      }
+
+    private void Text11_BeforePrint(object sender, EventArgs e)
+    {
+      string queryText=&quot;select TSZDMC from dbo.OUTP_BRSQDK (nolock) where XH=&quot;+Report.GetColumnValue(&quot;检查申请单明细.Sqxh&quot;).ToString();
+
+      using (SqlConnection conn = new SqlConnection(MZCISDBConnString))
+      {
+        using (SqlCommand cmd = new SqlCommand(queryText, conn))
+        {
+          conn.Open();
+          Text11.Text = cmd.ExecuteScalar().ToString();
+        }
+      }
+    }
+
+    private void Text12_BeforePrint(object sender, EventArgs e)
+    {
+      string queryText=&quot;select TSZDMC from dbo.OUTP_BRSQDK (nolock) where XH=&quot;+Report.GetColumnValue(&quot;检验申请单明细.Sqxh&quot;).ToString();
+
+      using (SqlConnection conn = new SqlConnection(MZCISDBConnString))
+      {
+        using (SqlCommand cmd = new SqlCommand(queryText, conn))
+        {
+          conn.Open();
+          Text12.Text = cmd.ExecuteScalar().ToString();
+        }
+      }
+    }
+
+   
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="THIS_ZY" ConnectionString="rijcmlqxfki+t8jnSxof6qn6ng9vShM0/RmEccdLw/zMv2ndpjN1smFouO2mUggkEB+eulnYg0jUQnm3hPeYu1V1coeKurxH0oS3fNQOPyfjpw5L1Rm6y0zKKfkqG5nD2baiOr7ro1NJ0nXWD8AKhwmA37nqSc4vo0jWUDzagK126L6WXaPynL9W99lQygMrdFDg+ss9V3c3LI0VaLJTdWSAF4d2Q==">
+      <TableDataSource Name="Table3" Alias="检验申请单引导信息" DataType="System.Int32" Enabled="true" SelectCommand="SELECT ksdm,name,kslx,yxjl,memo FROM dbo.TF_ZXKS&#13;&#10;WHERE kslx=80&#13;&#10;ORDER BY kslx,ksdm">
+        <Column Name="ksdm" DataType="System.String"/>
+        <Column Name="name" DataType="System.String"/>
+        <Column Name="memo" DataType="System.String"/>
+        <Column Name="kslx" DataType="System.Int16"/>
+        <Column Name="yxjl" DataType="System.Int16"/>
+      </TableDataSource>
+      <TableDataSource Name="Table4" Alias="检查申请单引导信息" DataType="System.Int32" Enabled="true" SelectCommand="SELECT ksdm,name,kslx,yxjl,memo FROM dbo.TF_ZXKS&#13;&#10;WHERE kslx=90&#13;&#10;ORDER BY kslx,ksdm">
+        <Column Name="ksdm" DataType="System.String"/>
+        <Column Name="name" DataType="System.String"/>
+        <Column Name="memo" DataType="System.String"/>
+        <Column Name="kslx" DataType="System.Int16"/>
+        <Column Name="yxjl" DataType="System.Int16"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <MsSqlDataConnection Name="CISDB" ConnectionString="rijcmlqxfki+t8jnSxof6qn6ng9vUP6mDCQwXkVLMI15euSdqz6GLL1CprNUvcPZ0UIZ3sIlpxv/pcVLDMtVZSpCzNJOSwCMXFAKhYnBzbffbXwbWfLmtZOVonpaZXbK6Fr/9PgVcLONP/EEzDNXV7iv0rU49xqOQHePPO3Sb0TglVerBAf/mNIYCsu4BmF/h0X1uJK07UJI8nyocCF7xNbS4xw5g==">
+      <TableDataSource Name="Table" Alias="ZLXXMX" DataType="System.Int32" Enabled="true" SelectCommand="select YPMC, YPSL, YPDW, YPJE, ZXKS from dbo.utf_his5_Getzlxmmx(@GHXH,@YSDM)">
+        <Column Name="YPMC" DataType="System.String"/>
+        <Column Name="YPSL" DataType="System.Decimal"/>
+        <Column Name="YPDW" DataType="System.String"/>
+        <Column Name="YPJE" DataType="System.Decimal"/>
+        <Column Name="ZXKS" DataType="System.String"/>
+        <CommandParameter Name="@GHXH" DataType="22" Expression="[PatBasicInfo.Ghxh]"/>
+        <CommandParameter Name="@YSDM" DataType="22" Expression="[PatBasicInfo.Ysdm]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <TableDataSource Name="PatBasicInfo" ReferenceName="报表数据.PatBasicInfo" DataType="System.Int32" Enabled="true">
+      <Column Name="Birth" DataType="System.String"/>
+      <Column Name="Blh" DataType="System.String"/>
+      <Column Name="Cardno" DataType="System.String"/>
+      <Column Name="Cardtype" DataType="System.String"/>
+      <Column Name="CardYe" DataType="System.String"/>
+      <Column Name="Cfzbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Csd_s" DataType="System.String"/>
+      <Column Name="Csd_x" DataType="System.String"/>
+      <Column Name="CzkBz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Czrq" DataType="System.String"/>
+      <Column Name="Czyh" DataType="System.String"/>
+      <Column Name="Dwdm" DataType="System.String"/>
+      <Column Name="Dwmc" DataType="System.String"/>
+      <Column Name="Dyid" DataType="System.String"/>
+      <Column Name="Dymc" DataType="System.String"/>
+      <Column Name="Fzbz" DataType="System.Int32"/>
+      <Column Name="Ghhx" DataType="System.Int32"/>
+      <Column Name="Ghksdm" DataType="System.String"/>
+      <Column Name="Ghksmc" DataType="System.String"/>
+      <Column Name="Ghlb" DataType="System.Int32"/>
+      <Column Name="Ghrq" DataType="System.String"/>
+      <Column Name="Ghxh" DataType="System.Decimal"/>
+      <Column Name="Ghysdm" DataType="System.String"/>
+      <Column Name="Ghysmc" DataType="System.String"/>
+      <Column Name="Hzxm" DataType="System.String"/>
+      <Column Name="Jlzt" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Jsbz" DataType="System.Int32"/>
+      <Column Name="Jssjh" DataType="System.String"/>
+      <Column Name="Jzbz" DataType="System.Int32"/>
+      <Column Name="Jzsj" DataType="System.String"/>
+      <Column Name="Jzysdm" DataType="System.String"/>
+      <Column Name="Jzysmc" DataType="System.String"/>
+      <Column Name="Kmdm" DataType="System.String"/>
+      <Column Name="Kmmc" DataType="System.String"/>
+      <Column Name="Ksdm" DataType="System.String"/>
+      <Column Name="Ksmc" DataType="System.String"/>
+      <Column Name="Lrrq" DataType="System.String"/>
+      <Column Name="Lsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Lxdh" DataType="System.String"/>
+      <Column Name="Lxdz" DataType="System.String"/>
+      <Column Name="Lxr" DataType="System.String"/>
+      <Column Name="Memo" DataType="System.String"/>
+      <Column Name="Mzlgbz" DataType="System.Int32"/>
+      <Column Name="Patid" DataType="System.Decimal"/>
+      <Column Name="Py" DataType="System.String"/>
+      <Column Name="Pzh" DataType="System.String"/>
+      <Column Name="Pzlx" DataType="System.Int32"/>
+      <Column Name="Pzlxsm" DataType="System.String"/>
+      <Column Name="RisLisReportState" DataType="System.Int32"/>
+      <Column Name="Scjzsj" DataType="System.String"/>
+      <Column Name="Scjzysdm" DataType="System.String"/>
+      <Column Name="Sex" DataType="System.String"/>
+      <Column Name="Sfzh" DataType="System.String"/>
+      <Column Name="SqdBz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="SqdJe" DataType="System.String"/>
+      <Column Name="Wb" DataType="System.String"/>
+      <Column Name="Xh" DataType="System.Decimal"/>
+      <Column Name="Ybbrbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ybdm" DataType="System.String"/>
+      <Column Name="Ybsm" DataType="System.String"/>
+      <Column Name="Ylxm" DataType="System.String"/>
+      <Column Name="Ysdm" DataType="System.String"/>
+      <Column Name="Ysmc" DataType="System.String"/>
+      <Column Name="Yyxh" DataType="System.Decimal"/>
+      <Column Name="Yzbm" DataType="System.String"/>
+      <Column Name="Zddm" DataType="System.String"/>
+      <Column Name="Zdmc" DataType="System.String"/>
+      <Column Name="Zhbz" DataType="System.String"/>
+      <Column Name="Zjdm" DataType="System.String"/>
+      <Column Name="Zjmc" DataType="System.String"/>
+      <Column Name="Zjrq" DataType="System.String"/>
+      <Column Name="Zqdm" DataType="System.String"/>
+      <Column Name="Zqmc" DataType="System.String"/>
+      <Column Name="Ylxmmc" DataType="System.String"/>
+      <Column Name="Dbzddm" DataType="System.String"/>
+      <Column Name="Dbzdmc" DataType="System.String"/>
+      <Column Name="Sdbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Sdysdm" DataType="System.String"/>
+      <Column Name="Sdysxm" DataType="System.String"/>
+      <Column Name="Shbzh" DataType="System.String"/>
+      <Column Name="Jzjlc" DataType="System.String"/>
+      <Column Name="Yyzt" DataType="System.String"/>
+      <Column Name="Cfjzzz" DataType="System.Int32"/>
+      <Column Name="Jgbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Jgbqdm" DataType="System.String"/>
+      <Column Name="Jgbqmc" DataType="System.String"/>
+      <Column Name="Jgcwdm" DataType="System.String"/>
+      <Column Name="IsInCP" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nEmrXh" DataType="System.Decimal"/>
+      <Column Name="Scjzysmc" DataType="System.String"/>
+      <Column Name="Tsbzdm" DataType="System.String"/>
+      <Column Name="Tsbzmc" DataType="System.String"/>
+      <Column Name="Sygl" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Bmjb" DataType="System.Int32"/>
+      <Column Name="Age" DataType="System.String"/>
+      <Column Name="Yysjd" DataType="System.String"/>
+      <Column Name="sCfzbz" DataType="System.String"/>
+      <Column Name="Pxxh" DataType="System.Int32"/>
+      <Column Name="Ybxx" DataType="System.String"/>
+      <Column Name="Jgxx" DataType="System.String"/>
+      <Column Name="Ynsbz" DataType="System.String"/>
+      <Column Name="Ybbfz" DataType="System.String"/>
+      <Column Name="Ybbfzmc" DataType="System.String"/>
+      <Column Name="Wjzms" DataType="System.String"/>
+      <Column Name="Ybjkid" DataType="System.String"/>
+      <Column Name="Zzybz" DataType="System.Int32"/>
+      <Column Name="Fzghhx" DataType="System.Decimal"/>
+      <Column Name="Ghje" DataType="System.Decimal"/>
+      <Column Name="Jzrq" DataType="System.String"/>
+      <Column Name="Qtkh" DataType="System.String"/>
+      <Column Name="Blzt" DataType="System.String"/>
+      <Column Name="Ghsjd" DataType="System.Int32"/>
+      <Column Name="Brtslb" DataType="System.String"/>
+      <Column Name="Color" DataType="System.String"/>
+      <Column Name="VIPMS" DataType="System.String"/>
+      <Column Name="Qfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+    </TableDataSource>
+    <TableDataSource Name="Table2" ReferenceName="报表数据.Table2" DataType="System.Int32" Enabled="true">
+      <Column Name="诊断代码" DataType="System.String"/>
+      <Column Name="单个诊断名称" DataType="System.String"/>
+      <Column Name="诊断名称" DataType="System.String"/>
+      <Column Name="诊断类别" DataType="System.String"/>
+      <Column Name="诊断属性" DataType="System.String"/>
+      <Column Name="属性名称" DataType="System.String"/>
+      <Column Name="备注" DataType="System.String"/>
+      <Column Name="发病日期" DataType="System.String"/>
+      <Column Name="所属病种" DataType="System.String"/>
+      <Column Name="西医诊断" DataType="System.String"/>
+      <Column Name="中医诊断" DataType="System.String"/>
+      <Column Name="症型名称" DataType="System.String"/>
+      <Column Name="诊断名称_所有" DataType="System.String"/>
+      <Column Name="症型名称_所有" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="治疗项目明细" ReferenceName="报表数据.治疗项目明细" DataType="System.Int32" Enabled="true">
+      <Column Name="ShowLrrq" DataType="System.String"/>
+      <Column Name="bLgbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="sTzsj" DataType="System.String"/>
+      <Column Name="fCqcfxh" DataType="System.Decimal"/>
+      <Column Name="fCqcfmxxh" DataType="System.Decimal"/>
+      <Column Name="bLsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Iskz" DataType="System.Int32"/>
+      <Column Name="sYbjesf" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bBfbbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bPsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bUse" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bXgDjbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bYbJzbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bZbbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bZfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bZfcfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="fBjdcgh" DataType="System.Double"/>
+      <Column Name="fBjjl" DataType="System.Double"/>
+      <Column Name="fBjLjsl" DataType="System.Double"/>
+      <Column Name="fBjmryl" DataType="System.Double"/>
+      <Column Name="fBjyppc" DataType="System.String"/>
+      <Column Name="fBjyyts" DataType="System.Int32"/>
+      <Column Name="fCfRule" DataType="System.Int32"/>
+      <Column Name="fCyLrsl" DataType="System.Decimal"/>
+      <Column Name="fGgxs" DataType="System.Decimal"/>
+      <Column Name="fkcsl" DataType="System.Double"/>
+      <Column Name="fKzdcgh" DataType="System.Double"/>
+      <Column Name="fKzjl" DataType="System.Double"/>
+      <Column Name="fKzLjsl" DataType="System.Double"/>
+      <Column Name="fKzmryl" DataType="System.Double"/>
+      <Column Name="fKzyppc" DataType="System.String"/>
+      <Column Name="sQyid" DataType="System.String"/>
+      <Column Name="fKzyyts" DataType="System.Int32"/>
+      <Column Name="fljts" DataType="System.Int32"/>
+      <Column Name="fMrdcgh" DataType="System.Double"/>
+      <Column Name="fMrjl" DataType="System.Double"/>
+      <Column Name="fMrLjsl" DataType="System.Double"/>
+      <Column Name="fMrmryl" DataType="System.Double"/>
+      <Column Name="fMryppc" DataType="System.String"/>
+      <Column Name="fMryyts" DataType="System.Int32"/>
+      <Column Name="fMxje" DataType="System.Decimal"/>
+      <Column Name="fMzxs" DataType="System.Decimal"/>
+      <Column Name="fMzYlsj" DataType="System.Decimal"/>
+      <Column Name="fMzYpsl" DataType="System.Decimal"/>
+      <Column Name="fRecipeFee" DataType="System.Decimal"/>
+      <Column Name="fRecipeFee_Xm" DataType="System.Decimal"/>
+      <Column Name="fRecipeFee_Yp" DataType="System.Decimal"/>
+      <Column Name="fRecipeYb_ypFee" DataType="System.Decimal"/>
+      <Column Name="fRecipeYbFee" DataType="System.Decimal"/>
+      <Column Name="fYkxs" DataType="System.Decimal"/>
+      <Column Name="fYlsj" DataType="System.Decimal"/>
+      <Column Name="fYpfj" DataType="System.Decimal"/>
+      <Column Name="fYpjl" DataType="System.Decimal"/>
+      <Column Name="fYpmcsl" DataType="System.Decimal"/>
+      <Column Name="fYpsl" DataType="System.Decimal"/>
+      <Column Name="fYpxs" DataType="System.Decimal"/>
+      <Column Name="Mxjlzt" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="MxShbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nBckgrdColor" DataType="System.Int32"/>
+      <Column Name="nBxbz" DataType="System.Int32"/>
+      <Column Name="nCfjlzt" DataType="System.Int32"/>
+      <Column Name="nCflx" DataType="System.Int32"/>
+      <Column Name="nCfmxs" DataType="System.Int32"/>
+      <Column Name="nCfts" DataType="System.Int32"/>
+      <Column Name="nCurePlanNo" DataType="System.Decimal"/>
+      <Column Name="nCysl" DataType="System.Int32"/>
+      <Column Name="nCyts" DataType="System.Int32"/>
+      <Column Name="nDmbz" DataType="System.Int32"/>
+      <Column Name="nTsbz" DataType="System.Int32"/>
+      <Column Name="nTsdybz" DataType="System.Int32"/>
+      <Column Name="nDwbz" DataType="System.Int32"/>
+      <Column Name="nDwlb" DataType="System.Int32"/>
+      <Column Name="nDxmYpbz" DataType="System.Int32"/>
+      <Column Name="nEkbz" DataType="System.Int32"/>
+      <Column Name="nEkyp" DataType="System.Int32"/>
+      <Column Name="nFontColor" DataType="System.Int32"/>
+      <Column Name="nFzxh" DataType="System.Decimal"/>
+      <Column Name="nGgIdm" DataType="System.Int32"/>
+      <Column Name="nGhxh" DataType="System.Decimal"/>
+      <Column Name="nIdm" DataType="System.Int32"/>
+      <Column Name="nIncXh" DataType="System.Int32"/>
+      <Column Name="nLdlx" DataType="System.String"/>
+      <Column Name="nLdxh" DataType="System.String"/>
+      <Column Name="nLdxmbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nMzlybz" DataType="System.Int32"/>
+      <Column Name="nOrdXh" DataType="System.Decimal"/>
+      <Column Name="nPatid" DataType="System.Decimal"/>
+      <Column Name="nSybz" DataType="System.Int32"/>
+      <Column Name="nTscfbz" DataType="System.Int32"/>
+      <Column Name="nWarnBz" DataType="System.Int32"/>
+      <Column Name="nXgbz" DataType="System.Int32"/>
+      <Column Name="nXmlb" DataType="System.Int32"/>
+      <Column Name="nXmsl" DataType="System.Int32"/>
+      <Column Name="nXysl" DataType="System.Int32"/>
+      <Column Name="nYbkzbz" DataType="System.Int32"/>
+      <Column Name="nYbshbz" DataType="System.Int32"/>
+      <Column Name="nYbspbz" DataType="System.Int32"/>
+      <Column Name="nYfLdsl" DataType="System.Int32"/>
+      <Column Name="nYpbz" DataType="System.Int32"/>
+      <Column Name="nYyts" DataType="System.Int32"/>
+      <Column Name="nYzzt" DataType="System.Int32"/>
+      <Column Name="nZbz" DataType="System.Int32"/>
+      <Column Name="nZysl" DataType="System.Int32"/>
+      <Column Name="OldRecipeNo" DataType="System.Decimal"/>
+      <Column Name="OldRecipeMxNo" DataType="System.Decimal"/>
+      <Column Name="ParentID" DataType="System.Int32"/>
+      <Column Name="RecipeCaption" DataType="System.Int32"/>
+      <Column Name="RecipeCaptionEx" DataType="System.String"/>
+      <Column Name="RecipeNo" DataType="System.Decimal"/>
+      <Column Name="sBbzl" DataType="System.String"/>
+      <Column Name="sCfMemo" DataType="System.String"/>
+      <Column Name="sCfyfdm" DataType="System.String"/>
+      <Column Name="sCfyfmc" DataType="System.String"/>
+      <Column Name="sCfysdm" DataType="System.String"/>
+      <Column Name="sCfysmc" DataType="System.String"/>
+      <Column Name="sCfZddm" DataType="System.String"/>
+      <Column Name="sCfzdmc" DataType="System.String"/>
+      <Column Name="sCzyh" DataType="System.String"/>
+      <Column Name="sDmxsmc" DataType="System.String"/>
+      <Column Name="sDxmdm" DataType="System.String"/>
+      <Column Name="sDxmmc" DataType="System.String"/>
+      <Column Name="sGgdw" DataType="System.String"/>
+      <Column Name="sGhksdm" DataType="System.String"/>
+      <Column Name="sGhksmc" DataType="System.String"/>
+      <Column Name="sGroupKey" DataType="System.String"/>
+      <Column Name="sHzxm" DataType="System.String"/>
+      <Column Name="sID" DataType="System.Int32"/>
+      <Column Name="sJldw" DataType="System.String"/>
+      <Column Name="sKey" DataType="System.String"/>
+      <Column Name="sLcxmdm" DataType="System.String"/>
+      <Column Name="sLrrq" DataType="System.String"/>
+      <Column Name="sMcjldw" DataType="System.String"/>
+      <Column Name="sMzdm" DataType="System.String"/>
+      <Column Name="sMzdw" DataType="System.String"/>
+      <Column Name="sMzmc" DataType="System.String"/>
+      <Column Name="sPcdm" DataType="System.String"/>
+      <Column Name="sPcmc" DataType="System.String"/>
+      <Column Name="sYfdm" DataType="System.String"/>
+      <Column Name="sYfmc" DataType="System.String"/>
+      <Column Name="sYpdm" DataType="System.String"/>
+      <Column Name="sYpdw" DataType="System.String"/>
+      <Column Name="sYpgg" DataType="System.String"/>
+      <Column Name="sYpjxdm" DataType="System.String"/>
+      <Column Name="sYpjxmc" DataType="System.String"/>
+      <Column Name="sYpmc" DataType="System.String"/>
+      <Column Name="sYpyfdm" DataType="System.String"/>
+      <Column Name="sYpyfmc" DataType="System.String"/>
+      <Column Name="sYznr" DataType="System.String"/>
+      <Column Name="sYzzt" DataType="System.String"/>
+      <Column Name="sZxdw" DataType="System.String"/>
+      <Column Name="IsSaved" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nMrjldwbz" DataType="System.Int32"/>
+      <Column Name="Mxbmbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Cfbmbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bFslxbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="fKzYcjzyl" DataType="System.Double"/>
+      <Column Name="fMrYcjzyl" DataType="System.Double"/>
+      <Column Name="fBjYcjzyl" DataType="System.Double"/>
+      <Column Name="sSfbz" DataType="System.String"/>
+      <Column Name="sEktz" DataType="System.String"/>
+      <Column Name="sEknlsm" DataType="System.String"/>
+      <Column Name="djCkcstate" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="sCymrjl" DataType="System.Int32"/>
+      <Column Name="SCycyjx" DataType="System.String"/>
+      <Column Name="SCycyjxdm" DataType="System.String"/>
+      <Column Name="SCyfycs" DataType="System.Int32"/>
+      <Column Name="SCyyyff" DataType="System.String"/>
+      <Column Name="SCyyyffdm" DataType="System.String"/>
+      <Column Name="SCyfyyq" DataType="System.String"/>
+      <Column Name="SCyfyyqdm" DataType="System.String"/>
+      <Column Name="sYllb" DataType="System.String"/>
+      <Column Name="sYbbfzdm" DataType="System.String"/>
+      <Column Name="sDjzt" DataType="System.Int32"/>
+      <Column Name="bWsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bZybz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nXz" DataType="System.Int32"/>
+      <Column Name="nLjdyxh" DataType="System.Decimal"/>
+      <Column Name="nKssKzbz" DataType="System.Int32"/>
+      <Column Name="sPsypdm" DataType="System.String"/>
+      <Column Name="Jlsm" DataType="System.String"/>
+      <Column Name="nYbjyb" DataType="System.Int32"/>
+      <Column Name="bQjbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="CatpionXh" DataType="System.String"/>
+      <Column Name="sTbzddm" DataType="System.String"/>
+      <Column Name="sTbzdmc" DataType="System.String"/>
+      <Column Name="bZlxmxh" DataType="System.Decimal"/>
+      <Column Name="HasModified" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="sTsjfzfdm" DataType="System.String"/>
+      <Column Name="sTsjfzfmc" DataType="System.String"/>
+      <Column Name="fCfyyts" DataType="System.Int32"/>
+      <Column Name="fCyrycs" DataType="System.Int32"/>
+      <Column Name="fCydjts" DataType="System.Int32"/>
+      <Column Name="fCyjzzl" DataType="System.Int32"/>
+      <Column Name="sCyjldw" DataType="System.String"/>
+      <Column Name="Cjrq" DataType="System.String"/>
+      <Column Name="sShid" DataType="System.String"/>
+      <Column Name="OneClickAddType" DataType="System.Int32"/>
+      <Column Name="OneClickAddKey" DataType="System.Decimal"/>
+      <Column Name="Lsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nKljcfYpgg" DataType="System.Int32"/>
+      <Column Name="Fsxz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bKdbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nXdffs" DataType="System.Int32"/>
+      <Column Name="Bgsybz" DataType="System.Int32"/>
+      <Column Name="Ybxzbz" DataType="System.Int32"/>
+      <Column Name="dTfsl" DataType="System.Decimal"/>
+      <Column Name="bIsklj" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nWpcfbz" DataType="System.Int32"/>
+      <Column Name="nKljcfbz" DataType="System.Int32"/>
+      <Column Name="nFybz" DataType="System.Int32"/>
+      <Column Name="bCcfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nCyfsts" DataType="System.Int32"/>
+      <Column Name="sCyfstsMemo" DataType="System.String"/>
+      <Column Name="nEjygbz" DataType="System.Int32"/>
+      <Column Name="sEkHeight" DataType="System.String"/>
+      <Column Name="sJmsyzz" DataType="System.String"/>
+      <Column Name="sJmsyJtyy" DataType="System.String"/>
+      <Column Name="sCfYBZddm" DataType="System.String"/>
+      <Column Name="sCfYBZdmc" DataType="System.String"/>
+      <Column Name="sEwm_wx" DataType="System.String"/>
+      <Column Name="sEwm_zfb" DataType="System.String"/>
+      <Column Name="fZkbl" DataType="System.Decimal"/>
+      <Column Name="fYhdj" DataType="System.Decimal"/>
+      <Column Name="bMxb" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="sMemoInfo" DataType="System.String"/>
+      <Column Name="bYbbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bMustZt" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bLrczyUKbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="fXdfxh" DataType="System.Decimal"/>
+      <Column Name="sXdfmc" DataType="System.String"/>
+      <Column Name="Jccfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="CyYdsl" DataType="System.Int32"/>
+      <Column Name="nDjfs" DataType="System.Int32"/>
+      <Column Name="ids" DataType="System.Int32"/>
+      <Column Name="sCsyy" DataType="System.String"/>
+      <Column Name="bGs" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="bLx" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="sKfdm" DataType="System.String"/>
+      <Column Name="sKfmc" DataType="System.String"/>
+      <Column Name="sWzdm" DataType="System.String"/>
+      <Column Name="sWzbm" DataType="System.String"/>
+      <Column Name="tScfxh" DataType="System.String"/>
+      <Column Name="Syxzlb" DataType="System.Int32"/>
+      <Column Name="Sybfzbz" DataType="System.Int32"/>
+      <Column Name="Syyllb" DataType="System.String"/>
+      <Column Name="Sylbdm" DataType="System.String"/>
+      <Column Name="Sylbmc" DataType="System.String"/>
+      <Column Name="Syzddm" DataType="System.String"/>
+      <Column Name="Syzdmc" DataType="System.String"/>
+      <Column Name="Sybfzmc" DataType="System.String"/>
+      <Column Name="Syzzrslx" DataType="System.String"/>
+      <Column Name="Sysj" DataType="System.String"/>
+      <Column Name="Sycbjyjcxmdm" DataType="System.String"/>
+      <Column Name="Sycbjyjcxmmc" DataType="System.String"/>
+      <Column Name="Syfwzh" DataType="System.String"/>
+      <Column Name="Sjhzh" DataType="System.String"/>
+      <Column Name="Bzlb" DataType="System.String"/>
+      <Column Name="Bzdm" DataType="System.String"/>
+      <Column Name="Bzmc" DataType="System.String"/>
+      <Column Name="sTsqksm" DataType="System.String"/>
+      <Column Name="sCyfldm" DataType="System.String"/>
+      <Column Name="sCyflmc" DataType="System.String"/>
+      <Column Name="bOldPsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Gwypjb" DataType="System.Int32"/>
+      <Column Name="sZxysdm" DataType="System.String"/>
+      <Column Name="sZxysmc" DataType="System.String"/>
+      <Column Name="fSqjl" DataType="System.Double"/>
+      <Column Name="fSqsl" DataType="System.Double"/>
+      <Column Name="fSqdcgh" DataType="System.Double"/>
+      <Column Name="nFsts" DataType="System.Int32"/>
+      <Column Name="bDyzt" DataType="System.String"/>
+      <Column Name="sYpyfdm2" DataType="System.String"/>
+      <Column Name="sYpyfmc2" DataType="System.String"/>
+      <Column Name="sYdyrq" DataType="System.String"/>
+      <Column Name="nDlfzxh" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="检验申请单明细" ReferenceName="报表数据.检验申请单明细" DataType="System.Int32" Enabled="true">
+      <Column Name="Sqxh" DataType="System.Decimal"/>
+      <Column Name="NoteName" DataType="System.String"/>
+      <Column Name="CreateDate" DataType="System.DateTime"/>
+      <Column Name="Sqmxxh" DataType="System.Decimal"/>
+      <Column Name="Id" DataType="System.String"/>
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Count" DataType="System.Int32"/>
+      <Column Name="Jjbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Zxzt" DataType="System.Int32"/>
+      <Column Name="Sfzt" DataType="System.Int32"/>
+      <Column Name="Price" DataType="System.Decimal"/>
+      <Column Name="Sqdlb" DataType="System.Int32"/>
+      <Column Name="Ksmc" DataType="System.String"/>
+      <Column Name="CreateYsmc" DataType="System.String"/>
+      <Column Name="CreateYsdm" DataType="System.String"/>
+      <Column Name="Zxdd" DataType="System.String"/>
+      <Column Name="Jcmd" DataType="System.String"/>
+      <Column Name="Lcxx" DataType="System.String"/>
+      <Column Name="ExtendInfo" DataType="System.String"/>
+      <Column Name="Bbmc" DataType="System.String"/>
+      <Column Name="Unit" DataType="System.String"/>
+      <Column Name="Sfxmlx" DataType="System.String"/>
+      <Column Name="Sfxmdm" DataType="System.String"/>
+      <Column Name="Sfxmmc" DataType="System.String"/>
+      <Column Name="Cftszddm" DataType="System.String"/>
+      <Column Name="Cftszdmc" DataType="System.String"/>
+      <Column Name="Jcbw" DataType="System.String"/>
+      <Column Name="Sqdzt" DataType="System.Int32"/>
+      <Column Name="Ksdm" DataType="System.String"/>
+      <Column Name="Yzxrq" DataType="System.String"/>
+      <Column Name="DetailName" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="检查申请单明细" ReferenceName="报表数据.检查申请单明细" DataType="System.Int32" Enabled="true">
+      <Column Name="Sqxh" DataType="System.Decimal"/>
+      <Column Name="NoteName" DataType="System.String"/>
+      <Column Name="CreateDate" DataType="System.DateTime"/>
+      <Column Name="Sqmxxh" DataType="System.Decimal"/>
+      <Column Name="Id" DataType="System.String"/>
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Count" DataType="System.Int32"/>
+      <Column Name="Jjbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Zxzt" DataType="System.Int32"/>
+      <Column Name="Sfzt" DataType="System.Int32"/>
+      <Column Name="Price" DataType="System.Decimal"/>
+      <Column Name="Sqdlb" DataType="System.Int32"/>
+      <Column Name="Ksmc" DataType="System.String"/>
+      <Column Name="CreateYsmc" DataType="System.String"/>
+      <Column Name="CreateYsdm" DataType="System.String"/>
+      <Column Name="Zxdd" DataType="System.String"/>
+      <Column Name="Jcmd" DataType="System.String"/>
+      <Column Name="Lcxx" DataType="System.String"/>
+      <Column Name="ExtendInfo" DataType="System.String"/>
+      <Column Name="Bbmc" DataType="System.String"/>
+      <Column Name="Unit" DataType="System.String"/>
+      <Column Name="Sfxmlx" DataType="System.String"/>
+      <Column Name="Sfxmdm" DataType="System.String"/>
+      <Column Name="Sfxmmc" DataType="System.String"/>
+      <Column Name="Cftszddm" DataType="System.String"/>
+      <Column Name="Cftszdmc" DataType="System.String"/>
+      <Column Name="Jcbw" DataType="System.String"/>
+      <Column Name="Sqdzt" DataType="System.Int32"/>
+      <Column Name="Ksdm" DataType="System.String"/>
+      <Column Name="Yzxrq" DataType="System.String"/>
+      <Column Name="DetailName" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Table1" ReferenceName="报表数据.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="ReportName" DataType="System.String"/>
+      <Column Name="TitleInfo" DataType="System.String"/>
+      <Column Name="IsMoney" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="LdInfoKey" DataType="System.String"/>
+      <Column Name="ysmc" DataType="System.String"/>
+      <Column Name="ksmc" DataType="System.String"/>
+      <Column Name="dlsj" DataType="System.String"/>
+      <Column Name="dysj" DataType="System.String"/>
+      <Column Name="ysbmp" DataType="System.Drawing.Image, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" BindableControl="Picture"/>
+      <Column Name="yymc" DataType="System.String"/>
+      <Column Name="sEwm_zfb" DataType="System.String"/>
+      <Column Name="sEwm_wx" DataType="System.String"/>
+      <Column Name="Ewm_zfb" DataType="System.String"/>
+      <Column Name="Ewm_wx" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="148.1" PaperHeight="210.1" RawPaperSize="11" LeftMargin="5" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="4" OtherPagesSource="4">
+    <PageHeaderBand Name="PageHeader1" Width="540.92" Height="258.35">
+      <TextObject Name="Text23" Left="10.45" Top="124.05" Width="113.4" Height="28.35" Text="姓名：[PatBasicInfo.Hzxm]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text53" Left="143.4" Top="124.05" Width="75.6" Height="28.35" Text="性别：[PatBasicInfo.Sex]" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text54" Left="274.8" Top="124.05" Width="85.05" Height="28.35" Text="年龄：[PatBasicInfo.Age]" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text55" Left="8.2" Top="174.75" Width="141.75" Height="28.35" Text="卡号：[PatBasicInfo.Cardno]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text60" Left="9.45" Top="204.2" Width="481.95" Height="28.35" Text="    因病情需要,您将要进行以下检查,请根据以下列出的项目缴费后分" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text61" Left="9.45" Top="226.55" Width="481.95" Height="28.35" Text="别到指定的地点预约或检查：" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <LineObject Name="Line1" Left="9.45" Top="258.35" Width="481.95" Diagonal="true"/>
+      <LineObject Name="Line2" Left="9.45" Top="204" Width="481.95" Diagonal="true"/>
+      <TextObject Name="Text62" Left="142.2" Top="175.75" Width="113.4" Height="28.35" Text="医生：[PatBasicInfo.Jzysmc]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text63" Left="9.45" Top="149.4" Width="340.2" Height="28.35" CanBreak="false" Text="诊断：[PatBasicInfo.Zdmc]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text64" Left="275.5" Top="175.75" Width="236.25" Height="28.35" CanBreak="false" Text="科室：[PatBasicInfo.Ksmc]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <BarcodeObject Name="Barcode1" Left="373.55" Top="115.6" Width="140" Height="56.7" DataColumn="PatBasicInfo.Blh" Text="20160070417" Barcode="Code128" Barcode.AutoEncode="true"/>
+      <PictureObject Name="Picture2" Left="126.6" Top="40.45" Width="330.75" Height="37.8" Image="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"/>
+      <TextObject Name="Text13" Left="245.3" Top="85.25" Width="122.85" Height="18.9" Text="导检治疗单" Font="宋体, 14pt, style=Bold"/>
+      <BarcodeObject Name="Barcode2" Left="47.9" Top="22.7" Width="106.55" Height="96.2" AfterDataEvent="PageHeader2_BeforePrint" AutoSize="false" DataColumn="Table1.Ewm_zfb" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="262.43" Width="540.92" Height="43.25">
+      <TextObject Name="Text15" Left="9.45" Top="1" Width="481.95" Height="28.35" Text="检验项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+      <SubreportObject Name="Subreport1" Left="15.9" Top="22.35" Width="94.5" Height="18.9" ReportPage="Page2"/>
+      <TextObject Name="Text16" Left="168.4" Top="6" Width="47.25" Height="18.9" Text="数量" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="232.35" Top="6" Width="94.5" Height="18.9" Text="单位" Font="宋体, 9pt"/>
+      <TextObject Name="Text20" Left="294.3" Top="6" Width="94.5" Height="18.9" Text="金额" Font="宋体, 9pt"/>
+      <TextObject Name="Text21" Left="363.25" Top="6" Width="94.5" Height="18.9" Text="执行科室" Font="宋体, 9pt"/>
+      <ChildBand Name="Child1" Top="309.76" Width="540.92" Height="46.8">
+        <TextObject Name="Text4" Left="9.45" Top="2" Width="481.95" Height="28.35" Text="检查项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+        <SubreportObject Name="Subreport2" Left="15.9" Top="25.35" Width="94.5" Height="18.9" ReportPage="Page3"/>
+        <ChildBand Name="Child2" Top="360.64" Width="540.92" Height="57.35" Guides="47.25">
+          <SubreportObject Name="Subreport3" Left="14.9" Top="27.45" Width="94.5" Height="18.9" ReportPage="Page4"/>
+          <TextObject Name="Text68" Left="9.45" Top="5.45" Width="481.95" Height="28.35" Text="治疗项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+        </ChildBand>
+      </ChildBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="422.08" Width="540.92" Height="174.4">
+      <TextObject Name="Text1" Left="9.45" Top="12" Width="94.5" Height="28.35" Text="温馨提示:" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text5" Left="9.45" Top="22.9" Width="481.95" Height="28.35" Text="1、请认真阅读本指引单内容，同意检查者请缴费或检查 " VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text57" Left="9.45" Top="47.15" Width="481.95" Height="37.8" Text="2、门诊病人请到门诊收费处缴费后按照本单提示到相应地点检查&#13;&#10;&#13;&#10;" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text59" Left="9.45" Top="101.05" Width="472.5" Height="28.35" Text="打印日期：	[Date] " HorzAlign="Right" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+      <LineObject Name="Line3" Left="9.45" Width="481.95" Diagonal="true"/>
+      <TextObject Name="Text69" Left="9.55" Top="62.5" Width="481.95" Height="28.35" Text="3、处方中涉及的联动治疗项目，已在扫码时一并支付。" VertAlign="Bottom" Font="宋体, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2">
+    <DataBand Name="Data2" Width="718.2" Height="18.9" BeforePrintEvent="Data2_BeforePrint" DataSource="检验申请单明细">
+      <TextObject Name="Text3" Left="13" Width="236.25" Height="18.9" Text="[检验申请单明细.Name]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text2" Left="354.3" Width="94.5" Height="18.9" Text="[检验申请单明细.Ksmc]" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="428.8" Width="132.3" Height="18.9" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="278.25" Width="85.05" Height="18.9" AfterDataEvent="Text_price" Text="[检验申请单明细.Price]" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="518.7" Width="94.5" Height="18.9" BeforePrintEvent="Text12_BeforePrint" VertAlign="Bottom" WordWrap="false" Font="宋体, 9pt"/>
+    </DataBand>
+  </ReportPage>
+  <ReportPage Name="Page3">
+    <DataBand Name="Data3" Width="718.2" Height="28.35" BeforePrintEvent="Data3_BeforePrint" DataSource="检查申请单明细">
+      <TextObject Name="Text14" Left="5" Width="236.25" Height="18.9" CanBreak="false" Text="[检查申请单明细.Name]" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="354.6" Width="85.05" Height="18.9" Text="[检查申请单明细.Ksmc]" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="406.65" Width="94.5" Height="18.9" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="280.55" Width="66.15" Height="18.9" AfterDataEvent="Text_price" Text="[检查申请单明细.Price]" VertAlign="Bottom" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="501.45" Width="94.5" Height="18.9" BeforePrintEvent="Text11_BeforePrint" VertAlign="Bottom" Font="宋体, 9pt"/>
+    </DataBand>
+  </ReportPage>
+  <ReportPage Name="Page4">
+    <DataBand Name="Data4" Width="718.2" Height="19.8" DataSource="Table" Filter="[治疗项目明细.sYzzt]!=&quot;③用法联动&quot;">
+      <TextObject Name="Text65" Left="-5.55" Top="0.9" Width="170.1" Height="18.9" EvenStylePriority="UseAll" CanBreak="false" Text="[ZLXXMX.YPMC]" Font="宋体, 9pt"/>
+      <TextObject Name="Text66" Left="348.2" Top="0.9" Width="94.5" Height="18.9" Text="[ZLXXMX.ZXKS]" Font="宋体, 9pt"/>
+      <TextObject Name="Text67" Left="280.7" Top="0.9" Width="94.5" Height="18.9" Text="[ZLXXMX.YPJE]" HideZeros="true" Font="宋体, 9pt"/>
+      <TextObject Name="Text18" Left="154.35" Top="0.45" Width="47.25" Height="18.9" Text="[ZLXXMX.YPSL]" HideZeros="true" Font="宋体, 9pt"/>
+      <TextObject Name="Text19" Left="201.5" Top="0.45" Width="66.15" Height="18.9" Text="[ZLXXMX.YPDW]" HorzAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>
