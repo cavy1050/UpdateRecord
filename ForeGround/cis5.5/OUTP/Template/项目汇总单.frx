@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" StartReportEvent="_StartReport" ReportInfo.Created="09/23/2014 23:35:17" ReportInfo.Modified="01/11/2020 13:23:20" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="false">
+<Report ScriptLanguage="CSharp" StartReportEvent="_StartReport" ReportInfo.Created="09/23/2014 23:35:17" ReportInfo.Modified="01/19/2020 17:27:09" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="false">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -191,7 +191,7 @@ namespace FastReport
 }
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="THIS_ZY" ConnectionString="rijcmlqxfki+t8jnSxof6qn6ng9vShM0/RmEccdLw/zMv2ndpjN1smFouO2mUggkEB+eulnYg0jUQnm3hPeYu1V1coeKurxH0oS3fNQOPyfjpw5L1Rm6y0zKKfkqG5nD2baiOr7ro1NJ0nXWD8AKhwmA37nqSc4vo0jWUDzagK126L6WXaPynL9W99lQygMrdFDg+ss9V3c3LI0VaLJTdWSAF4d2Q==">
+    <MsSqlDataConnection Name="THIS_ZY" ConnectionString="rijcmlqxfki+t8jnSxof6qn6ng9vShM0/RmEccdLw/zMv2ndpjN1smFouO2mUggkEB+eulnYg0jUQnm3hPeYu1V1coeKurxH0oS3fNQOPyfjpw5L1Rm6y0zKKfkqG5nD2baiOr7ro1NJ0nXWD8AKhwmA37nqSc4vo0jWUDzagK126L6WXaPynL9W99lQygMrdFDg+ssbfMuir5uJzqg5HJ6Aa//1A==">
       <TableDataSource Name="Table3" Alias="检验申请单引导信息" DataType="System.Int32" Enabled="true" SelectCommand="SELECT ksdm,name,kslx,yxjl,memo FROM dbo.TF_ZXKS&#13;&#10;WHERE kslx=80&#13;&#10;ORDER BY kslx,ksdm">
         <Column Name="ksdm" DataType="System.String"/>
         <Column Name="name" DataType="System.String"/>
@@ -205,17 +205,6 @@ namespace FastReport
         <Column Name="memo" DataType="System.String"/>
         <Column Name="kslx" DataType="System.Int16"/>
         <Column Name="yxjl" DataType="System.Int16"/>
-      </TableDataSource>
-    </MsSqlDataConnection>
-    <MsSqlDataConnection Name="CISDB" ConnectionString="rijcmlqxfki+t8jnSxof6qn6ng9vUP6mDCQwXkVLMI15euSdqz6GLL1CprNUvcPZ0UIZ3sIlpxv/pcVLDMtVZSpCzNJOSwCMXFAKhYnBzbffbXwbWfLmtZOVonpaZXbK6Fr/9PgVcLONP/EEzDNXV7iv0rU49xqOQHePPO3Sb0TglVerBAf/mNIYCsu4BmF/h0X1uJK07UJI8nyocCF7xNbS4xw5g==">
-      <TableDataSource Name="Table" Alias="ZLXXMX" DataType="System.Int32" Enabled="true" SelectCommand="select YPMC, YPSL, YPDW, YPJE, ZXKS from dbo.utf_his5_Getzlxmmx(@GHXH,@YSDM)">
-        <Column Name="YPMC" DataType="System.String"/>
-        <Column Name="YPSL" DataType="System.Decimal"/>
-        <Column Name="YPDW" DataType="System.String"/>
-        <Column Name="YPJE" DataType="System.Decimal"/>
-        <Column Name="ZXKS" DataType="System.String"/>
-        <CommandParameter Name="@GHXH" DataType="22" Expression="[PatBasicInfo.Ghxh]"/>
-        <CommandParameter Name="@YSDM" DataType="22" Expression="[PatBasicInfo.Ysdm]"/>
       </TableDataSource>
     </MsSqlDataConnection>
     <TableDataSource Name="PatBasicInfo" ReferenceName="报表数据.PatBasicInfo" DataType="System.Int32" Enabled="true">
@@ -732,23 +721,23 @@ namespace FastReport
       <TextObject Name="Text13" Left="245.3" Top="85.25" Width="122.85" Height="18.9" Text="导检治疗单" Font="宋体, 14pt, style=Bold"/>
       <BarcodeObject Name="Barcode2" Left="47.9" Top="22.7" Width="106.55" Height="96.2" AfterDataEvent="PageHeader2_BeforePrint" AutoSize="false" DataColumn="Table1.Ewm_zfb" ShowText="false" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="true"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="262.43" Width="540.92" Height="43.25">
+    <DataBand Name="Data1" Top="262.43" Width="540.92" Height="41.25">
       <TextObject Name="Text15" Left="9.45" Top="1" Width="481.95" Height="28.35" Text="检验项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
       <SubreportObject Name="Subreport1" Left="15.9" Top="22.35" Width="94.5" Height="18.9" ReportPage="Page2"/>
       <TextObject Name="Text16" Left="168.4" Top="6" Width="47.25" Height="18.9" Text="数量" Font="宋体, 9pt"/>
       <TextObject Name="Text17" Left="232.35" Top="6" Width="94.5" Height="18.9" Text="单位" Font="宋体, 9pt"/>
       <TextObject Name="Text20" Left="294.3" Top="6" Width="94.5" Height="18.9" Text="金额" Font="宋体, 9pt"/>
       <TextObject Name="Text21" Left="363.25" Top="6" Width="94.5" Height="18.9" Text="执行科室" Font="宋体, 9pt"/>
-      <ChildBand Name="Child1" Top="309.76" Width="540.92" Height="46.8">
+      <ChildBand Name="Child1" Top="307.76" Width="540.92" Height="44.25">
         <TextObject Name="Text4" Left="9.45" Top="2" Width="481.95" Height="28.35" Text="检查项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
         <SubreportObject Name="Subreport2" Left="15.9" Top="25.35" Width="94.5" Height="18.9" ReportPage="Page3"/>
-        <ChildBand Name="Child2" Top="360.64" Width="540.92" Height="57.35" Guides="47.25">
-          <SubreportObject Name="Subreport3" Left="14.9" Top="27.45" Width="94.5" Height="18.9" ReportPage="Page4"/>
-          <TextObject Name="Text68" Left="9.45" Top="5.45" Width="481.95" Height="28.35" Text="治疗项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+        <ChildBand Name="Child2" Top="356.09" Width="540.92" Height="44.35" Guides="47.25">
+          <SubreportObject Name="Subreport3" Left="14.9" Top="25.45" Width="94.5" Height="18.9" ReportPage="Page4"/>
+          <TextObject Name="Text68" Left="9.45" Top="3.45" Width="481.95" Height="28.35" Text="治疗项目：   " VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
         </ChildBand>
       </ChildBand>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="422.08" Width="540.92" Height="174.4">
+    <PageFooterBand Name="PageFooter1" Top="404.53" Width="540.92" Height="174.4">
       <TextObject Name="Text1" Left="9.45" Top="12" Width="94.5" Height="28.35" Text="温馨提示:" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
       <TextObject Name="Text5" Left="9.45" Top="22.9" Width="481.95" Height="28.35" Text="1、请认真阅读本指引单内容，同意检查者请缴费或检查 " VertAlign="Bottom" Font="宋体, 10pt"/>
       <TextObject Name="Text57" Left="9.45" Top="47.15" Width="481.95" Height="37.8" Text="2、门诊病人请到门诊收费处缴费后按照本单提示到相应地点检查&#13;&#10;&#13;&#10;" VertAlign="Bottom" Font="宋体, 10pt"/>
@@ -758,8 +747,8 @@ namespace FastReport
     </PageFooterBand>
   </ReportPage>
   <ReportPage Name="Page2">
-    <DataBand Name="Data2" Width="718.2" Height="18.9" BeforePrintEvent="Data2_BeforePrint" DataSource="检验申请单明细">
-      <TextObject Name="Text3" Left="13" Width="236.25" Height="18.9" Text="[检验申请单明细.Name]" AutoWidth="true" VertAlign="Bottom" Font="宋体, 9pt"/>
+    <DataBand Name="Data2" Width="718.2" Height="18.9" CanGrow="true" BeforePrintEvent="Data2_BeforePrint" DataSource="检验申请单明细">
+      <TextObject Name="Text3" Left="-2" Width="217.35" Height="18.9" CanGrow="true" CanShrink="true" Text="[检验申请单明细.Name]" VertAlign="Bottom" Font="宋体, 9pt"/>
       <TextObject Name="Text2" Left="354.3" Width="94.5" Height="18.9" Text="[检验申请单明细.Ksmc]" VertAlign="Bottom" Font="宋体, 9pt"/>
       <TextObject Name="Text6" Left="428.8" Width="132.3" Height="18.9" VertAlign="Bottom" Font="宋体, 9pt"/>
       <TextObject Name="Text10" Left="278.25" Width="85.05" Height="18.9" AfterDataEvent="Text_price" Text="[检验申请单明细.Price]" VertAlign="Bottom" Font="宋体, 9pt"/>
@@ -767,8 +756,8 @@ namespace FastReport
     </DataBand>
   </ReportPage>
   <ReportPage Name="Page3">
-    <DataBand Name="Data3" Width="718.2" Height="28.35" BeforePrintEvent="Data3_BeforePrint" DataSource="检查申请单明细">
-      <TextObject Name="Text14" Left="5" Width="236.25" Height="18.9" CanBreak="false" Text="[检查申请单明细.Name]" VertAlign="Bottom" Font="宋体, 9pt"/>
+    <DataBand Name="Data3" Width="718.2" Height="18.9" CanGrow="true" BeforePrintEvent="Data3_BeforePrint" DataSource="检查申请单明细">
+      <TextObject Name="Text14" Left="-6" Width="245.7" Height="18.9" CanGrow="true" CanShrink="true" Text="[检查申请单明细.Name]" VertAlign="Bottom" Font="宋体, 9pt"/>
       <TextObject Name="Text7" Left="354.6" Width="85.05" Height="18.9" Text="[检查申请单明细.Ksmc]" VertAlign="Bottom" Font="宋体, 9pt"/>
       <TextObject Name="Text8" Left="406.65" Width="94.5" Height="18.9" VertAlign="Bottom" Font="宋体, 9pt"/>
       <TextObject Name="Text9" Left="280.55" Width="66.15" Height="18.9" AfterDataEvent="Text_price" Text="[检查申请单明细.Price]" VertAlign="Bottom" Font="宋体, 9pt"/>
@@ -776,12 +765,12 @@ namespace FastReport
     </DataBand>
   </ReportPage>
   <ReportPage Name="Page4">
-    <DataBand Name="Data4" Width="718.2" Height="19.8" DataSource="Table" Filter="[治疗项目明细.sYzzt]!=&quot;③用法联动&quot;">
-      <TextObject Name="Text65" Left="-5.55" Top="0.9" Width="170.1" Height="18.9" EvenStylePriority="UseAll" CanBreak="false" Text="[ZLXXMX.YPMC]" Font="宋体, 9pt"/>
-      <TextObject Name="Text66" Left="348.2" Top="0.9" Width="94.5" Height="18.9" Text="[ZLXXMX.ZXKS]" Font="宋体, 9pt"/>
-      <TextObject Name="Text67" Left="280.7" Top="0.9" Width="94.5" Height="18.9" Text="[ZLXXMX.YPJE]" HideZeros="true" Font="宋体, 9pt"/>
-      <TextObject Name="Text18" Left="154.35" Top="0.45" Width="47.25" Height="18.9" Text="[ZLXXMX.YPSL]" HideZeros="true" Font="宋体, 9pt"/>
-      <TextObject Name="Text19" Left="201.5" Top="0.45" Width="66.15" Height="18.9" Text="[ZLXXMX.YPDW]" HorzAlign="Center" Font="宋体, 9pt"/>
+    <DataBand Name="Data4" Width="718.2" Height="19.8" CanGrow="true" DataSource="治疗项目明细" Filter="[治疗项目明细.sYzzt]!=&quot;③用法联动&quot;">
+      <TextObject Name="Text65" Left="-5.55" Top="0.9" Width="170.1" Height="18.9" CanGrow="true" CanShrink="true" EvenStylePriority="UseAll" Text="[治疗项目明细.sYpmc]" Font="宋体, 9pt"/>
+      <TextObject Name="Text66" Left="348.2" Top="0.9" Width="94.5" Height="18.9" Text="[治疗项目明细.sYfmc]" Font="宋体, 9pt"/>
+      <TextObject Name="Text67" Left="280.7" Top="0.9" Width="94.5" Height="18.9" Text="[治疗项目明细.fMxje]" Font="宋体, 9pt"/>
+      <TextObject Name="Text18" Left="154.35" Top="0.45" Width="47.25" Height="18.9" Text="[治疗项目明细.fYpsl]" Font="宋体, 9pt"/>
+      <TextObject Name="Text19" Left="201.5" Top="0.45" Width="66.15" Height="18.9" Text="[治疗项目明细.sZxdw]" HorzAlign="Center" Font="宋体, 9pt"/>
     </DataBand>
   </ReportPage>
 </Report>
