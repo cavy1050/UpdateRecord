@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/27/2014 14:24:17" ReportInfo.Modified="02/16/2020 15:19:52" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="true">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {      }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="病人信息" ReferenceName="报表数据.病人信息" DataType="System.Int32" Enabled="true">
+      <Column Name="Cisxh" DataType="System.Decimal"/>
+      <Column Name="Hisxh" DataType="System.Decimal"/>
+      <Column Name="HisSyxh" DataType="System.Decimal"/>
+      <Column Name="HisYexh" DataType="System.Decimal"/>
+      <Column Name="Ghxh" DataType="System.Decimal"/>
+      <Column Name="PatId" DataType="System.Decimal"/>
+      <Column Name="Mzh" DataType="System.String"/>
+      <Column Name="Blh" DataType="System.String"/>
+      <Column Name="CardNo" DataType="System.String"/>
+      <Column Name="Hzxm" DataType="System.String"/>
+      <Column Name="Sex" DataType="System.String"/>
+      <Column Name="Age" DataType="System.String"/>
+      <Column Name="Brlx" DataType="System.Int32"/>
+      <Column Name="Ksdm" DataType="System.String"/>
+      <Column Name="Ksmc" DataType="System.String"/>
+      <Column Name="Bqdm" DataType="System.String"/>
+      <Column Name="Bqmc" DataType="System.String"/>
+      <Column Name="Sfzh" DataType="System.String"/>
+      <Column Name="Shbzh" DataType="System.String"/>
+      <Column Name="Cftszddm" DataType="System.String"/>
+      <Column Name="Cftszdmc" DataType="System.String"/>
+      <Column Name="MedType" DataType="System.String"/>
+      <Column Name="MedTypeMc" DataType="System.String"/>
+      <Column Name="Jgbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Jzbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Phone" DataType="System.String"/>
+      <Column Name="Address" DataType="System.String"/>
+      <Column Name="Ghlb" DataType="System.Int32"/>
+      <Column Name="Cwdm" DataType="System.String"/>
+      <Column Name="Ybdm" DataType="System.String"/>
+      <Column Name="Pzlx" DataType="System.Int32"/>
+      <Column Name="Ghrq" DataType="System.String"/>
+      <Column Name="Ybsm" DataType="System.String"/>
+      <Column Name="Cfybbfz" DataType="System.String"/>
+      <Column Name="Cfybbfzmc" DataType="System.String"/>
+      <Column Name="Zymc" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="病人诊断信息" ReferenceName="报表数据.病人诊断信息" DataType="System.Int32" Enabled="true">
+      <Column Name="Cisxh" DataType="System.Decimal"/>
+      <Column Name="Id" DataType="System.String"/>
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Category" DataType="System.Int32"/>
+      <Column Name="Type" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="申请单主信息" ReferenceName="报表数据.申请单主信息" DataType="System.Int32" Enabled="true">
+      <Column Name="Type" DataType="null"/>
+      <Column Name="PatientNoteXh" DataType="System.Decimal"/>
+      <Column Name="Brlx" DataType="System.Int32"/>
+      <Column Name="Brbs" DataType="System.Decimal"/>
+      <Column Name="Ghxh" DataType="System.Decimal"/>
+      <Column Name="Syxh" DataType="System.Decimal"/>
+      <Column Name="Yexh" DataType="System.Decimal"/>
+      <Column Name="PatId" DataType="System.Decimal"/>
+      <Column Name="Mzh" DataType="System.String"/>
+      <Column Name="Blh" DataType="System.String"/>
+      <Column Name="Hzxm" DataType="System.String"/>
+      <Column Name="Ksdm" DataType="System.String"/>
+      <Column Name="Ksmc" DataType="System.String"/>
+      <Column Name="Bqdm" DataType="System.String"/>
+      <Column Name="Bqmc" DataType="System.String"/>
+      <Column Name="TemplateGroupId" DataType="System.String"/>
+      <Column Name="TemplateId" DataType="System.String"/>
+      <Column Name="TemplateName" DataType="System.String"/>
+      <Column Name="Py" DataType="System.String"/>
+      <Column Name="Wb" DataType="System.String"/>
+      <Column Name="TemplateState" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Index" DataType="System.Int32"/>
+      <Column Name="FormDesginName" DataType="System.String"/>
+      <Column Name="PrintTemplateName" DataType="System.String"/>
+      <Column Name="TemplateBillType" DataType="null"/>
+      <Column Name="PlanId" DataType="System.String"/>
+      <Column Name="PlanName" DataType="System.String"/>
+      <Column Name="Jjbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="CreateDate" DataType="System.DateTime"/>
+      <Column Name="CreateYsdm" DataType="System.String"/>
+      <Column Name="CreateYsmc" DataType="System.String"/>
+      <Column Name="CreateKsdm" DataType="System.String"/>
+      <Column Name="CreateKsmc" DataType="System.String"/>
+      <Column Name="Sftb" DataType="System.Int32"/>
+      <Column Name="Shrq" DataType="System.DateTime"/>
+      <Column Name="Yszfrq" DataType="System.DateTime"/>
+      <Column Name="Yzzxrq" DataType="System.DateTime"/>
+      <Column Name="Zzzxrq" DataType="System.DateTime"/>
+      <Column Name="Sqdzt" DataType="System.Int32"/>
+      <Column Name="Sfzt" DataType="System.Int32"/>
+      <Column Name="MinCheckedProjectCount" DataType="System.Int32"/>
+      <Column Name="MaxCheckedProjectCount" DataType="System.Int32"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Notice" DataType="System.String"/>
+      <Column Name="执行科室" DataType="System.String"/>
+      <Column Name="Jzbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="AllowModifyProjectCount" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Yszt" DataType="System.String"/>
+      <Column Name="Cftszddm" DataType="System.String"/>
+      <Column Name="Cftszdmc" DataType="System.String"/>
+      <Column Name="MedType" DataType="System.String"/>
+      <Column Name="MedTypeMc" DataType="System.String"/>
+      <Column Name="Sex" DataType="System.String"/>
+      <Column Name="Kybz" DataType="System.Int32"/>
+      <Column Name="ExecuteAddress" DataType="System.String"/>
+      <Column Name="Mrjjksjh" DataType="System.String"/>
+      <Column Name="Kdtsjgsj" DataType="System.Int32"/>
+      <Column Name="MaxNoteCount" DataType="System.Int32"/>
+      <Column Name="条形码" DataType="System.String"/>
+      <Column Name="申请单标本" DataType="System.String"/>
+      <Column Name="bZfbz" DataType="System.Int32"/>
+      <Column Name="IsMb" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="IsGs" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="IsLx" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ukbz" DataType="System.String"/>
+      <Column Name="Fsxxls" DataType="System.Int32"/>
+      <Column Name="Ybdm" DataType="System.String"/>
+      <Column Name="Pzlx" DataType="System.Int32"/>
+      <Column Name="Syxzlb" DataType="System.Int32"/>
+      <Column Name="Sybfzbz" DataType="System.Int32"/>
+      <Column Name="Syyllb" DataType="System.String"/>
+      <Column Name="Sylbdm" DataType="System.String"/>
+      <Column Name="Sylbmc" DataType="System.String"/>
+      <Column Name="Syzddm" DataType="System.String"/>
+      <Column Name="Syzdmc" DataType="System.String"/>
+      <Column Name="Sybfzmc" DataType="System.String"/>
+      <Column Name="Syzzrslx" DataType="System.String"/>
+      <Column Name="Sysj" DataType="System.String"/>
+      <Column Name="Sycbjyjcxmdm" DataType="System.String"/>
+      <Column Name="Sycbjyjcxmmc" DataType="System.String"/>
+      <Column Name="Syfwzh" DataType="System.String"/>
+      <Column Name="Sjhzh" DataType="System.String"/>
+      <Column Name="医生签名图片" DataType="System.Drawing.Image, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" BindableControl="Picture"/>
+      <Column Name="Kdtsjgsjdw" DataType="System.Int32"/>
+      <Column Name="Kdtsjgsjkzfs" DataType="System.Int32"/>
+      <Column Name="Cfybbfzmc" DataType="System.String"/>
+      <Column Name="Cfybbfz" DataType="System.String"/>
+      <Column Name="IsPackage" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="IsPrint" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Sfms" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="申请单项目信息" ReferenceName="报表数据.申请单项目信息" DataType="System.Int32" Enabled="true">
+      <Column Name="PatientProjetXh" DataType="System.Decimal"/>
+      <Column Name="Sqxh" DataType="System.Decimal"/>
+      <Column Name="ParentId" DataType="System.String"/>
+      <Column Name="PlanProjectId" DataType="System.String"/>
+      <Column Name="IsChecked" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Count" DataType="System.Int32"/>
+      <Column Name="Jjbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Id" DataType="System.String"/>
+      <Column Name="Name" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="Py" DataType="System.String"/>
+      <Column Name="Wb" DataType="System.String"/>
+      <Column Name="State" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Memo" DataType="System.String"/>
+      <Column Name="IsGroup" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Zxzt" DataType="System.Int32"/>
+      <Column Name="Sfzt" DataType="System.Int32"/>
+      <Column Name="CheckBit" DataType="System.Int32"/>
+      <Column Name="部位" DataType="System.String"/>
+      <Column Name="价格" DataType="System.Decimal"/>
+      <Column Name="总价" DataType="System.Decimal"/>
+      <Column Name="IsAppointment" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="MaxCount" DataType="System.Int32"/>
+      <Column Name="Xbxz" DataType="System.String"/>
+      <Column Name="Jcsj" DataType="System.String"/>
+      <Column Name="Bgzq" DataType="System.String"/>
+      <Column Name="Syz" DataType="System.String"/>
+      <Column Name="Xmyy" DataType="System.String"/>
+      <Column Name="Ybdm" DataType="System.String"/>
+      <Column Name="Ylxmdm" DataType="System.String"/>
+      <Column Name="Ylxmmc" DataType="System.String"/>
+      <Column Name="AllowJj" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="HisSqdXh" DataType="System.Decimal"/>
+      <Column Name="项目标本" DataType="System.String"/>
+      <Column Name="ExecuteAddress" DataType="System.String"/>
+      <Column Name="InstrumentId" DataType="System.String"/>
+      <Column Name="Zlbmrxz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ljsl" DataType="System.Int32"/>
+      <Column Name="Ljts" DataType="System.Int32"/>
+      <Column Name="Yzxrq" DataType="System.DateTime"/>
+      <Column Name="Zfcfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ckz" DataType="System.String"/>
+      <Column Name="Unit" DataType="System.String"/>
+      <Column Name="Kdzysx" DataType="System.String"/>
+      <Column Name="CZRQ" DataType="System.DateTime"/>
+      <Column Name="预执行日期" DataType="System.String"/>
+      <Column Name="Zqbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ewbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Swbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="FullLcxmdm" DataType="System.String"/>
+      <Column Name="FullLcxmmc" DataType="System.String"/>
+      <Column Name="Kdtxjgts" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="申请单附加信息" ReferenceName="报表数据.申请单附加信息" DataType="System.Int32" Enabled="true">
+      <Column Name="病人申请单序号" DataType="System.String"/>
+      <Column Name="诊断_代码" DataType="System.String"/>
+      <Column Name="诊断" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="ReportMasterInfo" ReferenceName="报表数据.ReportMasterInfo" DataType="System.Int32" Enabled="true">
+      <Column Name="医院名称" DataType="System.String"/>
+      <Column Name="系统名称" DataType="System.String"/>
+      <Column Name="科室名称" DataType="System.String"/>
+      <Column Name="病区名称" DataType="System.String"/>
+      <Column Name="职工姓名" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="申请单收费项目信息" ReferenceName="报表数据.申请单收费项目信息" DataType="System.Int32" Enabled="true">
+      <Column Name="申请单项目代码" DataType="System.String"/>
+      <Column Name="申请单项目名称" DataType="System.String"/>
+      <Column Name="收费项目类型" DataType="System.String"/>
+      <Column Name="收费项目代码" DataType="System.String"/>
+      <Column Name="收费项目名称" DataType="System.String"/>
+      <Column Name="部位" DataType="System.String"/>
+      <Column Name="数量" DataType="System.Int32"/>
+      <Column Name="价格" DataType="System.Decimal"/>
+    </TableDataSource>
+    <Total Name="Total" Expression="[申请单项目信息.总价]" EvaluateCondition="[申请单项目信息.Zxzt]==1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="70" PaperHeight="33" LeftMargin="1" TopMargin="1" RightMargin="1" BottomMargin="1" FirstPageSource="15" OtherPagesSource="15">
+    <PageHeaderBand Name="PageHeader1" Width="257.04" Height="258.6">
+      <TextObject Name="Text4" Left="170.1" Top="8.45" Width="66.15" Height="18.9" Text="[申请单项目信息.项目标本]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
+      <BarcodeObject Name="Barcode1" Left="28.35" Top="65.6" Width="98.75" Height="37.8" DataColumn="病人信息.Mzh" Barcode="Code128" Barcode.AutoEncode="true"/>
+      <TextObject Name="Text1" Left="5.9" Top="8.45" Width="56.7" Height="18.9" Text="[病人信息.Hzxm]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text2" Left="110.25" Top="8.45" Width="28.35" Height="18.9" Text="[病人信息.Sex]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text3" Left="133.65" Top="8.45" Width="47.25" Height="18.9" Text="[病人信息.Age]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text5" Left="5.9" Top="27.35" Width="94.5" Height="18.9" Text="[病人信息.Ksmc]" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text6" Left="120.85" Top="27.35" Width="113.4" Height="18.9" Text="[病人信息.Mzh]" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text8" Left="5.9" Top="99.3" Width="245.7" Height="18.9" CanBreak="false" Text="[申请单项目信息.Name]" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text9" Left="5.9" Top="47.25" Width="245.7" Height="18.9" Text="[FormatDateTime([申请单主信息.CreateDate],&quot;yyyy-mm-dd hh:mm:ss&quot;)]" Font="宋体, 11pt"/>
+    </PageHeaderBand>
+  </ReportPage>
+</Report>
