@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="05/27/2014 14:24:17" ReportInfo.Modified="02/16/2020 15:19:52" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="true">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/27/2014 14:24:17" ReportInfo.Modified="02/16/2020 17:47:08" ReportInfo.CreatorVersion="2014.2.3.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -239,7 +239,6 @@ namespace FastReport
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="70" PaperHeight="33" LeftMargin="1" TopMargin="1" RightMargin="1" BottomMargin="1" FirstPageSource="15" OtherPagesSource="15">
     <PageHeaderBand Name="PageHeader1" Width="257.04" Height="258.6">
-      <TextObject Name="Text4" Left="170.1" Top="8.45" Width="66.15" Height="18.9" Text="[申请单项目信息.项目标本]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
       <BarcodeObject Name="Barcode1" Left="28.35" Top="65.6" Width="98.75" Height="37.8" DataColumn="病人信息.Mzh" Barcode="Code128" Barcode.AutoEncode="true"/>
       <TextObject Name="Text1" Left="5.9" Top="8.45" Width="56.7" Height="18.9" Text="[病人信息.Hzxm]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
       <TextObject Name="Text2" Left="110.25" Top="8.45" Width="28.35" Height="18.9" Text="[病人信息.Sex]" VertAlign="Bottom" Font="宋体, 11pt, style=Bold"/>
