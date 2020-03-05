@@ -1,0 +1,669 @@
+Title = 门诊收费系统
+Icon = .\bmp\mzsfxt.ico
+Bmp = Bmp
+Menu
+  Caption = &1收费工作
+  Icon = 
+  Menu
+    Caption = &1门诊收费
+    Icon = 
+    AppName = sf_mzsf.dll
+    FuncName = fsf_mzsf
+    VarName = 21001
+  End
+  Menu
+    Caption = &2急诊收费
+    Icon = 
+    AppName = sf_mzsf.dll
+    FuncName = fsf_jzsf
+    VarName = 21002
+  End
+  Menu
+    Caption = &3结账前退费
+    Icon = 
+    AppName = sf_bftf.dll
+    FuncName = fsf_bftf_wjz
+    VarName = 21003
+  End
+  Menu
+    Caption = &4结账后退费
+    Icon = 
+    AppName = sf_bftf.dll
+    FuncName = fsf_bftf
+    VarName = 21004
+  End
+  Menu
+    Caption = 医保兑付
+    Icon = 
+    AppName = sf_mzybdf.dll
+    FuncName = fsf_mzybdf
+    VarName = 21010
+  End
+  Menu
+    Caption = 门诊发票集中打印
+    Icon = 
+    AppName = yy_mzfpjzdy.dll
+    FuncName = fyy_mzfpjzdy
+    VarName = 21012
+  End
+  Menu
+    Caption = （停用）门诊发票汇总打印
+    Icon = 
+    AppName = yy_fphzdy.dll
+    FuncName = fyy_fphzdy
+    VarName = 21013
+  End
+  Menu
+    Caption = 自助刷费机
+    Icon = 
+    AppName = mzzz_zzsfj.dll
+    FuncName = fmzzz_zzsfj
+    VarName = 21014
+  End
+  Menu
+    Caption = 收费发票处理
+    Icon = 
+    AppName = yy_fpyccl.dll
+    FuncName = yy_fphyccl
+    VarName = 21015
+  End
+  Menu
+    Caption = 急诊费用导入住院
+    Icon = 
+    AppName = sf_jzfyzzy.dll
+    FuncName = fsf_jzfyzzy
+    VarName = 21016
+  End
+End
+Menu
+  Caption = &2家床管理
+  Icon = 
+  Menu
+    Caption = &1家床收费
+    Icon = 
+    AppName = sf_mzsf.dll
+    FuncName = fsf_jcsf
+    VarName = 22001
+  End
+  Menu
+    Caption = &2家床退费
+    Icon = 
+    AppName = sf_bftf.dll
+    FuncName = fsf_jctf
+    VarName = 22002
+  End
+  Menu
+    Caption = &3预交金管理
+    Icon = 
+    AppName = sf_jcyjjgl.dll
+    FuncName = fsf_jcyjjgl
+    VarName = 22003
+  End
+  Menu
+    Caption = &4家床结算
+    Icon = 
+    AppName = sf_jcjs.dll
+    FuncName = fsf_jcjs
+    VarName = 22004
+  End
+  Menu
+    Caption = &5家床结算取消
+    Icon = 
+    AppName = sf_jcjsqx.dll
+    FuncName = fsf_jcjsqx
+    VarName = 22005
+  End
+End
+Menu
+  Caption = &3财务
+  Icon = 
+  Menu
+    Caption = &1操作员结账
+    Icon = 
+    AppName = sf_czyjz.dll
+    FuncName = fsf_czyjz
+    VarName = 23001
+  End
+  Menu
+    Caption = &2全班结账
+    Icon = 
+    AppName = sf_qbjz.dll
+    FuncName = fsf_qbjz
+    VarName = 23002
+  End
+  Menu
+    Caption = &3结帐单统计
+    Icon = 
+    AppName = sf_cx_jzzdtj.dll
+    FuncName = fsf_cx_jzzdtj
+    VarName = 23003
+  End
+  Menu
+    Caption = &4预交金结帐
+    Icon = 
+    AppName = sf_yjjjz.dll
+    FuncName = fsf_yjjjz
+    VarName = 23004
+  End
+  Menu
+    Caption = &5合并结账单统计
+    Icon = 
+    AppName = sf_cx_hbjzzdtj.dll
+    FuncName = fsf_cx_hbjzzdtj
+    VarName = 23005
+  End
+  Menu
+    Caption = &6门诊合并结帐(优化流程)
+    Icon = 
+    AppName = yy_czyjz_new.dll
+    FuncName = fyy_czyjz_new
+    VarName = 23006
+  End
+  Menu
+    Caption = &7合并结帐单统计(优化流程)
+    Icon = 
+    AppName = sf_hbjzzdtj_yhlc.dll
+    FuncName = fsf_hbjzzdtj_yhlc
+    VarName = 23007
+  End
+End
+Menu
+  Caption = &4查询
+  Icon = 
+  Menu
+    Caption = &1处方查询
+    Icon = 
+    AppName = sf_cx_cfcx.dll
+    FuncName = fsf_cx_cfcx
+    VarName = 24001
+  End
+  Menu
+    Caption = &2门诊费用查询
+    Icon = 
+    AppName = sf_cx_fycx.dll
+    FuncName = fsf_cx_fycx
+    VarName = 24003
+  End
+  Menu
+    Caption = &3单项目统计
+    Icon = 
+    AppName = mz_ksdgxmtj.dll
+    FuncName = fmz_ksdgxmtj_mz
+    VarName = 24004
+  End
+  Menu
+    Caption = &5挂号收费查询
+    Icon = 
+    AppName = sf_cx_ghsf.dll
+    FuncName = fsf_cx_ghsf
+    VarName = 24005
+  End
+  Menu
+    Caption = &6门诊收费药品比例统计
+    Icon = 
+    AppName = sf_ypbltj.dll
+    FuncName = fsf_ypfltj
+    VarName = 24007
+  End
+  Menu
+    Caption = &7医生站处方信息查询
+    Icon = 
+    AppName = yf_mzyscfxx.dll
+    FuncName = fsf_mzyscfxx
+    VarName = 24008
+  End
+  Menu
+    Caption = &A门诊收费查询Ex
+    Icon = 
+    AppName = sf_cx_cfcx_ex.dll
+    FuncName = fsf_cx_cfcx_ex
+    VarName = 24011
+  End
+  Menu
+    Caption = &B门诊收费综合查询
+    Icon = 
+    AppName = sf_mzsfzhcx.dll
+    FuncName = fsf_mzzhxx
+    VarName = 24012
+  End
+  Menu
+    Caption = &8单边账查询
+    Icon = 
+    AppName = cqybyccx.dll
+    FuncName = fyy_Ybychd2016
+    VarName = 24013
+  End
+End
+Menu
+  Caption = &5报表
+  Icon = 
+  Menu
+    Caption = &1外挂报表
+    Icon = 
+    AppName = dorep.dll
+    FuncName = showorep
+    VarName = 25001
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &2药品用量统计
+    Icon = 
+    AppName = sf_bb_ypyltj.dll
+    FuncName = fsf_bb_ypyltj
+    VarName = 25002
+  End
+  Menu
+    Caption = &3门诊医生工作量统计
+    Icon = 
+    AppName = sf_bb_ysgzltj_m.dll
+    FuncName = fsf_bb_ysgzltj_m
+    VarName = 25003
+  End
+  Menu
+    Caption = &8门诊收入报表(优化流程)
+    Icon = 
+    AppName = yy_yhlcbb.dll
+    FuncName = fyy_yhlcbb_rb
+    VarName = 23008
+  End
+  Menu
+    Caption = &9个人资金明细表(优化流程)
+    Icon = 
+    AppName = yy_yhlcbb.dll
+    FuncName = fyy_yhlcbb_grzjmx
+    VarName = 23009
+  End
+End
+Menu
+  Caption = &6设置
+  Icon = 
+  Menu
+    Caption = &1发票管理
+    Icon = 
+    AppName = gh_fpgl.dll
+    FuncName = fsf_fpgl
+    VarName = 26001
+  End
+  Menu
+    Caption = &2协定方定义
+    Icon = 
+    AppName = sf_xdfdy.dll
+    FuncName = fsf_xdfdy
+    VarName = 26002
+  End
+  Menu
+    Caption = &3项目联动定义
+    Icon = 
+    AppName = sf_xmlddy.dll
+    FuncName = fsf_xmlddy
+    VarName = 26003
+  End
+  Menu
+    Caption = &4收费窗口设置
+    Icon = 
+    AppName = sf_sfcksz.dll
+    FuncName = fsf_sfcksz
+    VarName = 26004
+  End
+  Menu
+    Caption = &5收发配窗口设置
+    Icon = 
+    AppName = sf_sffycksz.dll
+    FuncName = fsf_sffycksz
+    VarName = 26005
+  End
+  Menu
+    Caption = &6不挂号收费项目设置
+    Icon = 
+    AppName = sf_bghsfxm.dll
+    FuncName = fsf_bghsfxm
+    VarName = 26007
+  End
+  Menu
+    Caption = &7收费挂号打印机设置
+    Icon = 
+    AppName = sf_sfdyjsz.dll
+    FuncName = fsf_sfdyjsz
+    VarName = 26008
+  End
+  Menu
+    Caption = &8医保单独请求
+    Icon = 
+    AppName = yy_ybddqq.dll
+    FuncName = fyy_ybddqq
+    VarName = 26009
+  End
+  Menu
+    Caption = &9医保账户查询
+    Icon = 
+    AppName = yy_ybddqq.dll
+    FuncName = fyy_ybzhcx
+    VarName = 26010
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &A分诊大屏设置
+    Icon = 
+    AppName = sf_sfcksz.dll
+    FuncName = fsf_ys_fzdpsz
+    VarName = 26011
+  End
+  Menu
+    Caption = &B医技大屏设置
+    Icon = 
+    AppName = sf_sfcksz.dll
+    FuncName = fsf_ys_yjdpsz
+    VarName = 26012
+  End
+  Menu
+    Caption = &C分诊大屏科室对应
+    Icon = 
+    AppName = sf_dpfycksz.dll
+    FuncName = fsf_ys_fzdpksdy
+    VarName = 26013
+  End
+  Menu
+    Caption = &D医技大屏科室对应
+    Icon = 
+    AppName = sf_dpfycksz.dll
+    FuncName = fsf_ys_yjdpksdy
+    VarName = 26014
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &H门诊药品统计模板设置
+    Icon = 
+    AppName = SF_yptjmbsz.dll
+    FuncName = fsf_yptjmbsz
+    VarName = 26018
+  End
+  Menu
+    Caption = &I单机版本数据导回
+    Icon = 
+    AppName = sf_bdsfsjcl.dll
+    FuncName = fsf_bdsfsjcl
+    VarName = 26019
+  End
+  Menu
+    Caption = 重庆竟达医保单独请求
+    Icon = 
+    AppName = yy_nbddqq.dll
+    FuncName = fyy_nbddqq_zy
+    VarName = 26020
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = 检验材料费设置
+    Icon = 
+    AppName = yy_jyclfsz.dll
+    FuncName = fyy_jyclfsz
+    VarName = 26021
+  End
+End
+Menu
+  Caption = &7急观处理
+  Icon = 
+  Menu
+    Caption = &1急观登记
+    Icon = 
+    AppName = zyb_rydj.dll
+    FuncName = fzyb_rydj_jg
+    VarName = 27001
+  End
+  Menu
+    Caption = &2急观取消
+    Icon = 
+    AppName = zyb_ryqx.dll
+    FuncName = fzyb_ryqx_jg
+    VarName = 27002
+  End
+  Menu
+    Caption = &3急观病人信息维护
+    Icon = 
+    AppName = zyb_brxxwh.dll
+    FuncName = fzyb_brxxwh_jg
+    VarName = 27003
+  End
+  Menu
+    Caption = &4医保凭证修改
+    Icon = 
+    AppName = zyb_pzxg.dll
+    FuncName = fzyb_pzxg
+    VarName = 27004
+  End
+  Menu
+    Caption = &5急观预交金管理
+    Icon = 
+    AppName = zyb_yjjgl.dll
+    FuncName = fzyb_yjjgl_jg
+    VarName = 27005
+  End
+  Menu
+    Caption = &6急观转住院
+    Icon = 
+    AppName = zyb_jg2zy.dll
+    FuncName = fzyb_jg2zy
+    VarName = 27006
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &7病人结账
+    Icon = 
+    AppName = zyb_brjz.dll
+    FuncName = fzyb_brjz_jg
+    VarName = 27007
+  End
+  Menu
+    Caption = &8取消结账
+    Icon = 
+    AppName = zyb_qxjz.dll
+    FuncName = fzyb_qxjz_jg
+    VarName = 27008
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &9急观收费
+    Icon = 
+    AppName = zy_xcflr.dll
+    FuncName = fzy_jgsf
+    VarName = 27009
+  End
+  Menu
+    Caption = &A急观退费
+    Icon = 
+    AppName = zy_xcfzf.dll
+    FuncName = fzy_jgsfzf
+    VarName = 27010
+  End
+  Menu
+    Caption = &B急观补记帐
+    Icon = 
+    AppName = zy_bjz.dll
+    FuncName = fzy_bjz
+    VarName = 27011
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &C收费员结账
+    Icon = 
+    AppName = zyb_sfyjz.dll
+    FuncName = fzyb_sfyjz
+    VarName = 27012
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &D病人信息查询
+    Icon = 
+    AppName = zy_cx_brxxcx.dll
+    FuncName = fzy_cx_brxxcx
+    VarName = 27013
+  End
+  Menu
+    Caption = &E急观发票管理
+    Icon = 
+    AppName = Gh_fpgl.dll
+    FuncName = fzy_fpgl
+    VarName = 27014
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &F入区登记
+    Icon = 
+    AppName = bq_rqdj.dll
+    FuncName = fbq_rqdj
+    VarName = 27015
+  End
+  Menu
+    Caption = &G入区取消
+    Icon = 
+    AppName = bq_rqqx.dll
+    FuncName = fbq_rqqx
+    VarName = 27016
+  End
+  Menu
+    Caption = &H病人出区
+    Icon = 
+    AppName = bq_brcq.dll
+    FuncName = fbq_brcq
+    VarName = 27017
+  End
+  Menu
+    Caption = &I出区召回
+    Icon = 
+    AppName = bq_rqqx.dll
+    FuncName = fbq_cqzh
+    VarName = 27018
+  End
+  Menu
+    Caption = &J急观病人信息查询
+    Icon = 
+    AppName = zy_cx_brxxcx.dll
+    FuncName = fzy_cx_brxxcx_jg
+    VarName = 27019
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &K暂观登记
+    Icon = 
+    AppName = mz_jgdj.dll
+    FuncName = fmz_jzdj
+    VarName = 27020
+  End
+  Menu
+    Caption = &L急诊登记
+    Icon = 
+    AppName = mz_jzdj.dll
+    FuncName = fmz_jzdj
+    VarName = 27021
+  End
+End
+Menu
+  Caption = &8全国流感数据上报
+  Icon = 
+  Menu
+    Caption = &1数据匹配配置节目面
+    Icon = 
+    AppName = yy_ybdz_main.dll
+    FuncName = fyy_ybdz_main_pz
+    VarName = 28001
+  End
+  Menu
+    Caption = &2数据匹配界面
+    Icon = 
+    AppName = yy_ybdz_main.dll
+    FuncName = fyy_ybdz_main_pp
+    VarName = 28002
+  End
+  Menu
+    Caption = &A全国流感上报基础设置
+    Icon = 
+    AppName = yy_lgsbjk.dll
+    FuncName = fyy_zlsbjksz
+    VarName = 28003
+  End
+  Menu
+    Caption = &B全国流感上报数据生成
+    Icon = 
+    AppName = yy_lgsbjk.dll
+    FuncName = fyy_zlsbjk
+    VarName = 28004
+  End
+End
+Menu
+  Caption = &9新型冠状病毒数据上报
+  Icon = 
+  Menu
+    Caption = &1基础数据设置
+    Icon = 
+    AppName = yy_gzbdjk.dll
+    FuncName = fyy_zlsbjksz
+    VarName = 29001
+  End
+  Menu
+    Caption = &2数据上传程序
+    Icon = 
+    AppName = yy_gzbdjk.dll
+    FuncName = fyy_zlsbjk
+    VarName = 29002
+  End
+End
