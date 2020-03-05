@@ -1,0 +1,94 @@
+﻿<XtraSerializer version="1.0" application="View">
+  <property name="#LayoutVersion" />
+  <property name="ActiveFilterString" />
+  <property name="ActiveFilterEnabled">true</property>
+  <property name="Columns" iskey="true" value="20">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Name">手术序号</property>
+    </property>
+    <property name="Item2" isnull="true" iskey="true">
+      <property name="Name">首页序号</property>
+    </property>
+    <property name="Item3" isnull="true" iskey="true">
+      <property name="Width">126</property>
+      <property name="Name">申请日期</property>
+    </property>
+    <property name="Item4" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">0</property>
+      <property name="Width">120</property>
+      <property name="Name">安排日期</property>
+    </property>
+    <property name="Item5" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">4</property>
+      <property name="Width">21</property>
+      <property name="Name">床位号</property>
+    </property>
+    <property name="Item6" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">1</property>
+      <property name="Width">45</property>
+      <property name="Name">姓名</property>
+    </property>
+    <property name="Item7" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">5</property>
+      <property name="Width">23</property>
+      <property name="Name">性别</property>
+    </property>
+    <property name="Item8" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">6</property>
+      <property name="Width">24</property>
+      <property name="Name">年龄</property>
+    </property>
+    <property name="Item9" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">2</property>
+      <property name="Width">64</property>
+      <property name="Name">手术1名称</property>
+    </property>
+    <property name="Item10" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">3</property>
+      <property name="Width">44</property>
+      <property name="Name">主刀医生</property>
+    </property>
+    <property name="Item11" isnull="true" iskey="true">
+      <property name="Name">住院号</property>
+    </property>
+    <property name="Item12" isnull="true" iskey="true">
+      <property name="Name">cardno</property>
+    </property>
+    <property name="Item13" isnull="true" iskey="true">
+      <property name="Name">yexh</property>
+    </property>
+    <property name="Item14" isnull="true" iskey="true">
+      <property name="Name">sfzh</property>
+    </property>
+    <property name="Item15" isnull="true" iskey="true">
+      <property name="Name">ysdm</property>
+    </property>
+    <property name="Item16" isnull="true" iskey="true">
+      <property name="Name">jlzt</property>
+    </property>
+    <property name="Item17" isnull="true" iskey="true">
+      <property name="Name">name</property>
+    </property>
+    <property name="Item18" isnull="true" iskey="true">
+      <property name="Name">colyzxh</property>
+    </property>
+    <property name="Item19" isnull="true" iskey="true">
+      <property name="Name">colKsmc</property>
+    </property>
+    <property name="Item20" isnull="true" iskey="true">
+      <property name="Visible">true</property>
+      <property name="VisibleIndex">7</property>
+      <property name="Name">病历号</property>
+    </property>
+  </property>
+  <property name="OptionsView" isnull="true" iskey="true">
+    <property name="ShowGroupPanel">false</property>
+  </property>
+</XtraSerializer>
