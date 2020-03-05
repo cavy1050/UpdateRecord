@@ -1,0 +1,138 @@
+<Model id="50d24b42-d7a1-444b-9b1f-679d824d0987" name="尸体解剖告知书{重医附属大学城医院}" description="" text="尸体解剖告知书" nodetype="Model" canprint="True" isPrintAlone="False" printInOddPages="False" display="11```0`1" Version="1.0.0.169" titledisplay="1`1`1" hospitalcoderange="10209" catalogcode="B-A506" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" indentLength="0" isReview="False" isform="False" formclass="" submitCACoordinate="" auditCACoordinate="" maxrefid="26" RelateInstanceId="0">
+  <Ref id="13">
+    <node identity="0" isfixed="True" spaceholder="8" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="235372ac-6455-4ba2-8728-c2c2a9628bc0" nodetype="Embeded" nodelogiccontent="" name="身份信息(一般信息)" text="身份信息(一般信息)" description="用于病程中对病例特点的描述，包括姓名、性别、年龄等信息。" display="11```0`1">
+      <node embededId="0" id="c9a9b2ab-81ca-4d9a-8da7-7308e7cb90f6" nodetype="Object" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.101" display="11```0`1">
+        <node id="6fa963d2-ab46-493e-9cf6-ff87addccf52" nodetype="AtomNode" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.000" atomtype="String" value="``" defaultvalue="#patname`当前病人姓名`" display="1111111```````13```" embededId="19" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+      <node text=" " rtf=" " nodetype="Text" />
+    </node>
+  </Ref>
+  <Ref id="22">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="d2784633-25e3-4cb7-b7bb-d0b9e54d6672" nodetype="Embeded" nodelogiccontent="" name="就诊科室" text="就诊科室" display="20`入院科室`&#xD;&#xA;`0`1">
+      <node embededId="0" id="7ee0bbdd-86d4-412b-83ca-795992ed45fd" nodetype="Object" nodelogiccontent="" name="就诊科室" text="就诊科室" description="0.212" display="11```0`1">
+        <node id="5e39b306-e2b9-450e-ba78-3b6971652a38" nodetype="AtomNode" nodelogiccontent="" name="就诊科室" text="就诊科室" description="3.001" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="院内科室///DepartmentBook///记录状态//1" inputdirect="False" defaultvalue="#CurrentDeptName`当前科室名称`" display="1111111```````13```" embededId="33" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="23">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="13" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="69ecf9c9-8744-4455-92c9-46022c836010" nodetype="Embeded" nodelogiccontent="" name="死亡诊断(死亡诊断)" text="死亡诊断(死亡诊断)" description="导致患者死亡的诊断。" display="11```0`1">
+      <node embededId="0" id="1a4ea117-c46d-4009-83ca-0f3ad7ccb8e2" nodetype="Object" nodelogiccontent="" name="死亡诊断(死亡诊断)" signid="死亡诊断名称|572" text="死亡诊断(死亡诊断)" description="6.209" display="11```0`1">
+        <node id="1222d85e-4a28-445a-8dad-70434002ac85" nodetype="AtomNode" nodelogiccontent="" name="死亡诊断(死亡诊断)" text="死亡诊断" description="6.001" atomtype="String" maxrequired="8" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="ICD-10///ICD10///记录状态//1" inputdirect="False" display="1111111```````13```" embededId="1" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="24">
+    <node identity="0" isfixed="False" spaceholder="4" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="23abced6-de0c-42ef-8a5f-c6105f8b038b" nodetype="Embeded" nodelogiccontent="" name="死亡信息(死亡时间)" text="死亡时间" description="用于死亡记录，死亡时间要具体至分钟。" display="11```0`1">
+      <node embededId="0" id="b016b573-b0c8-468a-bc72-5d15a9b7a1a1" nodetype="Object" nodelogiccontent="" name="死亡时间" text="死亡时间" description="日期时间型" display="11```0`1">
+        <node id="c8499f95-5517-4342-bcc4-6822448c911e" nodetype="AtomNode" nodelogiccontent="" name="绝对时间" text="死亡时间" description="支持绝对时间显示格式和精度等设置。" atomtype="Time" value="" display="1111011`` ```yyyy年MM月dd日 HH时mm分+Minute+``13```" embededId="11" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="ef9d05fc-3382-4bb9-b157-29a8f601ef5c" nodetype="DynamicMoleNode" nodelogiccontent="" name="同意书与委托书(告知书内容)" text="同意书与委托书(告知书内容)" description="适用于告知书。" otherid="C-1192" display="10`医务人员告知：&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="尊敬的患者家属或患者的法定监护人、授权委托人：&#xA;" rtf="\b \'d7\'f0\'be\'b4\'b5\'c4\'bb\'bc\'d5\'df\'bc\'d2\'ca\'f4\'bb\'f2\'bb\'bc\'d5\'df\'b5\'c4\'b7\'a8\'b6\'a8\'bc\'e0\'bb\'a4\'c8\'cb\'a1\'a2\'ca\'da\'c8\'a8\'ce\'af\'cd\'d0\'c8\'cb\'a3\'ba\b0\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    您的" rtf="    \'c4\'fa\'b5\'c4" nodetype="Text" />
+    <node text="家人" rtf="\'bc\'d2\'c8\'cb" nodetype="Text" />
+    <node refid="13" nodetype="Embeded" />
+    <node text="，在我院" rtf="\'a3\'ac\'d4\'da\'ce\'d2\'d4\'ba" nodetype="Text" />
+    <node refid="22" nodetype="Embeded" />
+    <node text="住院治疗" rtf="\'d7\'a1\'d4\'ba\'d6\'ce\'c1\'c6" nodetype="Text" />
+    <node text="，" rtf="\'a3\'ac" nodetype="Text" />
+    <node text="因" rtf="\'d2\'f2" nodetype="Text" />
+    <node refid="23" nodetype="Embeded" />
+    <node text="疾病" rtf="\'bc\'b2\'b2\'a1" nodetype="Text" />
+    <node text="于" rtf="\'d3\'da" nodetype="Text" />
+    <node refid="24" nodetype="Embeded" />
+    <node text="去世，敬请节哀并特此告知如下事项：" rtf="\'c8\'a5\'ca\'c0\'a3\'ac\'be\'b4\'c7\'eb\'bd\'da\'b0\'a7\'b2\'a2\'cc\'d8\'b4\'cb\'b8\'e6\'d6\'aa\'c8\'e7\'cf\'c2\'ca\'c2\'cf\'ee\'a3\'ba" nodetype="Text" />
+    <node text="&#xA;    1.如死者生前未对尸体作出明确处理意见，死者的家属具有对尸体及器官捐献的处置权。&#xA;    2.如家属对死者的死因有异议，应在48小时内提出尸检申请。我院不具有尸体冻存条件，若需冻存应将尸体运送至殡仪馆，尸检时间可以延长至7日(具体费用详询殡仪馆)。&#xA;" rtf="\par&#xD;&#xA;    1.\'c8\'e7\'cb\'c0\'d5\'df\'c9\'fa\'c7\'b0\'ce\'b4\'b6\'d4\'ca\'ac\'cc\'e5\'d7\'f7\'b3\'f6\'c3\'f7\'c8\'b7\'b4\'a6\'c0\'ed\'d2\'e2\'bc\'fb\'a3\'ac\'cb\'c0\'d5\'df\'b5\'c4\'bc\'d2\'ca\'f4\'be\'df\'d3\'d0\'b6\'d4\'ca\'ac\'cc\'e5\'bc\'b0\'c6\'f7\'b9\'d9\'be\'e8\'cf\'d7\'b5\'c4\'b4\'a6\'d6\'c3\'c8\'a8\'a1\'a3\par&#xD;&#xA;    2.\'c8\'e7\'bc\'d2\'ca\'f4\'b6\'d4\'cb\'c0\'d5\'df\'b5\'c4\'cb\'c0\'d2\'f2\'d3\'d0\'d2\'ec\'d2\'e9\'a3\'ac\'d3\'a6\'d4\'da\b 48\'d0\'a1\'ca\'b1\'c4\'da\b0\'cc\'e1\'b3\'f6\'ca\'ac\'bc\'ec\'c9\'ea\'c7\'eb\'a1\'a3\'ce\'d2\'d4\'ba\'b2\'bb\'be\'df\'d3\'d0\'ca\'ac\'cc\'e5\'b6\'b3\'b4\'e6\'cc\'f5\'bc\'fe\'a3\'ac\'c8\'f4\'d0\'e8\'b6\'b3\'b4\'e6\'d3\'a6\'bd\'ab\'ca\'ac\'cc\'e5\'d4\'cb\'cb\'cd\'d6\'c1\'e9\'eb\'d2\'c7\'b9\'dd\'a3\'ac\'ca\'ac\'bc\'ec\'ca\'b1\'bc\'e4\'bf\'c9\'d2\'d4\'d1\'d3\'b3\'a4\'d6\'c17\'c8\'d5(\'be\'df\'cc\'e5\'b7\'d1\'d3\'c3\'cf\'ea\'d1\'af\'e9\'eb\'d2\'c7\'b9\'dd)\'a1\'a3\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="3.如因拒绝或者拖延尸检，超过规定时间，从而影响对死因判定的，自行承担责任。&#xA;" rtf="3.\'c8\'e7\'d2\'f2\'be\'dc\'be\'f8\'bb\'f2\'d5\'df\'cd\'cf\'d1\'d3\'ca\'ac\'bc\'ec\'a3\'ac\'b3\'ac\'b9\'fd\'b9\'e6\'b6\'a8\'ca\'b1\'bc\'e4\'a3\'ac\'b4\'d3\'b6\'f8\'d3\'b0\'cf\'ec\'b6\'d4\'cb\'c0\'d2\'f2\'c5\'d0\'b6\'a8\'b5\'c4\'a3\'ac\'d7\'d4\'d0\'d0\'b3\'d0\'b5\'a3\'d4\'f0\'c8\'ce\'a1\'a3\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="4.尸体解剖的过程需要损坏死者的体貌，取出必要的组织、内脏器官进行检验，所以在尸体解剖时尸体的体貌会有所损坏，同时死者的部分组织、内脏器官会缺失。并且，即使进行了全面、系统的尸体解剖和病理检验，仍有可能查不出真正的死因。&#xA;" rtf="4.\'ca\'ac\'cc\'e5\'bd\'e2\'c6\'ca\'b5\'c4\'b9\'fd\'b3\'cc\'d0\'e8\'d2\'aa\'cb\'f0\'bb\'b5\'cb\'c0\'d5\'df\'b5\'c4\'cc\'e5\'c3\'b2\'a3\'ac\'c8\'a1\'b3\'f6\'b1\'d8\'d2\'aa\'b5\'c4\'d7\'e9\'d6\'af\'a1\'a2\'c4\'da\'d4\'e0\'c6\'f7\'b9\'d9\'bd\'f8\'d0\'d0\'bc\'ec\'d1\'e9\'a3\'ac\'cb\'f9\'d2\'d4\'d4\'da\'ca\'ac\'cc\'e5\'bd\'e2\'c6\'ca\'ca\'b1\'ca\'ac\'cc\'e5\'b5\'c4\'cc\'e5\'c3\'b2\'bb\'e1\'d3\'d0\'cb\'f9\'cb\'f0\'bb\'b5\'a3\'ac\'cd\'ac\'ca\'b1\'cb\'c0\'d5\'df\'b5\'c4\'b2\'bf\'b7\'d6\'d7\'e9\'d6\'af\'a1\'a2\'c4\'da\'d4\'e0\'c6\'f7\'b9\'d9\'bb\'e1\'c8\'b1\'ca\'a7\'a1\'a3\'b2\'a2\'c7\'d2\'a3\'ac\'bc\'b4\'ca\'b9\'bd\'f8\'d0\'d0\'c1\'cb\'c8\'ab\'c3\'e6\'a1\'a2\'cf\'b5\'cd\'b3\'b5\'c4\'ca\'ac\'cc\'e5\'bd\'e2\'c6\'ca\'ba\'cd\'b2\'a1\'c0\'ed\'bc\'ec\'d1\'e9\'a3\'ac\'c8\'d4\'d3\'d0\'bf\'c9\'c4\'dc\'b2\'e9\'b2\'bb\'b3\'f6\'d5\'e6\'d5\'fd\'b5\'c4\'cb\'c0\'d2\'f2\'a1\'a3\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="5.尸检需要在以下具备资格的机构进行:&#xA;      (1)卫生行政部门批准设置具有独立病理解剖能力并且设置病理科的医疗机构:&#xA;      (2)设有具备独立病理解剖能力的病理教研室或法医教研室的医学院校，或设有医学专业的并具备独立病理解剖能力的病理教研室或法医教研室的高等普通学校:&#xA;      (3)医患双方可共同协商选择经过国家司法行政部门批准的司法鉴定机构。&#xA;    6.您可以委托法医病理学人员参加尸检，也可以委派代表观察尸检过程。&#xA;" rtf="5.\'ca\'ac\'bc\'ec\'d0\'e8\'d2\'aa\'d4\'da\'d2\'d4\'cf\'c2\'be\'df\'b1\'b8\'d7\'ca\'b8\'f1\'b5\'c4\'bb\'fa\'b9\'b9\'bd\'f8\'d0\'d0:\par&#xD;&#xA;      (1)\'ce\'c0\'c9\'fa\'d0\'d0\'d5\'fe\'b2\'bf\'c3\'c5\'c5\'fa\'d7\'bc\'c9\'e8\'d6\'c3\'be\'df\'d3\'d0\'b6\'c0\'c1\'a2\'b2\'a1\'c0\'ed\'bd\'e2\'c6\'ca\'c4\'dc\'c1\'a6\'b2\'a2\'c7\'d2\'c9\'e8\'d6\'c3\'b2\'a1\'c0\'ed\'bf\'c6\'b5\'c4\'d2\'bd\'c1\'c6\'bb\'fa\'b9\'b9:\par&#xD;&#xA;      (2)\'c9\'e8\'d3\'d0\'be\'df\'b1\'b8\'b6\'c0\'c1\'a2\'b2\'a1\'c0\'ed\'bd\'e2\'c6\'ca\'c4\'dc\'c1\'a6\'b5\'c4\'b2\'a1\'c0\'ed\'bd\'cc\'d1\'d0\'ca\'d2\'bb\'f2\'b7\'a8\'d2\'bd\'bd\'cc\'d1\'d0\'ca\'d2\'b5\'c4\'d2\'bd\'d1\'a7\'d4\'ba\'d0\'a3\'a3\'ac\'bb\'f2\'c9\'e8\'d3\'d0\'d2\'bd\'d1\'a7\'d7\'a8\'d2\'b5\'b5\'c4\'b2\'a2\'be\'df\'b1\'b8\'b6\'c0\'c1\'a2\'b2\'a1\'c0\'ed\'bd\'e2\'c6\'ca\'c4\'dc\'c1\'a6\'b5\'c4\'b2\'a1\'c0\'ed\'bd\'cc\'d1\'d0\'ca\'d2\'bb\'f2\'b7\'a8\'d2\'bd\'bd\'cc\'d1\'d0\'ca\'d2\'b5\'c4\'b8\'df\'b5\'c8\'c6\'d5\'cd\'a8\'d1\'a7\'d0\'a3:\par&#xD;&#xA;      (3)\'d2\'bd\'bb\'bc\'cb\'ab\'b7\'bd\'bf\'c9\'b9\'b2\'cd\'ac\'d0\'ad\'c9\'cc\'d1\'a1\'d4\'f1\'be\'ad\'b9\'fd\'b9\'fa\'bc\'d2\'cb\'be\'b7\'a8\'d0\'d0\'d5\'fe\'b2\'bf\'c3\'c5\'c5\'fa\'d7\'bc\'b5\'c4\'cb\'be\'b7\'a8\'bc\'f8\'b6\'a8\'bb\'fa\'b9\'b9\'a1\'a3\par&#xD;&#xA;    6.\'c4\'fa\'bf\'c9\'d2\'d4\'ce\'af\'cd\'d0\'b7\'a8\'d2\'bd\'b2\'a1\'c0\'ed\'d1\'a7\'c8\'cb\'d4\'b1\'b2\'ce\'bc\'d3\'ca\'ac\'bc\'ec\'a3\'ac\'d2\'b2\'bf\'c9\'d2\'d4\'ce\'af\'c5\'c9\'b4\'fa\'b1\'ed\'b9\'db\'b2\'ec\'ca\'ac\'bc\'ec\'b9\'fd\'b3\'cc\'a1\'a3\par&#xD;&#xA;" nodetype="Text" />
+  </node>
+  <Ref id="21">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" visiable="False" text="勾选框" description="勾选框" atomtype="Check" value="1" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="f5b0c6a2-cf35-4e47-bfc1-21ac1b197c06" nodetype="DynamicMoleNode" nodelogiccontent="" name="检查摘要" text="检查摘要" otherid="C-1151" display="10`患者近亲属或其法定监护人、授权委托人意见：&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="患者家属或患者的法定监护人、授权委托人意见：&#xA;    医护人员已经将尸检相关情况向我做了详细的说明，并且及时解答了相关问题。经慎重考虑，我们对尸检处理的决定是：" rtf="\b \'bb\'bc\'d5\'df\'bc\'d2\'ca\'f4\'bb\'f2\'bb\'bc\'d5\'df\'b5\'c4\'b7\'a8\'b6\'a8\'bc\'e0\'bb\'a4\'c8\'cb\'a1\'a2\'ca\'da\'c8\'a8\'ce\'af\'cd\'d0\'c8\'cb\'d2\'e2\'bc\'fb\'a3\'ba\b0\par&#xD;&#xA;\pard     \'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'d2\'d1\'be\'ad\'bd\'ab\'ca\'ac\'bc\'ec\'cf\'e0\'b9\'d8\'c7\'e9\'bf\'f6\'cf\'f2\'ce\'d2\'d7\'f6\'c1\'cb\'cf\'ea\'cf\'b8\'b5\'c4\'cb\'b5\'c3\'f7\'a3\'ac\'b2\'a2\'c7\'d2\'bc\'b0\'ca\'b1\'bd\'e2\'b4\'f0\'c1\'cb\'cf\'e0\'b9\'d8\'ce\'ca\'cc\'e2\'a1\'a3\'be\'ad\'c9\'f7\'d6\'d8\'bf\'bc\'c2\'c7\'a3\'ac\'ce\'d2\'c3\'c7\'b6\'d4\'ca\'ac\'bc\'ec\'b4\'a6\'c0\'ed\'b5\'c4\'be\'f6\'b6\'a8\'ca\'c7\'a3\'ba" nodetype="Text" />
+    <node text="_________" rtf="\ul _________" nodetype="Text" />
+    <node text="_________" rtf="\ul _________" nodetype="Text" />
+    <node text="（" rtf="\'a3\'a8" nodetype="Text" />
+    <node text="“同意尸检”或" rtf="\ldblquote\b\'cd\'ac\'d2\'e2\'ca\'ac\'bc\'ec\rdblquote\'bb\'f2" nodetype="Text" />
+    <node refid="21" nodetype="Embeded" />
+    <node text=" “不同意尸检" rtf=" \ldblquote\b\'b2\'bb\'cd\'ac\'d2\'e2\'ca\'ac\'bc\'ec" nodetype="Text" />
+    <node text="”)" rtf="\b \rdblquote\b0 )" nodetype="Text" />
+    <node text="。" rtf="\'a1\'a3" nodetype="Text" />
+    <node text="&#xA;　　若患方家属或患者的法定监护人、授权委托人拒绝签字的，视为患方不同意尸检。&#xA;" rtf="\par&#xD;&#xA;\'a1\'a1\'a1\'a1\'c8\'f4\'bb\'bc\'b7\'bd\'bc\'d2\'ca\'f4\'bb\'f2\'bb\'bc\'d5\'df\'b5\'c4\'b7\'a8\'b6\'a8\'bc\'e0\'bb\'a4\'c8\'cb\'a1\'a2\'ca\'da\'c8\'a8\'ce\'af\'cd\'d0\'c8\'cb\'be\'dc\'be\'f8\'c7\'a9\'d7\'d6\'b5\'c4\'a3\'ac\'ca\'d3\'ce\'aa\'bb\'bc\'b7\'bd\'b2\'bb\'cd\'ac\'d2\'e2\'ca\'ac\'bc\'ec\'a1\'a3\par&#xD;&#xA;" nodetype="Text" />
+    <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
+    <node text="家属签名" rtf="\'bc\'d2\'ca\'f4\'c7\'a9\'c3\'fb" nodetype="Text" />
+    <node text="：" rtf="\'a3\'ba" nodetype="Text" />
+    <node text="_________与" rtf="\ul _________\ulnone\'d3\'eb" nodetype="Text" />
+    <node text="死者" rtf="\'cb\'c0\'d5\'df" nodetype="Text" />
+    <node text="关系" rtf="\'b9\'d8\'cf\'b5" nodetype="Text" />
+    <node text="_________签名日期" rtf="\ul _________\ulnone\'c7\'a9\'c3\'fb\'c8\'d5\'c6\'da" nodetype="Text" />
+    <node text="：" rtf="\'a3\'ba" nodetype="Text" />
+    <node text="________年" rtf="\ul ________\ulnone\'c4\'ea" nodetype="Text" />
+    <node text="____月" rtf="\ul ____\ulnone\'d4\'c2" nodetype="Text" />
+    <node text="___日" rtf="\ul ___\ulnone\'c8\'d5" nodetype="Text" />
+    <node text="____时" rtf="\ul ____\ulnone\'ca\'b1" nodetype="Text" />
+    <node text="____分" rtf="\ul ____\ulnone\'b7\'d6" nodetype="Text" />
+  </node>
+  <Ref id="26">
+    <node identity="0" isfixed="True" spaceholder="20" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="34e00ca9-f630-4a0a-bb9a-2400a3d7392f" nodetype="Embeded" nodelogiccontent="" name="日期(记录日期)" text="记录日期" display="11```0`1">
+      <node embededId="0" id="fe028248-7533-49c0-8c47-11132c39fbfe" nodetype="Object" nodelogiccontent="" name="记录日期" text="记录日期" description="各项文书的记录日期。" display="11```0`1">
+        <node id="c8499f95-5517-4342-bcc4-6822448c911e" nodetype="AtomNode" nodelogiccontent="" name="记录日期" visiable="False" text="签名日期" description="8.001" atomtype="Time" value="" defaultvalue="157`当前日期时间" display="1111011`````yyyy年MM月dd日HH时mm分+Minute++(DTS: )``13```" embededId="3" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="677251ae-2022-4cd8-81ed-be3a86e4f1a6" nodetype="DynamicMoleNode" nodelogiccontent="" name="医生陈述" text="医生陈述" description="知情同意书中项目" otherid="C-1192" display="11```0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="医护人员" rtf="\b \'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1" nodetype="Text" />
+    <node text="陈述" rtf="\b \'b3\'c2\'ca\'f6" nodetype="Text" />
+    <node text="：" rtf="\'a3\'ba" nodetype="Text" />
+    <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    我" rtf="    \'ce\'d2" nodetype="Text" />
+    <node text="已经" rtf="\'d2\'d1\'be\'ad" nodetype="Text" />
+    <node text="将" rtf="\'bd\'ab" nodetype="Text" />
+    <node text="尸检" rtf="\'ca\'ac\'bc\'ec" nodetype="Text" />
+    <node text="的" rtf="\'b5\'c4" nodetype="Text" />
+    <node text="相关" rtf="\'cf\'e0\'b9\'d8" nodetype="Text" />
+    <node text="情况" rtf="\'c7\'e9\'bf\'f6" nodetype="Text" />
+    <node text="向" rtf="\'cf\'f2" nodetype="Text" />
+    <node text="患者" rtf="\'bb\'bc\'d5\'df" nodetype="Text" />
+    <node text="家属" rtf="\'bc\'d2\'ca\'f4" nodetype="Text" />
+    <node text="或" rtf="\'bb\'f2" nodetype="Text" />
+    <node text="患者" rtf="\'bb\'bc\'d5\'df" nodetype="Text" />
+    <node text="的" rtf="\'b5\'c4" nodetype="Text" />
+    <node text="法定" rtf="\'b7\'a8\'b6\'a8" nodetype="Text" />
+    <node text="监护人" rtf="\'bc\'e0\'bb\'a4\'c8\'cb" nodetype="Text" />
+    <node text="、" rtf="\'a1\'a2" nodetype="Text" />
+    <node text="授权" rtf="\'ca\'da\'c8\'a8" nodetype="Text" />
+    <node text="委托人" rtf="\'ce\'af\'cd\'d0\'c8\'cb" nodetype="Text" />
+    <node text="做了" rtf="\'d7\'f6\'c1\'cb" nodetype="Text" />
+    <node text="详细" rtf="\'cf\'ea\'cf\'b8" nodetype="Text" />
+    <node text="的" rtf="\'b5\'c4" nodetype="Text" />
+    <node text="告知" rtf="\'b8\'e6\'d6\'aa" nodetype="Text" />
+    <node text="，" rtf="\'a3\'ac" nodetype="Text" />
+    <node text="并且" rtf="\'b2\'a2\'c7\'d2" nodetype="Text" />
+    <node text="解答了" rtf="\'bd\'e2\'b4\'f0\'c1\'cb" nodetype="Text" />
+    <node text="相关" rtf="\'cf\'e0\'b9\'d8" nodetype="Text" />
+    <node text="问题" rtf="\'ce\'ca\'cc\'e2" nodetype="Text" />
+    <node text="。" rtf="\'a1\'a3" nodetype="Text" />
+    <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
+    <node text="医护人员签名：" rtf="\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'c7\'a9\'c3\'fb\'a3\'ba" nodetype="Text" />
+    <node text="_________" rtf="\ul _________" nodetype="Text" />
+    <node text="_________" rtf="\ul _________" nodetype="Text" />
+    <node text="     签名日期：" rtf="     \'c7\'a9\'c3\'fb\'c8\'d5\'c6\'da\'a3\'ba" nodetype="Text" />
+    <node refid="26" nodetype="Embeded" />
+    <node text="________年" rtf="\ul ________\ulnone\'c4\'ea" nodetype="Text" />
+    <node text="____月" rtf="\ul ____\ulnone\'d4\'c2" nodetype="Text" />
+    <node text="___日" rtf="\ul ___\ulnone\'c8\'d5" nodetype="Text" />
+    <node text="____时" rtf="\ul ____\ulnone\'ca\'b1" nodetype="Text" />
+    <node text="____分" rtf="\ul ____\ulnone\'b7\'d6" nodetype="Text" />
+  </node>
+</Model>
