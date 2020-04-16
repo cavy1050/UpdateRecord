@@ -38,10 +38,16 @@ set nocount on
         
 begin          
  declare @shbzh varchar(30)          
-           
- select top 1 @shbzh = b.cardno from SF_BRJSK a  
+ 
+ /*
+ select top 1 @shbzh = isnull( b.shbzh,b.cardno) from SF_BRJSK a  
  left join SF_BRXXK b on a.patid=b.patid and a.blh=b.blh  
  where sjh in (select jssjh from GH_GHZDK where xh = @ghxh and patid = @patid)        
+ */         
+
+ SELECT @shbzh = b.sbkh FROM dbo.GH_GHZDK a (NOLOCK)
+	INNER JOIN dbo.YY_CQYB_MZJZJLK b (NOLOCK) ON a.jssjh=b.jssjh
+ WHERE a.xh=@ghxh 
    
  if @cftszddm=''--录入的时候用           
  begin          
@@ -59,5 +65,8 @@ end
     
 ----调用并发症       
 --exec usp_mz_ys_getbfz  @ghxh,@patid,@ybdm,@pyfield,@searchstr,@cftszddm,@medtype 
+
+
+
 
 
