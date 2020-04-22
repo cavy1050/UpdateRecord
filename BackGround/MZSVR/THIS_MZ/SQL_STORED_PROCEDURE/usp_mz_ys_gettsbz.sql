@@ -27,6 +27,7 @@ select * from YY_SYB_BRJBBMK where shbzh='512222194812124404'
           
 select sybkh,* from SF_BRJSK where patid=1168997          
           
+exec usp_mz_ys_gettsbz_cs @ghxh=3332367,@patid=734186,@ybdm='056 ',@medtype='13',@pyfield='a.py',@searchstr=''
           
 [调用实例]            
           
@@ -48,6 +49,9 @@ begin
  SELECT @shbzh = b.sbkh FROM dbo.GH_GHZDK a (NOLOCK)
 	INNER JOIN dbo.YY_CQYB_MZJZJLK b (NOLOCK) ON a.jssjh=b.jssjh
  WHERE a.xh=@ghxh 
+
+ IF ISNULL(@shbzh,'')='' 
+	SELECT @shbzh=cardno FROM dbo.GH_GHZDK a (NOLOCK) WHERE a.xh=@ghxh
    
  if @cftszddm=''--录入的时候用           
  begin          
@@ -65,6 +69,8 @@ end
     
 ----调用并发症       
 --exec usp_mz_ys_getbfz  @ghxh,@patid,@ybdm,@pyfield,@searchstr,@cftszddm,@medtype 
+
+
 
 
 
