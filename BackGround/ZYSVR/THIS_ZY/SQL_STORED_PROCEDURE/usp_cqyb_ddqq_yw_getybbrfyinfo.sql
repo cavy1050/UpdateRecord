@@ -1,8 +1,6 @@
-if exists(select * from sysobjects where name='usp_cqyb_ddqq_yw_getybbrfyinfo')
-  drop proc usp_cqyb_ddqq_yw_getybbrfyinfo
-go
+Text
 
-Create proc usp_cqyb_ddqq_yw_getybbrfyinfo
+CREATE proc usp_cqyb_ddqq_yw_getybbrfyinfo
 (
 	@syxh			ut_syxh,		--首页序号
 	@jsxh			ut_xh12,		--结算序号
@@ -123,8 +121,11 @@ BEGIN
 		LEFT JOIN ZLXM d(NOLOCK) ON c.dydm = d.XMLSH 
 	where a.syxh = @syxh and a.jlzt = 1
 	 
-	update #temp_fymx set cbbz = 2 where sfxmdj in ('1','2') and ybzlje > 0 and cbbz = 1
-	
+	 update #temp_fymx set cbbz = 2 where sfxmdj in ('1','2') and ybzlje > 0 and cbbz = 1
+	 --lj20200331处理单独ybzzfbz为1时前台显示
+	update  a set a.sfxmdj='3',a.qzfbz='1' from #temp_fymx a , ZY_BRFYMXK b(NOLOCK)
+	 where b.xh = a.mxxh and b.ybzzfbz='1'and a.sfxmdj in('1','2')
+		
 	select a.mxxh as "费用序号",a.cfrq as "收费日期",
 		(CASE WHEN ISNULL(a.ybxybz,'') = '' THEN '' ELSE '△' END) + ' '+ xmmc as "药品名称",
 		xmgg as "药品规格",a.xmdj as "药品单价",a.xmsl as "药品数量",
@@ -265,4 +266,5 @@ BEGIN
 END
 
 return
-go
+
+
