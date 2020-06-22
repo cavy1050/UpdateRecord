@@ -486,7 +486,7 @@ JXMC,FLMC,FLDLMC,YPLCMC,YPLCPY,YPLCWB,QFKZBZ,YPBZ,XMLB,LCXMDM,LCXMMC,LCXMDJ,POS,
 YJQRBZ,EKDW,EKXS,MZLYBZ,ZYLYBZ,DXMMC,DXM_YPBZ,YPFJ,BQDJBZ,YPGGMC,YPGGPY,YPGGWB,CYFYBZ,ZYZFBL,OTCBZ,ZBYBZ,CGYZBZ,YZGLBZ,GWYPJB,GJJBYWBZ,JBYWML_SHI,JBYWML_SHEN,FZYYBZ,SSHCBZ,YYDM,GLBS_NAME,GLBS_ID,  
 ETJSJE,YBBZ_SHENG,YBBZ_SHI,YBBZ_NH,YBBZ_TIELU,FYYYBZ,KJHYPBZ,TMBZ)    
 select idm, gg_idm, lc_idm, kcsl, yfdm, yfmc,ypdm, ypmc, py, wb, ypgg,dxmdm,mzdw, mzxs, zydw, zyxs, ykdw, ykxs,    
-ggdw,ggxs,zxdw, psbz, tsbz, ybkzbz, bxbz, ylsj, cjmc,memo
+ggdw,ggxs,zxdw, psbz, tsbz, ybkzbz, bxbz, ylsj, cjmc,substring(rtrim(ltrim(memo)),1,128)  memo
 , fldm,flzfbz,mzzfbz,zyzfbz,dydm,kzbz,dbcybz,jxdm,    
 jxmc,flmc,fldlmc, yplcmc, yplcpy,yplcwb,0,ypbz,xmlb,lcxmdm, lcxmmc ,lcxmdj,pos,pos_bz,zxmdm, bmbz,    
 yjqrbz,ekdw,ekxs,mzlybz,zylybz,dxmmc,isnull(dxmypbz,0),ypfj,bqdjbz,ypggmc,ypggpy,ypggwb,cyfybz,zyzfbl,otcbz,zbybz,cgyzbz,yzglbz,gwypjb,gjjbywbz,sjjbywbz,shenjjbywbz,fzyybz,sshcbz,yydm ,glbs_name,glbs_id,  
@@ -641,7 +641,7 @@ JXMC,FLMC,FLDLMC,YPLCMC,YPLCPY,YPLCWB,QFKZBZ,YPBZ,XMLB,LCXMDM,LCXMMC,LCXMDJ,POS,
 YJQRBZ,EKDW,EKXS,MZLYBZ,ZYLYBZ,DXMMC,DXM_YPBZ,YPFJ,BQDJBZ,YPGGMC,YPGGPY,YPGGWB,KDKSDMJH,OTCBZ,GWYPJB,GJJBYWBZ,JBYWML_SHI,JBYWML_SHEN,FZYYBZ,SSHCBZ,YYDM,GLBS_NAME,GLBS_ID,  
 ETJSJE,YBBZ_SHENG,YBBZ_SHI,YBBZ_NH,YBBZ_TIELU,FYYYBZ,KJHYPBZ,TMBZ)    
 select idm, gg_idm, lc_idm, kcsl, yfdm, yfmc,LTRIM(RTRIM(ypdm)), ypmc,convert(varchar(32),py) py,convert(varchar(32),wb) wb, ypgg,dxmdm,mzdw, mzxs, zydw, zyxs, ykdw, ykxs,    
-ggdw,ggxs,zxdw, psbz, tsbz, ybkzbz, bxbz, ylsj, cjmc, memo, fldm,flzfbz,mzzfbz,zyzfbz,dydm,kzbz,dbcybz,jxdm,    
+ggdw,ggxs,zxdw, psbz, tsbz, ybkzbz, bxbz, ylsj, cjmc,LEFT(memo,99) memo, fldm,flzfbz,mzzfbz,zyzfbz,dydm,kzbz,dbcybz,jxdm,    
 jxmc,flmc,fldlmc, yplcmc, yplcpy,yplcwb,0,ypbz,xmlb,lcxmdm, lcxmmc ,lcxmdj,pos,pos_bz,zxmdm, bmbz,    
 yjqrbz,ekdw,ekxs,mzlybz,zylybz,dxmmc,isnull(dxmypbz,0),ypfj,bqdjbz,ypggmc,ypggpy,ypggwb,kdksdmjh,otcbz,gwypjb,gjjbywbz,sjjbywbz,sjbywml,fzyybz,0 ,yydm,glbs_name,glbs_id ,  
 etjsje,ybbz_sheng,ybbz_shi,ybbz_nh,ybbz_tielu,fyyybz,kjhypbz,tmbz  
