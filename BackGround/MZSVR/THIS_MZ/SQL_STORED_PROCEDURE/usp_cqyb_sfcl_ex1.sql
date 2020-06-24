@@ -1,6 +1,4 @@
-if exists(select 1 from sysobjects where name='usp_cqyb_sfcl_ex1')
-  drop proc usp_cqyb_sfcl_ex1
-go
+Text
 CREATE proc usp_cqyb_sfcl_ex1
 (
 	@jssjh			ut_sjh,			--收据号
@@ -133,7 +131,7 @@ begin
 end
 
 ----chenhong add 20191125 根据医院要求修改 begin
-if exists (select 1 from SF_JEMXK a(nolock) where jssjh=@jssjh and a.lx='yb23' and je>1)
+if exists (select 1 from SF_JEMXK a(nolock) where jssjh=@jssjh and a.lx='yb23' and je>19)
 begin
 	select "F","医院垫付金额大于1元，不能结算！"
 	return
@@ -669,4 +667,5 @@ end
 select "T", @sfje2, @qkbz, @yjzfje
 
 return
-GO
+
+
