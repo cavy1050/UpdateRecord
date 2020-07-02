@@ -1,0 +1,476 @@
+Title = 门诊挂号系统
+Icon = .\bmp\mzghxt.ico
+Bmp = Bmp
+Menu
+  Caption = &1日常工作
+  Icon = 
+  Menu
+    Caption = &1基本信息登记
+    Icon = 
+    AppName = gh_brxxdj.dll
+    FuncName = fgh_brxxdj
+    VarName = 11001
+  End
+  Menu
+    Caption = &2挂号登记
+    Icon = 
+    AppName = gh_ghdj.dll
+    FuncName = fgh_ghdj
+    VarName = 11002
+  End
+  Menu
+    Caption = &B医保凭证修改
+    Icon = 
+    AppName = gh_pzxg.dll
+    FuncName = fgh_pzxg
+    VarName = 11011
+  End
+  Menu
+    Caption = &C基本信息维护
+    Icon = 
+    AppName = gh_brxxwh.dll
+    FuncName = fgh_brxxwh
+    VarName = 11012
+  End
+  Menu
+    Caption = &D电子健康卡管理
+    Icon = 
+    AppName = Cqdzjkkjk_yw.dll
+    FuncName = fyy_cqdzjkkjk_yw
+    VarName = 11013
+  End
+  Menu
+    Caption = &L门诊冲值卡管理
+    Icon = 
+    AppName = yy_gbxxwh.dll
+    FuncName = fyy_gbkbrxxwh
+    VarName = 11031
+  End
+  Menu
+    Caption = &M门诊发票集中打印
+    Icon = 
+    AppName = yy_mzfpjzdy.dll
+    FuncName = fyy_mzfpjzdy
+    VarName = 11032
+  End
+  Menu
+    Caption = &N门诊发票汇总打印
+    Icon = 
+    AppName = yy_fphzdy.dll
+    FuncName = fyy_fphzdy
+    VarName = 11033
+  End
+End
+Menu
+  Caption = &2财务
+  Icon = 
+  Menu
+    Caption = &1操作员结账
+    Icon = 
+    AppName = gh_czyjz.dll
+    FuncName = fgh_czyjz
+    VarName = 12001
+  End
+  Menu
+    Caption = &2全班操作员结账
+    Icon = 
+    AppName = gh_qbjz.dll
+    FuncName = fgh_qbjz
+    VarName = 12002
+  End
+  Menu
+    Caption = &3挂号结账单统计
+    Icon = 
+    AppName = gh_cx_jzzdtj.dll
+    FuncName = fgh_cx_jzzdtj
+    VarName = 12003
+  End
+  Menu
+    Caption = &4门诊合并结帐
+    Icon = 
+    AppName = sf_mzczyjz.dll
+    FuncName = fsf_czyjz
+    VarName = 12004
+  End
+  Menu
+    Caption = &5财务确认操作员结帐
+    Icon = 
+    AppName = gh_cwqrczyjz.dll
+    FuncName = fgh_cwqrczyjz
+    VarName = 12005
+  End
+  Menu
+    Caption = &6门诊合并结帐(优化流程)
+    Icon = 
+    AppName = yy_czyjz_new.dll
+    FuncName = fyy_czyjz_new
+    VarName = 12006
+  End
+  Menu
+    Caption = &7合并结帐单统计(优化流程)
+    Icon = 
+    AppName = sf_hbjzzdtj_yhlc.dll
+    FuncName = fsf_hbjzzdtj_yhlc
+    VarName = 12007
+  End
+End
+Menu
+  Caption = &3查询
+  Icon = 
+  Menu
+    Caption = &1挂号查询
+    Icon = 
+    AppName = gh_cx_ghcx.dll
+    FuncName = fgh_cx_ghcx
+    VarName = 13001
+  End
+  Menu
+    Caption = &3凭证查询
+    Icon = 
+    AppName = gh_cx_pzcx.dll
+    FuncName = fgh_cx_pzcx
+    VarName = 13003
+  End
+  Menu
+    Caption = &4病人信息查询
+    Icon = 
+    AppName = gh_cx_brxxcx.dll
+    FuncName = fgh_cx_brxxcx
+    VarName = 13004
+  End
+  Menu
+    Caption = &5挂号动态图表
+    Icon = 
+    AppName = gh_cx_dttb.dll
+    FuncName = fgh_cx_dttb
+    VarName = 13005
+  End
+  Menu
+    Caption = &6医保单独请求
+    Icon = 
+    AppName = yy_ybddqq.dll
+    FuncName = fyy_ybddqq
+    VarName = 13006
+  End
+  Menu
+    Caption = &7医保账户查询
+    Icon = 
+    AppName = yy_ybddqq.dll
+    FuncName = fyy_ybzhcx
+    VarName = 13007
+  End
+End
+Menu
+  Caption = &4报表
+  Icon = 
+  Menu
+    Caption = &1挂号外挂报表
+    Icon = 
+    AppName = dorep.dll
+    FuncName = showorep
+    VarName = 14001
+  End
+End
+Menu
+  Caption = &5设置
+  Icon = 
+  Menu
+    Caption = &1发票管理
+    Icon = 
+    AppName = Gh_fpgl.dll
+    FuncName = fsf_fpgl
+    VarName = 15001
+  End
+  Menu
+    Caption = &2科室专家排班
+    Icon = 
+    AppName = gh_Kszjpb.dll
+    FuncName = fgh_kszjpb
+    VarName = 15002
+  End
+  Menu
+    Caption = 分时挂号排班
+    Icon = 
+    AppName = GH_KSZJPB_SJD.dll
+    FuncName = kszjpbsz
+    VarName = 15101
+  End
+  Menu
+    Caption = 分时挂号排班_科室排班模板设置
+    Icon = 
+    AppName = GH_KSZJPB_SJD.dll
+    FuncName = ksmbsz
+    VarName = 15102
+  End
+  Menu
+    Caption = 分时挂号排班_专家排班模板设置
+    Icon = 
+    AppName = GH_KSZJPB_SJD.dll
+    FuncName = zjmbsz
+    VarName = 15103
+  End
+  Menu
+    Caption = 分时挂号排班_医生停诊申请
+    Icon = 
+    AppName = GH_KSZJPB_SJD.dll
+    FuncName = ystzsq
+    VarName = 15104
+  End
+  Menu
+    Caption = 分时挂号排班_医生停诊审批
+    Icon = 
+    AppName = GH_KSZJPB_SJD.dll
+    FuncName = ystzsp
+    VarName = 15105
+  End
+  Menu
+    Caption = &3高级专家设置
+    Icon = 
+    AppName = buildtab.dll
+    FuncName = gh_dmzjk
+    VarName = 15003
+  End
+  Menu
+    Caption = 名老中医挂号费设置
+    Icon = 
+    AppName = Buildtab.dll
+    FuncName = gh_lzmyghfsz
+    VarName = 15106
+  End
+  Menu
+    Caption = &4预约专家设置
+    Icon = 
+    AppName = gh_yyzjsz.dll
+    FuncName = fgh_yyzjsz
+    VarName = 15004
+  End
+  Menu
+    Caption = &5预约医生排班设置
+    Icon = 
+    AppName = Buildtab.dll        
+    FuncName = gh_yyyspbsz
+    VarName = 15005
+  End
+  Menu
+    Caption = &6预约类别
+    Icon = 
+    AppName = Buildtab.dll   
+    FuncName = gh_yylbsz
+    VarName = 15006
+  End
+  Menu
+    Caption = &7自动挂号设置
+    Icon = 
+    AppName = gh_autosz
+    FuncName = fyy_ybxgdy
+    VarName = 15007
+  End
+  Menu
+    Caption = &8专家预留号序设置
+    Icon = 
+    AppName = gh_zjylhxsz.dll
+    FuncName = fgh_ylhxsz
+    VarName = 15008
+  End
+  Menu
+    Caption = &9免费挂号原因
+    Icon = 
+    AppName = buildtab.dll
+    FuncName = gh_mfghyy
+    VarName = 15009
+  End
+  Menu
+    Caption = &A预算后特殊项目设置
+    Icon = 
+    AppName = YY_YSHTSXMSZ.dll
+    FuncName = fyy_yshtsxmsz
+    VarName = 15010
+  End
+  Menu
+    Caption = &B预算后特殊项目时间段设置
+    Icon = 
+    AppName = yy_yshtsyhsjdsz.dll
+    FuncName = fyy_yshtsyhsjdsz
+    VarName = 15011
+  End
+  Menu
+    Caption = &C挂号联动定义
+    Icon = 
+    AppName = Gh_ghldsz.dll
+    FuncName = fgh_ghlddy
+    VarName = 15012
+  End
+  Menu
+    Caption = &D签约医生设置
+    Icon = 
+    AppName = sf_tdysdz.dll
+    FuncName = fsf_tdysdz
+    VarName = 15020
+  End
+  Menu
+    Caption = &E签约团队设置
+    Icon = 
+    AppName = buildtab.dll
+    FuncName = fsf_mzqyttsz
+    VarName = 15021
+  End
+  Menu
+    Caption = &F签约病人设置
+    Icon = 
+    AppName = sf_qyttsz.dll
+    FuncName = fsf_qybrsz
+    VarName = 15022
+  End
+  Menu
+    Caption = &H社会关系设置
+    Icon = 
+    AppName = Buildtab.dll
+    FuncName = yy_shgxk
+    VarName = 15024
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = 预约排版设置
+    Icon = 
+    AppName = yy_sh_yypb.dll
+    FuncName = fyy_sh_yypb
+    VarName = 15025
+  End
+  Menu
+    Caption = 科室专家预约标志设置
+    Icon = 
+    AppName = YYbzsz.dll
+    FuncName = fyy_sh_yybzxg
+    VarName = 15026
+  End
+  Menu
+    Caption = 基本信息特殊需求设置
+    Icon = 
+    AppName = gh_brjbxxpz.dll
+    FuncName = fgh_brjbxxpz
+    VarName = 15027
+  End
+End
+Menu
+  Caption = &6卡库存管理
+  Icon = 
+  Menu
+    Caption = 卡库存管理
+    Icon = 
+    AppName = cykrkgl.dll
+    FuncName = fkrlgl
+    VarName = 16001
+  End
+End
+Menu
+  Caption = &7医保
+  Icon = 
+  Menu
+    Caption = 竟达接口单独请求
+    Icon = 
+    AppName = yy_nbddqq.dll
+    FuncName = fyy_nbddqq_mz
+    VarName = 17001
+  End
+  Menu
+    Caption = 重庆东软市医保单独请求
+    Icon = 
+    AppName = drsybddqq.dll
+    FuncName = fyy_mzduqq
+    VarName = 17002
+  End
+  Menu
+    Caption = 医保对账(市医保)
+    Icon = 
+    AppName = drsybddqq.dll
+    FuncName = fyy_ybdz
+    VarName = 17003
+  End
+  Menu
+    Caption = 药品项目对照
+    Icon = 
+    AppName = yy_cqybdz.dll
+    FuncName = fyb_ypxmdz
+    VarName = 17004
+  End
+  Menu
+    Caption = 单独请求查询冲正
+    Icon = 
+    AppName = yy_cqybddqq.dll
+    FuncName = fyy_cqybddqq
+    VarName = 17005
+  End
+  Menu
+    Caption = 单独请求查询
+    Icon = 
+    AppName = yy_cqybddqq.dll
+    FuncName = fyy_cqybddqq_cx
+    VarName = 17006
+  End
+  Menu
+    Caption = 交易异常审核
+    Icon = 
+    AppName = cqybyccx.dll
+    FuncName = fyy_Ybychd
+    VarName = 17008
+  End
+End
+Menu
+  Caption = &8预约挂号系统
+  Icon = 
+  Menu
+    Caption = &1院内预约挂号
+    Icon = 
+    AppName = yy_sh_yygh.dll
+    FuncName = fyy_shyygh
+    VarName = 16001
+  End
+  Menu
+    Caption = &2预约排班设置
+    Icon = 
+    AppName = yy_sh_yypb.dll
+    FuncName = fyy_sh_yypb
+    VarName = 16002
+  End
+  Menu
+    Caption = &3科室专家预约标志设置
+    Icon = 
+    AppName = YYbzsz.dll
+    FuncName = fyy_sh_yybzxg
+    VarName = 16003
+  End
+  Menu
+    Caption = &4预约信息查询
+    Icon = 
+    AppName = yy_sh_yygh.dll
+    FuncName = fyy_sh_shyyghcx
+    VarName = 16004
+  End
+  Menu
+    Caption = &5预约排班查询
+    Icon = 
+    AppName = yy_sh_yypb.dll
+    FuncName = fyy_sh_yypbxxcx
+    VarName = 16005
+  End
+  Menu
+    Caption = &6预约记录变更
+    Icon = 
+    AppName = yy_gh_yyjlbz
+    FuncName = fyy_gh_yyjlbz
+    VarName = 16006
+  End
+  Menu
+    Caption = &7预约挂号黑名单管理
+    Icon = 
+    AppName = yy_gh_yyhmdgl
+    FuncName = fyy_gh_yyhmdgl
+    VarName = 16007
+  End
+End

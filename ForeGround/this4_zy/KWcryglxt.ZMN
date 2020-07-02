@@ -1,0 +1,584 @@
+Title = 出入院管理系统
+Icon = .\bmp\cryglxt.ico
+Bmp = Bmp
+Menu
+  Caption = &1入院工作
+  Icon = 
+  Menu
+    Caption = &1入院登记
+    Icon = 
+    AppName = zyb_rydj.dll
+    FuncName = fzyb_rydj
+    VarName = 51001
+  End
+  Menu
+    Caption = &2入院取消
+    Icon = 
+    AppName = zyb_ryqx.dll
+    FuncName = fzyb_ryqx
+    VarName = 51002
+  End
+  Menu
+    Caption = &3病人信息维护
+    Icon = 
+    AppName = zyb_brxxwh.dll
+    FuncName = fzyb_brxxwh
+    VarName = 51003
+  End
+  Menu
+    Caption = &4医保凭证修改
+    Icon = 
+    AppName = zyb_pzxg_wd.dll
+    FuncName = fzyb_pzxg
+    VarName = 51004
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &C出区召回
+    Icon = 
+    AppName = bq_rqqx.dll
+    FuncName = fzyb_cqzh
+    VarName = 51013
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &H预交金管理
+    Icon = 
+    AppName = zyb_yjjgl.dll
+    FuncName = fzyb_yjjgl
+    VarName = 51021
+  End
+  Menu
+    Caption = &J病人担保信息维护
+    Icon = 
+    AppName = zy_brdbwh.dll
+    FuncName = fzy_brdbwh
+    VarName = 51023
+  End
+End
+Menu
+  Caption = &2出院管理
+  Icon = 
+  Menu
+    Caption = &1病人结账
+    Icon = 
+    AppName = zyb_brjz.dll
+    FuncName = fzyb_brjz
+    VarName = 52001
+  End
+  Menu
+    Caption = &2取消结账
+    Icon = 
+    AppName = zyb_qxjz.dll
+    FuncName = fzyb_qxjz
+    VarName = 52002
+  End
+  Menu
+    Caption = &3费用核对
+    Icon = 
+    AppName = yy_zybrsh.dll
+    FuncName = fyy_zybrsh
+    VarName = 52003
+  End
+  Menu
+    Caption = &4出院账单
+    Icon = 
+    AppName = zy_fyzdbb
+    FuncName = run
+    VarName = 52004
+  End
+  Menu
+    Caption = &5出院病人账单
+    Icon = 
+    AppName = zyb_cybrzd.dll
+    FuncName = fzyb_cybrzd
+    VarName = 52005
+  End
+  Menu
+    Caption = &6住院病人费用清单
+    Icon = 
+    AppName = zy_brfyqd.dll
+    FuncName = fzy_brfyqd
+    VarName = 52006
+  End
+  Menu
+    Caption = &7出入院一日清
+    Icon = 
+    AppName = bq_yrqbb.dll
+    FuncName = fzy_yrqbb
+    VarName = 52007
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &A补记账
+    Icon = 
+    AppName = zy_bjz.dll
+    FuncName = fzy_bjz
+    VarName = 52011
+  End
+  Menu
+    Caption = &D补记账作废
+    Icon = 
+    AppName = zy_bjz.dll
+    FuncName = fzy_bjzzf
+    VarName = 52014
+  End
+  Menu
+    Caption = &F住院小处方
+    Icon = 
+    AppName = zy_xcflr.dll
+    FuncName = fzy_xcflr
+    VarName = 52016
+  End
+  Menu
+    Caption = &G小处方作废
+    Icon = 
+    AppName = zy_xcfzf.dll
+    FuncName = fzy_xcfzf
+    VarName = 52017
+  End
+  Menu
+    Caption = &H医技收费
+    Icon = 
+    AppName = yj_yjsf.dll
+    FuncName = fyj_yjsf_allyj
+    VarName = 52018
+  End
+  Menu
+    Caption = &I自费项目红冲
+    Icon = 
+    AppName = zy_zfxmhc.dll
+    FuncName = fzy_bjzzf
+    VarName = 52019
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &0出院病人信息维护
+    Icon = 
+    AppName = zyb_brxxwh.dll
+    FuncName = fzyb_brxxwh_cy
+    VarName = 52032
+  End
+  Menu
+    Caption = &P病人出院诊断修改
+    Icon = 
+    AppName = zyb_zdxg.dll
+    FuncName = fzyb_zdxg
+    VarName = 52033
+  End
+  Menu
+    Caption = &Q病人出院诊断修改_病区
+    Icon = 
+    AppName = zyb_zdxg.dll
+    FuncName = fzyb_zdxg_bq
+    VarName = 52034
+  End
+  Menu
+    Caption = 补记帐（不受限制）
+    Icon = 
+    AppName = zy_bjz.dll
+    FuncName = fzy_bjz_kcf
+    VarName = 52035
+  End
+  Menu
+    Caption = 补记帐作废（不受限制）
+    Icon = 
+    AppName = zy_bjz_bxz.dll
+    FuncName = fzy_bjzzf
+    VarName = 52036
+  End
+End
+Menu
+  Caption = &3财务
+  Icon = 
+  Menu
+    Caption = &1收费员结账
+    Icon = 
+    AppName = zyb_sfyjz.dll
+    FuncName = fzyb_sfyjz
+    VarName = 53001
+  End
+  Menu
+    Caption = &2收费员结账_结帐前先打印
+    Icon = 
+    AppName = zyb_sfyjz.dll
+    FuncName = fzyb_sfyjz_xdy
+    VarName = 53002
+  End
+  Menu
+    Caption = &3收费员全班结账
+    Icon = 
+    AppName = zyb_sfyqbjz.dll
+    FuncName = fzyb_sfyqbjz
+    VarName = 53003
+  End
+  Menu
+    Caption = &4住院收入月结
+    Icon = 
+    AppName = zyb_zysryj.dll
+    FuncName = fzyb_zysryj
+    VarName = 53004
+  End
+  Menu
+    Caption = &5住院结帐单统计
+    Icon = 
+    AppName = zyb_cx_jzzdtj.dll
+    FuncName = fzyb_cx_jzzdtj
+    VarName = 53005
+  End
+End
+Menu
+  Caption = &4查询
+  Icon = 
+  Menu
+    Caption = &1病人信息查询
+    Icon = 
+    AppName = zy_cx_brxxcx.dll
+    FuncName = fzy_cx_brxxcx
+    VarName = 54001
+  End
+  Menu
+    Caption = &2住院病人基本信息查询
+    Icon = 
+    AppName = zy_cx_brjbxxcx.dll
+    FuncName = fzy_cx_brjbxxcx
+    VarName = 54002
+  End
+  Menu
+    Caption = &3已登记未入区查询
+    Icon = 
+    AppName = zy_cx_ydjwrqcx.dll
+    FuncName = fzy_cx_ydjwrqcx
+    VarName = 54003
+  End
+  Menu
+    Caption = &4病人医嘱查询
+    Icon = 
+    AppName = zy_cx_bryzcx.dll
+    FuncName = fzy_cx_bryzcx
+    VarName = 54004
+  End
+  Menu
+    Caption = &5病人信息修改查询
+    Icon = 
+    AppName = zy_brxxgxcx.dll
+    FuncName = fzy_brxxgxcx
+    VarName = 54005
+  End
+  Menu
+    Caption = 病案首页查询（按住院号）
+    Icon = 
+    AppName = BQ_YS_SYLR.dll
+    FuncName = fba_sylr_cry
+    VarName = 54006
+  End
+  Menu
+    Caption = &6护士医嘱查询
+    Icon = 
+    AppName = bq_hshdyz.dll
+    FuncName = fbq_hshdyz
+    VarName = 54006
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &A病人阶段费用查询
+    Icon = 
+    AppName = zy_cx_jdfycx.dll
+    FuncName = zy_cx_brjdfy
+    VarName = 54011
+  End
+  Menu
+    Caption = &B病人费用查询
+    Icon = 
+    AppName = zy_cx_brfycx.dll
+    FuncName = fzy_cx_brfycx
+    VarName = 54012
+  End
+  Menu
+    Caption = &C病人费用按发票号查询
+    Icon = 
+    AppName = zy_cx_brfycx.dll
+    FuncName = fzy_cx_brfycx_fp
+    VarName = 54013
+  End
+  Menu
+    Caption = &D干保病人单张发票查询
+    Icon = 
+    AppName = sf_gbbrdsjcx.dll
+    FuncName = fzy_gbbrdfpcx
+    VarName = 54014
+  End
+  Menu
+    Caption = -
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = &H在院病人预交金
+    Icon = 
+    AppName = zy_cx_zybryjjtj.dll
+    FuncName = fzy_cx_zybryjjtj
+    VarName = 54021
+  End
+  Menu
+    Caption = &I在院病人催款
+    Icon = 
+    AppName = zy_cx_brck.dll
+    FuncName = fzy_cx_brck
+    VarName = 54022
+  End
+  Menu
+    Caption = &J欠费管理
+    Icon = 
+    AppName = zy_cx_cyqfcx
+    FuncName = ShowCyqfcx
+    VarName = 54023
+  End
+  Menu
+    Caption = &K重点欠费病人查询
+    Icon = 
+    AppName = zy_cx_zdqfcx.dll
+    FuncName = ShowZdqfcx
+    VarName = 54024
+  End
+  Menu
+    Caption = &L未结帐信息查询
+    Icon = 
+    AppName = zy_cx_wjzxxcx.dll
+    FuncName = fzy_cx_wjzxxcx
+    VarName = 54025
+  End
+End
+Menu
+  Caption = &5报表
+  Icon = 
+  Menu
+    Caption = &1外挂报表
+    Icon = 
+    AppName = dorep.dll
+    FuncName = showorep
+    VarName = 55001
+  End
+End
+Menu
+  Caption = &6设置
+  Icon = 
+  Menu
+    Caption = &1发票管理
+    Icon = 
+    AppName = Gh_fpgl.dll
+    FuncName = fzy_fpgl
+    VarName = 56001
+  End
+  Menu
+    Caption = &2病床管理
+    Icon = 
+    AppName = bq_cwdmsz.dll
+    FuncName = fbq_bcgl
+    VarName = 56002
+  End
+  Menu
+    Caption = &3固定项目设置
+    Icon = 
+    AppName = zy_gdxmsz.dll
+    FuncName = fzy_gdxmsz
+    VarName = 56003
+  End
+  Menu
+    Caption = &4住院系统启用
+    Icon = 
+    AppName = zy_xtqy.dll
+    FuncName = fzy_xtqy
+    VarName = 56004
+  End
+  Menu
+    Caption = &5停药线设置
+    Icon = 
+    AppName = zyb_tyxsz.dll
+    FuncName = fzyb_tyxsz
+    VarName = 56005
+  End
+  Menu
+    Caption = &7占床标志设置
+    Icon = 
+    AppName = yy_zybcszjcx.dll
+    FuncName = yy_cwbzsz
+    VarName = 56007
+  End
+  Menu
+    Caption = &I基本信息特殊需求设置
+    Icon = 
+    AppName = gh_brjbxxpz.dll
+    FuncName = fgh_brjbxxpz
+    VarName = 56008
+  End
+End
+Menu
+  Caption = &7医保
+  Icon = 
+  Menu
+    Caption = &1医保单独请求
+    Icon = 
+    AppName = yy_ybddqq.dll
+    FuncName = fyy_ybddqq
+    VarName = 57001
+  End
+  Menu
+    Caption = &2医保对帐
+    Icon = 
+    AppName = yy_ybdz.dll
+    FuncName = fyy_ybdz
+    VarName = 57002
+  End
+  Menu
+    Caption = &3医保改帐申请
+    Icon = 
+    AppName = yy_ybgzsq.dll
+    FuncName = fyy_ybgzsq
+    VarName = 57003
+  End
+  Menu
+    Caption = &4医保数据上传
+    Icon = 
+    AppName = yy_ybsjsc.dll
+    FuncName = fyy_ybsjsc
+    VarName = 57004
+  End
+  Menu
+    Caption = &5医保账户查询
+    Icon = 
+    AppName = yy_ybddqq.dll
+    FuncName = fyy_ybzhcx
+    VarName = 57005
+  End
+  Menu
+    Caption = &A转诊干保信息导入
+    Icon = 
+    AppName = gh_drzzgbxx.dll
+    FuncName = fgh_drzzgbxx
+    VarName = 57011
+  End
+  Menu
+    Caption = 重庆竟达医保单独请求
+    Icon = 
+    AppName = yy_nbddqq.dll
+    FuncName = fyy_nbddqq_zy
+    VarName = 57012
+  End
+  Menu
+    Caption = 重庆东软市医保单独请求
+    Icon = 
+    AppName = drsybddqq.dll
+    FuncName = fyy_zyduqq
+    VarName = 57013
+  End
+  Menu
+    Caption = 市医保医保明细上传
+    Icon = 
+    AppName = drsybddqq.dll
+    FuncName = fyy_zyfymxsc
+    VarName = 57014
+  End
+  Menu
+    Caption = 市医保对账（重庆）
+    Icon = 
+    AppName = drsybddqq_dz.dll
+    FuncName = fyy_ybdz
+    VarName = 57015
+  End
+  Menu
+    Caption = 交通事故救助医保
+    Icon = 
+    AppName = Winybddqq.dll
+    FuncName = fyy_winybddqq
+    VarName = 57016
+  End
+  Menu
+    Caption = 异地新农合单独请求
+    Icon = 
+    AppName = Cqgjnh_ddqq.dll
+    FuncName = fyy_cqgjnhddqq
+    VarName = 57017
+  End
+  Menu
+    Caption = -----------------------------------------
+    Icon = 
+    AppName = 
+    FuncName = 
+    VarName = 
+  End
+  Menu
+    Caption = 药品项目对照
+    Icon = 
+    AppName = yy_cqybdz.dll
+    FuncName = fyb_ypxmdz
+    VarName = 57018
+  End
+  Menu
+    Caption = 单独请求查询冲正
+    Icon = 
+    AppName = yy_cqybddqq.dll
+    FuncName = fyy_cqybddqq
+    VarName = 57019
+  End
+  Menu
+    Caption = 单独请求查询
+    Icon = 
+    AppName = yy_cqybddqq.dll
+    FuncName = fyy_cqybddqq_cx
+    VarName = 57020
+  End
+  Menu
+    Caption = 单独请求业务
+    Icon = 
+    AppName = yy_cqybddqq_yw.dll
+    FuncName = fyy_cqybddqq_yw
+    VarName = 57021
+  End
+  Menu
+    Caption = 交易异常审核
+    Icon = 
+    AppName = cqybyccx.dll
+    FuncName = fyy_Ybychd
+    VarName = 57022
+  End
+  Menu
+    Caption = 重庆非实时医保
+    Icon = 
+    AppName = Cqfssybjkddqq.dll
+    FuncName = fyy_cqfssddqq
+    VarName = 57023
+  End
+End
