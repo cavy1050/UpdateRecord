@@ -1,4 +1,4 @@
-ALTER procedure usp_yf_pygzprint    
+alter procedure usp_yf_pygzprint    
  @jssjh   ut_lsh,      --结算收据号    
  @cfxhgroup  varchar(255),     --处方序号组   
  @pqbz  ut_bz=0,      --瓶签标志0 否 1 是,2药袋  
@@ -965,7 +965,7 @@ begin
   b.ybsm 费别,b.pzlx,e.pzh,e.dwbm, e.dwmc ,e.lxdz 联系地址,e.lxdh 联系电话,c.name as dymc ,e.qtkh,e.dyid,  
   s.lrrq kfrq,s.tmhdbz,case s.tmhdbz when 1 then '已核对' else '未核对' end as tmhdbz_sm  
   into #tmp_title  
-  from SF_BRXXK e (nolock)   
+  from SF_BRXXK e (nolock) 
    inner join SF_BRJSK d(nolock) on d.patid=e.patid  
    inner join SF_MZCFK s(nolock) on  d.sjh=s.jssjh  
    left join YY_YBFLK b (nolock) on e.ybdm=b.ybdm  
@@ -1010,18 +1010,19 @@ begin
   order by a.fzxh
   --a.cfwz,a.xh,a.sxh  lj20191124药房配药打印模板显示错乱
          
-       
+  --update by winning-dingsong-chongqing on 20200706 增加排序【order by sxh】
   if @dyfileterbz=0   
         begin  
-            select a.*,b.本处方金额合计 from #temp_zz_result_sc_rb_1  a left join #tmp_result_cfje b on a.xh=b.xh  
+            select a.*,b.本处方金额合计 from #temp_zz_result_sc_rb_1  a left join #tmp_result_cfje b on a.xh=b.xh
+			order by sxh  
         end  
         else if @dyfileterbz=1   
         begin  
-             exec('select a.*,b.本处方金额合计 from #temp_zz_result_sc_rb_1 a left join #tmp_result_cfje b on a.xh=b.xh  where ypyf0 in ('+@strfilter+')')  
+             exec('select a.*,b.本处方金额合计 from #temp_zz_result_sc_rb_1 a left join #tmp_result_cfje b on a.xh=b.xh  where ypyf0 in ('+@strfilter+') order by sxh  ')  
         end  
         else if @dyfileterbz=2   
         begin  
-            exec('select a.*,b.本处方金额合计 from #temp_zz_result_sc_rb_1 a left join #tmp_result_cfje b on a.xh=b.xh  where ypyf0 not in ('+@strfilter+')')  
+            exec('select a.*,b.本处方金额合计 from #temp_zz_result_sc_rb_1 a left join #tmp_result_cfje b on a.xh=b.xh  where ypyf0 not in ('+@strfilter+') order by sxh  ')  
         end  
  end  
  else  
@@ -1093,4 +1094,7 @@ begin
  end  
  return   
 end 
+
+
+
 
