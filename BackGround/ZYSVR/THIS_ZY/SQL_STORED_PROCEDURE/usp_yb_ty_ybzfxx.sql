@@ -70,7 +70,7 @@ SELECT a.jsxh,
       sum(case when b.lx='25' AND b.mc='生育基金支付' then b.je else 0 end) syjjzf,      
       sum(case when b.lx='26' then b.je else 0 end) syxjzf,    
       sum(case when b.lx='24' then b.je else 0 end) zfdy,    
-   sum(case when b.lx='GN31' then b.je else 0 end) ydbxje     
+   sum(case when b.lx='GN48' then b.je else 0 end) ydbxje     
 FROM #YB_BRLIST a    
  INNER JOIN dbo.ZY_BRJSJEK b (nolock) ON a.jsxh=b.jsxh    
 GROUP BY a.jsxh    
@@ -83,7 +83,7 @@ HAVING (sum(case when b.lx='04' then b.je else 0 end)+
         sum(case when b.lx='25' AND b.mc='生育基金支付' then b.je else 0 end)+    
          sum(case when b.lx='26' then b.je else 0 end)+
 		  sum(case when b.lx='24' then b.je else 0 end)+
-		   sum(case when b.lx='GN31' then b.je else 0 end)<>0)    
+		   sum(case when b.lx='GN48' then b.je else 0 end)<>0)    
 UNION ALL    
 SELECT a.jsxh,    
    sum(case when b.lx='yb04' then b.je else 0 end) xjzf,        
@@ -96,7 +96,7 @@ SELECT a.jsxh,
       sum(case when b.lx='yb24' then b.je else 0 end) syjjzf,      
       sum(case when b.lx='yb25' then b.je else 0 end) syxjzf,    
       sum(case when b.lx='yb99' then b.je else 0 end) zfdy,    
-   sum(case when b.lx='GN31' then b.je else 0 end) ydbxje     
+   sum(case when b.lx='GN48' then b.je else 0 end) ydbxje     
 FROM #YB_BRLIST a    
  INNER JOIN dbo.ZY_BRJSJEK b (nolock) ON a.jsxh=b.jsxh    
 GROUP BY a.jsxh    
@@ -126,4 +126,5 @@ FROM #YB_BRLIST a
 SELECT * FROM  #YB_BRLIST
     
 RETURN 
+
 
