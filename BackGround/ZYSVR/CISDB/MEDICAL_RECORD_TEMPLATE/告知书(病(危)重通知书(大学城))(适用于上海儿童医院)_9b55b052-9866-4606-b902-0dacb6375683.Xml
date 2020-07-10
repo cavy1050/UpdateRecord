@@ -1,0 +1,159 @@
+<Model id="9b55b052-9866-4606-b902-0dacb6375683" name="告知书(病(危)重通知书(大学城))" description="适用于上海儿童医院" text="病危(重)通知书" nodetype="Model" canprint="True" isPrintAlone="False" printInOddPages="False" display="11```0`1" Version="1.0.0.197" titledisplay="1`1`1" hospitalcoderange="10027" catalogcode="B-A5F1" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" indentLength="0" isReview="False" isform="False" formclass="" submitCACoordinate="" auditCACoordinate="" maxrefid="37" RelateInstanceId="0">
+  <Ref id="22">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="d303193d-ce04-4685-b23b-b1f0531946c4" nodetype="Embeded" nodelogiccontent="" name="入院情况(基本信息)" text="入院情况(基本信息)" description="适用于宝山分院，包括病人姓名、性别、年龄等。" display="11```0`1">
+      <node text="患者" rtf="\'BB\'BC\'D5\'DF" nodetype="Text" />
+      <node embededId="0" id="c9a9b2ab-81ca-4d9a-8da7-7308e7cb90f6" nodetype="Object" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.101" display="11```0`1">
+        <node id="6fa963d2-ab46-493e-9cf6-ff87addccf52" nodetype="AtomNode" nodelogiccontent="" name="病人姓名" text="姓名" description="0.000" atomtype="String" value="``" defaultvalue="#patname`当前病人姓名`" display="1111111```````0```" embededId="1" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+      <node embededId="0" id="0eab0ca9-ab6f-44df-abfc-5183bb74bc84" nodetype="Object" nodelogiccontent="" name="职业" visiable="False" text="职业" description="0.107" display="11```0`1">
+        <node id="5c2cd00b-78f0-4998-9af6-25cade5343bf" nodetype="AtomNode" nodelogiccontent="" name="职业" text="职业" description="1.1107" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="通用字典（字典分类明细）///CommonBook///记录状态//1//类别代码//41" inputdirect="False" display="1111111```````0```" embededId="11" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="23">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="6430de69-26ed-4590-a14b-dfe136c230a9" nodetype="Embeded" nodelogiccontent="" name="病史信息(医院病人基本信息(通用))" text="病史信息(医院病人基本信息(通用))" description="描述入院记录病人的基本信息." display="11```0`1">
+      <node text="现在" rtf="\'cf\'d6\'d4\'da" nodetype="Text" />
+      <node embededId="0" id="9c9cce1c-d074-401f-a941-99fdc7f8cead" nodetype="Object" nodelogiccontent="" name="入院科室" text="入院科室" description="0.212" display="11```0`1">
+        <node id="5e39b306-e2b9-450e-ba78-3b6971652a38" nodetype="AtomNode" nodelogiccontent="" name="入院科室" text="入院科室" description="3.001" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="院内科室///DepartmentBook///记录状态//1" inputdirect="False" defaultvalue="#PatientAdmitDepart`入院科室`" display="1111111```````0```" embededId="98" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="25">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="e85b7527-eb6c-4196-a756-5c901c1f2e87" nodetype="Embeded" nodelogiccontent="" name="主要诊断(西医诊断)" text="主要诊断(西医诊断)" description="本次医疗过程中对身体健康危害最大，花费医疗精力最多，住院时间最长的疾病诊断。" display="11```0`1">
+      <node embededId="0" id="f88a4ce4-ee18-4f0f-b9f7-47da80e43a27" nodetype="Object" nodelogiccontent="" name="部位修饰词" text="部位修饰词" description="2.201" display="11```0`1">
+        <node id="76ac966f-c1e3-40b4-888e-40fbe0c0a6e4" nodetype="AtomNode" nodelogiccontent="" name="部位修饰词" visiable="False" text="部位修饰词" description="4.004" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="关联词(修饰词)///GeneralLinkage///开始代码//G-A100//结束代码//G-A102" inputdirect="False" display="1111111```````0```" embededId="3" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+      <node embededId="0" id="e1c4bd65-b036-41b0-a400-ce79e9f0c3d9" nodetype="Object" nodelogiccontent="" name="主要诊断" signid="疾病诊断名称|621" text="主要诊断" description="6.204" display="11```0`1">
+        <node id="76ac966f-c1e3-40b4-888e-40fbe0c0a6e4" nodetype="AtomNode" nodelogiccontent="" name="具体骨折部位" visiable="False" text="具体骨折部位" description="4.004" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="关联词(修饰词)///GeneralLinkage///代码范围//G-092%" inputdirect="False" display="1111111```````0```" embededId="4" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+        <node id="1222d85e-4a28-445a-8dad-70434002ac85" nodetype="AtomNode" nodelogiccontent="" name="主要诊断" text="主要诊断" description="6.001" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="ICD-10///ICD10///记录状态//1" inputdirect="False" display="1111111```````0```" embededId="1" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="26">
+    <node identity="21" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="e85b7527-eb6c-4196-a756-5c901c1f2e87" nodetype="Embeded" nodelogiccontent="" name="主要诊断(西医诊断)" text="主要诊断(西医诊断)" description="本次医疗过程中对身体健康危害最大，花费医疗精力最多，住院时间最长的疾病诊断。" otherid="D-5431" display="11```0`1">
+      <node embededId="2" id="f88a4ce4-ee18-4f0f-b9f7-47da80e43a27" nodetype="Object" nodelogiccontent="" name="部位修饰词" text="部位修饰词" description="2.201" otherid="E-22100" display="11```0`1">
+        <node id="76ac966f-c1e3-40b4-888e-40fbe0c0a6e4" nodetype="AtomNode" nodelogiccontent="" name="部位修饰词" visiable="False" text="部位修饰词" description="4.004" otherid="F-40040" atomtype="String" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="关联词(修饰词)///GeneralLinkage///开始代码//G-A100//结束代码//G-A102" inputdirect="False" display="1111111```````0```" embededId="3" autoeditnext="True" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="ef9d05fc-3382-4bb9-b157-29a8f601ef5c" nodetype="DynamicMoleNode" nodelogiccontent="" name="同意书与委托书(告知书内容)" text="同意书与委托书(告知书内容)" description="适用于告知书。" otherid="C-1192" display="20`病危（重）通知内容：`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text=" &#xA;" rtf=" \par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="\b     " nodetype="Text" />
+    <node text="患者或其近亲属/委托代理人等，" rtf="\'bb\'bc\'d5\'df\'bb\'f2\'c6\'e4\'bd\'fc\'c7\'d7\'ca\'f4/\'ce\'af\'cd\'d0\'b4\'fa\'c0\'ed\'c8\'cb\'b5\'c8\'a3\'ac" nodetype="Text" />
+    <node refid="22" nodetype="Embeded" />
+    <node refid="23" nodetype="Embeded" />
+    <node text="科诊疗，目前病情危重。现特作如下告知：&#xA;    目前主要诊断：" rtf="\'bf\'c6\'d5\'ef\'c1\'c6\'a3\'ac\'c4\'bf\'c7\'b0\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'a1\'a3\'cf\'d6\'cc\'d8\'d7\'f7\'c8\'e7\'cf\'c2\'b8\'e6\'d6\'aa\'a3\'ba\par&#xD;&#xA;\pard     \'c4\'bf\'c7\'b0\'d6\'f7\'d2\'aa\'d5\'ef\'b6\'cf\'a3\'ba" nodetype="Text" />
+    <node refid="25" nodetype="Embeded" />
+    <node text="                                                                              " rtf="                                                                              " nodetype="Text" />
+    <node refid="26" nodetype="Embeded" />
+  </node>
+  <node id="f18119bc-46d4-409c-b1b2-deafd2f71a18" nodetype="DynamicMoleNode" nodelogiccontent="" name="病情概括及主要抢救措施" signid="病情概括及主要抢救措施|638" text="病情概括及主要抢救措施" description="知情同意书中项目" otherid="C-1192" display="20`    病情危重情况：`&#xD;&#xA;`9`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" isnewPage="False" canNull="False" canNullSubmit="False" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0" />
+  <node id="c6ba9393-65b9-45e1-845c-a98a0e3cef62" nodetype="DynamicMoleNode" nodelogiccontent="" name="抢救记录" signid="病情概括及主要抢救措施|638" text="抢救记录" otherid="C-1151" display="20`    主要抢救措施：`&#xD;&#xA;`9`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" isnewPage="False" canNull="False" canNullSubmit="False" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0" />
+  <node id="026507aa-e61f-4bbb-aaef-19251ae9730e" nodetype="DynamicMoleNode" nodelogiccontent="" name="备注" signid="病危（重）通知内容|631" text="备注" description="其他需要补充描述的内容" otherid="C-D6" display="10`备注`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="    医护人员将竭力救治，并需患方积极配合和支持诊疗。但在此诊疗过程中，仍然可能出现患者病情无好转或进一步恶化出现以下一种或多种危及其身体健康和生命的并发症：&#xA;    1.肺性脑病，严重的心律失常、心功能衰竭、心肌梗死、高血压危象；&#xA;    2.上消化道出血导致出血性休克、脑出血、脑梗塞、脑疝；&#xA;    3.感染中毒性休克、过敏性休克、心源性休克；&#xA;    4.弥漫性血管内凝血（DIC）；&#xA;    5.多器官功能衰竭；&#xA;    6.糖尿病酮症、酸中毒、低血糖性昏迷、高渗性昏迷；&#xA;    7.其他。&#xA;    上述情况一旦发生会严重威胁患者生命，医护人员将全力抢救，其中包括气管切开、呼吸机辅助呼吸、电除颤、心脏按摩、安装临时起搏器等措施。&#xA;    根据我国法律规定，为抢救患者，医生可以在不征得您同意的情况下依据救治工作的需要对患者先采取抢救措施，并使用应急救治所必需的仪器设备和治疗手段，然后履行告知义务，请您予以理解并积极配合医院的抢救治疗。&#xA;    如您还有其他问题和要求，请在接到本通知以后主动找医生了解咨询。请您留下准确的联系方式，以便医护人员随时与您沟通。&#xA;    此外，限于目前医学科学技术条件，尽管我院医护人员已经尽全力救治患者，仍存在因疾病原因患者不幸死亡的可能，请患者家属予以理解。" rtf="    \'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'bd\'ab\'bd\'df\'c1\'a6\'be\'c8\'d6\'ce\'a3\'ac\'b2\'a2\'d0\'e8\'bb\'bc\'b7\'bd\'bb\'fd\'bc\'ab\'c5\'e4\'ba\'cf\'ba\'cd\'d6\'a7\'b3\'d6\'d5\'ef\'c1\'c6\'a1\'a3\'b5\'ab\'d4\'da\'b4\'cb\'d5\'ef\'c1\'c6\'b9\'fd\'b3\'cc\'d6\'d0\'a3\'ac\'c8\'d4\'c8\'bb\'bf\'c9\'c4\'dc\'b3\'f6\'cf\'d6\'bb\'bc\'d5\'df\'b2\'a1\'c7\'e9\'ce\'de\'ba\'c3\'d7\'aa\'bb\'f2\'bd\'f8\'d2\'bb\'b2\'bd\'b6\'f1\'bb\'af\'b3\'f6\'cf\'d6\'d2\'d4\'cf\'c2\'d2\'bb\'d6\'d6\'bb\'f2\'b6\'e0\'d6\'d6\'ce\'a3\'bc\'b0\'c6\'e4\'c9\'ed\'cc\'e5\'bd\'a1\'bf\'b5\'ba\'cd\'c9\'fa\'c3\'fc\'b5\'c4\'b2\'a2\'b7\'a2\'d6\'a2\'a3\'ba\par&#xD;&#xA;    1.\'b7\'ce\'d0\'d4\'c4\'d4\'b2\'a1\'a3\'ac\'d1\'cf\'d6\'d8\'b5\'c4\'d0\'c4\'c2\'c9\'ca\'a7\'b3\'a3\'a1\'a2\'d0\'c4\'b9\'a6\'c4\'dc\'cb\'a5\'bd\'df\'a1\'a2\'d0\'c4\'bc\'a1\'b9\'a3\'cb\'c0\'a1\'a2\'b8\'df\'d1\'aa\'d1\'b9\'ce\'a3\'cf\'f3\'a3\'bb\par&#xD;&#xA;    2.\'c9\'cf\'cf\'fb\'bb\'af\'b5\'c0\'b3\'f6\'d1\'aa\'b5\'bc\'d6\'c2\'b3\'f6\'d1\'aa\'d0\'d4\'d0\'dd\'bf\'cb\'a1\'a2\'c4\'d4\'b3\'f6\'d1\'aa\'a1\'a2\'c4\'d4\'b9\'a3\'c8\'fb\'a1\'a2\'c4\'d4\'f0\'de\'a3\'bb\par&#xD;&#xA;    3.\'b8\'d0\'c8\'be\'d6\'d0\'b6\'be\'d0\'d4\'d0\'dd\'bf\'cb\'a1\'a2\'b9\'fd\'c3\'f4\'d0\'d4\'d0\'dd\'bf\'cb\'a1\'a2\'d0\'c4\'d4\'b4\'d0\'d4\'d0\'dd\'bf\'cb\'a3\'bb\par&#xD;&#xA;    4.\'c3\'d6\'c2\'fe\'d0\'d4\'d1\'aa\'b9\'dc\'c4\'da\'c4\'fd\'d1\'aa\'a3\'a8DIC\'a3\'a9\'a3\'bb\par&#xD;&#xA;    5.\'b6\'e0\'c6\'f7\'b9\'d9\'b9\'a6\'c4\'dc\'cb\'a5\'bd\'df\'a3\'bb\par&#xD;&#xA;    6.\'cc\'c7\'c4\'f2\'b2\'a1\'cd\'aa\'d6\'a2\'a1\'a2\'cb\'e1\'d6\'d0\'b6\'be\'a1\'a2\'b5\'cd\'d1\'aa\'cc\'c7\'d0\'d4\'bb\'e8\'c3\'d4\'a1\'a2\'b8\'df\'c9\'f8\'d0\'d4\'bb\'e8\'c3\'d4\'a3\'bb\par&#xD;&#xA;    7.\'c6\'e4\'cb\'fb\'a1\'a3\par&#xD;&#xA;    \'c9\'cf\'ca\'f6\'c7\'e9\'bf\'f6\'d2\'bb\'b5\'a9\'b7\'a2\'c9\'fa\'bb\'e1\'d1\'cf\'d6\'d8\'cd\'fe\'d0\'b2\'bb\'bc\'d5\'df\'c9\'fa\'c3\'fc\'a3\'ac\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'bd\'ab\'c8\'ab\'c1\'a6\'c7\'c0\'be\'c8\'a3\'ac\'c6\'e4\'d6\'d0\'b0\'fc\'c0\'a8\'c6\'f8\'b9\'dc\'c7\'d0\'bf\'aa\'a1\'a2\'ba\'f4\'ce\'fc\'bb\'fa\'b8\'a8\'d6\'fa\'ba\'f4\'ce\'fc\'a1\'a2\'b5\'e7\'b3\'fd\'b2\'fc\'a1\'a2\'d0\'c4\'d4\'e0\'b0\'b4\'c4\'a6\'a1\'a2\'b0\'b2\'d7\'b0\'c1\'d9\'ca\'b1\'c6\'f0\'b2\'ab\'c6\'f7\'b5\'c8\'b4\'eb\'ca\'a9\'a1\'a3\par&#xD;&#xA;    \'b8\'f9\'be\'dd\'ce\'d2\'b9\'fa\'b7\'a8\'c2\'c9\'b9\'e6\'b6\'a8\'a3\'ac\'ce\'aa\'c7\'c0\'be\'c8\'bb\'bc\'d5\'df\'a3\'ac\'d2\'bd\'c9\'fa\'bf\'c9\'d2\'d4\'d4\'da\'b2\'bb\'d5\'f7\'b5\'c3\'c4\'fa\'cd\'ac\'d2\'e2\'b5\'c4\'c7\'e9\'bf\'f6\'cf\'c2\'d2\'c0\'be\'dd\'be\'c8\'d6\'ce\'b9\'a4\'d7\'f7\'b5\'c4\'d0\'e8\'d2\'aa\'b6\'d4\'bb\'bc\'d5\'df\'cf\'c8\'b2\'c9\'c8\'a1\'c7\'c0\'be\'c8\'b4\'eb\'ca\'a9\'a3\'ac\'b2\'a2\'ca\'b9\'d3\'c3\'d3\'a6\'bc\'b1\'be\'c8\'d6\'ce\'cb\'f9\'b1\'d8\'d0\'e8\'b5\'c4\'d2\'c7\'c6\'f7\'c9\'e8\'b1\'b8\'ba\'cd\'d6\'ce\'c1\'c6\'ca\'d6\'b6\'ce\'a3\'ac\'c8\'bb\'ba\'f3\'c2\'c4\'d0\'d0\'b8\'e6\'d6\'aa\'d2\'e5\'ce\'f1\'a3\'ac\'c7\'eb\'c4\'fa\'d3\'e8\'d2\'d4\'c0\'ed\'bd\'e2\'b2\'a2\'bb\'fd\'bc\'ab\'c5\'e4\'ba\'cf\'d2\'bd\'d4\'ba\'b5\'c4\'c7\'c0\'be\'c8\'d6\'ce\'c1\'c6\'a1\'a3\par&#xD;&#xA;    \'c8\'e7\'c4\'fa\'bb\'b9\'d3\'d0\'c6\'e4\'cb\'fb\'ce\'ca\'cc\'e2\'ba\'cd\'d2\'aa\'c7\'f3\'a3\'ac\'c7\'eb\'d4\'da\'bd\'d3\'b5\'bd\'b1\'be\'cd\'a8\'d6\'aa\'d2\'d4\'ba\'f3\'d6\'f7\'b6\'af\'d5\'d2\'d2\'bd\'c9\'fa\'c1\'cb\'bd\'e2\'d7\'c9\'d1\'af\'a1\'a3\'c7\'eb\'c4\'fa\'c1\'f4\'cf\'c2\'d7\'bc\'c8\'b7\'b5\'c4\'c1\'aa\'cf\'b5\'b7\'bd\'ca\'bd\'a3\'ac\'d2\'d4\'b1\'e3\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'cb\'e6\'ca\'b1\'d3\'eb\'c4\'fa\'b9\'b5\'cd\'a8\'a1\'a3\par&#xD;&#xA;    \'b4\'cb\'cd\'e2\'a3\'ac\'cf\'de\'d3\'da\'c4\'bf\'c7\'b0\'d2\'bd\'d1\'a7\'bf\'c6\'d1\'a7\'bc\'bc\'ca\'f5\'cc\'f5\'bc\'fe\'a3\'ac\'be\'a1\'b9\'dc\'ce\'d2\'d4\'ba\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'d2\'d1\'be\'ad\'be\'a1\'c8\'ab\'c1\'a6\'be\'c8\'d6\'ce\'bb\'bc\'d5\'df\'a3\'ac\'c8\'d4\'b4\'e6\'d4\'da\'d2\'f2\'bc\'b2\'b2\'a1\'d4\'ad\'d2\'f2\'bb\'bc\'d5\'df\'b2\'bb\'d0\'d2\'cb\'c0\'cd\'f6\'b5\'c4\'bf\'c9\'c4\'dc\'a3\'ac\'c7\'eb\'bb\'bc\'d5\'df\'bc\'d2\'ca\'f4\'d3\'e8\'d2\'d4\'c0\'ed\'bd\'e2\'a1\'a3" nodetype="Text" />
+  </node>
+  <Ref id="28">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="29">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="30">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="31">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="32">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="33">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="34">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="35">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="36">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="37">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" diagnosisInsertstype="-1" FirstCharOfDiagnosisInsertVertical="0" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0```" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" isComplexShowlist="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="5dd97bd6-7168-4f58-a5fc-24e0c94d08db" nodetype="DynamicMoleNode" nodelogiccontent="" name="患方意见" text="患方意见" description="知情同意书中项目" otherid="C-1192" display="20`患者家属或患者法定监护人、授权委托人意见：`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    关于患者目前的病情危重、可能出现的风险和后果以及医护人员对于患者病情危重时进行的救治措施，医护人员已经向我详细告知。我了解了患者病情危重，并授权医护人员进行（同意划√，可多选）：&#xA;" rtf="    \'b9\'d8\'d3\'da\'bb\'bc\'d5\'df\'c4\'bf\'c7\'b0\'b5\'c4\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'a1\'a2\'bf\'c9\'c4\'dc\'b3\'f6\'cf\'d6\'b5\'c4\'b7\'e7\'cf\'d5\'ba\'cd\'ba\'f3\'b9\'fb\'d2\'d4\'bc\'b0\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'b6\'d4\'d3\'da\'bb\'bc\'d5\'df\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'ca\'b1\'bd\'f8\'d0\'d0\'b5\'c4\'be\'c8\'d6\'ce\'b4\'eb\'ca\'a9\'a3\'ac\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'d2\'d1\'be\'ad\'cf\'f2\'ce\'d2\'cf\'ea\'cf\'b8\'b8\'e6\'d6\'aa\'a1\'a3\'ce\'d2\'c1\'cb\'bd\'e2\'c1\'cb\'bb\'bc\'d5\'df\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'a3\'ac\'b2\'a2\'ca\'da\'c8\'a8\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'bd\'f8\'d0\'d0\'a3\'a8\'cd\'ac\'d2\'e2\'bb\'ae\'a1\'cc\'a3\'ac\'bf\'c9\'b6\'e0\'d1\'a1\'a3\'a9\'a3\'ba\par&#xD;&#xA;" nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node refid="28" nodetype="Embeded" />
+    <node text="气管切开       " rtf="\'c6\'f8\'b9\'dc\'c7\'d0\'bf\'aa       " nodetype="Text" />
+    <node refid="29" nodetype="Embeded" />
+    <node text="呼吸机辅助呼吸    " rtf="\'ba\'f4\'ce\'fc\'bb\'fa\'b8\'a8\'d6\'fa\'ba\'f4\'ce\'fc    " nodetype="Text" />
+    <node refid="30" nodetype="Embeded" />
+    <node text="电除颤 &#xA;    " rtf="\'b5\'e7\'b3\'fd\'b2\'fc \par&#xD;&#xA;    " nodetype="Text" />
+    <node refid="31" nodetype="Embeded" />
+    <node text="心脏按压       " rtf="\'d0\'c4\'d4\'e0\'b0\'b4\'d1\'b9       " nodetype="Text" />
+    <node refid="32" nodetype="Embeded" />
+    <node text="临时起搏器        " rtf="\'c1\'d9\'ca\'b1\'c6\'f0\'b2\'ab\'c6\'f7        " nodetype="Text" />
+    <node refid="33" nodetype="Embeded" />
+    <node text="其他有创救治措施&#xA;    患者授权亲属签名：        与患者关系：      签名日期：     年    月    日&#xA;    关于患者目前的病情危重、可能出现的风险和后果以及医护人员对于患者病情危重时进行的救治措施，医护人员已经向我详细告知。我了解了患者病情危重，我" rtf="\'c6\'e4\'cb\'fb\'d3\'d0\'b4\'b4\'be\'c8\'d6\'ce\'b4\'eb\'ca\'a9\par&#xD;&#xA;    \'bb\'bc\'d5\'df\'ca\'da\'c8\'a8\'c7\'d7\'ca\'f4\'c7\'a9\'c3\'fb\'a3\'ba        \'d3\'eb\'bb\'bc\'d5\'df\'b9\'d8\'cf\'b5\'a3\'ba      \'c7\'a9\'c3\'fb\'c8\'d5\'c6\'da\'a3\'ba     \'c4\'ea    \'d4\'c2    \'c8\'d5\par&#xD;&#xA;\pard     \'b9\'d8\'d3\'da\'bb\'bc\'d5\'df\'c4\'bf\'c7\'b0\'b5\'c4\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'a1\'a2\'bf\'c9\'c4\'dc\'b3\'f6\'cf\'d6\'b5\'c4\'b7\'e7\'cf\'d5\'ba\'cd\'ba\'f3\'b9\'fb\'d2\'d4\'bc\'b0\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'b6\'d4\'d3\'da\'bb\'bc\'d5\'df\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'ca\'b1\'bd\'f8\'d0\'d0\'b5\'c4\'be\'c8\'d6\'ce\'b4\'eb\'ca\'a9\'a3\'ac\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'d2\'d1\'be\'ad\'cf\'f2\'ce\'d2\'cf\'ea\'cf\'b8\'b8\'e6\'d6\'aa\'a1\'a3\'ce\'d2\'c1\'cb\'bd\'e2\'c1\'cb\'bb\'bc\'d5\'df\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'a3\'ac\'ce\'d2" nodetype="Text" />
+    <node refid="34" nodetype="Embeded" />
+    <node text="同意" rtf="\b \'cd\'ac\'d2\'e2" nodetype="Text" />
+    <node refid="35" nodetype="Embeded" />
+    <node text="不同意医护人员进行上述有创救治措施，我" rtf="\b \'b2\'bb\'cd\'ac\'d2\'e2\b0\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'bd\'f8\'d0\'d0\'c9\'cf\'ca\'f6\'d3\'d0\'b4\'b4\'be\'c8\'d6\'ce\'b4\'eb\'ca\'a9\'a3\'ac\'ce\'d2" nodetype="Text" />
+    <node refid="36" nodetype="Embeded" />
+    <node text="同" rtf="\b \'cd\'ac" nodetype="Text" />
+    <node text="意" rtf="\b \'d2\'e2" nodetype="Text" />
+    <node refid="37" nodetype="Embeded" />
+    <node text="不同意使用药物进行救治，对所发生的一切后果我们自行承担责任。" rtf="\b \'b2\'bb\'cd\'ac\'d2\'e2\b0\'ca\'b9\'d3\'c3\'d2\'a9\'ce\'ef\'bd\'f8\'d0\'d0\'be\'c8\'d6\'ce\'a3\'ac\'b6\'d4\'cb\'f9\'b7\'a2\'c9\'fa\'b5\'c4\'d2\'bb\'c7\'d0\'ba\'f3\'b9\'fb\'ce\'d2\'c3\'c7\'d7\'d4\'d0\'d0\'b3\'d0\'b5\'a3\'d4\'f0\'c8\'ce\'a1\'a3" nodetype="Text" />
+    <node text="&#xA;    患者授权亲属签名：        与患者关系：      签名日期：     年    月    日" rtf="\par&#xD;&#xA;\pard     \'bb\'bc\'d5\'df\'ca\'da\'c8\'a8\'c7\'d7\'ca\'f4\'c7\'a9\'c3\'fb\'a3\'ba        \'d3\'eb\'bb\'bc\'d5\'df\'b9\'d8\'cf\'b5\'a3\'ba      \'c7\'a9\'c3\'fb\'c8\'d5\'c6\'da\'a3\'ba     \'c4\'ea    \'d4\'c2    \'c8\'d5" nodetype="Text" />
+  </node>
+  <node id="ef9d05fc-3382-4bb9-b157-29a8f601ef5c" nodetype="DynamicMoleNode" nodelogiccontent="" name="同意书与委托书(告知书内容)" text="同意书与委托书(告知书内容)" description="适用于告知书。" otherid="C-1192" display="20`医护人员陈述：`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" isnewPage="False" canNull="True" canNullSubmit="True" MinLength="0" MaxLength="0" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    我已经将患者目前的病情危重、可能出现的风险和后果以及医护人员对于患者病情危重时进行的救治措施向患者近亲属或患者的法定监护人、授权委托人详细告知。&#xA;    医护人员签名：               签名日期：       年      月      日" rtf="    \'ce\'d2\'d2\'d1\'be\'ad\'bd\'ab\'bb\'bc\'d5\'df\'c4\'bf\'c7\'b0\'b5\'c4\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'a1\'a2\'bf\'c9\'c4\'dc\'b3\'f6\'cf\'d6\'b5\'c4\'b7\'e7\'cf\'d5\'ba\'cd\'ba\'f3\'b9\'fb\'d2\'d4\'bc\'b0\'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'b6\'d4\'d3\'da\'bb\'bc\'d5\'df\'b2\'a1\'c7\'e9\'ce\'a3\'d6\'d8\'ca\'b1\'bd\'f8\'d0\'d0\'b5\'c4\'be\'c8\'d6\'ce\'b4\'eb\'ca\'a9\'cf\'f2\'bb\'bc\'d5\'df\'bd\'fc\'c7\'d7\'ca\'f4\'bb\'f2\'bb\'bc\'d5\'df\'b5\'c4\'b7\'a8\'b6\'a8\'bc\'e0\'bb\'a4\'c8\'cb\'a1\'a2\'ca\'da\'c8\'a8\'ce\'af\'cd\'d0\'c8\'cb\'cf\'ea\'cf\'b8\'b8\'e6\'d6\'aa\'a1\'a3\par&#xD;&#xA;\pard     \'d2\'bd\'bb\'a4\'c8\'cb\'d4\'b1\'c7\'a9\'c3\'fb\'a3\'ba               \'c7\'a9\'c3\'fb\'c8\'d5\'c6\'da\'a3\'ba       \'c4\'ea      \'d4\'c2      \'c8\'d5" nodetype="Text" />
+  </node>
+</Model>
