@@ -1,5 +1,4 @@
-Text
-CREATE proc usp_cqyb_sfcl_ex1
+ALTER proc usp_cqyb_sfcl_ex1
 (
 	@jssjh			ut_sjh,			--收据号
 	@jslb			ut_bz,			--0预算1结算
@@ -91,7 +90,9 @@ declare	@patid		ut_xh12,		--患者id
         @errmsg      varchar(100),
 		@configCQ01 varchar(10)
 		,@config2136 varchar(10)='否'  --tsyhje特殊优惠 
-		,@tsyhje	ut_money		--tsyhje和参数2136有关,总金额要传到医保，这里是医保报销之后再优惠
+		,@tsyhje	ut_money,		--tsyhje和参数2136有关,总金额要传到医保，这里是医保报销之后再优惠
+		@cbypmc     ut_mc64         --垫付药品名称
+		
 
 select @now=convert(char(8),getdate(),112) + convert(char(8),getdate(),8),
 	   @zje=0, @ybzje=0, @sfje=0, @sfje1=0, @sfje2=0, @srje=0, @xmzfbl=0, 
@@ -131,11 +132,16 @@ begin
 end
 
 ----chenhong add 20191125 根据医院要求修改 begin
-if exists (select 1 from SF_JEMXK a(nolock) where jssjh=@jssjh and a.lx='yb23' and je>19)
-begin
-	select "F","医院垫付金额大于1元，不能结算！"
-	return
-end
+--add by yangdi 2020.6.29 控制新冠检测代码能够报销，其余不超过1元  --项目代码:250403088a,501944a
+IF NOT EXISTS (SELECT 1 FROM dbo.SF_MZCFK a (NOLOCK) INNER JOIN dbo.SF_CFMXK b (NOLOCK) ON a.xh=b.cfxh WHERE a.jssjh=@jssjh AND b.ypdm IN ('250403088a','501944a'))
+BEGIN
+	if exists (select 1 FROM dbo.SF_MZCFK a (NOLOCK) INNER JOIN dbo.SF_CFMXK b (NOLOCK) ON a.xh=b.cfxh WHERE a.jssjh=@jssjh AND b.cd_idm>0 AND b.sfxmdj!=3 AND b.ybzlje>1)
+	BEGIN
+		SELECT @cbypmc=ypmc FROM dbo.SF_MZCFK a (NOLOCK) INNER JOIN dbo.SF_CFMXK b (NOLOCK) ON a.xh=b.cfxh WHERE a.jssjh=@jssjh AND b.cd_idm>0 AND b.sfxmdj!=3 AND b.ybzlje>1
+		select "F","【"+@cbypmc+"】垫付金额大于1元，不能结算！"
+		return
+	end
+END
 ----chenhong add 20191125 根据医院要求修改 end
 
 if @jslb = 0
