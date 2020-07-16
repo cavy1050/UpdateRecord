@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/24/2015 10:49:07" ReportInfo.Modified="06/28/2020 18:26:44" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="false">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Text1_AfterData(object sender, EventArgs e)
+    {                     
+      Text1.Text=Text1.Text.Replace(&quot;复诊：否&quot;,&quot;&quot;);
+      Text1.Text=Text1.Text.Replace(&quot;医师签全名&quot;,&quot;                           医师签全名&quot;);   
+      Text1.Text=Text1.Text.Replace(&quot;接诊医生签名&quot;,&quot;                           接诊医生签名&quot;);
+      
+      //过滤为空的内容，使其不打印。通用
+      string blnr=Text1.Text.Replace(&quot; &quot;,&quot;&quot;).Replace(&quot;\n&quot;,&quot;&quot;);
+      //MessageBox.Show(blnr);
+      string str1=&quot;*处方信息*检查检验措施或建议&quot;;
+      bool yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*处方信息&quot;,&quot;&quot;);
+      }
+      str1=&quot;*检查检验措施或建议*休息方式或大概期限&quot;;
+      yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*检查检验措施或建议&quot;,&quot;&quot;);
+      }
+      str1=&quot;*休息方式或大概期限*入院单信息&quot;;
+      yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*休息方式或大概期限&quot;,&quot;&quot;);
+      }
+      str1=&quot;*入院单信息*传染病报告情况&quot;;
+      yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*入院单信息&quot;,&quot;&quot;);
+      }                          
+      str1=&quot;*传染病报告情况医师签名&quot;;
+      yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*传染病报告情况&quot;,&quot;&quot;);
+      } 
+      //儿科专用
+      str1=&quot;*检查检验措施或建议*入院单信息&quot;;
+      yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*检查检验措施或建议&quot;,&quot;&quot;);
+      }
+      str1=&quot;*入院单信息医师签名&quot;;
+      yn=blnr.ToLower().Contains(str1.ToLower());
+      if(yn)
+      {
+        Text1.Text=Text1.Text.Replace(&quot;*入院单信息&quot;,&quot;&quot;);
+      }
+      
+      Text1.Text=Text1.Text.Replace(&quot;\n&quot;,&quot;br/&quot;);  
+      Text1.Text=Text1.Text.Replace(&quot;br/br/&quot;,&quot;br/&quot;).Replace(&quot;br/br/&quot;,&quot;br/&quot;); 
+      Text1.Text=Text1.Text.Replace(&quot;br/ br/&quot;,&quot;br/&quot;);    
+      //MessageBox.Show(Text1.Text.ToLower().Contains(&quot;br/ br/&quot;.ToLower()).ToString());
+      //MessageBox.Show(Text1.Text);
+      Text1.Text=Text1.Text.Replace(&quot;br/&quot;,&quot;\n&quot;);
+    }
+
+    private void Page1_StartPage(object sender, EventArgs e)
+    {
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;肠镜检查知情同意书&quot;)&gt;0
+        ||Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;胃镜检查知情同意书&quot;)&gt;0)
+      {
+        Page1.TopMargin=10;
+        Page1.BottomMargin=10;
+        //Page1.LeftMargin=10;
+        //Page1.RightMargin=10;
+        Page1.PaperHeight=297;
+        Page1.PaperWidth=210;
+      }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;门诊“中心制”多学科联合诊疗记录&quot;)&gt;0)
+      {
+        
+           Text15.Text=(&quot;门诊“中心制”多学科联合诊疗记录&quot;);
+      }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;中医门诊模板&quot;)&gt;0)
+      {
+        
+        Text15.Text=(&quot;中医门诊病历&quot;);
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="病历明细" ReferenceName="报表数据.病历明细" DataType="System.Int32" Enabled="true">
+      <Column Name="病历内容" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Table1" ReferenceName="报表数据.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="ReportName" DataType="System.String"/>
+      <Column Name="TitleInfo" DataType="System.String"/>
+      <Column Name="IsMoney" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="LdInfoKey" DataType="System.String"/>
+      <Column Name="ysmc" DataType="System.String"/>
+      <Column Name="ksmc" DataType="System.String"/>
+      <Column Name="dlsj" DataType="System.String"/>
+      <Column Name="dysj" DataType="System.String"/>
+      <Column Name="ysbmp" DataType="System.Drawing.Image, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" BindableControl="Picture"/>
+      <Column Name="yssign" DataType="System.String"/>
+      <Column Name="yymc" DataType="System.String"/>
+      <Column Name="sEwm_zfb" DataType="System.String"/>
+      <Column Name="sEwm_wx" DataType="System.String"/>
+      <Column Name="Ewm_zfb" DataType="System.String"/>
+      <Column Name="Ewm_wx" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="打印设置" ReferenceName="报表数据.打印设置" DataType="System.Int32" Enabled="true">
+      <Column Name="起始行号" DataType="System.Int32"/>
+      <Column Name="就诊时间" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="PatBasicInfo" ReferenceName="报表数据.PatBasicInfo" DataType="System.Int32" Enabled="true">
+      <Column Name="Birth" DataType="System.String"/>
+      <Column Name="Blh" DataType="System.String"/>
+      <Column Name="Cardno" DataType="System.String"/>
+      <Column Name="Cardtype" DataType="System.String"/>
+      <Column Name="CardYe" DataType="System.String"/>
+      <Column Name="Cfzbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Csd_s" DataType="System.String"/>
+      <Column Name="Csd_x" DataType="System.String"/>
+      <Column Name="CzkBz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Czrq" DataType="System.String"/>
+      <Column Name="Czyh" DataType="System.String"/>
+      <Column Name="Dwdm" DataType="System.String"/>
+      <Column Name="Dwmc" DataType="System.String"/>
+      <Column Name="Dyid" DataType="System.String"/>
+      <Column Name="Dymc" DataType="System.String"/>
+      <Column Name="Fzbz" DataType="System.Int32"/>
+      <Column Name="Ghhx" DataType="System.Int32"/>
+      <Column Name="Ghksdm" DataType="System.String"/>
+      <Column Name="Ghksmc" DataType="System.String"/>
+      <Column Name="Ghlb" DataType="System.Int32"/>
+      <Column Name="Ghrq" DataType="System.String"/>
+      <Column Name="Ghxh" DataType="System.Decimal"/>
+      <Column Name="Ghysdm" DataType="System.String"/>
+      <Column Name="Ghysmc" DataType="System.String"/>
+      <Column Name="Hzxm" DataType="System.String"/>
+      <Column Name="Jlzt" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Jsbz" DataType="System.Int32"/>
+      <Column Name="Jssjh" DataType="System.String"/>
+      <Column Name="Jzbz" DataType="System.Int32"/>
+      <Column Name="Jzsj" DataType="System.String"/>
+      <Column Name="Jzysdm" DataType="System.String"/>
+      <Column Name="Jzysmc" DataType="System.String"/>
+      <Column Name="Kmdm" DataType="System.String"/>
+      <Column Name="Kmmc" DataType="System.String"/>
+      <Column Name="Ksdm" DataType="System.String"/>
+      <Column Name="Ksmc" DataType="System.String"/>
+      <Column Name="Lrrq" DataType="System.String"/>
+      <Column Name="Lsbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Lxdh" DataType="System.String"/>
+      <Column Name="Lxdz" DataType="System.String"/>
+      <Column Name="Lxr" DataType="System.String"/>
+      <Column Name="Memo" DataType="System.String"/>
+      <Column Name="Mzlgbz" DataType="System.Int32"/>
+      <Column Name="Patid" DataType="System.Decimal"/>
+      <Column Name="Py" DataType="System.String"/>
+      <Column Name="Pzh" DataType="System.String"/>
+      <Column Name="Pzlx" DataType="System.Int32"/>
+      <Column Name="Pzlxsm" DataType="System.String"/>
+      <Column Name="RisLisReportState" DataType="System.Int32"/>
+      <Column Name="Scjzsj" DataType="System.String"/>
+      <Column Name="Scjzysdm" DataType="System.String"/>
+      <Column Name="Sex" DataType="System.String"/>
+      <Column Name="Sfzh" DataType="System.String"/>
+      <Column Name="SqdBz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="SqdJe" DataType="System.String"/>
+      <Column Name="Wb" DataType="System.String"/>
+      <Column Name="Xh" DataType="System.Decimal"/>
+      <Column Name="Ybbrbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ybdm" DataType="System.String"/>
+      <Column Name="Ybsm" DataType="System.String"/>
+      <Column Name="Ylxm" DataType="System.String"/>
+      <Column Name="Ysdm" DataType="System.String"/>
+      <Column Name="Ysmc" DataType="System.String"/>
+      <Column Name="Yyxh" DataType="System.Decimal"/>
+      <Column Name="Yzbm" DataType="System.String"/>
+      <Column Name="Zddm" DataType="System.String"/>
+      <Column Name="Zdmc" DataType="System.String"/>
+      <Column Name="Zhbz" DataType="System.String"/>
+      <Column Name="Zjdm" DataType="System.String"/>
+      <Column Name="Zjmc" DataType="System.String"/>
+      <Column Name="Zjrq" DataType="System.String"/>
+      <Column Name="Zqdm" DataType="System.String"/>
+      <Column Name="Zqmc" DataType="System.String"/>
+      <Column Name="Ylxmmc" DataType="System.String"/>
+      <Column Name="Dbzddm" DataType="System.String"/>
+      <Column Name="Dbzdmc" DataType="System.String"/>
+      <Column Name="Sdbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Sdysdm" DataType="System.String"/>
+      <Column Name="Sdysxm" DataType="System.String"/>
+      <Column Name="Shbzh" DataType="System.String"/>
+      <Column Name="Jzjlc" DataType="System.String"/>
+      <Column Name="Yyzt" DataType="System.String"/>
+      <Column Name="Cfjzzz" DataType="System.Int32"/>
+      <Column Name="Jgbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Jgbqdm" DataType="System.String"/>
+      <Column Name="Jgbqmc" DataType="System.String"/>
+      <Column Name="Jgcwdm" DataType="System.String"/>
+      <Column Name="IsInCP" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="nEmrXh" DataType="System.Decimal"/>
+      <Column Name="Scjzysmc" DataType="System.String"/>
+      <Column Name="Tsbzdm" DataType="System.String"/>
+      <Column Name="Tsbzmc" DataType="System.String"/>
+      <Column Name="Sygl" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Bmjb" DataType="System.Int32"/>
+      <Column Name="Yysjd" DataType="System.String"/>
+      <Column Name="sCfzbz" DataType="System.String"/>
+      <Column Name="Pxxh" DataType="System.Int32"/>
+      <Column Name="Ybxx" DataType="System.String"/>
+      <Column Name="Jgxx" DataType="System.String"/>
+      <Column Name="Age" DataType="System.String"/>
+      <Column Name="Wjzms" DataType="System.String"/>
+      <Column Name="Ybjkid" DataType="System.String"/>
+      <Column Name="Ynsbz" DataType="System.String"/>
+      <Column Name="Zzybz" DataType="System.Int32"/>
+      <Column Name="Fzghhx" DataType="System.Decimal"/>
+      <Column Name="Ghje" DataType="System.Decimal"/>
+      <Column Name="Jzrq" DataType="System.String"/>
+      <Column Name="Qtkh" DataType="System.String"/>
+      <Column Name="Blzt" DataType="System.String"/>
+      <Column Name="Ghsjd" DataType="System.Int32"/>
+      <Column Name="Brtslb" DataType="System.String"/>
+      <Column Name="Color" DataType="System.String"/>
+      <Column Name="VIPMS" DataType="System.String"/>
+      <Column Name="Qfbz" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="Ybbfz" DataType="System.String"/>
+      <Column Name="Ybbfzmc" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Table2" ReferenceName="报表数据.Table2" DataType="System.Int32" Enabled="true">
+      <Column Name="诊断代码" DataType="System.String"/>
+      <Column Name="单个诊断名称" DataType="System.String"/>
+      <Column Name="诊断名称" DataType="System.String"/>
+      <Column Name="诊断名称_所有" DataType="System.String"/>
+      <Column Name="症型名称_所有" DataType="System.String"/>
+      <Column Name="诊断类别" DataType="System.String"/>
+      <Column Name="诊断属性" DataType="System.String"/>
+      <Column Name="属性名称" DataType="System.String"/>
+      <Column Name="备注" DataType="System.String"/>
+      <Column Name="发病日期" DataType="System.String"/>
+      <Column Name="所属病种" DataType="System.String"/>
+      <Column Name="西医诊断" DataType="System.String"/>
+      <Column Name="中医诊断" DataType="System.String"/>
+      <Column Name="症型名称" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Table3" ReferenceName="报表数据.Table3" DataType="System.Int32" Enabled="true">
+      <Column Name="医嘱内容" DataType="System.String"/>
+      <Column Name="组" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="病历文件信息" ReferenceName="报表数据.病历文件信息" DataType="System.Int32" Enabled="true">
+      <Column Name="病历文件名称" DataType="System.String"/>
+      <Column Name="病历创建时间" DataType="System.String"/>
+      <Column Name="病历打印状态" DataType="System.String"/>
+      <Column Name="病历创建医生工号" DataType="System.String"/>
+      <Column Name="病历创建医生姓名" DataType="System.String"/>
+      <Column Name="模板类型" DataType="System.String"/>
+      <Column Name="病历创建医生电子签章" DataType="System.String"/>
+      <Column Name="病历名称" DataType="System.String"/>
+      <Column Name="创建科室代码" DataType="System.String"/>
+      <Column Name="创建科室名称" DataType="System.String"/>
+      <Column Name="病历序号" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="ReportMasterInfo" ReferenceName="报表数据.ReportMasterInfo" DataType="System.Int32" Enabled="true">
+      <Column Name="医院名称" DataType="System.String"/>
+      <Column Name="系统名称" DataType="System.String"/>
+      <Column Name="科室名称" DataType="System.String"/>
+      <Column Name="病区名称" DataType="System.String"/>
+      <Column Name="职工姓名" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="210.1" PaperHeight="148.1" RawPaperSize="11" LeftMargin="5" TopMargin="5" RightMargin="5" BottomMargin="5" StartPageEvent="Page1_StartPage">
+    <PageHeaderBand Name="PageHeader1" Width="756.38" Height="66.95">
+      <TextObject Name="Text3" Left="-0.45" Top="47.05" Width="56.7" Height="12.45" Text="卡号：" HorzAlign="Right" Font="黑体, 10pt, style=Bold"/>
+      <TextObject Name="Text5" Left="111.5" Top="47.05" Width="56.7" Height="18.9" Text="姓名：" HorzAlign="Right" Font="黑体, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="167.2" Top="47.05" Width="85.05" Height="18.9" Text="[PatBasicInfo.Hzxm]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text7" Left="420.6" Top="47.05" Width="56.7" Height="18.9" Text="科室：" HorzAlign="Center" Font="黑体, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="471.5" Top="47.05" Width="113.05" Height="18.9" Text="[PatBasicInfo.Ksmc]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text9" Left="245.25" Top="47.05" Width="56.7" Height="18.9" Text="性别：" HorzAlign="Right" Font="黑体, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="292.95" Top="47.05" Width="47.25" Height="18.9" Text="[PatBasicInfo.Sex]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text11" Left="329.75" Top="47.05" Width="56.7" Height="18.9" Text="年龄：&#13;&#10;" HorzAlign="Right" Font="黑体, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Left="386.8" Top="47.05" Width="37.8" Height="18.9" Text="[PatBasicInfo.Age]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text13" Left="557.55" Top="47.05" Width="103.95" Height="18.9" Text="就诊时间：" HorzAlign="Center" Font="黑体, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="637.6" Top="47.05" Width="94.5" Height="18.9" Text="[Replace(Replace([病历文件信息.病历创建时间],&quot;-&quot;,&quot;&quot;),&quot; &quot;,&quot;&quot;)]" AutoWidth="true" Font="宋体, 10pt"/>
+      <TextObject Name="Text15" Left="222.27" Top="23.25" Width="311.85" Height="28.35" Text="门 诊 病 历" HorzAlign="Center" VertAlign="Center" Font="黑体, 12pt, style=Bold"/>
+      <TextObject Name="Text18" Left="208.09" Width="330.75" Height="28.35" Text="[ReportMasterInfo.医院名称]" HorzAlign="Center" VertAlign="Center" Font="黑体, 14pt, style=Bold"/>
+      <LineObject Name="Line2" Left="-2" Top="64.4" Width="765.45"/>
+      <TextObject Name="Text4" Left="47.25" Top="47.05" Width="66.15" Height="18.9" Text="[PatBasicInfo.Cardno]" AutoWidth="true" VertAlign="Center" Font="宋体, 10pt"/>
+      <PictureObject Name="Picture1" Left="189" Top="-9.45" Width="56.7" Height="47.25" Image="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"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="70.95" Width="756.38" Height="361.1" CanGrow="true" CanBreak="true" Guides="378" DataSource="病历明细">
+      <TextObject Name="Text1" Left="14.9" Top="2" Width="727.65" Height="347.65" CanGrow="true" AfterDataEvent="Text1_AfterData" Text="[病历明细.病历内容]" Font="宋体, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="436.05" Width="756.38" Height="24.4">
+      <TextObject Name="Text17" Left="278.96" Top="5.5" Width="198.45" Height="18.9" Text="第[Page#]页，共[TotalPages#]页" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <LineObject Name="Line3" Left="-0.1" Top="-1.45" Width="765.45"/>
+    </PageFooterBand>
+    <OverlayBand Name="Overlay1" Top="464.45" Width="756.38" Height="552.35">
+      <TextObject Name="Text2" Top="108.2" Width="519.75" Height="444.15" HorzAlign="Center" VertAlign="Center" Angle="45" Font="宋体, 28pt" TextFill.Color="Silver"/>
+    </OverlayBand>
+  </ReportPage>
+</Report>
