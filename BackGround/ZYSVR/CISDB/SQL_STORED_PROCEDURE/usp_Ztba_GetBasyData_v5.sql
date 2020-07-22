@@ -323,7 +323,7 @@ END
 ELSE        
 BEGIN        
  --病案转科表        
- create table #ba2                                 
+ create table #ba2                               
  (                         
   FSYXH varchar(20) NOT NULL,    --首页序号                      
   FPRN varchar(20) NULL,  --病案号        
@@ -384,7 +384,7 @@ BEGIN
   FDOCBH varchar(30) NULL,  --手术医生编号        
   FDOCNAME varchar(30) NULL, --手术医生        
   FMAZUIBH varchar(20) NULL, --麻醉方式编号        
-  FMAZUI varchar(30) NULL,  --麻醉方式        
+  FMAZUI varchar(100) NULL,  --麻醉方式        
   FIFFSOP bit NULL,    --是否附加手术        
   FOPDOCT1BH varchar(30) NULL, --I助编号        
   FOPDOCT1 varchar(30) NULL, --I助姓名        
@@ -526,7 +526,7 @@ ELSE
 BEGIN        
  --病案中医表        
  create table #ba8                  
- (        
+ (      
   FSYXH varchar(20) NOT NULL,    --首页序号                                 
   FPRN varchar(20) NULL,   --病案号        
   FTIMES int NULL,     --次数        
@@ -839,7 +839,7 @@ if @type=1
   ,FFBBHNEW, FFBNEW ,FRYZDBH,FRYZD
   ,FCFFMFSBH,FHBSAGBH,FHCVABBH,FHIVABBH,FREDCELL,FPLAQUE,FSEROUS,FALLBLOOD,FQTXHS,FOTHERBLOOD,FHLTJ,FHL1,FHL2,FHL3,FISOPFIRSTBH,FSZQX,FSZQXY,FSZQXN,FHZQKBH,FISSZBH,FMZXYSXZD,FRYXYSXZD,fphsxzd,FHKADDRBZ ,fryzlkmbh,fzkzlkmbh,fcyzlkmbh  ,fyydm            
  )                      
-select A.SYXH FSYXH,'0' FIFINPUT, A.BAHM FPRN,B.RYCS FTIMES,'11' FICDVERSION,A.HISSYXH FZYID,A.XSNL FAGE,A.XSNL FAGENEW,A.HZXM FNAME ,A.BRXB FSEXBH ,'' FSEX,                  
+select A.SYXH FSYXH,'0' FIFINPUT, A.BAHM FPRN,CASE WHEN B.RYCS=0 THEN 1 ELSE B.RYCS END FTIMES,'11' FICDVERSION,A.HISSYXH FZYID,A.XSNL FAGE,A.XSNL FAGENEW,A.HZXM FNAME ,A.BRXB FSEXBH ,'' FSEX,                  
   A.CSRQ FBIRTHDAY ,isnull(SSDM,'-') FBIRTHPLACE,isnull(QXDM,'-') FBIRTHPLACE_QX,isnull(A.SFZH,'-') FIDCARD ,A.GJDM FCOUNTRYBH ,'中国' FCOUNTRY,A.MZDM FNATIONALITYBH ,
   '' FNATIONALITY,'' FJOB,                  
   A.HYZK FSTATUSBH,'' FSTATUS,isnull(substring(A.GZDW,1,30),'-') FDWNAME,isnull(substring(A.GZDW,1,30),'-') FDWADDR,isnull(substring(A.DWDZ,1,30),'-') FDWADDRBZ,isnull(A.DWDH,'-') FDWTELE,isnull(A.DWYB,'-') FDWPOST,
@@ -859,6 +859,10 @@ select A.SYXH FSYXH,'0' FIFINPUT, A.BAHM FPRN,B.RYCS FTIMES,'11' FICDVERSION,A.H
   B.SSLCLJ FYCLJBH,'' FYCLJ,case isnumeric(B.BLZD) when 0 then NULL else B.BLZD end FPHZDBH,B.BLBH FPHZDNUM,B.YWGM FIFGMYWBH ,'' FIFGMYW,B.ZRHS FNURSEBH,'' FNURSE,B.LYFS FLYFSBH ,'' FLYFS,B.JSYLJG1 FYZOUTHOSTITAL,JSYLJG2 FSQOUTHOSTITAL,                  
 
 
+
+
+
+
   B.ZZYJH FISAGAINRYBH,'' FISAGAINRY,B.ZZYMD FISAGAINRYMD,Q.HMDAY1 FRYQHMDAYS,Q.HMHOUR1 FRYQHMHOURS,Q.HMMIN1 FRYQHMMINS,                  
   cast(isnull(Q.HMDAY1,0) as int)*24*60 + cast(isnull(Q.HMHOUR1,0) as int)*60 + cast(isnull(Q.HMMIN1,0) as int) FRYQHMCOUNTS,                  
   Q.HMDAY2 FRYHMDAYS,Q.HMHOUR2 FRYHMHOURS,Q.HMMIN2 FRYHMMINS,                  
@@ -868,8 +872,12 @@ select A.SYXH FSYXH,'0' FIFINPUT, A.BAHM FPRN,B.RYCS FTIMES,'11' FICDVERSION,A.H
   D.CFMFFS FCFFMFSBH,	B.HY1 FHBSAGBH,	B.HY2 FHCVABBH,	B.HY3 FHIVABBH,
   case when isnumeric(B.SXPZ1)=0 then NULL else round(B.SXPZ1,0) end  FREDCELL,case when isnumeric(B.SXPZ2)=0 then NULL else B.SXPZ2 end FPLAQUE,
   case when isnumeric(B.SXPZ3)=0 then NULL else B.SXPZ3 end FSEROUS,case when isnumeric(B.SXPZ4)=0 then NULL else B.SXPZ4 end FALLBLOOD,
-  D.ZTXHS FQTXHS,B.SXPZ5 FOTHERBLOOD,REPLACE(REPLACE(ISNULL(D.TJHL,'0'),'','0'),'-','0') FHLTJ,REPLACE(REPLACE(ISNULL(D.YJHL,'0'),'','0'),'-','0') FHL1,REPLACE(REPLACE(ISNULL(D.EJHL,'0'),'','0'),'-','0') FHL2,REPLACE(REPLACE(ISNULL(D.SJHL,'0'),'','0'),'-','0') FHL3,B.DYCZL FISOPFIRSTBH,case when B.SZDW='0' THEN B.SZQX ELSE 0 END FSZQX,case when B.SZDW='1' THEN B.SZQX ELSE 0 END FSZQXY,case when B.SZDW='2' THEN B.SZQX ELSE 0 END FSZQXN,
+  D.ZTXHS FQTXHS,B.SXPZ5 FOTHERBLOOD,REPLACE(REPLACE(ISNULL(D.TJHL,'0'),'','0'),'-','0') FHLTJ,REPLACE(REPLACE(ISNULL(D.YJHL,'0'),'','0'),'-','0') FHL1,REPLACE(REPLACE(ISNULL(D.EJHL,'0'),'','0'),'-','0') FHL2,REPLACE(REPLACE(ISNULL(D.SJHL,'0'),'','0'),'-'
+
+,'0') FHL3,B.DYCZL FISOPFIRSTBH,case when B.SZDW='0' THEN B.SZQX ELSE 0 END FSZQX,case when B.SZDW='1' THEN B.SZQX ELSE 0 END FSZQXY,case when B.SZDW='2' THEN B.SZQX ELSE 0 END FSZQXN,
   D.SFHZ FHZQKBH ,B.SZQK FISSZBH,convert(varchar(100),substring(B.MZZDMC,1,30)) FMZXYSXZD,convert(varchar(100),substring(B.RYZDMC,1,30)) FRYXYSXZD,substring(B.BLZDMC,1,30) fphsxzd , '-' FHKADDRBZ,convert(varchar(30),B.RYZLKM) fryzlkmbh,convert(varchar(30)
+
+
 ,B.ZKZLKM) fzkzlkmbh,convert(varchar(30),B.CYZLKM) fcyzlkmbh  ,
   CASE WHEN A.CYKS LIKE '02%' THEN '01'WHEN  A.CYKS LIKE '05%' THEN '02' WHEN A.CYKS LIKE '32%' THEN '03' ELSE null END  fyydm         
   from EMR_BRSYK A (nolock)        
@@ -1166,7 +1174,7 @@ update A set FJOB='其他',FJOBBH='90' from #ba1 A where FJOBBH='C14'
         
  --病人转科情况（HIS_BA2）                  
  insert into #ba2(FSYXH,FPRN,FTIMES,FZKTYKH,FZKDEPT,FZKDATE,FZKTIME)                      
- select A.SYXH FSYXH,A.BAHM,B1.RYCS,B.XKSDM,D.KSLB,substring(B.JSRQ,1,10),replace(substring(B.JSRQ,11,10),' ','')                   
+ select A.SYXH FSYXH,A.BAHM,CASE WHEN B1.RYCS=0 THEN 1 ELSE B1.RYCS END FTIMES,B.XKSDM,D.KSLB,substring(B.JSRQ,1,10),replace(substring(B.JSRQ,11,10),' ','')                   
  from  EMR_BRSYK A (nolock)        
  inner join #PAT P ON A.SYXH=P.EMRSYXH                 
  inner join EMR_BRCWXXK B (nolock) on B.SYXH=A.SYXH and B.ISDQCW=2                 
@@ -1177,7 +1185,7 @@ update A set FJOB='其他',FJOBBH='90' from #ba1 A where FJOBBH='C14'
          
  --病人诊断信息（HIS_BA3）                  
  insert into #ba3(FSYXH,FPRN, FTIMES, FZDLX, FICDVERSION, FICDM, FJBNAME, FRYBQBH, FRYBQ,FZLJGBH,FZLJG,FSXZD)                      
- select A.SYXH FSYXH,A.BAHM,B1.RYCS,case ZDXH when 0 then 1 else 2 end ,11,B.ZDDM,substring(B.BZDMMC,1,40),B.RYBQ,E.NAME, B.ZGQK,'',substring(ZDMC,1,50)                  
+ select A.SYXH FSYXH,A.BAHM,CASE WHEN B1.RYCS=0 THEN 1 ELSE B1.RYCS END FTIMES,case ZDXH when 0 then 1 else 2 end ,11,B.ZDDM,substring(B.BZDMMC,1,40),B.RYBQ,E.NAME, B.ZGQK,'',substring(ZDMC,1,50)                  
  from  EMR_BRSYK A (nolock)        
  inner join #PAT P ON A.SYXH=P.EMRSYXH                  
  inner join EMR_BASY_ZDK B (nolock) on B.QTBLJLXH=P.QTBLJLXH and B.SYXH=A.SYXH                  
@@ -1188,16 +1196,33 @@ update A set FJOB='其他',FJOBBH='90' from #ba1 A where FJOBBH='C14'
  update a set a.FZLJG=b.NAME    from #ba3  a ,EMR_SYS_ZDFLMXK b where a.FZLJGBH=b.MXDM  and b.LBDM=8          
          
  INSERT into #ba3(FSYXH,FPRN, FTIMES, FZDLX, FICDVERSION, FICDM, FJBNAME, FRYBQBH, FRYBQ,FZLJGBH,FZLJG)                  
- select A.SYXH FSYXH,A.BAHM,K.RYCS,'s',11,substring(K.SSZD,1,7),substring(K.SSZDMC,1,40),'','','2','好转'                 
+ select A.SYXH FSYXH,A.BAHM,CASE WHEN K.RYCS=0 THEN 1 ELSE K.RYCS END FTIMES,'s',11,substring(K.SSZD,1,7),substring(K.SSZDMC,1,40),'','','2','好转'                 
  from  EMR_BRSYK A (nolock)         
  INNER JOIN #PAT P ON A.SYXH=P.EMRSYXH                 
  INNER JOIN EMR_BASYK K (nolock) on A.SYXH=K.SYXH                  
  where K.SSZD<>'' AND K.SYXH=P.EMRSYXH        
  --根据医院要求导入病案的数据不能加以修饰  -mwg        
  --update A set FJBNAME=B.name from #ba3 A,THIS_MZ..YY_ZDDMK B (nolock) WHERE A.FICDM=B.id        
-   
-   
 
+
+
+ /*
+select A.SYXH FSYXH,A.BAHM FPRN,
+	case when B.SSKSSJ like '%-%' and B.SSKSSJ not like  '%+%' then B.SSKSSJ   else null  end FSSKSSJ,
+	case when B.SSJSSJ like '%-%'and B.SSJSSJ not like  '%+%' then B.SSKSSJ else null  end FSSJSSJ,
+	case when B.MZKSSJ like '%-%'and B.MZKSSJ not like  '%+%' then B.MZKSSJ else null  end  FMZKSSJ,
+	case when B.MZJSSJ like '%-%' and B.MZJSSJ not like  '%+%'then B.MZJSSJ else null  end  FMZJSSJ           
+ from  EMR_BRSYK A (nolock)        
+ inner join #PAT P ON A.SYXH=P.EMRSYXH                  
+ inner join EMR_BASY_SSK B (nolock) on B.QTBLJLXH=P.QTBLJLXH and B.SYXH=A.SYXH                  
+ left join EMR_SYS_ZDFLMXK D (nolock) on D.MXDM=B.QKDJ and D.LBDM = '27'                    
+ left join EMR_SYS_ZDFLMXK E (nolock)on E.MXDM=B.YHLB and E.LBDM = '28'                   
+ left join EMR_SYS_MZDMK F (nolock) on F.MZDM=B.MZFS                  
+ left join EMR_SYS_ZDFLMXK G (nolock) on G.MXDM=B.ZQSS and G.LBDM = '95'                   
+ left join EMR_SYS_ZDFLMXK H (nolock) on H.MXDM=B.SSJB and H.LBDM = '120'                  
+ left join EMR_SYS_KSDMK I (nolock) on I.KSDM=B.SSKS       
+ left join EMR_BASYK B1 (nolock) on B1.QTBLJLXH=P.QTBLJLXH and B1.SYXH=P.EMRSYXH   
+        */
      
 -- --病人手术信息（HIS_BA4）        
  insert into #ba4(FSYXH,FPRN, FTIMES, FNAME, FOPTIMES,FOPCODE,   
@@ -1211,7 +1236,7 @@ update A set FJOB='其他',FJOBBH='90' from #ba1 A where FJOBBH='C14'
  FSSYPFZBFFBH,FSZBDJCBH,FYWFJHZSSBH,FIFSZSXBH,FSZCXL,FSZSXPZBH,	FSSBDYSLBLZDBH,	FSQYSHBLZDBH,FIFSZYWYLBH,FQSMZSFTWXHBH,FMZYSZTZLBH,FMZYSZTZLSJBH,
  FMZYSXFFSZLBH,FIFXFFSCGBH,FIFSTEWARDBH,FJRMZFSSBH,FSTEWARDPF,FFSMZFYQSJBH,FMZFYQXGSJBH
  )                      
- select A.SYXH FSYXH,A.BAHM FPRN,B1.RYCS FTIMES,A.HZXM FNAME,B.SSXH FOPTIMES,substring(B.SSDM,1,12) FOPCODE,      
+ select A.SYXH FSYXH,A.BAHM FPRN,CASE WHEN B1.RYCS=0 THEN 1 ELSE B1.RYCS END FTIMES,A.HZXM FNAME,B.SSXH FOPTIMES,substring(B.SSDM,1,12) FOPCODE,      
  B.SSMC FOP,
  B.SSRQ FOPDATE,      
  B.QKDJ FQIEKOUBH,D.NAME FQIEKOU,B.YHLB FYUHEBH,        
@@ -1446,7 +1471,7 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  from [172.20.0.41\ZY].[THIS_ZY].[dbo].XZY_BRFYMXK as a,#PAT p where a.syxh=p.HISSYXH
  
  create  index  idx_idm_ypdm on  #BRFYMXK(idm,ypdm)                      
- -------add lr20140909 总费用;                  
+ -------add lr20140909 总费用;      
  
  update a set FSUM1=b.FSUM1 from #ba1 a,                      
  (select c.syxh,sum(c.zje) FSUM1 from #BRFYMXK c         
@@ -1488,7 +1513,7 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  (select c.syxh,sum(c.zje) FZHFWLYLF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                         
  where d.id='1'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                                               
- ---add lr20170217 一般治疗操作费;                                                                                                                    
+ ---add lr20170217 一般治疗操作费;                                                                     
  update a set FZHFWLCZF=b.FZHFWLCZF from #ba1 a,                                                                                    
  (select c.syxh,sum(c.zje) FZHFWLCZF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                         
  where d.id='2'  group by c.syxh) b                                    
@@ -1523,7 +1548,7 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  (select c.syxh,sum(c.zje) FZDLLCF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                       
  where d.id='8'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                    
- ---add lr20170217 非手术治疗项目费;                                                          
+ ---add lr20170217 非手术治疗项目费;                
  update a set FZLLFFSSF=b.FZLLFFSSF from #ba1 a,                                                                                     
  (select c.syxh,sum(c.zje) FZLLFFSSF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                     
  where d.id='9'  group by c.syxh) b                                                        
@@ -1557,9 +1582,9 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  update a set  FXYLGJF=b.FXYLGJF from #ba1 a,                                        
  (select c.syxh,sum(c.zje) FXYLGJF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on  convert(varchar,c.idm)=d.xmdm and d.fylb='0' and c.idm<>'0'                                                        
  where d.id='13-1' group by c.syxh) b                                                        
- where a.FZYID=convert(varchar(20),b.syxh)                                                           
+ where a.FZYID=convert(varchar(20),b.syxh)                          
  ---add lr20170217 血费;                                           
- update a set FXYLXF=b.FXYLXF from #ba1 a,                                                                                       
+update a set FXYLXF=b.FXYLXF from #ba1 a,                                                                                       
  (select c.syxh,sum(c.zje) FXYLXF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                      
  where d.id='16'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                         
@@ -1593,7 +1618,7 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  (select c.syxh,sum(c.zje) FHCLZLF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                 
  where d.id='22'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                          
- ---add lr20170217 手术用一次性医用材料费;                                           
+ ---add lr20170217 手术用一次性医用材料费;     
  update a set FHCLSSF=b.FHCLSSF from #ba1 a,                     
  (select c.syxh,sum(c.zje) FHCLSSF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                   
  where d.id='23' group by c.syxh) b                                                        
@@ -1629,7 +1654,7 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  where d.id='22'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                
  ---add lr20170217 中医针灸费;                                                          
- update a set FZYLZLF03=b.FZYLZLF03 from #ba1 a,                                                                                     
+update a set FZYLZLF03=b.FZYLZLF03 from #ba1 a,                                                                                     
  (select c.syxh,sum(c.zje) FZYLZLF03 from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                       
  where d.id='23'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                         
@@ -1663,7 +1688,7 @@ update A set FMAZUIBH='35',FMAZUI='局部浸润麻醉' from #ba4 A where FMAZUIBH='030
  (select c.syxh,sum(c.zje) FZYLQTF02 from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                           
  where d.id='29'  group by c.syxh) b                                                
  where a.FZYID=convert(varchar(20),b.syxh)                                                      
- ---add lr20170217 中医制剂费;                                                          
+ ---add lr20170217 中医制剂费;                    
  update a set FZCLJGZJF=b.FZCLJGZJF from #ba1 a,                                                                          
  (select c.syxh,sum(c.zje) FZCLJGZJF from #BRFYMXK c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on  convert(varchar,c.idm)=d.xmdm and d.fylb='1' and c.idm<>'0'                                                    
  where d.id='33'  group by c.syxh) b                                                        
@@ -1767,9 +1792,9 @@ BEGIN
  update a set FZHFWLCZF=b.FZHFWLCZF from #ba101 a,                                                                                    
  (select c.syxh,sum(c.zje) FZHFWLCZF from #BRFYMXK1 c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                         
  where d.id='2'  group by c.syxh) b         
- where a.FZYID=convert(varchar(20),b.syxh)                                                               
+ where a.FZYID=convert(varchar(20),b.syxh)                                                 
  ---add lr20170217 护理费;                                                          
- update a set FZHFWLHLF=b.FZHFWLHLF from #ba101 a,                                              
+ update a set FZHFWLHLF=b.FZHFWLHLF from #ba101 a,                                            
  (select c.syxh,sum(c.zje) FZHFWLHLF from #BRFYMXK1 c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                         
  where d.id='3'  group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                                                            
@@ -1873,7 +1898,7 @@ BEGIN
  (select c.syxh,sum(c.zje) FHCLSSF from #BRFYMXK1 c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                   
  where d.id='23' group by c.syxh) b                                                        
  where a.FZYID=convert(varchar(20),b.syxh)                                                       
- ---add lr20170217 中医辨证论治费;                                                          
+ ---add lr20170217 中医辨证论治费;                          
  update a set  FZHFWLYLF01=b.FZHFWLYLF01 from #ba101 a,                                                                                      
  (select c.syxh,sum(c.zje) FZHFWLYLF01 from #BRFYMXK1 c left join [172.20.0.41\ZY].[THIS_ZY].[dbo].BA_FYLBDYK d on c.ypdm=d.xmdm and d.fylb='0'                                                     
  where d.id='02'  group by c.syxh) b                                                        
@@ -1999,4 +2024,6 @@ select * from #ba101 -- where FPRN='20190012530'
 END          
 SET nocount off         
         
+
+
 
