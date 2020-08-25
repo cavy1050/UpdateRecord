@@ -1,9 +1,5 @@
-if exists(select 1 from sysobjects where name='usp_cqyb_gettransinfo')
-  drop proc usp_cqyb_gettransinfo
-GO
-SET ANSI_NULLS ON 
-SET ANSI_WARNINGS ON
-go 
+Text
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE proc usp_cqyb_gettransinfo
 (
   @code		varchar(15),	--交易代码
@@ -156,7 +152,8 @@ begin
 												--2 医疗类别
 					a.sbkh,						--3	社保卡号
 					a.ksdm,						--4 科室编码
-					case when isnull(ltrim(b.sfzh),'')='' THEN @m_mrsfzh ELSE b.sfzh END sfzh,						--5 医生编码
+					--case when isnull(ltrim(b.sfzh),'')='' THEN @m_mrsfzh ELSE b.sfzh END sfzh,--5 医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh,
 					(case when isnull(@ryrq_old,'')='' then a.ryrq else dbo.fun_convertrq_cqyb(2,@ryrq_old) end),						--6 入院日期
 					a.ryzd,						--7 入院诊断
 					@czym as jbr,				--8 经办人
@@ -216,10 +213,11 @@ select "T", a.jzlsh,						--1 门诊号/住院号
 					case when ISNULL(a.zgyllb,'')='' then a.jmyllb else a.zgyllb end zgyllb,						--2 医疗类别
 					a.sbkh,						--3	社保卡号
 					a.ksdm,						--4 科室编码
-					isnull((select top 1 (case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) 
-					from ZY_BRSYK c(nolock), YY_ZGBMK b(NOLOCK) 
-					where (case when isnull(ysdm,'')<>'' then c.ysdm else c.mzzdys end)=b.id 
-					and a.syxh=c.syxh),@m_mrsfzh),	--5 医生编码
+					--isnull((select top 1 (case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) 
+					--from ZY_BRSYK c(nolock), YY_ZGBMK b(NOLOCK) 
+					--where (case when isnull(ysdm,'')<>'' then c.ysdm else c.mzzdys end)=b.id 
+					--and a.syxh=c.syxh),@m_mrsfzh),	--5 医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh,
 					'2019-11-29'ryrq,						--6 入院日期
 					a.ryzd,						--7 入院诊断
 					@czym as jbr,				--8 经办人
@@ -240,10 +238,11 @@ else
 					case when ISNULL(a.zgyllb,'')='' then a.jmyllb else a.zgyllb end zgyllb,						--2 医疗类别
 					a.sbkh,						--3	社保卡号
 					a.ksdm,						--4 科室编码
-					isnull((select top 1 (case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) 
-					from ZY_BRSYK c(nolock), YY_ZGBMK b(NOLOCK) 
-					where (case when isnull(ysdm,'')<>'' then c.ysdm else c.mzzdys end)=b.id 
-					and a.syxh=c.syxh),@m_mrsfzh),	--5 医生编码
+					--isnull((select top 1 (case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) 
+					--from ZY_BRSYK c(nolock), YY_ZGBMK b(NOLOCK) 
+					--where (case when isnull(ysdm,'')<>'' then c.ysdm else c.mzzdys end)=b.id 
+					--and a.syxh=c.syxh),@m_mrsfzh),	--5 医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh,
 					a.ryrq,						--6 入院日期
 					a.ryzd,						--7 入院诊断
 					@czym as jbr,				--8 经办人
@@ -311,7 +310,8 @@ BEGIN
 						case when zgyllb = '' then (case when jmyllb = '13' then '13' when jmyllb = '15' then '13' else '11' end) else zgyllb end,
 													--3 医疗类别
 						ksdm,						--4 科室编码
-						case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end,						--5 医生编码
+						--case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end,--5 医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh,
 						(case when isnull(@ryrq_old,'')='' then ryrq else dbo.fun_convertrq_cqyb(2,@ryrq_old) end),	--6 入院日期
 						ryzd,						--7 入院诊断
 						CASE WHEN (@xtbz = 0) AND (isnull(@ryrq_old,'') <> '') THEN dbo.fun_convertrq_cqyb(2,@ryrq_old) 
@@ -337,7 +337,8 @@ BEGIN
 						case when zgyllb = '' then (case when jmyllb = '13' then '13' when jmyllb = '15' then '13' else '11' end) else zgyllb end,
 													--3 医疗类别
 						ksdm,						--4 科室编码
-						case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end,						--5 医生编码
+						--case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end,--5 医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh,
 						(case when isnull(@ryrq_old,'')='' then ryrq else dbo.fun_convertrq_cqyb(2,@ryrq_old) end),	--6 入院日期
 						ryzd,						--7 入院诊断
 						CASE WHEN (@xtbz IN (0,1) ) AND (isnull(@ryrq_old,'') <> '') THEN dbo.fun_convertrq_cqyb(2,@ryrq_old) 
@@ -489,7 +490,8 @@ case when isnull(replace(b.bfzinfo,' ',''),'') = ''  then @tmp_bfzinfo else b.bf
 							@gxbz as gxbz,		--2 更新标志
 							b.zgyllb,			--3 医疗类别
 							a.ksdm,				--4 科室编码
-							case when isnull(ltrim(c.sfzh),'')='' then @m_mrsfzh else c.sfzh end,	--5 医生编码isnull(c.sfzh,'50000020170901TY05')
+							--case when isnull(ltrim(c.sfzh),'')='' then @m_mrsfzh else c.sfzh end,	--5 医生编码isnull(c.sfzh,'50000020170901TY05')--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh,
 							b.ryrq,				--6 入院日期
 							b.ryzd,				--7 入院诊断
 							b.cyrq,				--8 出院日期
@@ -522,7 +524,8 @@ case when isnull(replace(b.bfzinfo,' ',''),'') = ''  then @tmp_bfzinfo else b.bf
 							@gxbz as gxbz,		--2 更新标志
 							b.zgyllb,			--3 医疗类别
 							a.ksdm,				--4 科室编码
-							case when isnull(ltrim(c.sfzh),'')='' then @m_mrsfzh else c.sfzh end,				--5 医生编码
+							--case when isnull(ltrim(c.sfzh),'')='' then @m_mrsfzh else c.sfzh end,--5 医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh,
 							b.ryrq,				--6 入院日期
 							b.ryzd,				--7 入院诊断
 							b.cyrq,				--8 出院日期
@@ -1062,11 +1065,12 @@ begin
 	end
 end
 else if @code = '06'	--预结算
-begin
+BEGIN
 	if @xtbz = 0
 	begin
 		--费用总额
-		select @fyze = a.zje - a.yhje from SF_BRJSK a(nolock) where sjh = @jsxh
+		select @fyze = a.zje - a.yhje,@patid=patid from SF_BRJSK a(nolock) where sjh = @jsxh
+         
 		--明细条数
 		select @mxts = count(1) from GH_GHMXK(nolock) where ghxh in (select xh from GH_GHZDK(nolock) where jssjh = @jsxh) and xmdj>0
 		
@@ -1089,7 +1093,8 @@ begin
 					gsjbbm,						--9 工伤认定疾病编码
 					cfjslx,						--10 尘肺结算类型
 					b.ksdm,                     --11 出院科室编码  
-					case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh
 		from YY_CQYB_MZJSJLK a(nolock) inner join YY_CQYB_MZJZJLK b(nolock) on a.jssjh = b.jssjh AND a.jzlsh = b.jzlsh
 									   left join YY_ZGBMK c(nolock) on b.ysdm = c.id  --挂号可能不挂医生
 		where a.jssjh = @jsxh and a.jlzt = 0
@@ -1097,7 +1102,9 @@ begin
 	else if @xtbz = 1
 	begin
 		--费用总额   
-		select @fyze = zje - yhje from SF_BRJSK(nolock) where sjh = @jsxh
+		select @fyze = zje - yhje,@patid=patid from SF_BRJSK(nolock) where sjh = @jsxh
+
+		--IF @patid=1328772 SELECT @fyze=214.20	
 		--明细条数
 		select @mxts = count(1) from SF_CFMXK(nolock) where cfxh in (select xh from SF_MZCFK(nolock) where jssjh = @jsxh)  
 		and (zje<>0 or round((ylsj-yhdj)/ykxs,4)*ypsl*cfts<>0)
@@ -1113,7 +1120,8 @@ begin
 					gsjbbm,						--9 工伤认定疾病编码
 					cfjslx,						--10 尘肺结算类型
 					b.ksdm,                     --11 出院科室编码  
-					case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh
 		from YY_CQYB_MZJSJLK a(nolock) inner join YY_CQYB_MZJZJLK b(nolock) on a.jssjh = b.jssjh and a.jzlsh = b.jzlsh
 									   left join YY_ZGBMK c(nolock) on b.ysdm = c.id
 		where a.jssjh = @jsxh and a.jlzt = 0
@@ -1228,7 +1236,8 @@ begin
 					gsjbbm,						--9 工伤认定疾病编码
 					cfjslx,						--10 尘肺结算类型
 					b.ksdm,                     --11 出院科室编码  
-					case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh
 		from YY_CQYB_ZYJSJLK a(nolock) inner join YY_CQYB_ZYJZJLK b(nolock) on a.syxh = b.syxh and a.jzlsh = b.jzlsh
 									   left join YY_ZGBMK c(nolock) on b.ysdm = c.id
 		where a.syxh = @syxh and a.jsxh = @jsxh and a.jlzt in (0,1,3)
@@ -1290,7 +1299,8 @@ begin
 					'' as gsjbbm,				--9 工伤认定疾病编码
 					'' as cfjslx,				--10 尘肺结算类型
 					a.ksdm,                     --11 出院科室编码  
-					case when isnull(ltrim(b.sfzh),'')='' THEN @m_mrsfzh ELSE b.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(b.sfzh),'')='' THEN @m_mrsfzh ELSE b.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh
 		from YY_CQYB_ZYJZJLK a(nolock) left join YY_ZGBMK b(nolock) on a.ysdm = b.id
 		where a.syxh = @syxh and a.jlzt = '1'
 	end       
@@ -1326,7 +1336,8 @@ begin
 					gsjbbm,						--12 工伤认定疾病编码
 					cfjslx,						--13 尘肺结算类型
 					b.ksdm,                     --14 出院科室编码  
-					case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh
 		from YY_CQYB_MZJSJLK a(nolock) inner join YY_CQYB_MZJZJLK b(NOLOCK) on a.jssjh = b.jssjh and a.jzlsh = b.jzlsh
 									   left join YY_ZGBMK c(nolock) on b.ysdm = c.id
 		where a.jssjh = @jsxh and a.jlzt in (0,1)
@@ -1334,7 +1345,9 @@ begin
 	else if @xtbz = 1
 	begin
 		--费用总额   
-		select @fyze = zje - yhje from SF_BRJSK(nolock) where sjh = @jsxh
+		select @fyze = zje - yhje,@patid=patid from SF_BRJSK(nolock) where sjh = @jsxh
+
+		--IF @patid=1328772 SELECT @fyze=214.20	
 		--明细条数
 		select @mxts = count(1) from SF_CFMXK(nolock) where cfxh in (select xh from SF_MZCFK(nolock) where jssjh = @jsxh) 
 		and (zje<>0 or round((ylsj-yhdj)/ykxs,4)*ypsl*cfts<>0)
@@ -1353,7 +1366,8 @@ begin
 					gsjbbm,						--12 工伤认定疾病编码
 					cfjslx,						--13 尘肺结算类型
 					b.ksdm,                     --14 出院科室编码  
-					case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END sfzh
 		from YY_CQYB_MZJSJLK a(nolock) inner join YY_CQYB_MZJZJLK b(nolock) on a.jssjh = b.jssjh and a.jzlsh = b.jzlsh
 									   left join YY_ZGBMK c(nolock) on b.ysdm = c.id
 		where a.jssjh = @jsxh and a.jlzt in (0,1)
@@ -1560,7 +1574,8 @@ begin
 					a.gsjbbm,						--12 工伤认定疾病编码
 					a.cfjslx,						--13 尘肺结算类型
 					d.ksdm,                     --14 出院科室编码  
-					case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码
+					--case when isnull(ltrim(c.sfzh),'')='' THEN @m_mrsfzh ELSE c.sfzh END sfzh --15 出院医生编码--update by winning-dingsong-chongqing on 20200820
+					case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END sfzh
 		from YY_CQYB_ZYJSJLK a(nolock) inner join YY_CQYB_ZYJZJLK b(nolock) on a.syxh = b.syxh and a.jzlsh = b.jzlsh
 									   inner join YY_ZGBMK c(nolock) on b.ysdm = c.id 
 									   INNER join ZY_BRJSK d(nolock) on a.syxh=d.syxh and a.jsxh=d.xh 
@@ -1851,9 +1866,7 @@ begin
 end;
 
 return
-GO
 
-SET ANSI_NULLS OFF 
-SET ANSI_WARNINGS OFF
 
-GO
+
+
