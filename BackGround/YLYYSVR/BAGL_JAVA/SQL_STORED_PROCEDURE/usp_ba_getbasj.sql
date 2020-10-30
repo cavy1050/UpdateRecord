@@ -1,8 +1,7 @@
-
 /*
-生成HQMS数据存储
+生成HQMS数据存储，20200806绩效2.0版本
 */
-ALTER PROCEDURE usp_ba_getbasj
+ALTER PROCEDURE [dbo].[usp_ba_getbasj]
   @ksrq varchar(16),
   @jsrq varchar(16)
   --@zjerrcode tinyint out,    --错误消息
@@ -10,13 +9,11 @@ ALTER PROCEDURE usp_ba_getbasj
 AS
 
 
-
-
   declare @rq1 varchar(10), @rq2 varchar(10)
   set @rq1=convert(date,LEFT
 (@ksrq,8),112)
   set @rq2=convert(date,LEFT(@jsrq,8),112)
-	--exec usp_ba_getbasj '20190101','20190601'
+	--exec [usp_ba_getbasj] '20200101','20200131'
 	--@author xie_peng
 
 	--1:获取机构代码及机构名称
@@ -24,8 +21,7 @@ AS
   select @dwdm = fvalue from tparam where fcode = 'hospitalCode'
   select @dwmc = fvalue from tparam where fcode = 'hospitalName'
 	select @icdver = fvalue from tparam where fcode = 'hqmsIcd10ZdVersion'
-	select @opver = fvalue from tparam where fcode = 'hqmsIcd9
-OpVersion'
+	select @opver = fvalue from tparam where fcode = 'hqmsIcd9OpVersion'
 
 	--2:新建临时表数据
 	select * into #Tupdata_hqms from Tupdata_hqms where 1=2
@@ -40,7 +36,7 @@ OpVersion'
 	alter column P66 int
 
 	--3:抓取数据
-	insert into #Tupdata_hqms(P900,P6891,P686,P800,P1,P2,P3,P4,P5,P6,P7,P8,P9,P101,P102,P103,P11,
+	insert into #Tupdata_hqms(fzyid,P900,P6891,P686,P800,P1,P2,P3,P4,P5,P6,P7,P8,P9,P101,P102,P103,P11,
 	P12,P13,P801,P802,P803,P14,P15,P16,P17,P171,P18,P19,P20,P804,P21,P22,
 	P23,P231,P24,P25,P26,P261,P27,P28,P281,P29,P30,P301,P31,P321,P322,
 	P805,P323,P324,P325,P806,P326,P327,P328,P807,P329,P3291,P3292,P808,
@@ -68,11 +64,11 @@ OpVersion'
 	P656,P66,P681,P682,P683,P684,P685,P67,P731,P732,P733,P734,P72,P830,
 	P831,P741,P742,P743,P782,P751,P752,P754,P755,P756,P757,P758,P759,
 	P760,P761,P762,P763,P764,P765,P767,P768,P769,P770,P771,P772,P773,
-	P774,P775,P776,P777,P778,P779,P780,P781,P901,P902,p903,P904,P905,P906,P907,P908
+	P774,P775,P776,P777,P778,P779,P780,P781,P901,P902,p903,P904,P905,P906,P907,P908, F01,F02C,F03N,F04,F10,F11,F12, F17, F18, F19, F20,F21,F22,F23,F24,F25,F26, A20N ,B38,B22C,B23C,B24C,B25C,B26C
 	
 	
 	)  --ADD BY QGY P11 插入民族代码 P902籍贯代码
-	select @dwdm P900,@dwmc 
+	select FZYID,@dwdm P900,@dwmc 
 P6891,'' P686,fascard1 P800,ffbbhnew P1,#tpatientvisit.ftimes P2,#tpatientvisit.fprn P3,fname P4,fsexbh P5,
 	convert(varchar(10),fbirthday,120) P6,datediff(year,fbirthday,frydate) P7,
 	fstatusbh P8,fjobbh P9,fbirthplacep P101,fbirthplacec P102,fbirthplaced P103,FNATIONALITYBH P11, 
@@ -141,108 +137,139 @@ P6891,'' P686,fascard1 P800,ffbbhnew P1,#tpatientvisit.ftimes P2,#tpatientvisit.
 	case when isnull(FRHBH,'')='' then 4 else FRHBH end   P906,
 	FRYQHMDAYS P907,FRYHMDAYS P908
 	 --add by qgy P902籍贯代码 p903是否过敏 P904死亡尸检，P905 ABO血型，P906 RH血型
+	 ,fryinfobh F01,FRYZDbh F02C,FRYZD F03N,SUBSTRING(CONVERT(VARCHAR(10),fzyzdqzdate,120),1,10) F04,
+	 case when fhbsagbh='3' then '0'  else fhbsagbh end F10
+   ,case when fhcvabbh='3' then '0' else fhcvabbh end F11
+   ,case when fhivabbh='3' then '0' else fhivabbh end F12,fhltj F17,FHL1 F18,FHL2 F19,FHL3 F20,
+   case when Fsxfybh='3' then '0' else FSXFYBH END F21, substring(convert(varchar(5),fredcell),1,2) F22 ,
+ substring(convert(varchar(5),fplaque),1,2) F23 ,substring(convert(varchar(5),fserous),1,2) F24 ,
+ substring(convert(varchar(20),fallblood),1,2) F25 , substring(convert(varchar(5),fqtxhs),1,2) F26 ,'1' A20N ,'0' B38 ,REPLACE(FKZRBH,'T',''),REPLACE(FZRDOCTBH,'T',''),REPLACE(FZZDOCTBH,'T',''),REPLACE(FZYDOCTBH,'T',''),REPLACE(FNURSEBH,'T','')
 
-	from #tpatientvisit  --left  join BASYFJ b on #tpatientvisit.fprn=b.FPRN 
-	
-	--
+	from #tpatientvisit  
+--护理天数	
+select * into #basyfb from [172.20.0.41\ZY].CISDB.dbo.EMR_BASYK_FB a (nolock),#tpatientvisit b (nolock)  where  a.SYXH=b.FZYID
 
 
-	--fzdlx = '1'
-	update a set a.P321 = b.ficdm,a.P322 = b.fjbname,a.P805 = b.frybqbh,a.P323 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+update a set a.F17 = b.TJHL,
+          a.F18= b.YJHL ,
+		  a.F19= b.EJHL ,
+		  a.F20= b.SJHL
+from #Tupdata_hqms a,#basyfb b where a.fzyid=b.SYXH 
+
+
+---输血反应--HY1 HBSAG,HY2 'HCV-AB',HY3 'HIV-AB',SXFY 输血反应,SXPZ1 红细胞,SXPZ2 血小板,SXPZ3 血浆,SXPZ4 全血,SXPZ5 自体血回输
+
+--全血200 ml为1U，悬浮红细胞200 ml为1U，血浆100 ml为1U，机采血小板1个机采治疗量(血小板含量≥2.5×1011/袋)为10 U，
+--洗涤红细胞［包括Rh(-)冰冻红细胞和临床有特殊要求的洗涤红细胞］以200ml全血中所制备的为1U。
+--红细胞使用率计算公式为：红细胞使用率(%)=红细胞(U)÷［红细胞(U)+全血(U)］×100%；成分输血率(%)=［总计(U)－全血(U)］÷总计(U)×100%。
+
+select SYXH,HY1 ,HY2 ,HY3 ,SXFY ,SXPZ1 ,SXPZ2 ,SXPZ3 ,SXPZ4 ,SXPZ5  into #emrbasyfb from [172.20.0.41\ZY].CISDB.dbo.EMR_BASYK a (nolock),#tpatientvisit b (nolock)  where  a.SYXH=b.FZYID
+
+update a set F10=HY1,F11=HY2,F12=HY3,a.F21 =SXFY,a.F22=b.SXPZ1,a.F23=convert(numeric(3,1),b.SXPZ2/200),a.F24=convert(numeric(3,1),b.SXPZ3/200),a.F25=convert(numeric(3,1),b.SXPZ4/200), a.F26=convert(numeric(3,1),b.SXPZ5/200) 
+from #Tupdata_hqms a,#emrbasyfb b where a.fzyid=b.SYXH AND ISNUMERIC(SXPZ2)=1
+
+
+UPDATE #Tupdata_hqms SET F21=0 WHERE F21=3
+----
+	--入院时情况 入院诊断编码，入院诊断名称 入院后确诊日期
+
+	UPDATE #Tupdata_hqms SET F01='-' where isnull(F01,'')=''
+	UPDATE a set a.F02C=b.FUPICDM,a.F03N=b.FUPJBNAME FROM  #Tupdata_hqms a,tupicd10set b where a.F02C=b.FICDM 
+
+	--fzdlx = '1'  出院病情当为5是转换为9国家编码
+	update a set a.P321 = b.ficdm,a.P322 = b.fjbname,a.P805 = b.frybqbh,a.F05 = case when b.fzljgbh=5 then '9' else b.fzljgbh end   from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '1' and b.fpx = 1 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '1'
-	update a set a.P324 = b.ficdm,a.P325 = b.fjbname,a.P806 = b.frybqbh,a.P326 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P324 = b.ficdm,a.P325 = b.fjbname,a.P806 = b.frybqbh,a.F06x01 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 1 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '2'
-	update a set a.P327 = b.ficdm,a.P328 = b.fjbname,a.P807 = b.frybqbh,a.P329 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P327 = b.ficdm,a.P328 = b.fjbname,a.P807 = b.frybqbh,a.F06x02 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 2 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx ='3'
-	update a set a.P3291 = b.ficdm,a.P3292 = b.fjbname,a.P808 = b.frybqbh,a.P3293 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3291 = b.ficdm,a.P3292 = b.fjbname,a.P808 = b.frybqbh,a.F06x03 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 3 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '4'
-	update a set a.P3294 =b.ficdm,a.P3295 = b.fjbname,a.P809 = b.frybqbh,a.P3296 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3294 =b.ficdm,a.P3295 = b.fjbname,a.P809 = b.frybqbh,a.F06x04 =case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 4 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '5'
-	update a set a.P3297 = b.ficdm,a.P3298 = b.fjbname,a.P810 = b.frybqbh,a.P3299 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3297 = b.ficdm,a.P3298 = b.fjbname,a.P810 = b.frybqbh,a.F06x05 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 5 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '6'
-	update a set a.P3281 = b.ficdm,a.P3282 = b.fjbname,a.P811 = b.frybqbh,a.P3283 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3281 = b.ficdm,a.P3282 = b.fjbname,a.P811 = b.frybqbh,a.F06x06 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 6 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '7'
-	update a set a.P3284 = b.ficdm,a.P3285 = b.fjbname,a.P812 = b.frybqbh,a.P3286 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3284 = b.ficdm,a.P3285 = b.fjbname,a.P812 = b.frybqbh,a.F06x07 =case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 7 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '8'
-	update a set a.P3287 = b.ficdm,a.P3288 = b.fjbname,a.P813 = b.frybqbh,a.P3289 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3287 = b.ficdm,a.P3288 = b.fjbname,a.P813 = b.frybqbh,a.F06x08 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 8 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '9'
-	update a set a.P3271 = b.ficdm,a.P3272 = b.fjbname,a.P814 = b.frybqbh,a.P3273 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3271 = b.ficdm,a.P3272 = b.fjbname,a.P814 = b.frybqbh,a.F06x09 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 9 AND a.P3 = b.fprn and a.P2 = b.ftimes
 	--fzdlx = '2' and fpx = '10'
-	update a set a.P3274 = b.ficdm,a.P3275 = b.fjbname,a.P815 = b.frybqbh,a.P3276 = b.fzljgbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.P3274 = b.ficdm,a.P3275 = b.fjbname,a.P815 = b.frybqbh,a.F06x10 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 10 and a.P3 = b.fprn and a.P2 = b.ftimes
 	----add by qgy诊断 
 		--fzdlx = '2' and fpx = '11'
 
-   update a set a.C06x11C = b.ficdm,a.C07x11N = b.fjbname,a.C08x11C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
-	where b.fzdlx = '2' and b.fpx = 11 and a.P3 = b.fprn and a.P2 = b.ftimes
-	UPDATE a set a.C06x11C = b.fupicdm,a.C07x11N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0'
-	and b.ficdm = a.C06x11C 
+   update a set a.C06x11C = b.ficdm,a.C07x11N = b.fjbname,a.C08x11C = b.frybqbh ,a.F06x11 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 	where b.fzdlx = '2' and b.fpx = 11 and a.P3 = b.fprn and a.P2 = b.ftimes
+   UPDATE a set a.C06x11C = b.fupicdm,a.C07x11N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0'and b.ficdm = a.C06x11C 
 	
-	update a set a.C06x12C = b.ficdm,a.C07x12N = b.fjbname,a.C08x12C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.C06x12C = b.ficdm,a.C07x12N = b.fjbname,a.C08x12C = b.frybqbh ,a.F06x12 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 12 and a.P3 = b.fprn and a.P2 = b.ftimes
 		update a set a.C06x12C = b.fupicdm,a.C07x12N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0'
 	and b.ficdm = a.C06x12C 
 	
 
-	update a set a.C06x13C = b.ficdm,a.C07x13N
- = b.fjbname,a.C08x13C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+   update a set a.C06x13C = b.ficdm,a.C07x13N
+ = b.fjbname,a.C08x13C = b.frybqbh ,a.F06x13 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 13 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x13C = b.fupicdm,a.C07x13N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x13C 
 
-	update a set a.C06x14C = b.ficdm,a.C07x14N = b.fjbname,a.C08x14C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.C06x14C = b.ficdm,a.C07x14N = b.fjbname,a.C08x14C = b.frybqbh,a.F06x14 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 14 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x14C = b.fupicdm,a.C07x14N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x14C 
 --其他诊断15
-	update a set a.C06x15C = b.ficdm,a.C07x15N = b.fjbname,a.C08x15C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.C06x15C = b.ficdm,a.C07x15N = b.fjbname,a.C08x15C = b.frybqbh,a.F06x15 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx
  = 15 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x15C = b.fupicdm,a.C07x15N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x15C 
 --其他诊断16
-   update a set a.C06x16C = b.ficdm,a.C07x16N = b.fjbname,a.C08x16C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+   update a set a.C06x16C = b.ficdm,a.C07x16N = b.fjbname,a.C08x16C = b.frybqbh ,a.F06x16 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 16 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x16C = b.fupicdm,a.C07x16N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x16C  
    
-    update a set a.C06x17C = b.ficdm,a.C07x17N = b.fjbname,a.C08x17C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+ update a set a.C06x17C = b.ficdm,a.C07x17N = b.fjbname,a.C08x17C = b.frybqbh,a.F06x17 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 17 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x17C = b.fupicdm,a.C07x17N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x17C              
   --其他诊断18
-   update a set a.C06x18C = b.ficdm,a.C07x18N = b.fjbname,a.C08x18C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+   update a set a.C06x18C = b.ficdm,a.C07x18N = b.fjbname,a.C08x18C = b.frybqbh ,a.F06x18 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 18 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x18C = b.fupicdm,a.C07x18N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x18C              
     --             
-	update a set a.C06x19C = b.ficdm,a.C07x19N = b.fjbname,a.C08x19C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a.C06x19C = b.ficdm,a.C07x19N = b.fjbname,a.C08x19C = b.frybqbh ,a.F06x19 = case when b.fzljgbh=5 then '9' else b.fzljgbh end from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 19 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a.C06x19C = b.fupicdm,a.C07x19N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a.C06x19C
 	 
-	update a set a. C06x20C   = b.ficdm,a.C07x20N = b.fjbname,a.C08x20C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+	update a set a. C06x20C   = b.ficdm,a.C07x20N = b.fjbname,a.C08x20C = b.frybqbh,a.F06x20 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 20 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a. C06x20C   = b.fupicdm,a.C07x20N = b.fupjbname from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a. C06x20C     
 	                 
-    update a set a. C06x21C   = b.ficdm,a.C07x21N = b.fjbname,a.C08x21C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+    update a set a. C06x21C   = b.ficdm,a.C07x21N = b.fjbname,a.C08x21C = b.frybqbh,a.F06x21 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 21 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a. C06x21C   = b.fupicdm,a.C07x21N = b.fupjbname 
 from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
 	and b.ficdm = a. C06x21C              
                         
-    update a set a. C06x22C   = b.ficdm,a.C07x22N = b.fjbname,a.C08x22C = b.frybqbh from #Tupdata_hqms a,tdiagnose b 
+    update a set a. C06x22C   = b.ficdm,a.C07x22N = b.fjbname,a.C08x22C = b.frybqbh,a.F06x12 = case when b.fzljgbh=5 then '9' else b.fzljgbh end  from #Tupdata_hqms a,tdiagnose b 
 	where b.fzdlx = '2' and b.fpx = 22 and a.P3 = b.fprn and a.P2 = b.ftimes
 	update a set a. C06x22C   = b.fupicdm,a.C07x22N = b.fupjbname 
 from #Tupdata_hqms a,tupicd10set b where b.fflag = '0' 
@@ -259,7 +286,7 @@ from #Tupdata_hqms a,tupicd10set b where b.fflag = '0'
 	update a set a.P490 = b.fopcode,a.P491 = convert(varchar(20),b.fopdate,120),a.P820 = b.fssjbbh,a.P492 = b.fop,a.P495 = b.fdocname,a.P496 = b.fopdoct1,
 	a.P497 = b.fopdoct2,a.P498 =  b.FMAZUIBH --case when isnull(b.fmazuibh,'')='' then b.FMAZUI elseb.FMAZUIBH end  --麻醉编号为空麻醉名称为横线时
 	,a.P499 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)--b.fqiekoubh
-	,a.P4910 = b.fmzdoct
+	,a.P4910 = b.fmzdoct, F13 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F15=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 1 and a.P3 = b.fprn and a.P2 = b.ftimes
 	
 	--operate foptimes = '2'
@@ -267,59 +294,60 @@ from #Tupdata_hqms a,tupicd10set b where b.fflag = '0'
 	a.P4918 = b.fopdoct2,a.P4919 = b.fmazuibh,a.P4920 =(case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
 	
 
-	,a.P4921 = b.fmzdoct
+	,a.P4921 = b.fmzdoct, F14x01 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x01=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 2 and a.P3 = b.fprn and a.P2 = b.ftimes
 
 	--operate foptimes = '3'
 	update a set a.P4922 = b.fopcode,a.P4923 = convert(varchar(20),b.fopdate,120),a.P822 = b.fssjbbh,a.P4924 = b.fop,a.P4527 = b.fdocname,a.P4528 = b.fopdoct1,
 	a.P4529 = b.fopdoct2,a.P4530 = b.fmazuibh,a.P4531 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-	,a.P4532 = b.fmzdoct
+	,a.P4532 = b.fmzdoct, F14x02 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x02=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 3 and a.P3 = b.fprn and a.P2 = b.ftimes
 
 	--operate foptimes = '4'
 	update a set a.P4533 = b.fopcode,a.P4534 = convert(varchar(20),b.fopdate,120),a.P823 = b.fssjbbh,a.P4535 = b.fop,a.P4538 = b.fdocname,a.P4539 = b.fopdoct1,
 	a.P4540 = b.fopdoct2,a.P4541 = b.fmazuibh,a.P4542 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
 	
-	,a.P4543 = b.fmzdoct
+	,a.P4543 = b.fmzdoct, F14x03 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x03=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 4 and a.P3 = b.fprn and a.P2 = b.ftimes
 
 	--operate foptimes = '5'
 	update a set a.P4544 = b.fopcode,a.P4545 = convert(varchar(20),b.fopdate,120),a.P824 = b.fssjbbh,a.P4546 = b.fop,a.P4549 = b.fdocname,a.P4550 = b.fopdoct1,
 	a.P4551 = b.fopdoct2,a.P4552 = b.fmazuibh,a.P4553 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-	,a.P4554 = b.fmzdoct
+	,a.P4554 = b.fmzdoct, F14x04 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x04=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 5 and a.P3 = b.fprn and a.P2 = b.ftimes
 
 	--opearte foptimes = '6'
 	update a set a.P45002 = b.fopcode,a.P45003 = convert(varchar(10),b.fopdate,120),a.P825 = b.fssjbbh,a.p45004 = b.fop,a.p45007 = b.fdocname,a.p45008 = b.fopdoct1,
 	a.p45009 = b.fopdoct2,a.p45010 = b.fmazuibh,a.p45012 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select
  id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-	,a.p45013 = b.fmzdoct
+	,a.p45013 = b.fmzdoct, F14x05 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x05=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 6 and a.P3 = b.fprn and a.P2 = b.ftimes
 
 	--opearte foptimes = '7'
 	update a set a.p45014 = b.fopcode,a.p45015 = convert(varchar(20),b.fopdate,120),a.P826 = b.fssjbbh,a.p45016 = b.fop,a.p45019 = b.fdocname,a.p45020 = b.fopdoct1,
 	a.p45021 = b.fopdoct2,a.p45022 = b.fmazuibh,a.p45024 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb
 =b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-	,a.p45025 = b.fmzdoct
+	,a.p45025 = b.fmzdoct, F14x06 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x06=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 7 and a.P3 = b.fprn and a.P2 = b.ftimes
 	
 	--opearte foptimes = '8'
 	update a set a.p45026 = b.fopcode,a.p45027 = convert(varchar(20),b.fopdate,120),a.P827 = b.fssjbbh,a.p45028 = b.fop,a.p45031 = b.fdocname,a.p45032 = b.fopdoct1,
 	a.p45033 = b.fopdoct2,a.p45034 = b.fmazuibh,a.p45036 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
 	
-	,a.p45037 = b.fmzdoct
+	,a.p45037 = b.fmzdoct, F14x07 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x07=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 8 and a.P3 = b.fprn and a.P2 = b.ftimes
 
 	--opearte foptimes = '9'
 	update a set a.p45038 = b.fopcode,a.p45039 = convert(varchar(20),b.fopdate,120),a.P828 = b.fssjbbh,a.p45040 = b.fop,a.p45043 = b.fdocname,a.p45044 = b.fopdoct1,
 	a.p45045 = b.fopdoct2,a.p45046 = b.fmazuibh,a.p45048 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-	,a.p45049 = b.fmzdoct
+	,a.p45049 = b.fmzdoct, F14x08 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x08=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx = 9 and a.P3 = b.fprn AND a.P2 = b.ftimes
 	
 	--opearte foptimes = '10'
 	update a set a.p45050 = b.fopcode,a.p45051 = convert(varchar(20),b.fopdate,120),a.P829 = b.fssjbbh,a.p45052 = b.fop,a.p45055 = b.fdocname,a.p45056 = b.fopdoct1,
-	a.p45057 = b.fopdoct2,a.p45058 = b.fmazuibh,a.
-p45060 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end),a.p45061 = b.fmzdoct
+	a.p45057 = b.fopdoct2,a.p45058 = b.fmazuibh,a.p45060 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end),a.p45061 = b.fmzdoct
+
+	, F14x09 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x09=b.fasabh
 	from #Tupdata_hqms a,toperation b where b.fpx
  = 10 and a.P3 = b.fprn and a.P2 = b.ftimes
 	--其他手术10到17
@@ -327,16 +355,15 @@ p45060 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.y
 	a.C41x10 = b.fopdoct2,a.C42x10C =
  
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x10C = b.fmazuibh,a.C44x10 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 11 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x10C = b.fmazuibh,a.C44x10 = b.fmzdoct, F14x10 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x10=b.fasabh
+ from #Tupdata_hqms a,toperation b where b.fpx = 11 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x10C = b.fupopcode,a.C36x10N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0'
 	and b.fopcode = a.C35x10C 
 
 	--麻醉方式
-	update a set a.C43x10C = b
-.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x10C = b.fbh 
+	update a set a.C43x10C = b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x10C = b.fbh 
 	--手术级别
     update a set a.C38x10 = b.fdsfbh  from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC029' and a.C38x10 = b.fbh and isnull(b.fdsfbh,'')<>''
 
@@ -346,16 +373,15 @@ p45060 = (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.y
 	update a set a.C35x11C = b.fopcode,a.C36x11N=b.FOP,a.C37x11 = convert(varchar(20),b.fopdate,120),a.C38x11 = b.fssjbbh,a.C39x11 = b.fdocname,a.C40x11 = b.fopdoct1,
 	a.C41x11 = b.fopdoct2,a.C42x11C = 
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x11C = b.fmazuibh,a.C44x11 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 12 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x11C = b.fmazuibh,a.C44x11 = b.fmzdoct , F14x11 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x11=b.fasabh
+from #Tupdata_hqms a,toperation b where b.fpx = 12 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x11C = b.fupopcode,a.C36x11N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0'
 	and b.fopcode = a.C35x11C 
 
 	--麻醉方式1
-	update a set a.C43x11C = 
-b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x11C = b.fbh 
+	update a set a.C43x11C = b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x11C = b.fbh 
 	--手术级别1
     update a set a.C38x11 = b.fdsfbh  from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC029' and a.C38x11 = b.fbh and isnull(b.fdsfbh,'')<>''
 	
@@ -363,16 +389,15 @@ b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C4
 	update a set a.C35x12C = b.fopcode,a.C36x12N=b.FOP,a.C37x12 = convert(varchar(20),b.fopdate,120),a.C38x12 = b.fssjbbh,a.C39x12 = b.fdocname,a.C40x12 = b.fopdoct1,
 	a.C41x12 = b.fopdoct2,a.C42x11C = 
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x12C = b.fmazuibh,a.C44x12 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 13 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x12C = b.fmazuibh,a.C44x12 = b.fmzdoct , F14x12 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x12=b.fasabh
+ from #Tupdata_hqms a,toperation b where b.fpx = 13 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x12C = b.fupopcode,a.C36x12N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0'
 	and b.fopcode = a.C35x12C 
 
 	--麻醉方式1
-	update a set a.C43x12C = 
-b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x12C = b.fbh 
+	update a set a.C43x12C = b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x12C = b.fbh 
 	--手术级别1
     update a set a.C38x12 = b.fdsfbh  from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC029' and a.C38x12 = b.fbh and isnull(b.fdsfbh,'')<>''
 
@@ -380,19 +405,17 @@ b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C4
 	update a set a.C35x13C = b.fopcode,a.C36x13N=b.FOP,a.C37x13 = convert(varchar(20),b.fopdate,120),a.C38x13 = b.fssjbbh,a.C39x13 = b.fdocname,a.C40x13 = b.fopdoct1,
 	a.C41x13 = b.fopdoct2,a.C42x13C = 
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x13C = b.fmazuibh,a.C44x13 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 14 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x13C = b.fmazuibh,a.C44x13 = b.fmzdoct, F14x13 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x13=b.fasabh
+ from #Tupdata_hqms a,toperation b where b.fpx = 14 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x13C = b.fupopcode,a.C36x13N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0' 
 	and b.fopcode = a.C35x13C 
 
 	--麻醉方式1
-	update a set a.C43x13C =
- b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x13C = b.fbh 
+	update a set a.C43x13C =b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C43x13C = b.fbh 
 	--手术级别1
-    update a set a.C38x13 = b.fdsfbh  from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC029' and a.C38x13 = b.fbh and isnull(b.fdsfbh,'')<>''
-
+    update a set a.C38x13 = b.fdsfbh  from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC029' and a.C38x13 = b.fbh and isnull(b.fdsfbh,'')<>''
 
 
 
@@ -400,8 +423,8 @@ b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C4
 	update a set a.C35x14C = b.fopcode,a.C36x14N=b.FOP,a.C37x14 = convert(varchar(20),b.fopdate,120),a.C38x14 = b.fssjbbh,a.C39x14 = b.fdocname,a.C40x14 = b.fopdoct1,
 	a.C41x14 = b.fopdoct2,a.C42x14C = 
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x14C = b.fmazuibh,a.C44x14 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 15 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x14C = b.fmazuibh,a.C44x14 = b.fmzdoct, F14x14 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x14=b.fasabh
+ from #Tupdata_hqms a,toperation b where b.fpx = 15 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x14C = b.fupopcode,a.C36x14N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0'
@@ -417,8 +440,9 @@ b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C4
 	update a set a.C35x15C = b.fopcode,a.C36x15N=b.FOP,a.C37x15 = convert(varchar(20),b.fopdate,120),a.C38x15 = b.fssjbbh,a.C39x15 = b.fdocname,a.C40x15 = b.fopdoct1,
 	a.C41x15 = b.fopdoct2,a.C42x15C = 
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x15C = b.fmazuibh,a.C44x15 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 16 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x15C = b.fmazuibh,a.C44x15 = b.fmzdoct, F14x15 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x15=b.fasabh
+
+ from #Tupdata_hqms a,toperation b where b.fpx = 16 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x15C = b.fupopcode,a.C36x15N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0' 
@@ -435,8 +459,8 @@ b.fdsfbh from #Tupdata_hqms a,thisdictdsf b where b.fzdbh = 'HQMSRC013' and a.C4
 	update a set a.C35x16C = b.fopcode,a.C36x16N=b.FOP,a.C37x16 = convert(varchar(20),b.fopdate,120),a.C38x16 = b.fssjbbh,a.C39x16 = b.fdocname,a.C40x16 = b.fopdoct1,
 	a.C41x16 = b.fopdoct2,a.C42x16C = 
 (case when (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)>0 then (select id from YY_QKYHDJ c where c.qkdj=b.fqiekoubh and c.yhlb=b.fyuhebh)else 0 end)
-,a.C43x16C = b.fmazuibh,a.C44x16 = b.fmzdoct from #Tupdata_hqms a,toperation
- b where b.fpx = 17 and a.P3 = b.fprn and a.P2 = b.ftimes
+,a.C43x16C = b.fmazuibh,a.C44x16 = b.fmzdoct, F14x16 = case  when b.fssjssj>= b.fsskssj then convert(numeric(10,2),DATEDIFF(MINUTE,b.fsskssj,b.fssjssj)/60.*1.00) else null end ,F16x16=b.fasabh
+ from #Tupdata_hqms a,toperation b where b.fpx = 17 and a.P3 = b.fprn and a.P2 = b.ftimes
 
   --更新手术代码名称
    update a set a.C35x16C = b.fupopcode,a.C36x16N = b.fupopname  from #Tupdata_hqms a,tupicd9set b where b.fflag = '0'
@@ -1000,10 +1024,30 @@ update  #Tupdata_hqms set P742='-' where P741  IN(2,3) and ISNULL(P742,'')=''
 	--当出生日期跟入院日期相隔365天时改为364天
 update #Tupdata_hqms set P7=0,P66=DATEDIFF(DD,convert(datetime,p6)+1,convert(datetime,p22)) where DATEDIFF(DD,convert(datetime,p6)+1,convert(datetime,p22))<365 and DATEDIFF(DD,convert(datetime,p6),convert(datetime,p22))=365
 
-	
+	--职业证书  --未处理
+ select id,yszyzbm into #tempzydm from [172.20.0.41\ZY].THIS_ZY.dbo.YY_ZGBMK where isnull(yszyzbm,'')<>''
+
+ update a  set a.B22C=b.yszyzbm from #Tupdata_hqms a,#tempzydm b where a.B22C =b.id
+ update a  set a.B23C=b.yszyzbm from #Tupdata_hqms a,#tempzydm b where a.B23C =b.id
+  update a  set a.B24C=b.yszyzbm from #Tupdata_hqms a,#tempzydm b where a.B24C =b.id
+ update a  set a.B25C=b.yszyzbm from #Tupdata_hqms a,#tempzydm b where a.B25C =b.id
+  update a  set a.B26C=b.yszyzbm from #Tupdata_hqms a,#tempzydm b where a.B26C =b.id
+
+
+
+/*B22C --科主任编码
+B23C--主任医生编码
+B24C--主治医师编码
+B25C--住院医师编码
+B26C --责任护士编码
+*/
+	---
+
+
+
 	    select 
 		P900 'A01',P6891 'A02',P3 'A48',P2 'A49',P22 'B12',P25 'B15',P800 'A47',P1 'A46C',P4 'A11',P5 'A12C',P6 'A13',P7 'A14',
-		P12 'A15C',P8 'A21C',P9 'A38C',P11 'A19C',P13 'A20',P901 'A22',P902 'A23C',
+		P12 'A15C',P8 'A21C',P9 'A38C',P11 'A19C',A20N,P13 'A20',P901 'A22',P902 'A23C',
 		replace(replace(P17,char(10),''),char(13),'') 'A24',
 		
 		P171 'A25C',
@@ -1014,39 +1058,46 @@ update #Tupdata_hqms set P7=0,P66=DATEDIFF(DD,convert(datetime,p6)+1,convert(dat
 		P803 'A28C',
 		replace(replace(isnull(P14,'-'),char(10),''),char(13),'') 'A29',
 		
-		isnull(P15,'') 'A30',isnull(P16,'') 'A31C',P18 'A32',P19 'A33C',replace(replace(P20,char(10),''),char(13),'') 'A34',P21 'A35',P804 'B11C',P23 'B13C',P231 'B14',
-		P24 'B21C',P26 'B16C',P261 'B17',P27 'B20',P28 'C01C',P281 'C02N',
+		isnull(P15,'') 'A30',isnull(P16,'') 'A31C',P18 'A32',P19 'A33C',replace(replace(P20,char(10),''),char(13),'') 'A34',P21 'A35',B38,P804 'B11C',P23 'B13C',P231 'B14',
+		isnull(P24,'-') 'B21C',P26 'B16C',P261 'B17',P27 'B20',P28 'C01C',P281 'C02N',
+		--入院诊断
+		F01,F02C,F03N,F04,
 		--主要诊断
-		P321 'C03C',P322 'C04N',P805 'C05C',
+		P321 'C03C',P322 'C04N',P805 'C05C',F05,
 		--其他诊断
-		P324 'C06x01C',P325 'C07x01N',P806 'C08x01C',P327 'C06x02C',P328 'C07x02N',P807 'C08x02C',P3291 'C06x03C',P3292 'C07x03N',P808 'C08x03C',
-		P3294 'C06x04C',P3295 'C07x04N',P809 'C08x04C',P3297 'C06x05C',P3298 'C07x05N',P810 'C08x05C',P3281 'C06x06C',P3282 'C07x06N',
-		P811 'C08x06C',P3284 'C06x07C',P3285 'C07x07N',P812 'C08x07C',P3287 'C06x08C',P3288 'C07x08N',P813 'C08x08C',P3271 'C06x09C',
-		P3272 'C07x09N',P814 'C08x09C',P3274 'C06x10C',P3275 'C07x10N',P815 'C08x10C',
-		 C06x11C,C07x11N ,  C08x11C,C06x12C ,C07x12N , C08x12C,C06x13C,  C07x13N,C08x13C ,C06x14C, C07x14N, C08x14C , C06x15C ,C07x15N,C08x15C ,C06x16C,C07x16N  ,C08x16C,C06x17C , C07x17N , C08x17C 
-        ,C06x18C ,C07x18N ,C08x18C ,C06x19C , C07x19N ,C08x19C ,C06x20C ,C07x20N ,C08x20C ,C06x21C , C07x21N, C08x21C ,C06x22C ,C07x22N ,C08x22C ,C06x23C ,C07x23N ,C08x23C ,C06x24C ,C07x24N ,C08x24C 
-       ,C06x25C ,C07x25N ,C08x25C ,C06x26C , C07x26N ,C08x26C ,C06x27C ,C07x27N ,C08x27C ,C06x28C , C07x28N , C08x28C , C06x29C, C07x29N ,C08x29C,C06x30C ,C07x30N ,C08x30C ,C06x31C ,C07x31N , C08x31C 
-      , C06x32C ,C07x32N ,C08x32C , C06x33C , C07x33N, C08x33C , C06x34C , C07x34N ,C08x34C , C06x35C , C07x35N , C08x35C , C06x36C ,C07x36N, C08x36C ,C06x37C ,C07x37N , C08x37C , C06x38C ,C07x38N ,C08x38C 
-       , C06x39C , C07x39N , C08x39C , C06x40C , C07x40N , C08x40C, 
+		P324 'C06x01C',P325 'C07x01N',P806 'C08x01C',F06x01,P327 'C06x02C',P328 'C07x02N',P807 'C08x02C',F06x02,P3291 'C06x03C',P3292 'C07x03N',P808 'C08x03C',F06x03,
+		P3294 'C06x04C',P3295 'C07x04N',P809 'C08x04C',F06x04,P3297 'C06x05C',P3298 'C07x05N',P810 'C08x05C',F06x05,P3281 'C06x06C',P3282 'C07x06N',
+		P811 'C08x06C',F06x06,P3284 'C06x07C',P3285 'C07x07N',P812 'C08x07C',F06x07,P3287 'C06x08C',P3288 'C07x08N',P813 'C08x08C',F06x08,P3271 'C06x09C',
+		P3272 'C07x09N',P814 'C08x09C',F06x09,P3274 'C06x10C',P3275 'C07x10N',P815 'C08x10C',F06x10,
+		 C06x11C,C07x11N ,  C08x11C,F06x11,C06x12C ,C07x12N , C08x12C,F06x12,C06x13C,  C07x13N,C08x13C ,F06x13,C06x14C, C07x14N, C08x14C ,F06x14, C06x15C ,C07x15N,C08x15C ,F06x15,C06x16C,C07x16N  ,C08x16C,F06x16,C06x17C , C07x17N , C08x17C 
+        ,F06x17,C06x18C ,C07x18N ,C08x18C ,F06x18,C06x19C , C07x19N ,C08x19C ,F06x19,C06x20C ,C07x20N ,C08x20C ,F06x20,C06x21C , C07x21N, C08x21C ,F06x21,C06x22C ,C07x22N ,C08x22C ,F06x22,C06x23C ,C07x23N ,C08x23C ,F06x23,C06x24C ,C07x24N ,C08x24C 
+       ,F06x24,C06x25C ,C07x25N ,C08x25C ,F06x25,C06x26C , C07x26N ,C08x26C ,F06x26,C06x27C ,C07x27N ,C08x27C ,F06x27,C06x28C , C07x28N , C08x28C ,F06x28, C06x29C, C07x29N ,C08x29C,F06x29,C06x30C ,C07x30N ,C08x30C ,F06x30,C06x31C ,C07x31N , C08x31C 
+      , F06x31,C06x32C ,C07x32N ,C08x32C , F06x32,C06x33C , C07x33N, C08x33C , F06x33,C06x34C , C07x34N ,C08x34C ,F06x34, C06x35C , C07x35N , C08x35C ,F06x35, C06x36C ,C07x36N, C08x36C ,F06x36,C06x37C ,C07x37N , C08x37C , F06x37,C06x38C ,C07x38N ,C08x38C
+
+ 
+       ,F06x38, C06x39C , C07x39N , C08x39C ,F06x39, C06x40C , C07x40N , C08x40C, F06x40,
 		--end其他诊断
-		P351 'C09C',P352 'C10N',P816 'C11',P361 'C12C',
-		P362 'C13N',P903 'C24C',P372 'C25',P431 'B22',P432 'B23',P433 'B24',P434 'B25',P819 'B26',P435 'B27',P437 'B28',P438 'B29',
+		--病理诊断
+		P351 'C09C',P352 'C10N',P816 'C11',F07x01C,F08x01N,F09x01,F07x02C,F08x02N,F09x02
+		
+		,P361 'C12C',P362 'C13N',P903 'C24C',P372 'C25',F10,F11,F12,
+		B22C,P431 'B22',B23C,P432 'B23',B24C,P433 'B24',B25C,P434 'B25',B26C,P819 'B26',P435 'B27',P437 'B28',P438 'B29',
 		P44 'B30C',P45 'B31',P46 'B32',P47 'B33',P904 C34C,P905 C26C,P906 C27C,
 		--主要手术
-		P490 'C14x01C',P492 'C15x01N',P491 'C16x01',P820 'C17x01',P495 'C18x01',P496 'C19x01',P497 'C20x01',P499 'C21x01C',P498 'C22x01C',P4910 'C23x01',
+		P490 'C14x01C',P492 'C15x01N',P491 'C16x01',P820 'C17x01',F13,P495 'C18x01',P496 'C19x01',P497 'C20x01',P499 'C21x01C',P498 'C22x01C',F15,P4910 'C23x01',
 
 		--其他手术
-		P4911 'C35x01C',P4913 'C36x01N',P4912 'C37x01',P821 'C38x01',P4916 'C39x01',P4917 'C40x01',P4918 'C41x01',P4920 'C42x01C',P4919 'C43x01C',P4921 'C44x01',
-		P4922 'C35x02C',P4924 'C36x02N',P4923 'C37x02',P822 'C38x02',P4527 'C39x02',P4528 'C40x02',P4529 'C41x02',P4531 'C42x02C',P4530 'C43x02C',P4532 'C44x02',
-		P4533 'C35x03C',P4535 'C36x03N',P4534 'C37x03',P823 'C38x03',P4538 'C39x03',P4539 'C40x03',P4540 'C41x03',P4542 'C42x03C',P4541 'C43x03C',P4543 'C44x03',
-		P4544 'C35x04C',P4546 'C36x04N',P4545 'C37x04',P824 'C38x04',P4549 'C39x04',P4550 'C40x04',P4551 'C41x04',P4553 'C42x04C',P4552 'C43x04C',P4554 'C44x04',
-		P45002 'C35x05C',P45004 'C36x05N',P45003 'C37x05',P825 'C38x05',P45007 'C39x05',P45008 'C40x05',P45009 'C41x05',P45012 'C42x05C',P45010 'C43x05C',P45013 'C44x05',
-		P45014 'C35x06C',P45016 'C36x06N',P45015 'C37x06',P826 'C38x06',P45019 'C39x06',P45020 'C40x06',P45021 'C41x06',P45024 'C42x06C',P45022 'C43x06C',P45025 'C44x06',
-		P45026 'C35x07C',P45028 'C36x07N',P45027 'C37x07',P827 'C38x07',P45031 'C39x07',P45032 'C40x07',P45033 'C41x07',P45036 'C42x07C',P45034 'C43x07C',P45037 'C44x07',
-		P45038 'C35x08C',P45040 'C36x08N',P45039 'C37x08',P828 'C38x08',P45043 'C39x08',P45044 'C40x08',P45045 'C41x08',P45048 'C42x08C',P45046 'C43x08C',P45049 'C44x08',
-		P45050 'C35x09C',P45052 'C36x09N',P45051 'C37x09',P829 'C38x09',P45055 'C39x09',P45056 'C40x09',P45057 'C41x09',P45060 'C42x09C',P45058 'C43x09C',P45061 'C44x09',
+		P4911 'C35x01C',P4913 'C36x01N',P4912 'C37x01',P821 'C38x01', F14x01,P4916 'C39x01',P4917 'C40x01',P4918 'C41x01',P4920 'C42x01C',P4919 'C43x01C', F16x01 ,P4921 'C44x01',
+		P4922 'C35x02C',P4924 'C36x02N',P4923 'C37x02',P822 'C38x02',F14x02,P4527 'C39x02',P4528 'C40x02',P4529 'C41x02',P4531 'C42x02C',P4530 'C43x02C',F16x02,P4532 'C44x02',
+		P4533 'C35x03C',P4535 'C36x03N',P4534 'C37x03',P823 'C38x03',F14x03,P4538 'C39x03',P4539 'C40x03',P4540 'C41x03',P4542 'C42x03C',P4541 'C43x03C',F16x03,P4543 'C44x03',
+		P4544 'C35x04C',P4546 'C36x04N',P4545 'C37x04',P824 'C38x04',F14x04,P4549 'C39x04',P4550 'C40x04',P4551 'C41x04',P4553 'C42x04C',P4552 'C43x04C',F16x04,P4554 'C44x04',
+		P45002 'C35x05C',P45004 'C36x05N',P45003 'C37x05',P825 'C38x05',F14x05,P45007 'C39x05',P45008 'C40x05',P45009 'C41x05',P45012 'C42x05C',P45010 'C43x05C',F16x05,P45013 'C44x05',
+		P45014 'C35x06C',P45016 'C36x06N',P45015 'C37x06',P826 'C38x06',F14x06,P45019 'C39x06',P45020 'C40x06',P45021 'C41x06',P45024 'C42x06C',P45022 'C43x06C',F16x06,P45025 'C44x06',
+		P45026 'C35x07C',P45028 'C36x07N',P45027 'C37x07',P827 'C38x07',F14x07,P45031 'C39x07',P45032 'C40x07',P45033 'C41x07',P45036 'C42x07C',P45034 'C43x07C',F16x07,P45037 'C44x07',
+		P45038 'C35x08C',P45040 'C36x08N',P45039 'C37x08',P828 'C38x08',F14x08,P45043 'C39x08',P45044 'C40x08',P45045 'C41x08',P45048 'C42x08C',P45046 'C43x08C',F16x08,P45049 'C44x08',
+		P45050 'C35x09C',P45052 'C36x09N',P45051 'C37x09',P829 'C38x09',F14x09,P45055 'C39x09',P45056 'C40x09',P45057 'C41x09',P45060 'C42x09C',P45058 'C43x09C',F16x09,P45061 'C44x09',
 
-		C35x10C,C36x10N,C37x10,C38x10,C39x10,C40x10,C41x10,C42x10C,C43x10C,C44x10,C35x11C,C36x11N,
+	/*	C35x10C,C36x10N,C37x10,C38x10,C39x10,C40x10,C41x10,C42x10C,C43x10C,C44x10,C35x11C,C36x11N,
 C37x11,C38x11,C39x11,C40x11,C41x11,C42x11C,C43x11C,C44x11,
 C35x12C,C36x12N,C37x12,C38x12,C39x12,C40x12,C41x12,C42x12C,C43x12C,C44x12,C35x13C,C36x13N,C37x13,C38x13,C39x13,C40x13,C41x13,C42x13C,C43x13C,C44x13,C35x14C,C36x14N,C37x14,C38x14,C39x14,
 C40x14,C41x14,C42x14C,C43x14C,C44x14,C35x15C,C36x15N,C37x15,C38x15,C39x15,C40x15,C41x15,C42x15C,C43x15C,C44x15,C35x16C,C36x16N,C37x16,C38x16,C39x16,C40x16,C41x16,C42x16C,C43x16C,C44x16,
@@ -1058,21 +1109,75 @@ C35x29C,C36x29N,C37x29,C38x29,C39x29,C40x29,C41x29,C42x29C,C43x29C,C44x29,C35x30
 C35x32C,C36x32N,C37x32,C38x32,C39x32,C40x32,C41x32,C42x32C,C43x32C,C44x32,C35x33C,C36x33N,C37x33,C38x33,C39x33,C40x33,C41x33,C42x33C,C43x33C,C44x33,C35x34C,C36x34N,C37x34,C38x34,C39x34,C40x34,C41x34,C42x34C,C43x34C,C44x34,
 C35x35C,C36x35N,C37x35,C38x35,C39x35,C40x35,C41x35,C42x35C,C43x35C,C44x35,C35x36C,C36x36N,C37x36,C38x36,C39x36,C40x36,C41x36,C42x36C,C43x36C,C44x36,C35x37C,C36x37N,C37x37,C38x37,C39x37,C40x37,C41x37,C42x37C,C43x37C,C44x37,
 C35x38C,C36x38N,C37x38,C38x38,C39x38,C40x38,C41x38,C42x38C,C43x38C,C44x38,C35x39C,C36x39N,C37x39,C38x39,C39x39,C40x39,C41x39,C42x39C,C43x39C,C44x39,C35x40C,C36x40N,C37x40,C38x40,C39x40,C40x40,C41x40,C42x40C,C43x40C,C44x40,
+*/
+
+C35x10C,C36x10N,C37x10,C38x10,F14x10,C39x10,C40x10,C41x10,C42x10C,C43x10C,F16x10,C44x10,C35x11C,C36x11N,C37x11,C38x11,F14x11,C39x11,C40x11,C41x11,C42x11C,
+C43x11C,F16x11,C44x11,C35x12C,C36x12N,C37x12,C38x12,F14x12,C39x12,C40x12,C41x12,C42x12C,C43x12C,F16x12,C44x12,C35x13C,
+C36x13N,C37x13,C38x13,F14x13,C39x13,C40x13,C41x13,C42x13C,C43x13C,F16x13,C44x13,C35x14C,C36x14N,C37x14,C38x14,F14x14,
+C39x14,C40x14,C41x14,C42x14C,C43x14C,F16x14,C44x14,C35x15C,C36x15N,C37x15,C38x15,F14x15,C39x15,C40x15,C41x15,C42x15C,
+C43x15C,F16x15,C44x15,C35x16C,C36x16N,C37x16,C38x16,F14x16,C39x16,C40x16,C41x16,C42x16C,C43x16C,F16x16,C44x16,C35x17C,
+C36x17N,C37x17,C38x17,F14x17,C39x17,C40x17,C41x17,C42x17C,C43x17C,F16x17,C44x17,C35x18C,C36x18N,C37x18,C38x18,F14x18,
+C39x18,C40x18,C41x18,C42x18C,C43x18C,F16x18,C44x18,C35x19C,C36x19N,C37x19,C38x19,F14x19,C39x19,C40x19,C41x19,C42x19C,
+C43x19C,F16x19,C44x19,C35x20C,C36x20N,C37x20,C38x20,F14x20,C39x20,C40x20,C41x20,C42x20C,C43x20C,F16x20,C44x20,C35x21C,
+C36x21N,C37x21,C38x21,F14x21,C39x21,C40x21,C41x21,C42x21C,C43x21C,F16x21,C44x21,C35x22C,C36x22N,C37x22,C38x22,F14x22,
+C39x22,C40x22,C41x22,C42x22C,C43x22C,F16x22,C44x22,C35x23C,C36x23N,C37x23,C38x23,F14x23,C39x23,C40x23,C41x23,C42x23C,
+C43x23C,F16x23,C44x23,C35x24C,C36x24N,C37x24,C38x24,F14x24,C39x24,C40x24,C41x24,C42x24C,C43x24C,F16x24,C44x24,C35x25C,
+C36x25N,C37x25,C38x25,F14x25,C39x25,C40x25,C41x25,C42x25C,C43x25C,F16x25,C44x25,C35x26C,C36x26N,C37x26,C38x26,F14x26,
+C39x26,C40x26,C41x26,C42x26C,C43x26C,F16x26,C44x26,C35x27C,C36x27N,C37x27,C38x27,F14x27,C39x27,C40x27,C41x27,C42x27C,
+C43x27C,F16x27,C44x27,C35x28C,C36x28N,C37x28,C38x28,F14x28,C39x28,C40x28,C41x28,C42x28C,C43x28C,F16x28,C44x28,C35x29C,
+C36x29N,C37x29,C38x29,F14x29,C39x29,C40x29,C41x29,C42x29C,C43x29C,F16x29,C44x29,C35x30C,C36x30N,C37x30,C38x30,F14x30,
+C39x30,C40x30,C41x30,C42x30C,C43x30C,F16x30,C44x30,C35x31C,C36x31N,C37x31,C38x31,F14x31,C39x31,C40x31,C41x31,C42x31C,
+C43x31C,F16x31,C44x31,C35x32C,C36x32N,C37x32,C38x32,F14x32,C39x32,C40x32,C41x32,C42x32C,C43x32C,F16x32,C44x32,C35x33C,
+C36x33N,C37x33,C38x33,F14x33,C39x33,C40x33,C41x33,C42x33C,C43x33C,F16x33,C44x33,C35x34C,C36x34N,C37x34,C38x34,F14x34,
+C39x34,C40x34,C41x34,C42x34C,C43x34C,F16x34,C44x34,C35x35C,C36x35N,C37x35,C38x35,F14x35,C39x35,C40x35,C41x35,C42x35C,
+C43x35C,F16x35,C44x35,C35x36C,C36x36N,C37x36,C38x36,F14x36,C39x36,C40x36,C41x36,C42x36C,C43x36C,F16x36,C44x36,C35x37C,
+C36x37N,C37x37,C38x37,F14x37,C39x37,C40x37,C41x37,C42x37C,C43x37C,F16x37,C44x37,C35x38C,C36x38N,C37x38,C38x38,F14x38,
+C39x38,C40x38,C41x38,C42x38C,C43x38C,F16x38,C44x38,C35x39C,C36x39N,C37x39,C38x39,F14x39,C39x39,C40x39,C41x39,C42x39C,
+C43x39C,F16x39,C44x39,C35x40C,C36x40N,C37x40,C38x40,F14x40,C39x40,C40x40,C41x40,C42x40C,C43x40C,F16x40,C44x40,
+F17,F18,F19,F20,F21,F22,F23,F24,F25,F26,
 
 	--end 其他手术
 		
 		P66 'A16',
-		P681 'A18x01',P682 'A18x02',P683 'A18x03',P684 'A18x04',P685 'A18x05',P67 'A17',isnull(P907,0) 'C28',isnull(P731,0) 'C29',ISNULL(P732,0) 'C30',ISNULL(P908,0) 'C31',ISNULL(P733,0) 'C32',
-		ISNULL(P734,0) 'C33',
+		P681 'A18x01',P682 'A18x02',P683 'A18x03',P684 'A18x04',P685 'A18x05',P67 'A17',isnull(P907,0) 'C28',isnull(P731,0) 'C29',ISNULL(P732,0) 'C30',ISNULL(P908,0) 'C31',ISNULL(P733,0) 'C32',ISNULL(P734,0) 'C33',
+		---有创呼吸机使用时间
+		
+       C47,C48x01C,C49x01,C50x01,C48x02C,C49x02,C50x02,C48x03C,C49x03,C50x03,C48x04C,C49x04,C50x04,C48x05C,C49x05,C50x05,
+
+		--退出时间5
+
+
 		P830 'B36C',P831 'B37',P741 'B34C',P742 'B35',P782 'D01',P751 'D09',P752 'D11',P754 'D12',P755 'D13',P756 'D14',P757 'D15',
 		P758 'D16',P759 'D17',P760 'D18',P761 'D19',P762 'D19x01',P763 'D20',P764 'D20x01',P765 'D20x02',P767 'D21',P768 'D22',
 		P769 'D23',P770 'D23x01',P771 'D24',P772 'D25',P773'D26',P774 'D27',P775 'D28',P776 'D29',P777 'D30',P778 'D31',P779 'D32',
 		P780 'D33',P781 'D34'
 
 		INTO #syjbk_bak
-		from  #Tupdata_hqms order by p3
-		--delete syjbk_bak
-		--insert into syjbk_bak select * from #syjbk_bak
+		from  #Tupdata_hqms 
+		
+		order by p3
+		
+		--B21C为空的改为横线
+		update #syjbk_bak set B21C='-' WHERE ISNULL(B21C,'')=''
+
+		--F17,F18,F19,F20 小于0的数据该为空
+		
+
+
+		--update #syjbk_bak set F17=NULL WHERE ISNUMERIC(F17)=1 AND CONVERT(NUMERIC(9,2),F17) <=0.0
+		/*
+		SELECT CASE WHEN CONVERT(NUMERIC(9,2),a.F17)<=0.0 THEN NULL ELSE CONVERT(VARCHAR(10),CONVERT(INT,ROUND(CONVERT(NUMERIC(9,2),a.F17),0))) END  FROM #Tupdata_hqms a
+		WHERE a.F17!='-'
+		*/
+
+		UPDATE #syjbk_bak SET F17=CASE WHEN CONVERT(NUMERIC(9,2),F17)<=0.0 THEN NULL ELSE CONVERT(VARCHAR(10),CONVERT(INT,ROUND(CONVERT(NUMERIC(9,2),F17),0))) END FROM #syjbk_bak WHERE F17!='-'
+		update #syjbk_bak set F18=CASE WHEN CONVERT(NUMERIC(9,2),F18)<=0.0 THEN NULL ELSE CONVERT(VARCHAR(10),CONVERT(INT,ROUND(CONVERT(NUMERIC(9,2),F18),0))) END FROM #syjbk_bak WHERE F18!='-'
+		update #syjbk_bak set F19=CASE WHEN CONVERT(NUMERIC(9,2),F19)<=0.0 THEN NULL ELSE CONVERT(VARCHAR(10),CONVERT(INT,ROUND(CONVERT(NUMERIC(9,2),F19),0))) END FROM #syjbk_bak WHERE F19!='-'
+		update #syjbk_bak set F20=CASE WHEN CONVERT(NUMERIC(9,2),F20)<=0.0 THEN NULL ELSE CONVERT(VARCHAR(10),CONVERT(INT,ROUND(CONVERT(NUMERIC(9,2),F20),0))) END FROM #syjbk_bak WHERE F20!='-'
+	  
+
+	--SELECT '' FREPORTDATESTR,* INTO THQMSJL FROM #syjbk_bak WHERE 1=2
+	--RETURN
 
 		--D20老病案数据取值老病案库手术麻醉费
 		--select * from [172.20.0.43\lis].THIS_BAGL.dbo.HQMS_SSZLF 
@@ -1096,14 +1201,14 @@ C35x38C,C36x38N,C37x38,C38x38,C39x38,C40x38,C41x38,C42x38C,C43x38C,C44x38,C35x39
 		--update a set a.A17 =null,A16=null from #syjbk_bak a where a.A14>1 and A16 is not null
 		--A19C民族为空默认横线
 		
-		update a set a.A19C ='-' from #syjbk_bak a where ISNULL(a.A19C,'')=''
+		update a set a.A19C ='99' from #syjbk_bak a where ISNULL(a.A19C,'')=''
 		--A22 出生地址为空默认横线
 		
 		update a set a.A22 ='-' from #syjbk_bak a where ISNULL(a.A22,'')=''
 		--A23C 籍贯外籍和空的默认横线
 		
 		update a set a.A23C ='-' from #syjbk_bak a where ISNULL(a.A23C,'')=''
-		update a set a.A23C ='-' from #syjbk_bak a where a.A23C='Wj'
+		update a set a.A23C ='35' from #syjbk_bak a where a.A23C='Wj'
 		UPDATE  #syjbk_bak SET A23C='-' where A23C NOT IN  (select FDSFBH from  thisdictdsf where fzdbh='HQMSRC036') AND A23C<>'-'
 		--A25C户口地址邮编为空或者不详
 		update a set a.A25C ='-' from #syjbk_bak a where (len(a.A25C)<4 or len(a.A25C)>6) AND a.A25C<>'-' 
@@ -1126,14 +1231,14 @@ C35x38C,C36x38N,C37x38,C38x38,C39x38,C40x38,C41x38,C42x38C,C43x38C,C44x38,C35x39
 		 
 		 update a set a.A31C ='-' from #syjbk_bak a  WHERE ISNUMERIC(A31C)=0
        --A33C联系人关系为空默认为9其他
-	   update a set a.A33C ='-' from #syjbk_bak a where isnull(a.A33C,'')=''
+	   update a set a.A33C ='7' from #syjbk_bak a where isnull(a.A33C,'')=''
 	   --A35联系人电话
 	   update a set a.A35 ='-' from #syjbk_bak a where isnull(a.A35,'')=''
 
 	   --A46C医疗付费方式为空默认为9-其他
 	    update a set a.A46C =9 from #syjbk_bak a where isnull(a.A46C,'')=''
 		--B29编码员为空默认王唯
-		update a set a.B29 ='王唯' from #syjbk_bak a where isnull(a.B29,'')=''  
+		--update a set a.B29 ='王唯' from #syjbk_bak a where isnull(a.B29,'')=''  
 		--D09自付金额老病案数据
 
 		update a set a.D09 =b.zfje from #syjbk_bak a , HQMS_TEMP_ZFJE b where a.A48=b.blh and b.zfje>'0'
@@ -1208,952 +1313,108 @@ FROM    #syjbk_bak a
 UPDATE  #syjbk_bak
     SET     C10N = '-'
     WHERE   ISNULL(C09C, '') = '-' and isnull(C10N,'')=''
+	--日间手术数据
 
+	 SELECT  A48 INTO #TEMPB38
+            FROM    #syjbk_bak a
+            WHERE ( A14 > 1 OR ISNULL(A14, 0) = 0 AND A16 > 28 )
+					AND DATEDIFF(HH,B12,B15) <= 48
+					AND  ( EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C14x01C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x01C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x02C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x03C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x04C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x05C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x06C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x07C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x08C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x09C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0)
+						OR EXISTS (SELECT 1 FROM dbo.T_Map_Standard b (NOLOCK) WHERE a.C35x10C=b.Code AND b.CategoryID='ICD-9-CM3' AND CHARINDEX('日间',b.OperationOptions)>0) )
+
+UPDATE #syjbk_bak SET B38=1 FROM #syjbk_bak a,#TEMPB38 b where a.A48=b.A48
 --20190016667
-  -- update  #syjbk_bak set A14=0,A16=364
 
+DECLARE @freportdatestr VARCHAR(100)
+		SELECT @freportdatestr=dbo.fn_Convertdatestr(@ksrq,@jsrq)
 
-	IF EXISTS (SELECT 1 FROM THQMSSET WHERE FREPORTDATESTR=CONVERT(VARCHAR(7),CONVERT(SMALLDATETIME,LEFT(@ksrq,8)),120))
+	IF EXISTS (SELECT 1 FROM THQMSSET WHERE FREPORTDATESTR=@freportdatestr)
 	BEGIN
-		DELETE FROM THQMSSET WHERE FREPORTDATESTR=CONVERT(VARCHAR(7),CONVERT(SMALLDATETIME,LEFT(@ksrq,8)),120)
+		DELETE FROM THQMSSET WHERE FREPORTDATESTR=@freportdatestr
 	END
 	
 	INSERT INTO THQMSSET (FREPORTDATESTR,
-	A01,A02,A48,A49,B12,B15,A47,A46C,A11,A12C,
-     A13,A14,A15C,A21C,A38C,A19C,A20,A22,A23C,A24,
-	  A25C,A26,A27,A28C,A29,A30,A31C,A32,A33C,A34,
-	   A35,B11C,B13C,B14,B21C,B16C,B17,B20,C01C,C02N,
-		C03C,C04N,C05C,C06x01C,C07x01N,C08x01C,C06x02C,C07x02N,C08x02C,C06x03C,
-		 C07x03N,C08x03C,C06x04C,C07x04N,C08x04C,C06x05C,C07x05N,C08x05C,C06x06C,C07x06N,
-		  C08x06C,C06x07C,C07x07N,C08x07C,C06x08C,C07x08N,C08x08C,C06x09C,C07x09N,C08x09C,
-		   C06x10C,C07x10N,C08x10C,C06x11C,C07x11N,C08x11C,C06x12C,C07x12N,C08x12C,C06x13C,
-			C07x13N,C08x13C,C06x14C,C07x14N,C08x14C,C06x15C,C07x15N,C08x15C,C06x16C,C07x16N,
-			 C08x16C,C06x17C,C07x17N,C08x17C,C06x18C,C07x18N,C08x18C,C06x19C,C07x19N,C08x19C,
-			  C06x20C,C07x20N,C08x20C,C06x21C,C07x21N,C08x21C,C06x22C,C07x22N,C08x22C,C06x23C,
-			   C07x23N,C08x23C,C06x24C,C07x24N,C08x24C,C06x25C,C07x25N,C08x25C,C06x26C,C07x26N,
-				C08x26C,C06x27C,C07x27N,C08x27C,C06x28C,C07x28N,C08x28C,C06x29C,C07x29N,C08x29C,
-				 C06x30C,C07x30N,C08x30C,C06x31C,C07x31N,C08x31C,C06x32C,C07x32N,C08x32C,C06x33C,
-				  C07x33N,C08x33C,C06x34C,C07x34N,C08x34C,C06x35C,C07x35N,C08x35C,C06x36C,C07x36N,
-				   C08x36C,C06x37C,C07x37N,C08x37C,C06x38C,C07x38N,C08x38C,C06x39C,C07x39N,C08x39C,
-					C06x40C,C07x40N,C08x40C,C09C,C10N,C11,C12C,C13N,C24C,C25,
-					 B22,B23,B24,B25,B26,B27,B28,B29,B30C,B31,
-					  B32,B33,C34C,C26C,C27C,C14x01C,C15x01N,C16x01,C17x01,C18x01,
-					   C19x01,C20x01,C21x01C,C22x01C,C23x01,C35x01C,C36x01N,C37x01,C38x01,C39x01,
-						C40x01,C41x01,C42x01C,C43x01C,C44x01,C35x02C,C36x02N,C37x02,C38x02,C39x02,
-						 C40x02,C41x02,C42x02C,C43x02C,C44x02,C35x03C,C36x03N,C37x03,C38x03,C39x03,
-						  C40x03,C41x03,C42x03C,C43x03C,C44x03,C35x04C,C36x04N,C37x04,C38x04,C39x04,
-						   C40x04,C41x04,C42x04C,C43x04C,C44x04,C35x05C,C36x05N,C37x05,C38x05,C39x05,
-							C40x05,C41x05,C42x05C,C43x05C,C44x05,C35x06C,C36x06N,C37x06,C38x06,C39x06,
-							 C40x06,C41x06,C42x06C,C43x06C,C44x06,C35x07C,C36x07N,C37x07,C38x07,C39x07,
-							  C40x07,C41x07,C42x07C,C43x07C,C44x07,C35x08C,C36x08N,C37x08,C38x08,C39x08,
-							   C40x08,C41x08,C42x08C,C43x08C,C44x08,C35x09C,C36x09N,C37x09,C38x09,C39x09,
-								C40x09,C41x09,C42x09C,C43x09C,C44x09,C35x10C,C36x10N,C37x10,C38x10,C39x10,
-								 C40x10,C41x10,C42x10C,C43x10C,C44x10,C35x11C,C36x11N,C37x11,C38x11,C39x11,
-							      C40x11,C41x11,C42x11C,C43x11C,C44x11,C35x12C,C36x12N,C37x12,C38x12,C39x12,
-								   C40x12,C41x12,C42x12C,C43x12C,C44x12,C35x13C,C36x13N,C37x13,C38x13,C39x13,
-									C40x13,C41x13,C42x13C,C43x13C,C44x13,C35x14C,C36x14N,C37x14,C38x14,C39x14,
-									 C40x14,C41x14,C42x14C,C43x14C,C44x14,C35x15C,C36x15N,C37x15,C38x15,C39x15,
-									  C40x15,C41x15,C42x15C,C43x15C,C44x15,C35x16C,C36x16N,C37x16,C38x16,C39x16,
-									   C40x16,C41x16,C42x16C,C43x16C,C44x16,C35x17C,C36x17N,C37x17,C38x17,C39x17,
-										C40x17,C41x17,C42x17C,C43x17C,C44x17,C35x18C,C36x18N,C37x18,C38x18,C39x18,
-										 C40x18,C41x18,C42x18C,C43x18C,C44x18,C35x19C,C36x19N,C37x19,C38x19,C39x19,
-										  C40x19,C41x19,C42x19C,C43x19C,C44x19,C35x20C,C36x20N,C37x20,C38x20,C39x20,
-										   C40x20,C41x20,C42x20C,C43x20C,C44x20,C35x21C,C36x21N,C37x21,C38x21,C39x21,
-											C40x21,C41x21,C42x21C,C43x21C,C44x21,C35x22C,C36x22N,C37x22,C38x22,C39x22,
-											 C40x22,C41x22,C42x22C,C43x22C,C44x22,C35x23C,C36x23N,C37x23,C38x23,C39x23,
-											  C40x23,C41x23,C42x23C,C43x23C,C44x23,C35x24C,C36x24N,C37x24,C38x24,C39x24,
-											   C40x24,C41x24,C42x24C,C43x24C,C44x24,C35x25C,C36x25N,C37x25,C38x25,C39x25,
-												C40x25,C41x25,C42x25C,C43x25C,C44x25,C35x26C,C36x26N,C37x26,C38x26,C39x26,
-												 C40x26,C41x26,C42x26C,C43x26C,C44x26,C35x27C,C36x27N,C37x27,C38x27,C39x27,
-												  C40x27,C41x27,C42x27C,C43x27C,C44x27,C35x28C,C36x28N,C37x28,C38x28,C39x28,
-												   C40x28,C41x28,C42x28C,C43x28C,C44x28,C35x29C,C36x29N,C37x29,C38x29,C39x29,
-												    C40x29,C41x29,C42x29C,C43x29C,C44x29,C35x30C,C36x30N,C37x30,C38x30,C39x30,
-													 C40x30,C41x30,C42x30C,C43x30C,C44x30,C35x31C,C36x31N,C37x31,C38x31,C39x31,
-													  C40x31,C41x31,C42x31C,C43x31C,C44x31,C35x32C,C36x32N,C37x32,C38x32,C39x32,
-													   C40x32,C41x32,C42x32C,C43x32C,C44x32,C35x33C,C36x33N,C37x33,C38x33,C39x33,
-													    C40x33,C41x33,C42x33C,C43x33C,C44x33,C35x34C,C36x34N,C37x34,C38x34,C39x34,
-														 C40x34,C41x34,C42x34C,C43x34C,C44x34,C35x35C,C36x35N,C37x35,C38x35,C39x35,
-														  C40x35,C41x35,C42x35C,C43x35C,C44x35,C35x36C,C36x36N,C37x36,C38x36,C39x36,
-														   C40x36,C41x36,C42x36C,C43x36C,C44x36,C35x37C,C36x37N,C37x37,C38x37,C39x37,
-														    C40x37,C41x37,C42x37C,C43x37C,C44x37,C35x38C,C36x38N,C37x38,C38x38,C39x38,
-															 C40x38,C41x38,C42x38C,C43x38C,C44x38,C35x39C,C36x39N,C37x39,C38x39,C39x39,
-															  C40x39,C41x39,C42x39C,C43x39C,C44x39,C35x40C,C36x40N,C37x40,C38x40,C39x40,
-															   C40x40,C41x40,C42x40C,C43x40C,C44x40,A16,A18x01,A18x02,A18x03,A18x04,
-															    A18x05,A17,C28,C29,C30,C31,C32,C33,B36C,B37,
-																 B34C,B35,D01,D09,D11,D12,D13,D14,D15,D16,
-																  D17,D18,D19,D19x01,D20,D20x01,D20x02,D21,D22,D23,
-																   D23x01,D24,D25,D26,D27,D28,D29,D30,D31,D32,
-																    D33,D34)
-	select CONVERT(VARCHAR(7),CONVERT(SMALLDATETIME,LEFT(@ksrq,8)),120),
-	A01,A02,A48,A49,B12,B15,A47,A46C,A11,A12C,
-     A13,A14,A15C,A21C,A38C,A19C,A20,A22,A23C,A24,
-	  A25C,A26,A27,A28C,A29,A30,A31C,A32,A33C,A34,
-	   A35,B11C,B13C,B14,B21C,B16C,B17,B20,C01C,C02N,
-		C03C,C04N,C05C,C06x01C,C07x01N,C08x01C,C06x02C,C07x02N,C08x02C,C06x03C,
-		 C07x03N,C08x03C,C06x04C,C07x04N,C08x04C,C06x05C,C07x05N,C08x05C,C06x06C,C07x06N,
-		  C08x06C,C06x07C,C07x07N,C08x07C,C06x08C,C07x08N,C08x08C,C06x09C,C07x09N,C08x09C,
-		   C06x10C,C07x10N,C08x10C,C06x11C,C07x11N,C08x11C,C06x12C,C07x12N,C08x12C,C06x13C,
-			C07x13N,C08x13C,C06x14C,C07x14N,C08x14C,C06x15C,C07x15N,C08x15C,C06x16C,C07x16N,
-			 C08x16C,C06x17C,C07x17N,C08x17C,C06x18C,C07x18N,C08x18C,C06x19C,C07x19N,C08x19C,
-			  C06x20C,C07x20N,C08x20C,C06x21C,C07x21N,C08x21C,C06x22C,C07x22N,C08x22C,C06x23C,
-			   C07x23N,C08x23C,C06x24C,C07x24N,C08x24C,C06x25C,C07x25N,C08x25C,C06x26C,C07x26N,
-				C08x26C,C06x27C,C07x27N,C08x27C,C06x28C,C07x28N,C08x28C,C06x29C,C07x29N,C08x29C,
-				 C06x30C,C07x30N,C08x30C,C06x31C,C07x31N,C08x31C,C06x32C,C07x32N,C08x32C,C06x33C,
-				  C07x33N,C08x33C,C06x34C,C07x34N,C08x34C,C06x35C,C07x35N,C08x35C,C06x36C,C07x36N,
-				   C08x36C,C06x37C,C07x37N,C08x37C,C06x38C,C07x38N,C08x38C,C06x39C,C07x39N,C08x39C,
-					C06x40C,C07x40N,C08x40C,C09C,C10N,C11,C12C,C13N,C24C,C25,
-					 B22,B23,B24,B25,B26,B27,B28,B29,B30C,B31,
-					  B32,B33,C34C,C26C,C27C,C14x01C,C15x01N,C16x01,C17x01,C18x01,
-					   C19x01,C20x01,C21x01C,C22x01C,C23x01,C35x01C,C36x01N,C37x01,C38x01,C39x01,
-						C40x01,C41x01,C42x01C,C43x01C,C44x01,C35x02C,C36x02N,C37x02,C38x02,C39x02,
-						 C40x02,C41x02,C42x02C,C43x02C,C44x02,C35x03C,C36x03N,C37x03,C38x03,C39x03,
-						  C40x03,C41x03,C42x03C,C43x03C,C44x03,C35x04C,C36x04N,C37x04,C38x04,C39x04,
-						   C40x04,C41x04,C42x04C,C43x04C,C44x04,C35x05C,C36x05N,C37x05,C38x05,C39x05,
-							C40x05,C41x05,C42x05C,C43x05C,C44x05,C35x06C,C36x06N,C37x06,C38x06,C39x06,
-							 C40x06,C41x06,C42x06C,C43x06C,C44x06,C35x07C,C36x07N,C37x07,C38x07,C39x07,
-							  C40x07,C41x07,C42x07C,C43x07C,C44x07,C35x08C,C36x08N,C37x08,C38x08,C39x08,
-							   C40x08,C41x08,C42x08C,C43x08C,C44x08,C35x09C,C36x09N,C37x09,C38x09,C39x09,
-								C40x09,C41x09,C42x09C,C43x09C,C44x09,C35x10C,C36x10N,C37x10,C38x10,C39x10,
-								 C40x10,C41x10,C42x10C,C43x10C,C44x10,C35x11C,C36x11N,C37x11,C38x11,C39x11,
-							      C40x11,C41x11,C42x11C,C43x11C,C44x11,C35x12C,C36x12N,C37x12,C38x12,C39x12,
-								   C40x12,C41x12,C42x12C,C43x12C,C44x12,C35x13C,C36x13N,C37x13,C38x13,C39x13,
-									C40x13,C41x13,C42x13C,C43x13C,C44x13,C35x14C,C36x14N,C37x14,C38x14,C39x14,
-									 C40x14,C41x14,C42x14C,C43x14C,C44x14,C35x15C,C36x15N,C37x15,C38x15,C39x15,
-									  C40x15,C41x15,C42x15C,C43x15C,C44x15,C35x16C,C36x16N,C37x16,C38x16,C39x16,
-									   C40x16,C41x16,C42x16C,C43x16C,C44x16,C35x17C,C36x17N,C37x17,C38x17,C39x17,
-										C40x17,C41x17,C42x17C,C43x17C,C44x17,C35x18C,C36x18N,C37x18,C38x18,C39x18,
-										 C40x18,C41x18,C42x18C,C43x18C,C44x18,C35x19C,C36x19N,C37x19,C38x19,C39x19,
-										  C40x19,C41x19,C42x19C,C43x19C,C44x19,C35x20C,C36x20N,C37x20,C38x20,C39x20,
-										   C40x20,C41x20,C42x20C,C43x20C,C44x20,C35x21C,C36x21N,C37x21,C38x21,C39x21,
-											C40x21,C41x21,C42x21C,C43x21C,C44x21,C35x22C,C36x22N,C37x22,C38x22,C39x22,
-											 C40x22,C41x22,C42x22C,C43x22C,C44x22,C35x23C,C36x23N,C37x23,C38x23,C39x23,
-											  C40x23,C41x23,C42x23C,C43x23C,C44x23,C35x24C,C36x24N,C37x24,C38x24,C39x24,
-											   C40x24,C41x24,C42x24C,C43x24C,C44x24,C35x25C,C36x25N,C37x25,C38x25,C39x25,
-												C40x25,C41x25,C42x25C,C43x25C,C44x25,C35x26C,C36x26N,C37x26,C38x26,C39x26,
-												 C40x26,C41x26,C42x26C,C43x26C,C44x26,C35x27C,C36x27N,C37x27,C38x27,C39x27,
-												  C40x27,C41x27,C42x27C,C43x27C,C44x27,C35x28C,C36x28N,C37x28,C38x28,C39x28,
-												   C40x28,C41x28,C42x28C,C43x28C,C44x28,C35x29C,C36x29N,C37x29,C38x29,C39x29,
-												    C40x29,C41x29,C42x29C,C43x29C,C44x29,C35x30C,C36x30N,C37x30,C38x30,C39x30,
-													 C40x30,C41x30,C42x30C,C43x30C,C44x30,C35x31C,C36x31N,C37x31,C38x31,C39x31,
-													  C40x31,C41x31,C42x31C,C43x31C,C44x31,C35x32C,C36x32N,C37x32,C38x32,C39x32,
-													   C40x32,C41x32,C42x32C,C43x32C,C44x32,C35x33C,C36x33N,C37x33,C38x33,C39x33,
-													    C40x33,C41x33,C42x33C,C43x33C,C44x33,C35x34C,C36x34N,C37x34,C38x34,C39x34,
-														 C40x34,C41x34,C42x34C,C43x34C,C44x34,C35x35C,C36x35N,C37x35,C38x35,C39x35,
-														  C40x35,C41x35,C42x35C,C43x35C,C44x35,C35x36C,C36x36N,C37x36,C38x36,C39x36,
-														   C40x36,C41x36,C42x36C,C43x36C,C44x36,C35x37C,C36x37N,C37x37,C38x37,C39x37,
-														    C40x37,C41x37,C42x37C,C43x37C,C44x37,C35x38C,C36x38N,C37x38,C38x38,C39x38,
-															 C40x38,C41x38,C42x38C,C43x38C,C44x38,C35x39C,C36x39N,C37x39,C38x39,C39x39,
-															  C40x39,C41x39,C42x39C,C43x39C,C44x39,C35x40C,C36x40N,C37x40,C38x40,C39x40,
-															   C40x40,C41x40,C42x40C,C43x40C,C44x40,A16,A18x01,A18x02,A18x03,A18x04,
-															    A18x05,A17,C28,C29,C30,C31,C32,C33,B36C,B37,
-																 B34C,B35,D01,D09,D11,D12,D13,D14,D15,D16,
-																  D17,D18,D19,D19x01,D20,D20x01,D20x02,D21,D22,D23,
-																   D23x01,D24,D25,D26,D27,D28,D29,D30,D31,D32,
-																    D33,D34
+A01,A02,A48,A49,B12,B15,A47,A46C,A11,A12C,A13,A14,A15C,A21C,A38C,A19C,A20N,A20,A22,A23C,A24,A25C,A26,A27,A28C,A29,A30,A31C,A32,A33C,A34,A35,B38,B11C,B13C,B14,B21C,B16C,
+ B17,B20,C01C,C02N,F01,F02C,F03N,F04,C03C,C04N,C05C,F05,C06x01C,C07x01N,C08x01C,F06x01,C06x02C,C07x02N,C08x02C,F06x02,C06x03C,C07x03N,C08x03C,F06x03,C06x04C,C07x04N,C08x04C,F06x04,C06x05C,
+  C07x05N,C08x05C,F06x05,C06x06C,C07x06N,C08x06C,F06x06,C06x07C,C07x07N,C08x07C,F06x07,C06x08C,C07x08N,C08x08C,F06x08,C06x09C,C07x09N,C08x09C,F06x09,C06x10C,C07x10N,C08x10C,F06x10,C06x11C,
+   C07x11N,C08x11C,F06x11,C06x12C,C07x12N,C08x12C,F06x12,C06x13C,C07x13N,C08x13C,F06x13,C06x14C,C07x14N,C08x14C,F06x14,C06x15C,C07x15N,C08x15C,F06x15,C06x16C,C07x16N,C08x16C,F06x16,C06x17C,
+    C07x17N,C08x17C,F06x17,C06x18C,C07x18N,C08x18C,F06x18,C06x19C,C07x19N,C08x19C,F06x19,C06x20C,C07x20N,C08x20C,F06x20,C06x21C,C07x21N,C08x21C,F06x21,C06x22C,C07x22N,C08x22C,F06x22,C06x23C,
+	 C07x23N,C08x23C,F06x23,C06x24C,C07x24N,C08x24C,F06x24,C06x25C,C07x25N,C08x25C,F06x25,C06x26C,C07x26N,C08x26C,F06x26,C06x27C,C07x27N,C08x27C,F06x27,C06x28C,C07x28N,C08x28C,F06x28,C06x29C,
+	  C07x29N,C08x29C,F06x29,C06x30C,C07x30N,C08x30C,F06x30,C06x31C,C07x31N,C08x31C,F06x31,C06x32C,C07x32N,C08x32C,F06x32,C06x33C,C07x33N,C08x33C,F06x33,C06x34C,C07x34N,C08x34C,F06x34,C06x35C,
+	   C07x35N,C08x35C,F06x35,C06x36C,C07x36N,C08x36C,F06x36,C06x37C,C07x37N,C08x37C,F06x37,C06x38C,C07x38N,C08x38C,F06x38,C06x39C,C07x39N,C08x39C,F06x39,C06x40C,C07x40N,C08x40C,F06x40,C09C,C10N,
+	    C11,F07x01C,F08x01N,F09x01,F07x02C,F08x02N,F09x02,C12C,C13N,C24C,C25,F10,F11,F12,B22C,B22,B23C,B23,B24C,B24,B25C,B25,B26C,B26,B27,B28,B29,B30C,B31,B32,B33,C34C,C26C,C27C,C14x01C,C15x01N,C16x01,
+		 C17x01,F13,C18x01,C19x01,C20x01,C21x01C,C22x01C,F15,C23x01,C35x01C,C36x01N,C37x01,C38x01,F14x01,C39x01,C40x01,C41x01,C42x01C,C43x01C,F16x01,C44x01,C35x02C,C36x02N,C37x02,C38x02,F14x02,C39x02,
+		  C40x02,C41x02,C42x02C,C43x02C,F16x02,C44x02,C35x03C,C36x03N,C37x03,C38x03,F14x03,C39x03,C40x03,C41x03,C42x03C,C43x03C,F16x03,C44x03,C35x04C,C36x04N,C37x04,C38x04,F14x04,C39x04,C40x04,C41x04,
+		   C42x04C,C43x04C,F16x04,C44x04,C35x05C,C36x05N,C37x05,C38x05,F14x05,C39x05,C40x05,C41x05,C42x05C,C43x05C,F16x05,C44x05,C35x06C,C36x06N,C37x06,C38x06,F14x06,C39x06,C40x06,C41x06,C42x06C,C43x06C,
+		    F16x06,C44x06,C35x07C,C36x07N,C37x07,C38x07,F14x07,C39x07,C40x07,C41x07,C42x07C,C43x07C,F16x07,C44x07,C35x08C,C36x08N,C37x08,C38x08,F14x08,C39x08,C40x08,C41x08,C42x08C,C43x08C,F16x08,C44x08,
+			 C35x09C,C36x09N,C37x09,C38x09,F14x09,C39x09,C40x09,C41x09,C42x09C,C43x09C,F16x09,C44x09,C35x10C,C36x10N,C37x10,C38x10,F14x10,C39x10,C40x10,C41x10,C42x10C,C43x10C,F16x10,C44x10,C35x11C,C36x11N,
+			  C37x11,C38x11,F14x11,C39x11,C40x11,C41x11,C42x11C,C43x11C,F16x11,C44x11,C35x12C,C36x12N,C37x12,C38x12,F14x12,C39x12,C40x12,C41x12,C42x12C,C43x12C,F16x12,C44x12,C35x13C,C36x13N,C37x13,C38x13,
+			   F14x13,C39x13,C40x13,C41x13,C42x13C,C43x13C,F16x13,C44x13,C35x14C,C36x14N,C37x14,C38x14,F14x14,C39x14,C40x14,C41x14,C42x14C,C43x14C,F16x14,C44x14,C35x15C,C36x15N,C37x15,C38x15,F14x15,C39x15,
+			    C40x15,C41x15,C42x15C,C43x15C,F16x15,C44x15,C35x16C,C36x16N,C37x16,C38x16,F14x16,C39x16,C40x16,C41x16,C42x16C,C43x16C,F16x16,C44x16,C35x17C,C36x17N,C37x17,C38x17,F14x17,C39x17,C40x17,C41x17,
+				 C42x17C,C43x17C,F16x17,C44x17,C35x18C,C36x18N,C37x18,C38x18,F14x18,C39x18,C40x18,C41x18,C42x18C,C43x18C,F16x18,C44x18,C35x19C,C36x19N,C37x19,C38x19,F14x19,C39x19,C40x19,C41x19,C42x19C,C43x19C,
+				  F16x19,C44x19,C35x20C,C36x20N,C37x20,C38x20,F14x20,C39x20,C40x20,C41x20,C42x20C,C43x20C,F16x20,C44x20,C35x21C,C36x21N,C37x21,C38x21,F14x21,C39x21,C40x21,C41x21,C42x21C,C43x21C,F16x21,C44x21,
+				   C35x22C,C36x22N,C37x22,C38x22,F14x22,C39x22,C40x22,C41x22,C42x22C,C43x22C,F16x22,C44x22,C35x23C,C36x23N,C37x23,C38x23,F14x23,C39x23,C40x23,C41x23,C42x23C,C43x23C,F16x23,C44x23,C35x24C,C36x24N,
+				    C37x24,C38x24,F14x24,C39x24,C40x24,C41x24,C42x24C,C43x24C,F16x24,C44x24,C35x25C,C36x25N,C37x25,C38x25,F14x25,C39x25,C40x25,C41x25,C42x25C,C43x25C,F16x25,C44x25,C35x26C,C36x26N,C37x26,C38x26,
+					 F14x26,C39x26,C40x26,C41x26,C42x26C,C43x26C,F16x26,C44x26,C35x27C,C36x27N,C37x27,C38x27,F14x27,C39x27,C40x27,C41x27,C42x27C,C43x27C,F16x27,C44x27,C35x28C,C36x28N,C37x28,C38x28,F14x28,C39x28,
+					  C40x28,C41x28,C42x28C,C43x28C,F16x28,C44x28,C35x29C,C36x29N,C37x29,C38x29,F14x29,C39x29,C40x29,C41x29,C42x29C,C43x29C,F16x29,C44x29,C35x30C,C36x30N,C37x30,C38x30,F14x30,C39x30,C40x30,C41x30,
+					   C42x30C,C43x30C,F16x30,C44x30,C35x31C,C36x31N,C37x31,C38x31,F14x31,C39x31,C40x31,C41x31,C42x31C,C43x31C,F16x31,C44x31,C35x32C,C36x32N,C37x32,C38x32,F14x32,C39x32,C40x32,C41x32,C42x32C,
+					    C43x32C,F16x32,C44x32,C35x33C,C36x33N,C37x33,C38x33,F14x33,C39x33,C40x33,C41x33,C42x33C,C43x33C,F16x33,C44x33,C35x34C,C36x34N,C37x34,C38x34,F14x34,C39x34,C40x34,C41x34,C42x34C,C43x34C,
+						 F16x34,C44x34,C35x35C,C36x35N,C37x35,C38x35,F14x35,C39x35,C40x35,C41x35,C42x35C,C43x35C,F16x35,C44x35,C35x36C,C36x36N,C37x36,C38x36,F14x36,C39x36,C40x36,C41x36,C42x36C,C43x36C,F16x36,
+						  C44x36,C35x37C,C36x37N,C37x37,C38x37,F14x37,C39x37,C40x37,C41x37,C42x37C,C43x37C,F16x37,C44x37,C35x38C,C36x38N,C37x38,C38x38,F14x38,C39x38,C40x38,C41x38,C42x38C,C43x38C,F16x38,C44x38,
+						   C35x39C,C36x39N,C37x39,C38x39,F14x39,C39x39,C40x39,C41x39,C42x39C,C43x39C,F16x39,C44x39,C35x40C,C36x40N,C37x40,C38x40,F14x40,C39x40,C40x40,C41x40,C42x40C,C43x40C,F16x40,C44x40,F17,F18,
+						    F19,F20,F21,F22,F23,F24,F25,F26,A16,A18x01,A18x02,A18x03,A18x04,A18x05,A17,C28,C29,C30,C31,C32,C33,C47,C48x01C,C49x01,C50x01,C48x02C,C49x02,C50x02,C48x03C,C49x03,C50x03,C48x04C,C49x04,
+							 C50x04,C48x05C,C49x05,C50x05,B36C,B37,B34C,B35,D01,D09,D11,D12,D13,D14,D15,D16,D17,D18,D19,D19x01,D20,D20x01,D20x02,D21,D22,D23,D23x01,D24,D25,D26,D27,D28,D29,D30,D31,D32,D33,D34)
+									
+	SELECT  @freportdatestr,
+A01,A02,A48,A49,B12,B15,A47,A46C,A11,A12C,A13,A14,A15C,A21C,A38C,A19C,A20N,A20,A22,A23C,A24,A25C,A26,A27,A28C,A29,A30,A31C,A32,A33C,A34,A35,B38,B11C,B13C,B14,B21C,B16C,
+ B17,B20,C01C,C02N,F01,F02C,F03N,F04,C03C,C04N,C05C,F05,C06x01C,C07x01N,C08x01C,F06x01,C06x02C,C07x02N,C08x02C,F06x02,C06x03C,C07x03N,C08x03C,F06x03,C06x04C,C07x04N,C08x04C,F06x04,C06x05C,
+  C07x05N,C08x05C,F06x05,C06x06C,C07x06N,C08x06C,F06x06,C06x07C,C07x07N,C08x07C,F06x07,C06x08C,C07x08N,C08x08C,F06x08,C06x09C,C07x09N,C08x09C,F06x09,C06x10C,C07x10N,C08x10C,F06x10,C06x11C,
+   C07x11N,C08x11C,F06x11,C06x12C,C07x12N,C08x12C,F06x12,C06x13C,C07x13N,C08x13C,F06x13,C06x14C,C07x14N,C08x14C,F06x14,C06x15C,C07x15N,C08x15C,F06x15,C06x16C,C07x16N,C08x16C,F06x16,C06x17C,
+    C07x17N,C08x17C,F06x17,C06x18C,C07x18N,C08x18C,F06x18,C06x19C,C07x19N,C08x19C,F06x19,C06x20C,C07x20N,C08x20C,F06x20,C06x21C,C07x21N,C08x21C,F06x21,C06x22C,C07x22N,C08x22C,F06x22,C06x23C,
+	 C07x23N,C08x23C,F06x23,C06x24C,C07x24N,C08x24C,F06x24,C06x25C,C07x25N,C08x25C,F06x25,C06x26C,C07x26N,C08x26C,F06x26,C06x27C,C07x27N,C08x27C,F06x27,C06x28C,C07x28N,C08x28C,F06x28,C06x29C,
+	  C07x29N,C08x29C,F06x29,C06x30C,C07x30N,C08x30C,F06x30,C06x31C,C07x31N,C08x31C,F06x31,C06x32C,C07x32N,C08x32C,F06x32,C06x33C,C07x33N,C08x33C,F06x33,C06x34C,C07x34N,C08x34C,F06x34,C06x35C,
+	   C07x35N,C08x35C,F06x35,C06x36C,C07x36N,C08x36C,F06x36,C06x37C,C07x37N,C08x37C,F06x37,C06x38C,C07x38N,C08x38C,F06x38,C06x39C,C07x39N,C08x39C,F06x39,C06x40C,C07x40N,C08x40C,F06x40,C09C,C10N,
+	    C11,F07x01C,F08x01N,F09x01,F07x02C,F08x02N,F09x02,C12C,C13N,C24C,C25,F10,F11,F12,B22C,B22,B23C,B23,B24C,B24,B25C,B25,B26C,B26,B27,B28,B29,B30C,B31,B32,B33,C34C,C26C,C27C,C14x01C,C15x01N,C16x01,
+		 C17x01,F13,C18x01,C19x01,C20x01,C21x01C,C22x01C,F15,C23x01,C35x01C,C36x01N,C37x01,C38x01,F14x01,C39x01,C40x01,C41x01,C42x01C,C43x01C,F16x01,C44x01,C35x02C,C36x02N,C37x02,C38x02,F14x02,C39x02,
+		  C40x02,C41x02,C42x02C,C43x02C,F16x02,C44x02,C35x03C,C36x03N,C37x03,C38x03,F14x03,C39x03,C40x03,C41x03,C42x03C,C43x03C,F16x03,C44x03,C35x04C,C36x04N,C37x04,C38x04,F14x04,C39x04,C40x04,C41x04,
+		   C42x04C,C43x04C,F16x04,C44x04,C35x05C,C36x05N,C37x05,C38x05,F14x05,C39x05,C40x05,C41x05,C42x05C,C43x05C,F16x05,C44x05,C35x06C,C36x06N,C37x06,C38x06,F14x06,C39x06,C40x06,C41x06,C42x06C,C43x06C,
+		    F16x06,C44x06,C35x07C,C36x07N,C37x07,C38x07,F14x07,C39x07,C40x07,C41x07,C42x07C,C43x07C,F16x07,C44x07,C35x08C,C36x08N,C37x08,C38x08,F14x08,C39x08,C40x08,C41x08,C42x08C,C43x08C,F16x08,C44x08,
+			 C35x09C,C36x09N,C37x09,C38x09,F14x09,C39x09,C40x09,C41x09,C42x09C,C43x09C,F16x09,C44x09,C35x10C,C36x10N,C37x10,C38x10,F14x10,C39x10,C40x10,C41x10,C42x10C,C43x10C,F16x10,C44x10,C35x11C,C36x11N,
+			  C37x11,C38x11,F14x11,C39x11,C40x11,C41x11,C42x11C,C43x11C,F16x11,C44x11,C35x12C,C36x12N,C37x12,C38x12,F14x12,C39x12,C40x12,C41x12,C42x12C,C43x12C,F16x12,C44x12,C35x13C,C36x13N,C37x13,C38x13,
+			   F14x13,C39x13,C40x13,C41x13,C42x13C,C43x13C,F16x13,C44x13,C35x14C,C36x14N,C37x14,C38x14,F14x14,C39x14,C40x14,C41x14,C42x14C,C43x14C,F16x14,C44x14,C35x15C,C36x15N,C37x15,C38x15,F14x15,C39x15,
+			    C40x15,C41x15,C42x15C,C43x15C,F16x15,C44x15,C35x16C,C36x16N,C37x16,C38x16,F14x16,C39x16,C40x16,C41x16,C42x16C,C43x16C,F16x16,C44x16,C35x17C,C36x17N,C37x17,C38x17,F14x17,C39x17,C40x17,C41x17,
+				 C42x17C,C43x17C,F16x17,C44x17,C35x18C,C36x18N,C37x18,C38x18,F14x18,C39x18,C40x18,C41x18,C42x18C,C43x18C,F16x18,C44x18,C35x19C,C36x19N,C37x19,C38x19,F14x19,C39x19,C40x19,C41x19,C42x19C,C43x19C,
+				  F16x19,C44x19,C35x20C,C36x20N,C37x20,C38x20,F14x20,C39x20,C40x20,C41x20,C42x20C,C43x20C,F16x20,C44x20,C35x21C,C36x21N,C37x21,C38x21,F14x21,C39x21,C40x21,C41x21,C42x21C,C43x21C,F16x21,C44x21,
+				   C35x22C,C36x22N,C37x22,C38x22,F14x22,C39x22,C40x22,C41x22,C42x22C,C43x22C,F16x22,C44x22,C35x23C,C36x23N,C37x23,C38x23,F14x23,C39x23,C40x23,C41x23,C42x23C,C43x23C,F16x23,C44x23,C35x24C,C36x24N,
+				    C37x24,C38x24,F14x24,C39x24,C40x24,C41x24,C42x24C,C43x24C,F16x24,C44x24,C35x25C,C36x25N,C37x25,C38x25,F14x25,C39x25,C40x25,C41x25,C42x25C,C43x25C,F16x25,C44x25,C35x26C,C36x26N,C37x26,C38x26,
+					 F14x26,C39x26,C40x26,C41x26,C42x26C,C43x26C,F16x26,C44x26,C35x27C,C36x27N,C37x27,C38x27,F14x27,C39x27,C40x27,C41x27,C42x27C,C43x27C,F16x27,C44x27,C35x28C,C36x28N,C37x28,C38x28,F14x28,C39x28,
+					  C40x28,C41x28,C42x28C,C43x28C,F16x28,C44x28,C35x29C,C36x29N,C37x29,C38x29,F14x29,C39x29,C40x29,C41x29,C42x29C,C43x29C,F16x29,C44x29,C35x30C,C36x30N,C37x30,C38x30,F14x30,C39x30,C40x30,C41x30,
+					   C42x30C,C43x30C,F16x30,C44x30,C35x31C,C36x31N,C37x31,C38x31,F14x31,C39x31,C40x31,C41x31,C42x31C,C43x31C,F16x31,C44x31,C35x32C,C36x32N,C37x32,C38x32,F14x32,C39x32,C40x32,C41x32,C42x32C,
+					    C43x32C,F16x32,C44x32,C35x33C,C36x33N,C37x33,C38x33,F14x33,C39x33,C40x33,C41x33,C42x33C,C43x33C,F16x33,C44x33,C35x34C,C36x34N,C37x34,C38x34,F14x34,C39x34,C40x34,C41x34,C42x34C,C43x34C,
+						 F16x34,C44x34,C35x35C,C36x35N,C37x35,C38x35,F14x35,C39x35,C40x35,C41x35,C42x35C,C43x35C,F16x35,C44x35,C35x36C,C36x36N,C37x36,C38x36,F14x36,C39x36,C40x36,C41x36,C42x36C,C43x36C,F16x36,
+						  C44x36,C35x37C,C36x37N,C37x37,C38x37,F14x37,C39x37,C40x37,C41x37,C42x37C,C43x37C,F16x37,C44x37,C35x38C,C36x38N,C37x38,C38x38,F14x38,C39x38,C40x38,C41x38,C42x38C,C43x38C,F16x38,C44x38,
+						   C35x39C,C36x39N,C37x39,C38x39,F14x39,C39x39,C40x39,C41x39,C42x39C,C43x39C,F16x39,C44x39,C35x40C,C36x40N,C37x40,C38x40,F14x40,C39x40,C40x40,C41x40,C42x40C,C43x40C,F16x40,C44x40,F17,F18,
+						    F19,F20,F21,F22,F23,F24,F25,F26,A16,A18x01,A18x02,A18x03,A18x04,A18x05,A17,C28,C29,C30,C31,C32,C33,C47,C48x01C,C49x01,C50x01,C48x02C,C49x02,C50x02,C48x03C,C49x03,C50x03,C48x04C,C49x04,
+							 C50x04,C48x05C,C49x05,C50x05,B36C,B37,B34C,B35,D01,D09,D11,D12,D13,D14,D15,D16,D17,D18,D19,D19x01,D20,D20x01,D20x02,D21,D22,D23,D23x01,D24,D25,D26,D27,D28,D29,D30,D31,D32,D33,D34
 	from #syjbk_bak
-    --set @zjerrcode = 0
-    --return 
-
-    --Err:
-    --rollback tran
-
-    --set @zjerrcode = 1
-    --PRINT @zjerrmsg
-    --select 0
-    --return
-
 	
-CREATE TABLE #syjbk_error ( ms  VARCHAR(300),syxh VARCHAR(20))
------PPT1
-IF EXISTS (SELECT top 1 * FROM #syjbk_bak WHERE ISNULL(REPLACE(D01,'-',''),'')='')
-INSERT #syjbk_error 
-	SELECT 'D01住院总费用为空',A48 
-	FROM #syjbk_bak WHERE ISNULL(REPLACE(D01,'-',''),'')=''
-	
-	---B20REPLACE(,-,'')
-	IF EXISTS (SELECT top 1 * FROM #syjbk_bak WHERE ISNULL(REPLACE(B20,'-',''),'')='') 
-  INSERT #syjbk_error 
-	SELECT 'B20实际住院天数为空',A48 
-	FROM #syjbk_bak WHERE ISNULL(REPLACE(B20,'-',''),'')='' 
-	
-	IF EXISTS (SELECT top 1 * FROM #syjbk_bak WHERE  B20<'0')
-  INSERT #syjbk_error 
-	SELECT 'B20实际住院天数小于零',A48 
-	FROM #syjbk_bak WHERE  B20<'0'
-	
-	
-	IF EXISTS (SELECT top 1 * FROM #syjbk_bak WHERE ISNULL(REPLACE(C03C,'-',''),'')='')
-	INSERT #syjbk_error 
-	SELECT 'C03C出院主要诊断编码为空',A48 
-	FROM #syjbk_bak WHERE ISNULL(REPLACE(C03C,'-',''),'')=''
-	
-	IF EXISTS (SELECT top 1 * FROM #syjbk_bak WHERE ISNULL(REPLACE(C04N,'-',''),'')='')
-	INSERT #syjbk_error 
-	SELECT 'C04N出院主要诊断名称为空',A48 
-	FROM #syjbk_bak WHERE ISNULL(REPLACE(C04N,'-',''),'')=''
-	
-	IF EXISTS (SELECT top 1 * FROM #syjbk_bak WHERE  A14<'0')
-    INSERT #syjbk_error 
-	SELECT 'A14年龄小于零',A48 
-	FROM #syjbk_bak WHERE  A14<'0'
- 
-	
-    IF EXISTS (SELECT 1 FROM #syjbk_bak WHERE B34C NOT IN ( SELECT  FDSFBH FROM dbo.thisdictdsf WHERE FZDBH='HQMSRC019' ))
-	INSERT #syjbk_error 
-	SELECT 'B34C离院方式不在字典范围内',A48 
-	FROM #syjbk_bak WHERE B34C NOT IN ( SELECT  FDSFBH FROM dbo.thisdictdsf WHERE FZDBH='HQMSRC019' )
-	
-	IF EXISTS (SELECT 1 FROM #syjbk_bak WHERE A21C NOT IN ( SELECT   FDSFBH FROM dbo.thisdictdsf where FZDBH='HQMSRC002' ))
-	INSERT #syjbk_error 
-	SELECT 'A21C婚姻状况不在字典范围内',A48 
-	FROM #syjbk_bak WHERE A21C NOT IN ( SELECT   FDSFBH FROM dbo.thisdictdsf where FZDBH='HQMSRC002')
-	
---PPT2
-	--SELECT Value_Standard,* FROM dbo.T_Map_Mapping
 
-    IF EXISTS (SELECT 1 FROM #syjbk_bak WHERE C03C NOT IN ( SELECT  FUPICDM FROM dbo.tupicd10set )  )
-	INSERT #syjbk_error 
-	SELECT C03C+' 出院主要诊断编码不在字典范围内',A48 
-	FROM #syjbk_bak WHERE C03C NOT IN ( SELECT  FUPICDM FROM dbo.tupicd10set   )
-	
-	--C04N
-	IF EXISTS (SELECT 1 FROM #syjbk_bak a,tupicd10set b WHERE a.C03C=b.FUPICDM and a.C04N <>b.FUPJBNAME )
-	INSERT #syjbk_error 
-	SELECT 'C04N与C03C出院主要诊断名称与编码不符',A48 
-	FROM #syjbk_bak a,tupicd10set b WHERE a.C03C=b.FUPICDM and a.C04N <>b.FUPJBNAME  
-
-
-IF EXISTS (SELECT 1 FROM #syjbk_bak WHERE C01C NOT IN ( SELECT  FUPICDM FROM dbo.tupicd10set  ))
-	INSERT #syjbk_error 
-	SELECT 'C01C门（急）诊诊断编码',A48 
-	FROM #syjbk_bak WHERE C01C NOT IN ( SELECT   FUPICDM FROM dbo.tupicd10set  )	
-	
- 
- --入院时间晚于出院时间、出生日期
- if exists(select 1 from #syjbk_bak where B12>B15 or B12<A13)
- begin 
-   INSERT #syjbk_error
-   select A48+'入院时间晚于出院时间、出生日期',A48
-   from #syjbk_bak where B12>B15 or B12<A13
- end 
- --出现O80-O84编码，且流产结局编码未出现O00-O08时，其他诊断无分娩结局编码 Z37 ？
- select * into  #syjbk_37 from #syjbk_bak where 1=2
-  insert into #syjbk_37 
- select * from #syjbk_bak where (C03C LIKE 'O81%' or C06x01C  LIKE 'O81%' 
- OR C06x02C  LIKE 'O81%' OR C06x03C LIKE 'O81%' OR C06x04C  LIKE 'O81%'
-  OR C06x05C  LIKE 'O81%' OR C06x06C  LIKE 'O81%' OR C06x07C  LIKE 'O81%') and  ( C06x01C NOT LIKE 'O0%' 
- OR C06x02C NOT LIKE 'O0%' OR C06x03C NOT LIKE 'O0%' OR C06x04C NOT LIKE 'O0%'
-  OR C06x05C NOT LIKE 'O0%' OR C06x06C NOT LIKE 'O0%' OR C06x07C NOT LIKE 'O0%')
-    insert into #syjbk_37 
- select * from #syjbk_bak where (C03C LIKE 'O82%' or C06x01C  LIKE 'O82%' 
- OR C06x02C  LIKE 'O82%' OR C06x03C LIKE 'O82%' OR C06x04C  LIKE 'O82%'
-  OR C06x05C  LIKE 'O82%' OR C06x06C  LIKE 'O82%' OR C06x07C  LIKE 'O82%') and  ( C06x01C NOT LIKE 'O00%' 
- OR C06x02C NOT LIKE 'O0%' OR C06x03C NOT LIKE 'O0%' OR C06x04C NOT LIKE 'O0%'
-  OR C06x05C NOT LIKE 'O0%' OR C06x06C NOT LIKE 'O0%' OR C06x07C NOT LIKE 'O0%')
-
-    insert into #syjbk_37 
- select * from #syjbk_bak where (C03C LIKE 'O83%' or C06x01C  LIKE 'O83%' 
- OR C06x02C  LIKE 'O83%' OR C06x03C LIKE 'O83%' OR C06x04C  LIKE 'O83%'
-  OR C06x05C  LIKE 'O83%' OR C06x06C  LIKE 'O83%' OR C06x07C  LIKE 'O83%') and  ( C06x01C NOT LIKE 'O0%' 
- OR C06x02C NOT LIKE 'O0%' OR C06x03C NOT LIKE 'O0%' OR C06x04C NOT LIKE 'O0%'
-  OR C06x05C NOT LIKE 'O0%' OR C06x06C NOT LIKE 'O0%' OR C06x07C NOT LIKE 'O0%')
-
-
-    insert into #syjbk_37 
- select * from #syjbk_bak where (C03C LIKE 'O84%' or C06x01C  LIKE 'O84%' 
- OR C06x02C  LIKE 'O84%' OR C06x03C LIKE 'O84%' OR C06x04C  LIKE 'O84%'
-  OR C06x05C  LIKE 'O84%' OR C06x06C  LIKE 'O84%' OR C06x07C  LIKE 'O84%') and  ( C06x01C NOT LIKE 'O0%' 
- OR C06x02C NOT LIKE 'O0%' OR C06x03C NOT LIKE 'O0%' OR C06x04C NOT LIKE 'O0%'
-  OR C06x05C NOT LIKE 'O0%' OR C06x06C NOT LIKE 'O0%' OR C06x07C NOT LIKE 'O0%')
-
-
-
-
- insert into #syjbk_37 
- select * from #syjbk_bak where C03C LIKE 'O80%' and ( C06x01C NOT LIKE 'O00%' 
- OR C06x02C NOT LIKE 'O00%' OR C06x03C NOT LIKE 'O00%' OR C06x04C NOT LIKE 'O00%'
-  OR C06x05C NOT LIKE 'O00%' OR C06x06C NOT LIKE 'O00%' OR C06x07C NOT LIKE 'O00%')
-   insert into #syjbk_37 
- select * from #syjbk_bak where C03C LIKE 'O80%' and ( C06x01C NOT LIKE 'O08%' 
- OR C06x02C NOT LIKE 'O08%' OR C06x03C NOT LIKE 'O08%' OR C06x04C NOT LIKE 'O08%'
-  OR C06x05C NOT LIKE 'O08%' OR C06x06C NOT LIKE 'O08%' OR C06x07C NOT LIKE 'O08%')
-    
-     insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X01C LIKE 'O80%' AND  (C03C NOT LIKE 'O00%' OR C06X02C NOT LIKE 'O00%' OR C06X03C NOT LIKE 'O00%' OR C06X04C NOT LIKE 'O00%'
-   OR C06X05C NOT LIKE 'O00%' OR C06X06C NOT LIKE 'O00%' OR C06X07C NOT LIKE 'O00%')
-      insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X01C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X02C NOT LIKE 'O08%' OR C06X03C NOT LIKE 'O08%' OR C06X04C NOT LIKE 'O08%'
-   OR C06X05C NOT LIKE 'O08%' OR C06X06C NOT LIKE 'O08%' OR C06X07C NOT LIKE 'O08%')
-
-    insert into #syjbk_37 
-   select * from #syjbk_bak where C06X02C  LIKE 'O80%' AND ( C03C NOT LIKE 'O00%' OR C06X01C NOT LIKE 'O00%' OR C06X03C NOT LIKE 'O00%' OR C06X04C NOT LIKE 'O00%'
-   OR C06X05C NOT LIKE 'O00%' OR C06X06C NOT LIKE 'O00%' OR C06X07C NOT LIKE 'O00%')
-         insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X02C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X01C NOT LIKE 'O08%' OR C06X03C NOT LIKE 'O08%' OR C06X04C NOT LIKE 'O08%'
-   OR C06X05C NOT LIKE 'O08%' OR C06X06C NOT LIKE 'O08%' OR C06X07C NOT LIKE 'O08%')
-
-       insert into #syjbk_37 
-   select * from #syjbk_bak where C06X03C  LIKE 'O80%' AND ( C03C NOT LIKE 'O00%' OR C06X01C NOT LIKE 'O00%' OR C06X02C NOT LIKE 'O00%' OR C06X04C NOT LIKE 'O00%'
-   OR C06X05C NOT LIKE 'O00%' OR C06X06C NOT LIKE 'O00%' OR C06X07C NOT LIKE 'O00%')
-         insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X03C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X01C NOT LIKE 'O08%' OR C06X02C NOT LIKE 'O08%' OR C06X04C NOT LIKE 'O08%'
-   OR C06X05C NOT LIKE 'O08%' OR C06X06C NOT LIKE 'O08%' OR C06X07C NOT LIKE 'O08%')
-
-      insert into #syjbk_37 
-   select * from #syjbk_bak where C06X04C  LIKE 'O80%' AND ( C03C NOT LIKE 'O00%' OR C06X01C NOT LIKE 'O00%' OR C06X02C NOT LIKE 'O00%' OR C06X03C NOT LIKE 'O00%'
-   OR C06X05C NOT LIKE 'O00%' OR C06X06C NOT LIKE 'O00%' OR C06X07C NOT LIKE 'O00%')
-         insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X04C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X01C NOT LIKE 'O08%' OR C06X02C NOT LIKE 'O08%' OR C06X03C NOT LIKE 'O08%'
-   OR C06X05C NOT LIKE 'O08%' OR C06X06C NOT LIKE 'O08%' OR C06X07C NOT LIKE 'O08%')
-   
-       insert into #syjbk_37 
-   select * from #syjbk_bak where C06X05C  LIKE 'O80%' AND ( C03C NOT LIKE 'O00%' OR C06X01C NOT LIKE 'O00%' OR C06X02C NOT LIKE 'O00%' OR C06X03C NOT LIKE 'O00%'
-   OR C06X04C NOT LIKE 'O00%' OR C06X06C NOT LIKE 'O00%' OR C06X07C NOT LIKE 'O00%')
-         insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X05C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X01C NOT LIKE 'O08%' OR C06X02C NOT LIKE 'O08%' OR C06X03C NOT LIKE 'O08%'
-   OR C06X04C NOT LIKE 'O08%' OR C06X06C NOT LIKE 'O08%' OR C06X07C NOT LIKE 'O08%')
-
-       insert into #syjbk_37 
-   select * from #syjbk_bak where C06X06C  LIKE 'O80%' AND ( C03C NOT LIKE 'O00%' OR C06X01C NOT LIKE 'O00%' OR C06X02C NOT LIKE 'O00%' OR C06X03C NOT LIKE 'O00%'
-   OR C06X04C NOT LIKE 'O00%' OR C06X05C NOT LIKE 'O00%' OR C06X07C NOT LIKE 'O00%')
-         insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X06C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X01C NOT LIKE 'O08%' OR C06X02C NOT LIKE 'O08%' OR C06X03C NOT LIKE 'O08%'
-   OR C06X04C NOT LIKE 'O08%' OR C06X05C NOT LIKE 'O08%' OR C06X07C NOT LIKE 'O08%')
-            insert into #syjbk_37 
-	select * from #syjbk_bak where  C06X07C LIKE 'O80%' AND  (C03C NOT LIKE 'O08%' OR C06X01C NOT LIKE 'O08%' OR C06X02C NOT LIKE 'O08%' OR C06X03C NOT LIKE 'O08%'
-   OR C06X04C NOT LIKE 'O08%' OR C06X05C NOT LIKE 'O08%' OR C06X06C NOT LIKE 'O08%')
-   insert into #syjbk_37 
-   select * from #syjbk_bak where C06X07C  LIKE 'O80%' AND ( C03C NOT LIKE 'O00%' OR C06X01C NOT LIKE 'O00%' OR C06X02C NOT LIKE 'O00%' OR C06X03C NOT LIKE 'O00%'
-   OR C06X04C NOT LIKE 'O00%' OR C06X05C NOT LIKE 'O00%' OR C06X06C NOT LIKE 'O00%')
-
- 
-
-
-  if exists(select 1 from #syjbk_37 where  C03C  not LIKE 'Z37%' and  C06X01C NOT LIKE 'Z37%'  and C06X02C NOT LIKE 'Z37%'  and C06X03C NOT LIKE 'Z37%'  and C06X04C NOT LIKE 'Z37%' 
-   and C06X05C NOT LIKE 'Z37%'  and C06X06C NOT LIKE 'Z37%'  and C06X07C NOT LIKE 'Z37%' and C06X08C  LIKE 'Z37%'  and C06X09C  LIKE 'Z37%' and C06X10C  LIKE 'Z37%' and C06X11C  LIKE 'Z37%'
-  
-  )
- begin 
-   INSERT #syjbk_error
-   select A48+'无分娩结局',A48
-   from #syjbk_37 where C03C  not LIKE 'Z37%' and  C06X01C NOT LIKE 'Z37%'  and C06X02C NOT LIKE 'Z37%'  and C06X03C NOT LIKE 'Z37%'  and C06X04C NOT LIKE 'Z37%' 
-   and C06X05C NOT LIKE 'Z37%'  and C06X06C NOT LIKE 'Z37%'  and C06X07C NOT LIKE 'Z37%'  and  C06X08C  LIKE 'Z37%' and C06X09C  LIKE 'Z37%' and C06X10C  LIKE 'Z37%' and C06X11C  LIKE 'Z37%' 
- end 
-
-   if exists(select 1 from #syjbk_37 where (C03C   LIKE 'Z37%' OR  C06X01C  LIKE 'Z37%'  OR C06X02C LIKE 'Z37%'  OR C06X03C LIKE 'Z37%'  OR C06X04C  LIKE 'Z37%' 
-   OR C06X05C  LIKE 'Z37%'  OR C06X06C  LIKE 'Z37%'  OR C06X07C  LIKE 'Z37%'  OR C06X08C  LIKE 'Z37%' OR C06X09C  LIKE 'Z37%' OR C06X10C  LIKE 'Z37%' OR C06X11C  LIKE 'Z37%'   )AND ISNULL(A18x01,'')=''
-  
-  )
- begin 
-   INSERT #syjbk_error
-   select A48+'有分娩结局无新生儿体重',A48
-   from #syjbk_37 where  ISNULL(A18x01,'')='' AND  (C03C   LIKE 'Z37%' OR  C06X01C  LIKE 'Z37%'  OR C06X02C LIKE 'Z37%'  OR C06X03C LIKE 'Z37%'  OR C06X04C  LIKE 'Z37%' 
-   OR C06X05C  LIKE 'Z37%'  OR C06X06C  LIKE 'Z37%'  OR C06X07C  LIKE 'Z37%'  OR C06X08C  LIKE 'Z37%' OR C06X09C  LIKE 'Z37%' OR C06X10C  LIKE 'Z37%' OR C06X11C  LIKE 'Z37%') 
- end 
-
-
-
-
-
-
- --出院主要诊断ICD-10首字母为C或D00-D48时，病理诊断编码为空
- if exists(select 1 from  #syjbk_bak where (C03C like 'C%' or C03C like 'D00%' or C03C LIKE  'D48%') and isnull(C09C,'-')='-')
- begin 
-    INSERT #syjbk_error
-   select '出院主要诊断ICD-10首字母为C或D00-D48时，病理诊断编码为空',A48
-   from #syjbk_bak where (C03C like 'C%' or C03C like 'D00%' or C03C LIKE 'D48%') and isnull(C09C,'-')='-'
- end 
- --病理诊断编码不为M肿瘤形态学数据
- if exists(select 1 from  #syjbk_bak where C09C is not null and C09C not like 'M%')
- begin 
-    INSERT #syjbk_error
-   select '病理诊断编码不为M开头肿瘤形态学编码',A48
-   from #syjbk_bak where isnull(C09C,'')<>'-'  AND isnull(C09C,'')<>''and C09C not like 'M%' 
- end 
-
-
-
- --无病理编码或者病理编号或者病理诊断
- --if exists(select 1 from  #syjbk_bak where ISNULL(C09C,'')<>'' and  (ISNULL(REPLACE(C10N,'-',''),'')='' OR ISNULL(REPLACE(C11,'-',''),'')=''))
- --begin 
- --   INSERT #syjbk_error
- --  select A48+'无病理编码或者病理编号或者病理诊断',A48
- --  from #syjbk_bak where isnull(C09C,'')<>''and (ISNULL(REPLACE(C10N,'-',''),'')='' OR ISNULL(REPLACE(C11,'-',''),'')='')
- --end 
- --if exists(select 1 from  #syjbk_bak where ISNULL(C10N,'')<>'' and (ISNULL(REPLACE(C09C,'-',''),'')='' OR ISNULL(REPLACE(C11,'-',''),'')=''))
- --begin 
- --   INSERT #syjbk_error
- --  select A48+'无病理编码或者病理编号或者病理诊断',A48
- --  from #syjbk_bak where  ISNULL(C10N,'')<>'' and (ISNULL(REPLACE(C09C,'-',''),'')='' OR ISNULL(REPLACE(C11,'-',''),'')='')
- --end 
- -- if exists(select 1 from  #syjbk_bak where ISNULL(C11,'')<>'' and (ISNULL(REPLACE(C09C,'-',''),'')='' OR ISNULL(REPLACE(C10N,'-',''),'')=''))
- --begin 
- --   INSERT #syjbk_error
- --  select A48+'无病理编码或者病理编号或者病理诊断',A48
- --  from #syjbk_bak where  ISNULL(C11,'')<>'' and (ISNULL(REPLACE(C09C,'-',''),'')='' OR ISNULL(REPLACE(C10N,'-',''),'')='')
- --end 
-
-
- --出院主要诊断ICD-10首字母为S或T时，损伤、中毒外部原因编码为空
-  if exists(select 1 from  #syjbk_bak where (C03C like 'S%' or C03C like 'T%' ) and isnull(C12C,'-')='-')
- begin 
-    INSERT #syjbk_error
-   select A48+'出院主要诊断ICD-10首字母为S或T时，损伤、中毒外部原因编码为空',A48
-   from #syjbk_bak where (C03C like 'S%' or C03C like 'T%' ) and isnull(C12C,'-')='-'
- end 
- --住院总费用应<自付金额、住院总费用小于分项之和
-----------------------以下为条件必填------------------------------------------
--- 离院方式为医嘱转院或医嘱转社区患者必填B35
-
--- 年龄不足1周岁的年龄（天）：A16按照实足年龄的天数填写。年龄不足1周岁时填写，年龄值A14应为0，取值范围：大于或等于0小于365，入院时间减出生日期后取整数，不足一天按0天计算。
---新生儿出生体重(克):A18x01 测量新生儿体重要求精确到10克；应在活产后一小时内称取重量。1、产妇和新生儿病案填写，从出生到28天为新生儿期，双胎及以上不同胎儿体重则继续填写下面的新生儿出生体重。2、新生儿体重范围：100克-9999克，产妇的主要诊断或其他诊断编码中含有Z37.0,Z37.2, Z37.3, Z37.5, Z37.6编码时，必须填写新生儿出生体重
---新生儿入院体重（克）:A17 100克-9999克，精确到10克；新生儿入院当日的体重；小于等于28天的新生儿必填，填写了新生儿入出院体重的，必须填写年龄不足1周岁的年龄（天），且必须小于等于28天。
---过敏药物名称:C25  有无药物过敏”为“有”时必填；多种药物用英文逗号进行分隔
-if exists(select  1 from #syjbk_bak where C24C='2' and isnull(C25,'')='' )
-begin 
-   INSERT #syjbk_error
-   select A48+'有无药物过敏”为“有”时必填；多种药物用英文逗号进行分隔',A48
-   from #syjbk_bak where C24C='2' and isnull(C25,'')=''
-end 
-
-
---------------必填项目-----------------------------------
---组织机构代码	A01
-if exists(select 1 from #syjbk_bak where isnull(A01,'')='')
-begin 
- INSERT #syjbk_error
- select  '组织机构代码为空',A48
-   from #syjbk_bak where isnull(A01,'')=''
-end 
---医疗机构名称	A02
-if exists(select 1 from #syjbk_bak where isnull(A02,'')='')
-begin 
- INSERT #syjbk_error
- select  '医疗机构名称为空',A48
-   from #syjbk_bak where isnull(A02,'')=''
-end 
---病案号	A48
-if exists(select 1 from #syjbk_bak where isnull(A48,'')='')
-begin 
- INSERT #syjbk_error
- select  '病案号为空',A48
-   from #syjbk_bak where isnull(A48,'')=''
-end 
---住院次数	A49
-if exists(select 1 from #syjbk_bak where isnull(A49,'')='')
-begin 
- INSERT #syjbk_error
- select  '住院次数为空',A48
-   from #syjbk_bak where isnull(A49,'')=''
-end 
---入院时间	B12
-if exists(select 1 from #syjbk_bak where isnull(B12,'')='')
-begin 
- INSERT #syjbk_error
- select  '入院时间为空',A48
-   from #syjbk_bak where isnull(B12,'')=''
-end 
-
---出院时间	B15
-if exists(select 1 from #syjbk_bak where isnull(B15,'')='')
-begin 
- INSERT #syjbk_error
- select  '出院时间为空',A48
-   from #syjbk_bak where isnull(B15,'')=''
-end 
---医疗付费方式	A46C
-if exists(select 1 from #syjbk_bak where isnull(A46C,'')='')
-begin 
- INSERT #syjbk_error
- select  '医疗付费方式为空',A48
-   from #syjbk_bak where isnull(A46C,'')=''
-end 
---姓名	A11
-if exists(select 1 from #syjbk_bak where isnull(A11,'')='')
-begin 
- INSERT #syjbk_error
- select  '姓名为空',A48
-   from #syjbk_bak where isnull(A11,'')=''
-end 
-
---性别	A12C
-if exists(select 1 from #syjbk_bak where isnull(A12C,'')='')
-begin 
- INSERT #syjbk_error
- select  '性别为空',A48
-   from #syjbk_bak where isnull(A12C,'')=''
-end 
---出生日期	A13
-if exists(select 1 from #syjbk_bak where isnull(A13,'')='')
-begin 
- INSERT #syjbk_error
- select  '出生日期为空',A48
-   from #syjbk_bak where isnull(A13,'')=''
-end 
-
---年龄（岁）	A14
-if exists(select 1 from #syjbk_bak where isnull(A14,'')='')
-begin 
- INSERT #syjbk_error
- select  '年龄（岁）为空',A48
-   from #syjbk_bak where isnull(A14,'')=''
-end 
---国籍	A15C
-if exists(select 1 from #syjbk_bak where isnull(A15C,'')='')
-begin 
- INSERT #syjbk_error
- select  '国籍为空',A48
-   from #syjbk_bak where isnull(A15C,'')=''
-end 
---婚姻	A21C
-if exists(select 1 from #syjbk_bak where isnull(A21C,'')='')
-begin 
- INSERT #syjbk_error
- select  '婚姻为空',A48
-   from #syjbk_bak where isnull(A21C,'')=''
-end 
---职业	A38C
-if exists(select 1 from #syjbk_bak where isnull(A38C,'')='')
-begin 
- INSERT #syjbk_error
- select  '职业为空',A48
-   from #syjbk_bak where isnull(A38C,'')=''
-end 
---民族	A19C
-if exists(select 1 from #syjbk_bak where isnull(A19C,'')='')
-begin 
- INSERT #syjbk_error
- select  '民族为空',A48
-   from #syjbk_bak where isnull(A19C,'')=''
-end 
---身份证号	A20
-if exists(select 1 from #syjbk_bak where isnull(A20,'')='')
-begin 
- INSERT #syjbk_error
- select  '身份证号为空或者小于15位数',A48
-   from #syjbk_bak where (isnull(A20,'')='' or LEN(A20)<15 )OR( LEN(A20) <18 AND LEN(A20)>15)
-end 
---出生地址	A22
-if exists(select 1 from #syjbk_bak where isnull(A22,'')='')
-begin 
- INSERT #syjbk_error
- select  '出生地址为空',A48
-   from #syjbk_bak where isnull(A22,'')=''
-end 
---籍贯省（自治区、直辖市）	A23C
-if exists(select 1 from #syjbk_bak where isnull(A23C,'')='')
-begin 
- INSERT #syjbk_error
- select  '籍贯省（自治区、直辖市）为空',A48
-   from #syjbk_bak where isnull(A23C,'')=''
-end 
-
---户口地址	A24
-if exists(select 1 from #syjbk_bak where isnull(A24,'')='')
-begin 
- INSERT #syjbk_error
- select  '户口地址为空',A48
-   from #syjbk_bak where isnull(A24,'')=''
-end 
---户口地址邮政编码	A25C
-if exists(select 1 from #syjbk_bak where isnull(A25C,'')='')
-begin 
- INSERT #syjbk_error
- select  '户口地址邮政编码为空',A48
-   from #syjbk_bak where isnull(A25C,'')=''
-end 
---现住址	A26
-if exists(select 1 from #syjbk_bak where isnull(A26,'')='')
-begin 
- INSERT #syjbk_error
- select  '现住址为空',A48
-   from #syjbk_bak where isnull(A26,'')=''
-end 
---现住址电话	A27
-if exists(select 1 from #syjbk_bak where isnull(A27,'')='')
-begin 
- INSERT #syjbk_error
- select  '现住址电话为空',A48
-   from #syjbk_bak where isnull(A27,'')=''
-end 
---现住址邮政编码	A28C
-if exists(select 1 from #syjbk_bak where isnull(A28C,'')='')
-begin 
- INSERT #syjbk_error
- select  '现住址邮政编码为空',A48
-   from #syjbk_bak where isnull(A28C,'')=''
-end 
---工作单位及地址	A29
-if exists(select 1 from #syjbk_bak where isnull(A29,'')='')
-begin 
- INSERT #syjbk_error
- select  '工作单位及地址为空',A48
-   from #syjbk_bak where isnull(A29,'')=''
-end 
---工作单位电话	A30
-if exists(select 1 from #syjbk_bak where isnull(A30,'')='')
-begin 
- INSERT #syjbk_error
- select  '工作单位电话为空',A48
-   from #syjbk_bak where isnull(A30,'')=''
-end 
---工作单位邮政编码	A31C
-if exists(select 1 from #syjbk_bak where isnull(A31C,'')='')
-begin 
- INSERT #syjbk_error
- select  '工作单位邮政编码为空',A48
-   from #syjbk_bak where isnull(A31C,'')=''
-end 
---联系人姓名	A32
-if exists(select 1 from #syjbk_bak where isnull(A32,'')='')
-begin 
- INSERT #syjbk_error
- select  '联系人姓名为空',A48
-   from #syjbk_bak where isnull(A32,'')=''
-end 
---联系人关系	A33C
-if exists(select 1 from #syjbk_bak where isnull(A33C,'')='')
-begin 
- INSERT #syjbk_error
- select  '联系人关系为空',A48
-   from #syjbk_bak where isnull(A33C,'')=''
-end 
---联系人地址	A34
-if exists(select 1 from #syjbk_bak where isnull(A34,'')='')
-begin 
- INSERT #syjbk_error
- select  '联系人地址为空',A48
-   from #syjbk_bak where isnull(A34,'')=''
-end 
-
---联系人电话	A35
-if exists(select 1 from #syjbk_bak where isnull(A35,'')='')
-begin 
- INSERT #syjbk_error
- select  '联系人电话为空',A48
-   from #syjbk_bak where isnull(A35,'')=''
-end 
---入院途径	B11C
-if exists(select 1 from #syjbk_bak where isnull(B11C,'')='')
-begin 
- INSERT #syjbk_error
- select  '入院途径为空',A48
-   from #syjbk_bak where isnull(B11C,'')=''
-end 
---入院科别	B13C
-if exists(select 1 from #syjbk_bak where isnull(B13C,'')='')
-begin 
- INSERT #syjbk_error
- select  '入院科别为空',A48
-   from #syjbk_bak where isnull(B13C,'')=''
-end 
---入院病房	B14
-if exists(select 1 from #syjbk_bak where isnull(B14,'')='')
-begin 
- INSERT #syjbk_error
- select  '入院病房为空',A48
-   from #syjbk_bak where isnull(B14,'')=''
-end 
---出院科别	B16C
-if exists(select 1 from #syjbk_bak where isnull(B16C,'')='')
-begin 
- INSERT #syjbk_error
- select  '出院科别为空',A48
-   from #syjbk_bak where isnull(B16C,'')=''
-end 
---出院病房	B17
-if exists(select 1 from #syjbk_bak where isnull(B17,'')='')
-begin 
- INSERT #syjbk_error
- select  '出院病房为空',A48
-   from #syjbk_bak where isnull(B17,'')=''
-end 
---实际住院（天）	B20
-if exists(select 1 from #syjbk_bak where isnull(B20,'')='')
-begin 
- INSERT #syjbk_error
- select  '实际住院（天）为空',A48
-   from #syjbk_bak where isnull(B20,'')=''
-end
---门（急）诊诊断编码	C01C
-if exists(select 1 from #syjbk_bak where isnull(C01C,'')='')
-begin 
- INSERT #syjbk_error
- select  '门（急）诊诊断编码为空',A48
-   from #syjbk_bak where isnull(C01C,'')=''
-end
---门（急）诊诊断名称	C02N
-if exists(select 1 from #syjbk_bak where isnull(C02N,'')='')
-begin 
- INSERT #syjbk_error
- select  '门（急）诊诊断名称为空',A48
-   from #syjbk_bak where isnull(C02N,'')=''
-end
---出院主要诊断编码	C03C
-if exists(select 1 from #syjbk_bak where isnull(C03C,'')='')
-begin 
- INSERT #syjbk_error
- select  '出院主要诊断编码为空',A48
-   from #syjbk_bak where isnull(C03C,'')=''
-end
---出院主要诊断名称	C04N
-if exists(select 1 from #syjbk_bak where isnull(C04N,'')='')
-begin 
- INSERT #syjbk_error
- select  '出院主要诊断名称为空',A48
-   from #syjbk_bak where isnull(C04N,'')=''
-end
---出院主要诊断入院病情	C05C
-if exists(select 1 from #syjbk_bak where isnull(C05C,'')='')
-begin 
- INSERT #syjbk_error
- select  '出院主要诊断入院病情为空',A48
-   from #syjbk_bak where isnull(C05C,'')=''
-end
---有无药物过敏	C24C
-if exists(select 1 from #syjbk_bak where isnull(C24C,'')='')
-begin 
- INSERT #syjbk_error
- select  '有无药物过敏为空',A48
-   from #syjbk_bak where isnull(C24C,'')=''
-end
---科主任	B22
-if exists(select 1 from #syjbk_bak where isnull(B22,'')='')
-begin 
- INSERT #syjbk_error
- select  '科主任为空',A48
-   from #syjbk_bak where isnull(B22,'')=''
-end
-
---主（副主）任医师	B23
-if exists(select 1 from #syjbk_bak where isnull(B23,'')='')
-begin 
- INSERT #syjbk_error
- select  '主（副主）任医师为空',A48
-   from #syjbk_bak where isnull(B23,'')=''
-end
---主治医师	B24
-if exists(select 1 from #syjbk_bak where isnull(B24,'')='')
-begin 
- INSERT #syjbk_error
- select  '主治医师为空',A48
-   from #syjbk_bak where isnull(B24,'')=''
-end
---住院医师	B25
-if exists(select 1 from #syjbk_bak where isnull(B25,'')='')
-begin 
- INSERT #syjbk_error
- select  '住院医师为空',A48
-   from #syjbk_bak where isnull(B25,'')=''
-end
---责任护士	B26
-if exists(select 1 from #syjbk_bak where isnull(B26,'')='')
-begin 
- INSERT #syjbk_error
- select  '责任护士为空',A48
-   from #syjbk_bak where isnull(B26,'')=''
-end
---编码员	B29
-if exists(select 1 from #syjbk_bak where isnull(B29,'')='')
-begin 
- INSERT #syjbk_error
- select  '编码员为空',A48
-   from #syjbk_bak where isnull(B29,'')=''
-end
---ABO血型	C26C
-if exists(select 1 from #syjbk_bak where isnull(C26C,'')='')
-begin 
- INSERT #syjbk_error
- select  'ABO血型为空',A48
-   from #syjbk_bak where isnull(C26C,'')=''
-end
---Rh血型	C27C
-if exists(select 1 from #syjbk_bak where isnull(C27C,'')='')
-begin 
- INSERT #syjbk_error
- select  'Rh血型为空',A48
-   from #syjbk_bak where isnull(C27C,'')=''
-end
---主要手术操作编码	C14x01C
-if exists(select 1 from #syjbk_bak where isnull(C14x01C,'')='')
-begin 
- INSERT #syjbk_error
- select  '主要手术操作编码为空',A48
-   from #syjbk_bak where isnull(C14x01C,'')=''
-end
-if exists(select 1 from #syjbk_bak where isnull(C14x01C,'')<>'' AND isnull(C14x01C,'')<>'-' and C14x01C NOT IN (SELECT FUPOPCODE FROM tupicd9set ))
-begin 
- INSERT #syjbk_error
- select  '主要手术操作编码不在值域范围',A48
-   from #syjbk_bak where isnull(C14x01C,'')<>'' AND isnull(C14x01C,'')<>'-' and C14x01C NOT IN (SELECT FUPOPCODE FROM tupicd9set )
-end
---主要手术操作名称	C15x01N
-if exists(select 1 from #syjbk_bak where isnull(C15x01N,'')='')
-begin 
- INSERT #syjbk_error
- select  '主要手术操作名称为空',A48
-   from #syjbk_bak where  isnull(C15x01N,'')='' 
-end
-
-if exists(select 1 from #syjbk_bak where isnull(C15x01N,'')<>'' AND  isnull(C15x01N,'')<>'-' AND C15x01N  NOT IN (SELECT FUPOPNAME FROM tupicd9set ))
-begin 
- INSERT #syjbk_error
- select  '主要手术操作名称不在值域范围',A48
-   from #syjbk_bak where isnull(C15x01N,'')<>'' AND  isnull(C15x01N,'')<>'-' AND C15x01N  NOT IN (SELECT FUPOPNAME FROM tupicd9set )
-end
---主要手术操作日期	C16x01
-if exists(select 1 from #syjbk_bak where isnull(C16x01,'')='')
-begin 
- INSERT #syjbk_error
- select  '主要手术操作日期为空',A48
-   from #syjbk_bak where isnull(C16x01,'')=''
-end
---主要手术操作级别 C17x01
-if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C17x01,'')='')
-begin 
- INSERT #syjbk_error
- select  '主要手术操作级别为空',A48
-   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C17x01,'')=''
-end
-
-----主要手术操作术者 C18x01
---if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C18x01,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '主要手术操作术者',A48
---   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C18x01,'')=''
---end
-
-----主要手术操作Ⅰ助 C19x01
---if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C19x01,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '主要手术操作Ⅰ助',A48
---   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C19x01,'')=''
---end
-----主主要手术操作Ⅱ助C20x01
---if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C20x01,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '主要手术操作Ⅱ助',A48
---   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C20x01,'')=''
---end
-----主要手术操作切口愈合等级 C21x01C
---if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C21x01C,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '主要手术操作切口愈合等级',A48
---   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C21x01C,'')=''
---end
-----主要手术操作麻醉方式 C22x01C
---if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C22x01C,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '主要手术操作麻醉方式',A48
---   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C22x01C,'')=''
---end
-----主要手术操作麻醉医师
---if exists(select 1 from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C23x01,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '主要手术操作麻醉医师',A48
---   from #syjbk_bak where isnull(C16x01,'')<>'-' and isnull(C23x01,'')=''
---end
---颅脑损伤患者入院前昏迷时间（天）	C28
-if exists(select 1 from #syjbk_bak where isnull(C28,'')='')
-begin 
- INSERT #syjbk_error
- select  '颅脑损伤患者入院前昏迷时间（天）为空',A48
-   from #syjbk_bak where isnull(C28,'')=''
-end
---颅脑损伤患者入院前昏迷时间(小时)	C29
-if exists(select 1 from #syjbk_bak where isnull(C29,'')='')
-begin 
- INSERT #syjbk_error
- select  '颅脑损伤患者入院前昏迷时间(小时)为空',A48
-   from #syjbk_bak where isnull(C29,'')=''
-end
---颅脑损伤患者入院前昏迷时间(分钟)	C30
-if exists(select 1 from #syjbk_bak where isnull(C30,'')='')
-begin 
- INSERT #syjbk_error
- select  '颅脑损伤患者入院前昏迷时间(分钟)为空',A48
-   from #syjbk_bak where isnull(C30,'')=''
-end
-
---颅脑损伤患者入院后昏迷时间（天）	C31
-if exists(select 1 from #syjbk_bak where isnull(C31,'')='')
-begin 
- INSERT #syjbk_error
- select  '颅脑损伤患者入院后昏迷时间（天）为空',A48
-   from #syjbk_bak where isnull(C31,'')=''
-end
---颅脑损伤患者入院后昏迷时间(小时)	C32
-if exists(select 1 from #syjbk_bak where isnull(C32,'')='')
-begin 
- INSERT #syjbk_error
- select  '颅脑损伤患者入院后昏迷时间(小时)为空',A48
-   from #syjbk_bak where isnull(C32,'')=''
-end
---颅脑损伤患者入院后昏迷时间(分钟)	C33
-if exists(select 1 from #syjbk_bak where isnull(C33,'')='')
-begin 
- INSERT #syjbk_error
- select  '颅脑损伤患者入院后昏迷时间(分钟)为空',A48
-   from #syjbk_bak where isnull(C33,'')=''
-end
-
---是否有出院31日内再住院计划	B36C
-if exists(select 1 from #syjbk_bak where isnull(B36C,'')='')
-begin 
- INSERT #syjbk_error
- select  '是否有出院31日内再住院计划为空',A48
-   from #syjbk_bak where isnull(B36C,'')=''
-end
---离院方式	B34C
-if exists(select 1 from #syjbk_bak where isnull(B34C,'')='')
-begin 
- INSERT #syjbk_error
- select  '离院方式为空',A48
-   from #syjbk_bak where isnull(B34C,'')=''
-end
-
---住院总费用	D01
---if exists(select 1 from #syjbk_bak where isnull(D01,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '住院总费用为空',A48
---   from #syjbk_bak where isnull(D01,'')=''
---end
-
-----住院总费用其中自付金额	D09
---if exists(select 1 from #syjbk_bak where isnull(D09,'')='')
---begin 
--- INSERT #syjbk_error
--- select  '住院总费用其中自付金额为空',A48
---   from #syjbk_bak where isnull(D09,'')=''
---end
-
-
-DECLARE @i INT,@b INT
-SELECT @i=COUNT(*) FROM TPATIENTVISIT a WHERE    a.fcydate>=@rq1 and a.fcydate<@rq2 and FCYDEPT not like '大公馆%' and  FCYDEPT not like '黄水%' and  FCYDEPT not like '三病区%'and  FCYDEPT not like '精神科%'  
-	and FCYBS NOT LIKE '黄水%'  and  FCYBS not like '大公馆%' --ADD BY QGY 排除大公馆黄水数据病房
-SELECT @b=COUNT(*) FROM #syjbk_bak b 
-IF @i<>@b   
-INSERT #syjbk_error 
-SELECT  @i,@b 
--- --SELECT '数量不符','123' 
-
-              
---IF EXISTS (SELECT 1 FROM #syjbk_error)
---SELECT a.*,b.FRYDEPT,b.FCYDEPT,FZYDOCT FROM #syjbk_error a 
---LEFT JOIN TPATIENTVISIT b on a.syxh=b.FPRN and b.FCYDATE>='20190101'
---ELSE
-  SELECT * FROM #syjbk_bak 
+    SELECT * FROM #syjbk_bak 
 
 
 SET QUOTED_IDENTIFIER OFF 
 
 SET QUOTED_IDENTIFIER OFF 
+
+
 
 
