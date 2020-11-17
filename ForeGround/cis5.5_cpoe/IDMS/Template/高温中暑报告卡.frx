@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/01/2019 09:46:15" ReportInfo.Modified="11/26/2019 17:46:56" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    //户别
+    private void Text641_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text641.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;01&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='12'
+        {
+          CheckBox94.Checked = true;//本县区
+        }
+        if(i==&quot;02&quot;)
+        {
+          CheckBox95.Checked = true;//本市其他县区
+        }
+        if(i==&quot;03&quot;)
+        {
+          CheckBox96.Checked = true;//本省其他地市
+        }
+        if(i==&quot;20&quot;)
+        {
+          CheckBox97.Checked = true;//外省
+        }
+        if(i==&quot;30&quot;)
+        {
+          CheckBox98.Checked = true;//港澳台
+        }
+        if(i==&quot;40&quot;)
+        {
+          CheckBox99.Checked = true;//外籍
+        }
+      }
+    }
+    //报卡类别
+    private void Text642_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text642.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;40&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='8'
+        {
+          CheckBox92.Checked = true;//初次报告
+        }
+        if(i==&quot;50&quot;)
+        {
+          CheckBox93.Checked = true;//订正报告
+        }
+      }
+    }
+    //中暑诊断
+    private void Text643_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text643.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;G1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='151'
+        {
+          CheckBox100.Checked = true;//轻症中暑
+        }
+        if(i==&quot;G2&quot;)
+        {
+          CheckBox101.Checked = true;//重症中暑
+        }
+        if(i==&quot;G3&quot;)
+        {
+          CheckBox109.Checked = true;//其他中暑
+        }
+      }
+    }
+    //重症诊断
+    private void Text645_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text645.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;G21&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='152'
+        {
+          CheckBox102.Checked = true;//热射病
+        }
+        if(i==&quot;G22&quot;)
+        {
+          CheckBox103.Checked = true;//热痉挛
+        }
+        if(i==&quot;G23&quot;)
+        {
+          CheckBox104.Checked = true;//热衰竭
+        }
+        if(i==&quot;G24&quot;)
+        {
+          CheckBox105.Checked = true;//混合性
+        }
+      }
+    }
+    //患者情况
+    private void Text646_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text646.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;14&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='14'
+        {
+          CheckBox106.Checked = true;//部分好转
+        }
+        if(i==&quot;11&quot;)
+        {
+          CheckBox107.Checked = true;//治愈
+        }
+        if(i==&quot;50&quot;)
+        {
+          CheckBox108.Checked = true;//死亡
+        }
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="DOCPHONE" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="BKTYPE_ID" DataType="System.String"/>
+      <Column Name="BKTYPE_NAME" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="ZYHM" DataType="System.String"/>
+      <Column Name="LXR" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="GuardianSFZH" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="AGE" DataType="System.String"/>
+      <Column Name="MZ_ID" DataType="System.String"/>
+      <Column Name="MZ_NAME" DataType="System.String"/>
+      <Column Name="GZDW" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="HB_ID" DataType="System.String"/>
+      <Column Name="HB_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="ADDR" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="ZY_OTHER" DataType="System.String"/>
+      <Column Name="FBRQ" DataType="System.String"/>
+      <Column Name="ZDDATE" DataType="System.String"/>
+      <Column Name="DEATH_TIME" DataType="System.String"/>
+      <Column Name="ICD_Code" DataType="System.String"/>
+      <Column Name="ICD_Name" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="HYZT_ID" DataType="System.String"/>
+      <Column Name="HYZT_NAME" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+      <Column Name="OUTCOME_ID" DataType="System.String"/>
+      <Column Name="OUTCOME_NAME" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text498" Width="718.2" Height="18.9" Text="高温中暑报告卡" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="718.2"/>
+    <DataBand Name="Data1" Top="45.88" Width="718.2" Height="399.92">
+      <TextObject Name="Text310" Width="75.6" Height="18.9" Text="卡片编号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text311" Left="66.15" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.KPBH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox92" Left="538.65" Top="2.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text515" Left="549.99" Width="66.15" Height="18.9" Text="初次报告" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text516" Left="217.35" Width="113.4" Height="18.9" Text="住院号或门诊号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text517" Left="321.3" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZYHM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text518" Left="472.5" Width="75.6" Height="18.9" Text="报卡类别：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox93" Left="633.15" Top="2.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text519" Left="644.49" Width="66.15" Height="18.9" Text="订正报告" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text520" Top="28.35" Width="47.25" Height="18.9" Text="姓名：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text521" Left="47.25" Top="28.35" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text522" Left="179.55" Top="28.35" Width="47.25" Height="18.9" Text="性别：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text523" Left="226.8" Top="28.35" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text524" Left="302.4" Top="28.35" Width="75.6" Height="18.9" Text="证件类型：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text525" Left="378" Top="28.35" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.IDTYPE_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text526" Left="510.3" Top="28.35" Width="75.6" Height="18.9" Text="证件号码：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text527" Left="585.9" Top="28.35" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SFZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text528" Top="56.7" Width="75.6" Height="18.9" Text="出生日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text529" Left="66.15" Top="56.7" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CSRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text530" Left="245.7" Top="56.7" Width="75.6" Height="18.9" Text="实足年龄：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text531" Left="311.85" Top="56.7" Width="151.2" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text532" Left="510.3" Top="56.7" Width="75.6" Height="18.9" Text="联系电话：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text533" Left="585.9" Top="56.7" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text534" Top="85.05" Width="75.6" Height="18.9" Text="病人属于：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox94" Left="75.6" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text535" Left="86.94" Top="85.05" Width="56.7" Height="18.9" Text="本县区" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox95" Left="160.65" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text536" Left="171.99" Top="85.05" Width="94.5" Height="18.9" Text="本市其他县区" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox96" Left="283.5" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text537" Left="294.84" Top="85.05" Width="94.5" Height="18.9" Text="本省其他地市" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox97" Left="406.35" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text538" Left="417.69" Top="85.05" Width="37.8" Height="18.9" Text="外省" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox98" Left="472.5" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text539" Left="483.84" Top="85.05" Width="56.7" Height="18.9" Text="港澳台" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox99" Left="557.55" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text540" Left="568.89" Top="85.05" Width="37.8" Height="18.9" Text="外籍" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text600" Left="66.15" Top="113.4" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text601" Left="179.55" Top="113.4" Width="122.85" Height="18.9" Text="省(自治区/直辖市)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text602" Left="302.4" Top="113.4" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text603" Left="415.8" Top="113.4" Width="85.05" Height="18.9" Text="市(地/州/盟)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text604" Left="500.85" Top="113.4" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text605" Left="614.25" Top="113.4" Width="103.95" Height="18.9" Text="县(市/区/旗)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text606" Left="66.15" Top="141.75" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text607" Left="179.55" Top="141.75" Width="85.05" Height="18.9" Text="乡镇(街道)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text608" Left="302.4" Top="141.75" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text609" Left="415.8" Top="141.75" Width="85.05" Height="18.9" Text="村(居)委员会" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text610" Left="500.85" Top="141.75" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text611" Left="614.25" Top="141.75" Width="103.95" Height="18.9" Text="(村民组/门牌号)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text612" Top="113.4" Width="75.6" Height="18.9" Text="现住地址：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text613" Top="170.1" Width="75.6" Height="18.9" Text="中暑诊断：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox100" Left="75.6" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text614" Left="86.94" Top="170.1" Width="66.15" Height="18.9" Text="轻症中暑" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox101" Left="179.55" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text615" Left="190.89" Top="170.1" Width="66.15" Height="18.9" Text="重症中暑" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text616" Left="75.6" Top="198.45" Width="75.6" Height="18.9" Text="重症中暑：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox102" Left="151.2" Top="201.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text617" Left="162.54" Top="198.45" Width="56.7" Height="18.9" Text="热射病" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox103" Left="236.25" Top="201.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text618" Left="247.59" Top="198.45" Width="56.7" Height="18.9" Text="热痉挛" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox104" Left="321.3" Top="201.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text619" Left="332.64" Top="198.45" Width="56.7" Height="18.9" Text="热衰竭" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox105" Left="406.35" Top="201.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text620" Left="417.69" Top="198.45" Width="56.7" Height="18.9" Text="混合型" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text621" Top="226.8" Width="75.6" Height="18.9" Text="患者情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox106" Left="75.6" Top="229.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text622" Left="86.94" Top="226.8" Width="66.15" Height="18.9" Text="部分好转" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox107" Left="179.55" Top="229.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text623" Left="190.89" Top="226.8" Width="37.8" Height="18.9" Text="治愈" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox108" Left="255.15" Top="229.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text624" Left="266.49" Top="226.8" Width="37.8" Height="18.9" Text="死亡" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text625" Top="255.15" Width="75.6" Height="18.9" Text="中暑日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text626" Left="66.15" Top="255.15" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.FBRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text627" Left="510.3" Top="255.15" Width="75.6" Height="18.9" Text="死亡时间：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text628" Left="576.45" Top="255.15" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DEATH_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text629" Top="283.5" Width="75.6" Height="18.9" Text="报告单位：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text630" Left="66.15" Top="283.5" Width="207.9" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGDWMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text631" Left="302.4" Top="283.5" Width="75.6" Height="18.9" Text="填卡医生：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text632" Left="368.55" Top="283.5" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text633" Left="510.3" Top="283.5" Width="75.6" Height="18.9" Text="填卡日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text634" Left="576.45" Top="283.5" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text635" Top="311.85" Width="75.6" Height="18.9" Text="填卡科室：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text636" Left="66.15" Top="311.85" Width="207.9" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text637" Left="302.4" Top="311.85" Width="75.6" Height="18.9" Text="填卡病区：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text638" Left="368.55" Top="311.85" Width="217.35" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text639" Top="340.2" Width="47.25" Height="18.9" Text="备注：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text640" Left="47.25" Top="343.22" Width="670.95" Height="56.7" Text="[报告卡主表.MEMO]" Font="宋体, 9pt"/>
+      <TextObject Name="Text641" Left="614.25" Top="85.05" Width="56.7" Height="18.9" Visible="false" AfterDataEvent="Text641_AfterData" Text="[报告卡主表.HB_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text642" Left="463.05" Top="56.7" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text642_AfterData" Text="[报告卡主表.BKTYPE_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text643" Left="387.45" Top="170.1" Width="75.6" Height="18.9" Visible="false" AfterDataEvent="Text643_AfterData" Text="[报告卡主表.DiagClass2_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox109" Left="292.95" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text644" Left="304.29" Top="170.1" Width="66.15" Height="18.9" Text="其他中暑" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text645" Left="481.95" Top="198.45" Width="75.6" Height="18.9" Visible="false" AfterDataEvent="Text645_AfterData" Text="[报告卡主表.DiagClass3_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text646" Left="330.75" Top="226.8" Width="75.6" Height="18.9" Visible="false" AfterDataEvent="Text646_AfterData" Text="[报告卡主表.OUTCOME_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="449.84" Width="718.2"/>
+  </ReportPage>
+</Report>

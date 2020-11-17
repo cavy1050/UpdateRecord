@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="12/31/2019 09:36:00" ReportInfo.Modified="04/13/2020 17:10:00" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private void Text208_AfterData(object sender, EventArgs e)
+    {     
+        string[] sArray = Text208.Text.Split(',') ;
+        foreach(string item  in sArray)
+        {
+            if(item.Equals(&quot;220&quot;))
+              CheckBox27.Visible=true;
+            if(item.Equals(&quot;240&quot;))
+            CheckBox28.Visible=true;
+          if(item.Equals(&quot;250&quot;))
+            CheckBox29.Visible=true;
+          if(item.Equals(&quot;530&quot;))
+            CheckBox30.Visible=true;
+          if(item.Equals(&quot;999&quot;))
+            CheckBox31.Visible=true;
+        }
+    }
+    
+    private void Text92_AfterData(object sender, EventArgs e)
+    {
+      if(Text92.Text.Contains(&quot;10&quot;))
+      {
+        CheckBox6.Visible=true;
+        CheckBox5.Visible=false;
+        CheckBox4.Visible=false;
+      } else  if(Text92.Text.Contains(&quot;20&quot;)){   
+        CheckBox6.Visible=false;
+        CheckBox5.Visible=false;
+        CheckBox4.Visible=true;                
+      }  else  if(Text92.Text.Contains(&quot;50&quot;)){   
+        CheckBox6.Visible=false;
+        CheckBox5.Visible=true;
+        CheckBox4.Visible=false;                
+      }   else  {   
+        CheckBox6.Visible=false;
+        CheckBox5.Visible=false;
+        CheckBox4.Visible=false;                
+      }
+    }
+
+    private void Text93_AfterData(object sender, EventArgs e)
+    {
+      if(Text93.Text.Contains(&quot;07&quot;))
+      {
+        CheckBox3.Visible=true;
+        CheckBox2.Visible=false;
+        CheckBox1.Visible=false;
+      } else  if(Text93.Text.Contains(&quot;12&quot;)){   
+        CheckBox3.Visible=false;
+        CheckBox2.Visible=true;
+        CheckBox1.Visible=false;
+
+      } else  if(Text93.Text.Contains(&quot;22&quot;)){   
+        CheckBox3.Visible=false;
+        CheckBox2.Visible=false;
+        CheckBox1.Visible=true;
+
+      }
+    }
+
+    private void Text94_AfterData(object sender, EventArgs e)
+    {
+      if(Text94.Text.Contains(&quot;1&quot;))
+      { CheckBox8.Visible=true;
+        CheckBox7.Visible=false;
+      } else  if(Text94.Text.Contains(&quot;2&quot;)){   
+        CheckBox8.Visible=false;
+        CheckBox7.Visible=true;
+      }
+    }
+
+    private void Text87_AfterData(object sender, EventArgs e)
+    {
+      Text87.Text=Text87.Text.Trim().Substring(0,4)+&quot;年&quot;
+        +Text87.Text.Trim().Substring(4,2)+&quot;月&quot;
+        +Text87.Text.Trim().Substring(6,2)+&quot;日&quot;;     
+
+    }
+
+    private void Text89_AfterData(object sender, EventArgs e)
+    {
+      Text89.Text=Text89.Text.Trim().Substring(0,4)+&quot;年&quot;
+        +Text89.Text.Trim().Substring(4,2)+&quot;月&quot;
+        +Text89.Text.Trim().Substring(6,2)+&quot;日&quot;;     
+    }
+
+    private void Text187_AfterData(object sender, EventArgs e)
+    {
+      if(Text187.Text.Contains(&quot;1&quot;)) { 
+        CheckBox22.Visible=true;
+        CheckBox23.Visible=false;
+        CheckBox24.Visible=false;
+        CheckBox25.Visible=false;
+        CheckBox26.Visible=false;
+      } else  if(Text187.Text.Contains(&quot;2&quot;)){   
+        CheckBox22.Visible=false;
+        CheckBox23.Visible=true;
+        CheckBox24.Visible=false;
+        CheckBox25.Visible=false;
+        CheckBox26.Visible=false;
+      } else  if(Text187.Text.Contains(&quot;3&quot;)){   
+        CheckBox22.Visible=false;
+        CheckBox23.Visible=false;
+        CheckBox24.Visible=true;
+        CheckBox25.Visible=false;
+        CheckBox26.Visible=false;
+      } else  if(Text187.Text.Contains(&quot;4&quot;)){   
+        CheckBox22.Visible=false;
+        CheckBox23.Visible=false;
+        CheckBox24.Visible=false;
+        CheckBox25.Visible=true;
+        CheckBox26.Visible=false;
+      } else  if(Text187.Text.Contains(&quot;9&quot;)){   
+        CheckBox22.Visible=false;
+        CheckBox23.Visible=false;
+        CheckBox24.Visible=false;
+        CheckBox25.Visible=false;
+        CheckBox26.Visible=true;
+      }
+
+    }
+    private void Text209_AfterData(object sender, EventArgs e)
+    {
+      if(Text209.Text.Contains(&quot;2&quot;))
+      { CheckBox34.Visible=true;
+      }else  if(Text209.Text.Contains(&quot;1&quot;)){   
+        CheckBox34.Visible=false;
+      }
+    }
+    private void Text210_AfterData(object sender, EventArgs e)
+    {
+      if(Text210.Text.Contains(&quot;1&quot;))
+      { CheckBox32.Visible=true;
+        CheckBox33.Visible=false;
+      } else  if(Text210.Text.Contains(&quot;2&quot;)){   
+        CheckBox32.Visible=false;
+        CheckBox33.Visible=true;}
+      else  if(Text210.Text.Contains(&quot;&quot;)){   
+        CheckBox32.Visible=false;
+        CheckBox33.Visible=false;
+      }
+    }
+  }
+  
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="BKTYPE_ID" DataType="System.String"/>
+      <Column Name="BKTYPE_NAME" DataType="System.String"/>
+      <Column Name="HB_ID" DataType="System.String"/>
+      <Column Name="HB_NAME" DataType="System.String"/>
+      <Column Name="MZH" DataType="System.String"/>
+      <Column Name="ZYHM" DataType="System.String"/>
+      <Column Name="ICD_Code" DataType="System.String"/>
+      <Column Name="ICD_Name" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="GZDW" DataType="System.String"/>
+      <Column Name="PREZDDM" DataType="System.String"/>
+      <Column Name="PREZDMC" DataType="System.String"/>
+      <Column Name="PREZDDATE" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="FBDATE" DataType="System.String"/>
+      <Column Name="ZDDATE" DataType="System.String"/>
+      <Column Name="ZDYJ_ID" DataType="System.String"/>
+      <Column Name="ZDYJ_NAME" DataType="System.String"/>
+      <Column Name="ZDFL_ID" DataType="System.String"/>
+      <Column Name="ZDFL_NAME" DataType="System.String"/>
+      <Column Name="PRESTROKE_ID" DataType="System.String"/>
+      <Column Name="PRESTROKE_NAME" DataType="System.String"/>
+      <Column Name="PRERECODE_ID" DataType="System.String"/>
+      <Column Name="PRERECODE_NAME" DataType="System.String"/>
+      <Column Name="DEATH_TIME" DataType="System.String"/>
+      <Column Name="DEATH_REASON_ID" DataType="System.String"/>
+      <Column Name="DEATH_REASON_NAME" DataType="System.String"/>
+      <Column Name="OTHER_CAUSE_ID" DataType="System.String"/>
+      <Column Name="OTHER_CAUSE" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="YNSKRDM" DataType="System.String"/>
+      <Column Name="YNSKRMC" DataType="System.String"/>
+      <Column Name="YNSKRQ" DataType="System.String"/>
+      <Column Name="YWSKRDM" DataType="System.String"/>
+      <Column Name="YWSKRMC" DataType="System.String"/>
+      <Column Name="YWSKRQ" DataType="System.String"/>
+      <Column Name="SKDWDM" DataType="System.String"/>
+      <Column Name="SKDWMC" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="JZDURATION" DataType="System.String"/>
+      <Column Name="FBCS" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="报告卡扩展表" ReferenceName="Data.报告卡扩展表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="BGKXH" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" ExtraDesignWidth="true">
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="1083.08">
+      <TextObject Name="Text1" Top="7.56" Width="718.2" Height="37.8" AfterDataEvent="Text1_AfterData" Text="脑卒中登记报告卡" HorzAlign="Center" VertAlign="Center" Font="宋体, 18pt, style=Bold"/>
+      <TextObject Name="Text2" Left="510.3" Top="16.35" Width="189" Height="32.13" AfterDataEvent="Text1_AfterData" Text="编号：[报告卡主表.KPBH]&#13;&#10;" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+      <LineObject Name="Line1" Left="557.55" Top="36.8" Width="103.95" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text3" Left="41.45" Top="56.7" Width="75.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="发病报告" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text4" Left="145.4" Top="56.7" Width="75.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="订正报告" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text5" Left="249.35" Top="56.7" Width="75.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="死亡报告" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text6" Left="362.75" Top="56.7" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="常住户籍" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text7" Left="476.15" Top="56.7" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="常住非户籍" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text8" Left="599" Top="56.7" Width="47.25" Height="22.68" AfterDataEvent="Text1_AfterData" Text="流动" VertAlign="Bottom" Font="宋体, 11pt"/>
+      <TextObject Name="Text9" Left="9.45" Top="94.5" Width="292.95" Height="22.68" AfterDataEvent="Text1_AfterData" Text="门诊号：[报告卡主表.MZH]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text10" Left="217.35" Top="94.5" Width="302.4" Height="22.68" AfterDataEvent="Text1_AfterData" Text="住院号：[报告卡主表.ZYHM]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text11" Left="425.25" Top="94.5" Width="85.05" Height="22.68" AfterDataEvent="Text1_AfterData" Text="ICD编码：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text12" Left="9.45" Top="132.3" Width="189" Height="22.68" AfterDataEvent="Text1_AfterData" Text="姓名：[报告卡主表.HZXM]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text13" Left="217.35" Top="132.3" Width="56.7" Height="22.68" AfterDataEvent="Text1_AfterData" Text="性别：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text14" Left="302.4" Top="132.3" Width="28.35" Height="22.68" AfterDataEvent="Text1_AfterData" Text="男" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text15" Left="368.55" Top="132.3" Width="28.35" Height="22.68" AfterDataEvent="Text1_AfterData" Text="女" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text16" Left="406.35" Top="132.3" Width="85.05" Height="22.68" AfterDataEvent="Text1_AfterData" Text="出生日期：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text17" Left="9.45" Top="170.1" Width="359.1" Height="22.68" AfterDataEvent="Text1_AfterData" Text="身份证号码：[报告卡主表.SFZH]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text18" Left="9.45" Top="207.9" Width="141.75" Height="22.68" AfterDataEvent="Text1_AfterData" Text="职业:" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text19" Left="255.15" Top="207.9" Width="85.05" Height="22.68" AfterDataEvent="Text1_AfterData" Text="文化程度:" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text20" Left="292.95" Top="170.1" Width="66.15" Height="22.68" AfterDataEvent="Text1_AfterData" Text="户籍地:" VertAlign="Center" Font="宋体, 11pt"/>
+      <LineObject Name="Line2" Left="500.85" Top="161.2" Height="98.28" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text21" Left="513.75" Top="167.1" Width="170.1" Height="41.58" AfterDataEvent="Text1_AfterData" Text="  更正诊断报告栏&#13;&#10;(原报告有误时填写)" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text22" Left="504.3" Top="203.45" Width="198.45" Height="22.68" AfterDataEvent="Text1_AfterData" Text="原诊断:[报告卡主表.PREZDMC]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text23" Left="504.3" Top="235.25" Width="198.45" Height="22.68" AfterDataEvent="Text1_AfterData" Text="原诊断日期:" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text24" Left="9.45" Top="245.7" Width="274.05" Height="22.68" AfterDataEvent="Text1_AfterData" Text="工作单位:[报告卡主表.GZDW]" VertAlign="Center" Font="宋体, 11pt"/>
+      <LineObject Name="Line3" Left="500.4" Top="258.15" Width="207.9" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text25" Left="9.45" Top="283.5" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="现家庭住址:" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text26" Left="94.5" Top="274.05" Width="604.8" Height="32.13" Border.Lines="Bottom" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.JZD_SHENG_NAME] [报告卡主表.JZD_SHI_NAME] [报告卡主表.JZD_QU_NAME] [报告卡主表.JZD_XZ_NAME][报告卡主表.JZD_CUN][报告卡主表.JZD_MPH]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text36" Left="264.6" Top="245.7" Width="198.45" Height="22.68" AfterDataEvent="Text1_AfterData" Text="电话:[报告卡主表.LXDH]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text37" Left="9.45" Top="321.3" Width="292.95" Height="22.68" AfterDataEvent="Text1_AfterData" Text="1.诊断：[报告卡主表.ZDMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text38" Left="302.4" Top="321.3" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="2.诊断日期:" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text39" Left="9.45" Top="359.1" Width="633.15" Height="22.68" AfterDataEvent="Text1_AfterData" Text="3.诊断依据：     CT     MRI     血管造影     腰穿     其他" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text45" Left="9.45" Top="415.8" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="4.诊断分类:" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text51" Left="9.45" Top="510.3" Width="141.75" Height="22.68" AfterDataEvent="Text1_AfterData" Text="5.急性发作日期:" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text52" Left="126.85" Top="510.3" Width="75.6" Height="22.68" Border.Lines="Bottom" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.FBDATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text53" Left="207.9" Top="510.3" Width="311.85" Height="22.68" AfterDataEvent="Text1_AfterData" Text="(渐进性或不明显的发作在“日”栏填00)" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text54" Left="9.45" Top="548.1" Width="274.05" Height="22.68" AfterDataEvent="Text1_AfterData" Text="6.前次脑卒中(本次发作28天以前的)" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text55" Left="292.95" Top="548.1" Width="132.3" Height="22.68" AfterDataEvent="Text1_AfterData" Text="有，见过记录" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text56" Left="444.15" Top="548.1" Width="122.85" Height="22.68" AfterDataEvent="Text1_AfterData" Text="有，未见过记录" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text57" Left="595.35" Top="548.1" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="无" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text58" Left="9.45" Top="585.9" Width="122.85" Height="22.68" AfterDataEvent="Text1_AfterData" Text="7.发病次数：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text59" Left="94.5" Top="585.9" Width="66.15" Height="22.68" Border.Lines="Bottom" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.FBCS]" HorzAlign="Center" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text60" Left="9.45" Top="623.7" Width="94.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="死亡病例" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text61" Left="9.45" Top="661.5" Width="113.4" Height="22.68" AfterDataEvent="Text1_AfterData" Text="8.死亡日期：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text62" Left="122.85" Top="661.5" Width="217.35" Height="22.68" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.DEATH_TIME]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text63" Left="9.45" Top="699.3" Width="359.1" Height="22.68" AfterDataEvent="Text1_AfterData" Text="9.直接死因：[报告卡主表.DEATH_REASON_NAME]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text64" Left="9.45" Top="737.1" Width="368.55" Height="22.68" AfterDataEvent="Text1_AfterData" Text="10.其它疾病及情况：[报告卡主表.OTHER_CAUSE]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text65" Left="9.45" Top="774.9" Width="236.25" Height="22.68" AfterDataEvent="Text1_AfterData" Text="填  卡  人：[报告卡主表.BGYSMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text66" Left="9.45" Top="803.25" Width="236.25" Height="32.13" AfterDataEvent="Text1_AfterData" Text="院内收卡人：[报告卡主表.YNSKRMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text67" Left="9.45" Top="841.05" Width="226.8" Height="32.13" AfterDataEvent="Text1_AfterData" Text="院外收卡人：[报告卡主表.YWSKRMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text69" Left="368.55" Top="699.3" Width="311.85" Height="22.68" AfterDataEvent="Text1_AfterData" Text="ICD代码：[报告卡主表.DEATH_REASON_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text70" Left="368.55" Top="737.1" Width="330.75" Height="22.68" AfterDataEvent="Text1_AfterData" Text="ICD代码：[报告卡主表.OTHER_CAUSE_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text71" Left="245.7" Top="774.9" Width="85.05" Height="22.68" AfterDataEvent="Text1_AfterData" Text="报告日期：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text72" Left="245.7" Top="803.25" Width="217.35" Height="32.13" AfterDataEvent="Text1_AfterData" Text="收卡日期：[报告卡主表.YNSKRQ]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text73" Left="255.15" Top="841.05" Width="217.35" Height="32.13" AfterDataEvent="Text1_AfterData" Text="收卡日期：[报告卡主表.YWSKRQ]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text74" Left="481.95" Top="774.9" Width="198.45" Height="22.68" AfterDataEvent="Text1_AfterData" Text="填报科室：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text75" Left="481.95" Top="812.7" Width="198.45" Height="22.68" AfterDataEvent="Text1_AfterData" Text="报告单位：" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text76" Left="481.95" Top="841.05" Width="226.8" Height="32.13" AfterDataEvent="Text1_AfterData" Text="收卡单位：[报告卡主表.SKDWMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text77" Left="321.3" Top="774.9" Width="141.75" Height="22.68" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.BGRQ]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text78" Left="551.1" Top="774.9" Width="160.65" Height="22.68" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.TBKSMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text79" Left="551.1" Top="812.7" Width="160.65" Height="22.68" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.BGDWMC]" VertAlign="Center" Font="宋体, 11pt"/>
+      <LineObject Name="Line4" Left="18.9" Top="890.3" Height="183.33" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line5" Left="18.9" Top="890.3" Width="680.4" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line6" Left="699.3" Top="890.3" Height="183.33" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text68" Left="283.5" Top="897.75" Width="132.3" Height="22.68" AfterDataEvent="Text1_AfterData" Text="填 卡 说 明" VertAlign="Center" Font="宋体, 11pt, style=Bold"/>
+      <TextObject Name="Text80" Left="37.8" Top="916.65" Width="491.4" Height="22.68" AfterDataEvent="Text1_AfterData" Text="1.填报病种:包括蛛网膜下腔出血、脑出血、脑梗死" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text81" Left="37.8" Top="935.55" Width="623.7" Height="22.68" AfterDataEvent="Text1_AfterData" Text="2.如同时有门诊号和住院号时，两栏都要填写" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text82" Left="37.8" Top="945" Width="670.95" Height="41.58" AfterDataEvent="Text1_AfterData" Text="3.如发现既往报告需更正的(诊断错误等)，请按目前诊断另行报告，并填写更正诊断报告栏。" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text83" Left="37.8" Top="973.35" Width="661.5" Height="22.68" AfterDataEvent="Text1_AfterData" Text="4.填写职业时参照说明，注明具体工种，不能只写工人或干部" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text84" Left="37.8" Top="992.25" Width="642.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="5.发病次数指该病例累计脑卒中发病的次数，按病史如实填写" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text85" Left="37.8" Top="1030.05" Width="642.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="7.直接死因：按临床诊断或死检报告如实填写，原因不明的ICD编码填写999.9" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text86" Left="37.8" Top="1048.95" Width="642.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="8.其它疾病及情况：指与脑卒中或直接死因相关的疾病，如无，则不必填写。" VertAlign="Center" Font="宋体, 11pt"/>
+      <LineObject Name="Line7" Left="18.9" Top="1072.85" Width="680.4" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox1" Left="453.6" Top="56.7" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox2" Left="576.45" Top="56.7" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox3" Left="340.2" Top="56.7" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox4" Left="226.8" Top="56.7" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox5" Left="122.85" Top="56.7" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox6" Left="18.9" Top="56.7" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox7" Left="341.2" Top="132.3" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox8" Left="270.6" Top="132.3" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text87" Left="585.9" Top="226.8" Width="122.85" Height="32.13" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.PREZDDATE]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text88" Left="481.95" Top="132.3" Width="217.35" Height="22.68" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.CSRQ]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text89" Left="387.45" Top="321.3" Width="170.1" Height="22.68" AfterDataEvent="Text89_AfterData" Text="[报告卡主表.ZDDATE]" VertAlign="Center" Font="宋体, 11pt"/>
+      <LineObject Name="Line11" Left="94.5" Top="187" Width="198.45" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line14" Left="75.6" Top="264.6" Width="151.2" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line15" Left="306.85" Top="264.6" Width="122.85" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line16" Left="500.85" Top="160.65" Width="207.9" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line17" Left="708.3" Top="160.65" Height="98.28" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line18" Left="77.6" Top="831.6" Width="151.2" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line19" Left="78.6" Top="869.4" Width="151.2" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line20" Left="299.95" Top="831.6" Width="151.2" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line21" Left="310.4" Top="869.4" Width="151.2" AfterDataEvent="Text1_AfterData"/>
+      <LineObject Name="Line22" Left="560.55" Top="869.4" Width="151.2" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text90" Left="160.65" Top="585.9" Width="37.8" Height="22.68" AfterDataEvent="Text1_AfterData" Text="次" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text91" Left="37.8" Top="1011.15" Width="642.6" Height="22.68" AfterDataEvent="Text1_AfterData" Text="6.死亡病例仅用于脑卒中发作死亡的病例，非病例死亡不必填写。" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text92" Left="28.35" Top="28.35" Width="28.35" Height="22.68" Visible="false" AfterDataEvent="Text92_AfterData" Text="[报告卡主表.BKTYPE_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text93" Left="66.15" Top="28.35" Width="37.8" Height="22.68" Visible="false" AfterDataEvent="Text93_AfterData" Text="[报告卡主表.HB_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text94" Left="103.95" Top="28.35" Width="28.35" Height="22.68" Visible="false" AfterDataEvent="Text94_AfterData" Text="[报告卡主表.SEX_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text183" Left="519.75" Top="94.5" Width="207.9" Height="22.68" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.ZDDM]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text184" Left="47.25" Top="207.9" Width="179.55" Height="22.68" Border.Lines="Bottom" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.ZY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text185" Left="321.3" Top="207.9" Width="160.65" Height="22.68" Border.Lines="Bottom" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.WHCD_NAME]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text186" Left="349.65" Top="170.1" Width="141.75" Height="22.68" Border.Lines="Bottom" AfterDataEvent="Text1_AfterData" Text="[报告卡主表.HJD_SHENG_NAME]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text187" Left="623.7" Top="406.35" Width="66.15" Height="22.68" Visible="false" AfterDataEvent="Text187_AfterData" Text="[报告卡主表.ZDFL_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text188" Left="18.9" Top="444.15" Width="699.3" Height="22.68" AfterDataEvent="Text1_AfterData" Text="     确认脑卒中伴有确认冠心病      确认脑卒中伴有糖尿病      确认脑卒中伴有血脂异常" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text189" Left="18.9" Top="472.5" Width="699.3" Height="22.68" AfterDataEvent="Text1_AfterData" Text="     确认脑卒中伴有高血压          资料不全" VertAlign="Center" Font="宋体, 11pt"/>
+      <CheckBoxObject Name="CheckBox22" Left="37.8" Top="444.15" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox23" Left="255.15" Top="444.15" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox24" Left="444.15" Top="444.15" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox25" Left="37.8" Top="472.5" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox26" Left="255.15" Top="472.5" Width="18.9" Height="22.68" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text27" Left="255.15" Top="472.5" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text190" Left="37.8" Top="472.5" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text191" Left="37.8" Top="444.15" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text192" Left="-9450" Top="-9450" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text193" Left="255.15" Top="444.15" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text194" Left="444.15" Top="444.15" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text195" Left="18.9" Top="56.7" Width="18.9" Height="22.68" Border.Lines="All" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text196" Left="122.85" Top="56.7" Width="18.9" Height="22.68" Border.Lines="All" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text197" Left="226.8" Top="56.7" Width="18.9" Height="22.68" Border.Lines="All" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text198" Left="340.2" Top="56.7" Width="18.9" Height="22.68" Border.Lines="All" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text199" Left="453.6" Top="56.7" Width="18.9" Height="22.68" Border.Lines="All" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text200" Left="576.45" Top="56.7" Width="18.9" Height="22.68" Border.Lines="All" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text201" Left="270.6" Top="132.3" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text202" Left="340.2" Top="132.3" Width="18.9" Height="22.68" Border.Lines="All" HorzAlign="Center" VertAlign="Bottom" Font="宋体, 10pt"/>
+      <TextObject Name="Text208" Left="9.45" Top="387.45" Width="66.15" Height="22.68" Visible="false" AfterDataEvent="Text208_AfterData" Text="[报告卡主表.ZDYJ_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <CheckBoxObject Name="CheckBox27" Left="113.4" Top="359.1" Width="18.9" Height="22.68" Visible="false" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox28" Left="170.1" Top="359.1" Width="18.9" Height="22.68" Visible="false" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox29" Left="226.8" Top="359.1" Width="18.9" Height="22.68" Visible="false" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox30" Left="330.75" Top="359.1" Width="18.9" Height="22.68" Visible="false" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox31" Left="396.9" Top="359.1" Width="18.9" Height="22.68" Visible="false" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <TextObject Name="Text209" Left="614.25" Top="595.35" Width="66.15" Height="22.68" Visible="false" AfterDataEvent="Text209_AfterData" Text="[报告卡主表.PRESTROKE_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <TextObject Name="Text210" Left="510.3" Top="595.35" Width="66.15" Height="22.68" Visible="false" AfterDataEvent="Text210_AfterData" Text="[报告卡主表.PRERECODE_ID]" VertAlign="Center" Font="宋体, 11pt"/>
+      <CheckBoxObject Name="CheckBox32" Left="274.05" Top="548.1" Width="18.9" Height="22.68" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox33" Left="425.25" Top="548.1" Width="18.9" Height="22.68" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+      <CheckBoxObject Name="CheckBox34" Left="576.45" Top="548.1" Width="18.9" Height="22.68" Border.Lines="All" AfterDataEvent="Text1_AfterData"/>
+    </PageHeaderBand>
+  </ReportPage>
+</Report>

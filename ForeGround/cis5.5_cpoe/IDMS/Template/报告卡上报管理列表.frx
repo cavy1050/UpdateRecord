@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/14/2020 13:26:37" ReportInfo.Modified="01/14/2020 14:39:51" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="Table1" ReferenceName="Data.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="XTLBMC" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="BRXB" DataType="System.String"/>
+      <Column Name="BRNL" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="RYZDMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="SHZT" DataType="System.String"/>
+      <Column Name="BGKMC" DataType="System.String"/>
+      <Column Name="RYZDMC1" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="BGKTABLE" DataType="System.String"/>
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="37.8">
+      <TextObject Name="Text1" Left="443.21" Top="9.45" Width="160.65" Height="28.35" Text="报告卡上报管理列表" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="1047.06" Height="28.35">
+      <TextObject Name="Text2" Width="94.5" Height="28.35" Border.Lines="All" Text="报告卡状态" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="94.5" Width="85.05" Height="28.35" Border.Lines="All" Text="系统类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="179.55" Width="94.5" Height="28.35" Border.Lines="All" Text="患者姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="274.05" Width="47.25" Height="28.35" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="321.3" Width="47.25" Height="28.35" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="368.55" Width="66.15" Height="28.35" Border.Lines="All" Text="出生日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text15" Left="434.7" Width="85.05" Height="28.35" Border.Lines="All" Text="科室" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="519.75" Width="85.05" Height="28.35" Border.Lines="All" Text="填报医生" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text19" Left="604.8" Width="75.6" Height="28.35" Border.Lines="All" Text="填报日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text21" Left="680.4" Width="113.4" Height="28.35" Border.Lines="All" Text="诊断名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text23" Left="793.8" Width="255.15" Height="28.35" Border.Lines="All" Text="报告卡名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="74.23" Width="1047.06" Height="37.8" DataSource="Table1">
+      <TextObject Name="Text3" Width="94.5" Height="37.8" Border.Lines="All" Text="[Table1.SHZT]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="94.5" Width="85.05" Height="37.8" Border.Lines="All" Text="[Table1.XTLBMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="179.55" Width="94.5" Height="37.8" Border.Lines="All" Text="[Table1.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="274.05" Width="47.25" Height="37.8" Border.Lines="All" Text="[Table1.BRXB]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="321.3" Width="47.25" Height="37.8" Border.Lines="All" Text="[Table1.BRNL]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="368.55" Width="66.15" Height="37.8" Border.Lines="All" Text="[Table1.CSRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="434.7" Width="85.05" Height="37.8" Border.Lines="All" Text="[Table1.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text16" Left="519.75" Width="85.05" Height="37.8" Border.Lines="All" Text="[Table1.TBCZYMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text18" Left="604.8" Width="75.6" Height="37.8" Border.Lines="All" Text="[Table1.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text20" Left="680.4" Width="113.4" Height="37.8" Border.Lines="All" Text="[Table1.RYZDMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text22" Left="793.8" Width="255.15" Height="37.8" Border.Lines="All" Text="[Table1.BGKMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/06/2019 16:52:06" ReportInfo.Modified="11/06/2019 17:04:40" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="AGE" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="CYDJFL_ID" DataType="System.String"/>
+      <Column Name="CYDJFL_NAME" DataType="System.String"/>
+      <Column Name="NYQK_ID" DataType="System.String"/>
+      <Column Name="NYQK_NAME" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text498" Width="718.2" Height="37.8" Text="结核病患者出院登记卡" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2"/>
+    <DataBand Name="Data1" Top="45.8" Width="718.2" Height="274.05">
+      <TextObject Name="Text537" Width="75.6" Height="18.9" Text="卡片编号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text538" Left="66.15" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.KPBH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text599" Top="85.05" Width="75.6" Height="18.9" Text="现住地址：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text600" Left="66.15" Top="85.05" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text601" Left="207.9" Top="85.05" Width="28.35" Height="18.9" Text="省" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text602" Left="292.95" Top="85.05" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text603" Left="434.7" Top="85.05" Width="18.9" Height="18.9" Text="市" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text604" Left="510.3" Top="85.05" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text605" Left="652.05" Top="85.05" Width="75.6" Height="18.9" Text="县(市、区)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text606" Left="66.15" Top="113.4" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text607" Left="207.9" Top="113.4" Width="85.05" Height="18.9" Text="乡(镇、街办)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text608" Left="292.95" Top="113.4" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text609" Left="434.7" Top="113.4" Width="75.6" Height="18.9" Text="村(街、路)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text610" Left="510.3" Top="113.4" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text611" Left="652.05" Top="113.4" Width="66.15" Height="18.9" Text="(门牌号)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text612" Top="28.35" Width="75.6" Height="18.9" Text="患者姓名：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text613" Left="66.15" Top="28.35" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text614" Left="349.65" Top="28.35" Width="47.25" Height="18.9" Text="性别：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text615" Left="396.9" Top="28.35" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text616" Left="595.35" Top="28.35" Width="47.25" Height="18.9" Text="年龄：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text617" Left="642.6" Top="28.35" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text618" Top="56.7" Width="75.6" Height="18.9" Text="联系电话：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text619" Left="66.15" Top="56.7" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text620" Left="245.7" Top="56.7" Width="75.6" Height="18.9" Text="证件类型：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text621" Left="321.3" Top="56.7" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.IDTYPE_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text622" Left="491.4" Top="56.7" Width="75.6" Height="18.9" Text="身份证号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text623" Left="567" Top="56.7" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SFZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text624" Top="141.75" Width="75.6" Height="18.9" Text="户籍地址：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text625" Left="66.15" Top="141.75" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text626" Left="207.9" Top="141.75" Width="28.35" Height="18.9" Text="省" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text627" Left="292.95" Top="141.75" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text628" Left="434.7" Top="141.75" Width="18.9" Height="18.9" Text="市" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text629" Left="510.3" Top="141.75" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text630" Left="652.05" Top="141.75" Width="75.6" Height="18.9" Text="县(市、区)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text631" Left="66.15" Top="170.1" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text632" Left="207.9" Top="170.1" Width="85.05" Height="18.9" Text="乡(镇、街办)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text633" Left="292.95" Top="170.1" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text634" Left="434.7" Top="170.1" Width="75.6" Height="18.9" Text="村(街、路)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text635" Left="510.3" Top="170.1" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text636" Left="652.05" Top="170.1" Width="66.15" Height="18.9" Text="(门牌号)" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text637" Top="198.45" Width="94.5" Height="18.9" Text="出院登记分类：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text638" Left="85.05" Top="198.45" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CYDJFL_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text639" Left="434.7" Top="198.45" Width="85.05" Height="18.9" Text="耐药情况：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text640" Left="510.3" Top="198.45" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.NYQK_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text641" Top="226.8" Width="75.6" Height="18.9" Text="报告人：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text642" Left="66.15" Top="226.8" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text643" Left="226.8" Top="226.8" Width="75.6" Height="18.9" Text="报告科室：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text644" Left="292.95" Top="226.8" Width="179.55" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text645" Left="481.95" Top="226.8" Width="75.6" Height="18.9" Text="报告病区：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text646" Left="548.1" Top="226.8" Width="170.1" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text647" Top="255.15" Width="75.6" Height="18.9" Text="报告单位：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text648" Left="66.15" Top="255.15" Width="406.35" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGDWMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text649" Left="481.95" Top="255.15" Width="75.6" Height="18.9" Text="报告日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text650" Left="548.1" Top="255.15" Width="170.1" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="323.85" Width="718.2"/>
+  </ReportPage>
+</Report>

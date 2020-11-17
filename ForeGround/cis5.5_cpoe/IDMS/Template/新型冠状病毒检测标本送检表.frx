@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/12/2020 14:22:10" ReportInfo.Modified="02/12/2020 14:36:56" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private void Data255_AfterData(object sender, EventArgs e)//看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='69'
+  
+    {
+      //体重获取方式
+      if(Text255.Text.Equals(&quot;1&quot;))
+        CheckBox23.Checked=true; //是
+      else if(Text255.Text.Equals(&quot;2&quot;))
+        CheckBox24.Checked=true; } //否
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BKTYPE_ID" DataType="System.String"/>
+      <Column Name="BKTYPE_NAME" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="MZ_ID" DataType="System.String"/>
+      <Column Name="MZ_NAME" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="MZH" DataType="System.String"/>
+      <Column Name="ZYHM" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="HB_ID" DataType="System.String"/>
+      <Column Name="HB_NAME" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="AGE" DataType="System.String"/>
+      <Column Name="GZWD" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="SPECIMENNO" DataType="System.String"/>
+      <Column Name="SPECIMENTYPE_ID" DataType="System.String"/>
+      <Column Name="SPECIMENTYPE_NAME" DataType="System.String"/>
+      <Column Name="FBDATE" DataType="System.String"/>
+      <Column Name="JZDATE" DataType="System.String"/>
+      <Column Name="CYDATE" DataType="System.String"/>
+      <Column Name="YBLY_ID" DataType="System.String"/>
+      <Column Name="YBLY_NAME" DataType="System.String"/>
+      <Column Name="JCDATE" DataType="System.String"/>
+      <Column Name="SJCJ" DataType="System.String"/>
+      <Column Name="BJY" DataType="System.String"/>
+      <Column Name="YD" DataType="System.String"/>
+      <Column Name="SDCX" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text254" Width="718.2" Height="37.8" Text="新型冠状病毒检测标本送检表" HorzAlign="Center" Font="Arial, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="718.2"/>
+    <DataBand Name="Data1" Top="45.88" Width="718.2" Height="368.55">
+      <TextObject Name="Text36" Width="85.05" Height="18.9" Text="卡片编号：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text35" Left="75.6" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.KPBH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text69" Top="85.05" Width="189" Height="18.9" Text="样本来源是否为聚集性病例：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox23" Left="189" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text70" Left="200.34" Top="85.05" Width="37.8" Height="18.9" Text="是" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox24" Left="257.04" Top="87.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text71" Left="268.38" Top="85.05" Width="37.8" Height="18.9" Text="否" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text255" Left="321.3" Top="85.05" Width="66.15" Height="18.9" Visible="false" AfterDataEvent="Data255_AfterData" Text="[报告卡主表.YBLY_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text256" Left="255.15" Width="85.05" Height="18.9" Text="标本编号：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text257" Left="330.75" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SPECIMENNO]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text258" Left="500.85" Width="85.05" Height="18.9" Text="患者姓名：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text259" Left="576.45" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text260" Top="28.35" Width="85.05" Height="18.9" Text="性别：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text261" Left="75.6" Top="28.35" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text262" Left="255.15" Top="28.35" Width="85.05" Height="18.9" Text="年龄：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text263" Left="330.75" Top="28.35" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text264" Left="500.85" Top="28.35" Width="85.05" Height="18.9" Text="发病日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text265" Left="576.45" Top="28.35" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.FBDATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text266" Top="56.7" Width="85.05" Height="18.9" Text="就诊日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text267" Left="75.6" Top="56.7" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZDATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text268" Left="255.15" Top="56.7" Width="85.05" Height="18.9" Text="采样日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text269" Left="330.75" Top="56.7" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CYDATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text270" Left="500.85" Top="56.7" Width="85.05" Height="18.9" Text="检测日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text271" Left="576.45" Top="56.7" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JCDATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text272" Top="113.4" Width="189" Height="18.9" Text="实时荧光 RT-PCR 试剂厂家：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text273" Left="189" Top="113.4" Width="510.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SJCJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text274" Top="141.75" Width="189" Height="18.9" Text="实时荧光 RT-PCR 靶基因：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text275" Left="189" Top="141.75" Width="510.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BJY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text276" Top="170.1" Width="189" Height="18.9" Text="基因序列同源性 一代：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text277" Left="189" Top="170.1" Width="510.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YD]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text278" Top="198.45" Width="189" Height="18.9" Text="基因序列同源性 深度测序：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text279" Left="189" Top="198.45" Width="510.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SDCX]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text280" Top="226.8" Width="56.7" Height="18.9" Text="备注：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text281" Left="56.7" Top="226.8" Width="642.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.MEMO]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text282" Top="264.6" Width="85.05" Height="18.9" Text="报告人：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text283" Left="75.6" Top="264.6" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text284" Left="255.15" Top="264.6" Width="85.05" Height="18.9" Text="报告科室：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text285" Left="330.75" Top="264.6" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text286" Left="500.85" Top="264.6" Width="85.05" Height="18.9" Text="报告病区：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text287" Left="576.45" Top="264.6" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text288" Top="292.95" Width="85.05" Height="18.9" Text="报告单位：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text289" Left="75.6" Top="292.95" Width="378" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGDWMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text290" Left="500.85" Top="292.95" Width="85.05" Height="18.9" Text="报告日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text291" Left="576.45" Top="292.95" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="418.47" Width="718.2"/>
+  </ReportPage>
+</Report>

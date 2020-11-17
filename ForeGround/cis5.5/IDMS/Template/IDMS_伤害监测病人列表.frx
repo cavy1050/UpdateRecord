@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/23/2019 09:46:30" ReportInfo.Modified="09/18/2019 13:27:50" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="标题相关" ReferenceName="报表数据.标题相关" DataType="System.Int32" Enabled="true">
+      <Column Name="标题" DataType="System.String"/>
+      <Column Name="医院名称" DataType="System.String"/>
+      <Column Name="查询日期" DataType="System.String"/>
+      <Column Name="部门" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="Table1" ReferenceName="报表数据.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="BKLB" DataType="System.Int32"/>
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.String"/>
+      <Column Name="SHZT" DataType="System.String"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SHFSSJ" DataType="System.String"/>
+      <Column Name="SHDD_NAME" DataType="System.String"/>
+      <Column Name="SHYY_NAME" DataType="System.String"/>
+      <Column Name="SFGY_NAME" DataType="System.String"/>
+      <Column Name="SHXZ_NAME" DataType="System.String"/>
+      <Column Name="SSCD_NAME" DataType="System.String"/>
+      <Column Name="SHJJ_NAME" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="XTLBMC" DataType="System.String"/>
+      <Column Name="SHZTMC" DataType="System.String"/>
+      <Column Name="XH1" DataType="System.Decimal"/>
+      <Column Name="YEXH1" DataType="System.Decimal"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="AGE" DataType="System.String"/>
+      <Column Name="AGEUNIT_ID" DataType="System.String"/>
+      <Column Name="AGEUNIT_NAME" DataType="System.String"/>
+      <Column Name="HB_ID" DataType="System.String"/>
+      <Column Name="HB_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="JZD_XIAOQU" DataType="System.String"/>
+      <Column Name="JZD_LOU" DataType="System.String"/>
+      <Column Name="JZD_DY" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="ICD_Code" DataType="System.String"/>
+      <Column Name="ICD_Name" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="HZJZSJ" DataType="System.String"/>
+      <Column Name="JZYY" DataType="System.String"/>
+      <Column Name="SHYY_ID" DataType="System.String"/>
+      <Column Name="SHREASON_OTHER" DataType="System.String"/>
+      <Column Name="SHDD_ID" DataType="System.String"/>
+      <Column Name="SHPLACE_OTHER" DataType="System.String"/>
+      <Column Name="SHHD_ID" DataType="System.String"/>
+      <Column Name="SHHD_NAME" DataType="System.String"/>
+      <Column Name="SHACT_OTHER" DataType="System.String"/>
+      <Column Name="SFGY_ID" DataType="System.String"/>
+      <Column Name="SHXZ_ID" DataType="System.String"/>
+      <Column Name="SHXZ_OTHER" DataType="System.String"/>
+      <Column Name="SHBW_ID" DataType="System.String"/>
+      <Column Name="SHBW_NAME" DataType="System.String"/>
+      <Column Name="SSCD_ID" DataType="System.String"/>
+      <Column Name="SHJJ_ID" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="YSLXDH" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="JZYY_ID" DataType="System.String"/>
+      <Column Name="JZYY_NAME" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="ReportMasterInfo" ReferenceName="报表数据.ReportMasterInfo" DataType="System.Int32" Enabled="true">
+      <Column Name="医院名称" DataType="System.String"/>
+      <Column Name="系统名称" DataType="System.String"/>
+      <Column Name="科室名称" DataType="System.String"/>
+      <Column Name="病区名称" DataType="System.String"/>
+      <Column Name="职工姓名" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" LeftMargin="5" RightMargin="5">
+    <ReportTitleBand Name="ReportTitle1" Width="1084.86" Height="37.8">
+      <TextObject Name="Text36" Width="1086.75" Height="37.8" Text="伤害监测审核病人列表&#13;&#10;" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="1084.86" Height="37.8">
+      <TextObject Name="Text3" Width="37.8" Height="37.8" Border.Lines="All" Text="审核状态" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="37.8" Width="37.8" Height="37.8" Border.Lines="All" Text="系统类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="113.4" Width="37.8" Height="37.8" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="151.2" Width="94.5" Height="37.8" Border.Lines="All" Text="伤害发生地点" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="245.7" Width="94.5" Height="37.8" Border.Lines="All" Text="伤害发生原因" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text15" Left="340.2" Width="37.8" Height="37.8" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="378" Width="75.6" Height="37.8" Border.Lines="All" Text="伤害发生时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text19" Left="453.6" Width="85.05" Height="37.8" Border.Lines="All" Text="报告科室" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text21" Left="538.65" Width="66.15" Height="37.8" Border.Lines="All" Text="病区名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="75.6" Width="37.8" Height="37.8" Border.Lines="All" Text="患者姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text23" Left="604.8" Width="56.7" Height="37.8" Border.Lines="All" Text="报告医生" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text25" Left="661.5" Width="75.6" Height="37.8" Border.Lines="All" Text="是否故意" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text27" Left="737.1" Width="56.7" Height="37.8" Border.Lines="All" Text="伤害性质" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text29" Left="793.8" Width="66.15" Height="37.8" Border.Lines="All" Text="受伤程度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text31" Left="859.95" Width="85.05" Height="37.8" Border.Lines="All" Text="伤害结局" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text33" Left="945" Width="75.6" Height="37.8" Border.Lines="All" Text="报告时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text35" Left="1020.6" Width="66.15" Height="37.8" Border.Lines="All" Text="审核时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="83.6" Width="1084.86" Height="47.25" CanGrow="true" CanShrink="true" CanBreak="true" DataSource="Table1">
+      <TextObject Name="Text2" Width="37.8" Height="47.25" Border.Lines="All" Text="[Table1.SHZTMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="37.8" Width="37.8" Height="47.25" Border.Lines="All" Text="[Table1.XTLBMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="113.4" Width="37.8" Height="47.25" Border.Lines="All" Text="[Table1.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="151.2" Width="94.5" Height="47.25" Border.Lines="All" Text="[Table1.SHDD_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="245.7" Width="94.5" Height="47.25" Border.Lines="All" Text="[Table1.SHYY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="340.2" Width="37.8" Height="47.25" Border.Lines="All" Text="[Table1.AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text16" Left="378" Width="75.6" Height="47.25" Border.Lines="All" Text="[Table1.SHFSSJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text18" Left="453.6" Width="85.05" Height="47.25" Border.Lines="All" Text="[Table1.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text20" Left="538.65" Width="66.15" Height="47.25" Border.Lines="All" Text="[Table1.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="75.6" Width="37.8" Height="47.25" Border.Lines="All" Text="[Table1.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text22" Left="604.8" Width="56.7" Height="47.25" Border.Lines="All" Text="[Table1.TBCZYMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text24" Left="661.5" Width="75.6" Height="47.25" Border.Lines="All" Text="[Table1.SFGY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text26" Left="737.1" Width="56.7" Height="47.25" Border.Lines="All" Text="[Table1.SHXZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text28" Left="793.8" Width="66.15" Height="47.25" Border.Lines="All" Text="[Table1.SSCD_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text30" Left="859.95" Width="85.05" Height="47.25" Border.Lines="All" Text="[Table1.SHJJ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text32" Left="945" Width="75.6" Height="47.25" Border.Lines="All" Text="[Table1.TBCZRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text34" Left="1020.6" Width="66.15" Height="47.25" Border.Lines="All" Text="[Table1.SHCZRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="134.85" Width="1084.86"/>
+  </ReportPage>
+</Report>

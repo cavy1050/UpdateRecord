@@ -1,0 +1,843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/09/2019 13:31:24" ReportInfo.Modified="11/25/2019 10:40:31" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    //既往治疗情况门诊
+    private void Text391_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text391.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;10&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='20'
+        {
+          CheckBox78.Checked = true;//未治疗
+        }
+        if(i==&quot;26&quot;)
+        {
+          CheckBox79.Checked = true;//间断门诊治疗
+        }
+        if(i==&quot;27&quot;)
+        {
+          CheckBox80.Checked = true;//连续门诊治疗
+        }
+      }
+    }
+    //住院疗效
+    private void Text556_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text556.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;11&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='14'
+        {
+          CheckBox73.Checked = true;//治愈
+        }
+        if(i==&quot;12&quot;)
+        {
+          CheckBox74.Checked = true;//明显好转
+        }
+        if(i==&quot;21&quot;)
+        {
+          CheckBox75.Checked = true;//无变化
+        }
+        if(i==&quot;40&quot;)
+        {
+          CheckBox76.Checked = true;//加重
+        }
+//        if(i==&quot;50&quot;)
+//        {
+//          CheckBox77.Checked = true;//死亡
+//        }
+      }
+    }
+
+    private void Cell71_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ1&quot;))) return;
+      int ZYYW_CXBZ1 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ1&quot;));
+      if(ZYYW_CXBZ1 ==0)
+      {
+          Cell71.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF11&quot;)+&quot;mg,&quot;+
+                               &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF12&quot;) + &quot;mg,&quot;+
+                               &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF13&quot;)+&quot;mg&quot;;
+          
+      }else if(ZYYW_CXBZ1 ==1)
+      {
+          Cell71.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL11&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYYW_PCMC1&quot;)+
+                       &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL12&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+          Cell71.Text=&quot;药物不详&quot;;
+      }
+    }
+    
+    
+
+    private void Cell77_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ2&quot;))) return;
+      int ZYYW_CXBZ2 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ2&quot;));
+      if(ZYYW_CXBZ2 ==0)
+      {
+        Cell77.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF21&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF22&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF23&quot;)+&quot;mg&quot;;
+          
+      }else if(ZYYW_CXBZ2 ==1)
+      {
+        Cell77.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL21&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYYW_PCMC2&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL22&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell77.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell83_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ3&quot;))) return;
+      int ZYYW_CXBZ3 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ3&quot;));
+      if(ZYYW_CXBZ3 ==0)
+      {
+        Cell83.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF31&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF32&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF33&quot;)+&quot;mg&quot;;
+          
+      }else if(ZYYW_CXBZ3 ==1)
+      {
+        Cell83.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL31&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYYW_PCMC3&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL32&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell83.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell100_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ1&quot;))) return;
+      int ZLYW_CXBZ1 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ1&quot;));
+      if(ZLYW_CXBZ1 ==0)
+      {
+        Cell100.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF11&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF12&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF13&quot;)+&quot;mg&quot;;
+          
+      }else if(ZLYW_CXBZ1 ==1)
+      {
+        Cell100.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL11&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLYW_PCMC1&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL12&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell100.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell105_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ2&quot;))) return;
+      int ZLYW_CXBZ2 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ2&quot;));
+      
+      if(ZLYW_CXBZ2 ==0)
+      {
+        Cell105.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF21&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF22&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF23&quot;)+&quot;mg&quot;;
+          
+      }else if(ZLYW_CXBZ2 ==1)
+      {
+        Cell105.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL21&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLYW_PCMC2&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL22&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell105.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell110_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ3&quot;))) return;
+      int ZLYW_CXBZ3 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ3&quot;));
+      if(ZLYW_CXBZ3 ==0)
+      {
+        Cell110.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF31&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF32&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF33&quot;)+&quot;mg&quot;;
+          
+      }else if(ZLYW_CXBZ3 ==1)
+      {
+        Cell110.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL31&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLYW_PCMC3&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL32&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell110.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell126_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ4&quot;))) return;
+      int ZYYW_CXBZ4 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ4&quot;));
+      if(ZYYW_CXBZ4 ==0)
+      {
+        Cell126.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF41&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF42&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF43&quot;)+&quot;mg&quot;;
+          
+      }else if(ZYYW_CXBZ4 ==1)
+      {
+        Cell126.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL41&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYYW_PCMC4&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL42&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell126.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell132_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ5&quot;))) return;
+      int ZYYW_CXBZ5 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ5&quot;));
+      if(ZYYW_CXBZ5 ==0)
+      {
+        Cell132.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF51&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF52&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF53&quot;)+&quot;mg&quot;;
+          
+      }else if(ZYYW_CXBZ5 ==1)
+      {
+        Cell132.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL51&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYYW_PCMC5&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL52&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell132.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell138_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ6&quot;))) return;
+      int ZYYW_CXBZ6 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZYYW_CXBZ6&quot;));
+      if(ZYYW_CXBZ6 ==0)
+      {
+        Cell138.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF61&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF62&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZYYF63&quot;)+&quot;mg&quot;;
+          
+      }else if(ZYYW_CXBZ6 ==1)
+      {
+        Cell138.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL61&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYYW_PCMC6&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZYJL62&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell138.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell143_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ4&quot;))) return;
+      int ZLYW_CXBZ4 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ4&quot;));
+      if(ZLYW_CXBZ4 ==0)
+      {
+        Cell143.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF41&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF42&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF43&quot;)+&quot;mg&quot;;
+          
+      }else if(ZLYW_CXBZ4 ==1)
+      {
+        Cell143.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL41&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLYW_PCMC4&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL42&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell143.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell148_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ5&quot;))) return;
+      int ZLYW_CXBZ5 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ5&quot;));
+      if(ZLYW_CXBZ5 ==0)
+      {
+        Cell148.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF51&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF52&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF53&quot;)+&quot;mg&quot;;
+          
+      }else if(ZLYW_CXBZ5 ==1)
+      {
+        Cell148.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL51&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLYW_PCMC5&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL52&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell148.Text=&quot;药物不详&quot;;
+      }
+    }
+
+    private void Cell153_AfterData(object sender, EventArgs e)
+    {
+      if(String.IsNullOrEmpty((String)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ6&quot;))) return;
+      int ZLYW_CXBZ6 = int.Parse((string)Report.GetColumnValue(&quot;报告卡主表.ZLYW_CXBZ6&quot;));
+      if(ZLYW_CXBZ6 ==0)
+      {
+        Cell153.Text =&quot;用法：&quot;+&quot;早&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF61&quot;)+&quot;mg,&quot;+
+          &quot;中&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF62&quot;) + &quot;mg,&quot;+
+          &quot;晚&quot;+ Report.GetColumnValue(&quot;报告卡主表.ZLYF63&quot;)+&quot;mg&quot;;
+          
+      }else if(ZLYW_CXBZ6 ==1)
+      {
+        Cell153.Text =&quot;长效药：&quot;+&quot;每&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL61&quot;)+&quot;次/&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLYW_PCMC6&quot;)+
+          &quot;,每次&quot;+Report.GetColumnValue(&quot;报告卡主表.ZLJL62&quot;)+&quot;mg&quot;;
+                       
+      }else
+      {
+        Cell153.Text=&quot;药物不详&quot;;
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="MZ_ID" DataType="System.String"/>
+      <Column Name="MZ_NAME" DataType="System.String"/>
+      <Column Name="ZQTY_ID" DataType="System.String"/>
+      <Column Name="ZQTY_NAME" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="LXR" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="CCFBRQ" DataType="System.String"/>
+      <Column Name="CZRQ" DataType="System.String"/>
+      <Column Name="RYRQ" DataType="System.String"/>
+      <Column Name="BAH_MZ" DataType="System.String"/>
+      <Column Name="BAH_ZY" DataType="System.String"/>
+      <Column Name="CYLX_ID" DataType="System.String"/>
+      <Column Name="CYLX_NAME" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="QZRQ" DataType="System.String"/>
+      <Column Name="ZLJG_ID" DataType="System.String"/>
+      <Column Name="ZLJG_NAME" DataType="System.String"/>
+      <Column Name="CYRQ" DataType="System.String"/>
+      <Column Name="JWZLQK_MZ_ID" DataType="System.String"/>
+      <Column Name="JWZLQK_MZ_NAME" DataType="System.String"/>
+      <Column Name="JWZLQK_ZY" DataType="System.String"/>
+      <Column Name="JWWXXW_ID" DataType="System.String"/>
+      <Column Name="JWWXXW_NAME" DataType="System.String"/>
+      <Column Name="JWWXPG_ID" DataType="System.String"/>
+      <Column Name="JWWXPG_NAME" DataType="System.String"/>
+      <Column Name="ZYYW1_ID" DataType="System.String"/>
+      <Column Name="ZYYW1_NAME" DataType="System.String"/>
+      <Column Name="ZYYW1GG_ID" DataType="System.String"/>
+      <Column Name="ZYYW1GG" DataType="System.String"/>
+      <Column Name="ZYYF11" DataType="System.String"/>
+      <Column Name="ZYYF12" DataType="System.String"/>
+      <Column Name="ZYYF13" DataType="System.String"/>
+      <Column Name="ZYJL11" DataType="System.String"/>
+      <Column Name="ZYJL12" DataType="System.String"/>
+      <Column Name="ZYYW2_ID" DataType="System.String"/>
+      <Column Name="ZYYW2_NAME" DataType="System.String"/>
+      <Column Name="ZYYW2GG_ID" DataType="System.String"/>
+      <Column Name="ZYYW2GG" DataType="System.String"/>
+      <Column Name="ZYYF21" DataType="System.String"/>
+      <Column Name="ZYYF22" DataType="System.String"/>
+      <Column Name="ZYYF23" DataType="System.String"/>
+      <Column Name="ZYJL21" DataType="System.String"/>
+      <Column Name="ZYJL22" DataType="System.String"/>
+      <Column Name="ZYYW3_ID" DataType="System.String"/>
+      <Column Name="ZYYW3_NAME" DataType="System.String"/>
+      <Column Name="ZYYW3GG_ID" DataType="System.String"/>
+      <Column Name="ZYYW3GG" DataType="System.String"/>
+      <Column Name="ZYYF31" DataType="System.String"/>
+      <Column Name="ZYYF32" DataType="System.String"/>
+      <Column Name="ZYYF33" DataType="System.String"/>
+      <Column Name="ZYJL31" DataType="System.String"/>
+      <Column Name="ZYJL32" DataType="System.String"/>
+      <Column Name="ZLYW1_ID" DataType="System.String"/>
+      <Column Name="ZLYW1_NAME" DataType="System.String"/>
+      <Column Name="ZLYW1GG_ID" DataType="System.String"/>
+      <Column Name="ZLYW1GG" DataType="System.String"/>
+      <Column Name="ZLYF11" DataType="System.String"/>
+      <Column Name="ZLYF12" DataType="System.String"/>
+      <Column Name="ZLYF13" DataType="System.String"/>
+      <Column Name="ZLJL11" DataType="System.String"/>
+      <Column Name="ZLJL12" DataType="System.String"/>
+      <Column Name="ZLYW2_ID" DataType="System.String"/>
+      <Column Name="ZLYW2_NAME" DataType="System.String"/>
+      <Column Name="ZLYW2GG_ID" DataType="System.String"/>
+      <Column Name="ZLYW2GG" DataType="System.String"/>
+      <Column Name="ZLYF21" DataType="System.String"/>
+      <Column Name="ZLYF22" DataType="System.String"/>
+      <Column Name="ZLYF23" DataType="System.String"/>
+      <Column Name="ZLJL21" DataType="System.String"/>
+      <Column Name="ZLJL22" DataType="System.String"/>
+      <Column Name="ZLYW3_ID" DataType="System.String"/>
+      <Column Name="ZLYW3_NAME" DataType="System.String"/>
+      <Column Name="ZLYW3GG_ID" DataType="System.String"/>
+      <Column Name="ZLYW3GG" DataType="System.String"/>
+      <Column Name="ZLYF31" DataType="System.String"/>
+      <Column Name="ZLYF32" DataType="System.String"/>
+      <Column Name="ZLYF33" DataType="System.String"/>
+      <Column Name="ZLJL31" DataType="System.String"/>
+      <Column Name="ZLJL32" DataType="System.String"/>
+      <Column Name="KFCS_ID" DataType="System.String"/>
+      <Column Name="KFCS_NAME" DataType="System.String"/>
+      <Column Name="KFCS_QT" DataType="System.String"/>
+      <Column Name="QTZYSX" DataType="System.String"/>
+      <Column Name="YYDM" DataType="System.String"/>
+      <Column Name="YYMC" DataType="System.String"/>
+      <Column Name="JZYSDM" DataType="System.String"/>
+      <Column Name="JZYSXM" DataType="System.String"/>
+      <Column Name="JZYSLXDH" DataType="System.String"/>
+      <Column Name="JZYSQZRQ" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="ICD_Code" DataType="System.String"/>
+      <Column Name="ICD_Name" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="ZYYW4_ID" DataType="System.String"/>
+      <Column Name="ZYYW4_NAME" DataType="System.String"/>
+      <Column Name="ZYYW4GG_ID" DataType="System.String"/>
+      <Column Name="ZYYW4GG" DataType="System.String"/>
+      <Column Name="ZYYF41" DataType="System.String"/>
+      <Column Name="ZYYF42" DataType="System.String"/>
+      <Column Name="ZYYF43" DataType="System.String"/>
+      <Column Name="ZYJL41" DataType="System.String"/>
+      <Column Name="ZYJL42" DataType="System.String"/>
+      <Column Name="ZYYW5_ID" DataType="System.String"/>
+      <Column Name="ZYYW5_NAME" DataType="System.String"/>
+      <Column Name="ZYYW5GG_ID" DataType="System.String"/>
+      <Column Name="ZYYW5GG" DataType="System.String"/>
+      <Column Name="ZYYF51" DataType="System.String"/>
+      <Column Name="ZYYF52" DataType="System.String"/>
+      <Column Name="ZYYF53" DataType="System.String"/>
+      <Column Name="ZYJL51" DataType="System.String"/>
+      <Column Name="ZYJL52" DataType="System.String"/>
+      <Column Name="ZYYW6_ID" DataType="System.String"/>
+      <Column Name="ZYYW6_NAME" DataType="System.String"/>
+      <Column Name="ZYYW6GG_ID" DataType="System.String"/>
+      <Column Name="ZYYW6GG" DataType="System.String"/>
+      <Column Name="ZYYF61" DataType="System.String"/>
+      <Column Name="ZYYF62" DataType="System.String"/>
+      <Column Name="ZYYF63" DataType="System.String"/>
+      <Column Name="ZYJL61" DataType="System.String"/>
+      <Column Name="ZYJL62" DataType="System.String"/>
+      <Column Name="ZLYW4_ID" DataType="System.String"/>
+      <Column Name="ZLYW4_NAME" DataType="System.String"/>
+      <Column Name="ZLYW4GG_ID" DataType="System.String"/>
+      <Column Name="ZLYW4GG" DataType="System.String"/>
+      <Column Name="ZLYF41" DataType="System.String"/>
+      <Column Name="ZLYF42" DataType="System.String"/>
+      <Column Name="ZLYF43" DataType="System.String"/>
+      <Column Name="ZLJL41" DataType="System.String"/>
+      <Column Name="ZLJL42" DataType="System.String"/>
+      <Column Name="ZLYW5_ID" DataType="System.String"/>
+      <Column Name="ZLYW5_NAME" DataType="System.String"/>
+      <Column Name="ZLYW5GG_ID" DataType="System.String"/>
+      <Column Name="ZLYW5GG" DataType="System.String"/>
+      <Column Name="ZLYF51" DataType="System.String"/>
+      <Column Name="ZLYF52" DataType="System.String"/>
+      <Column Name="ZLYF53" DataType="System.String"/>
+      <Column Name="ZLJL51" DataType="System.String"/>
+      <Column Name="ZLJL52" DataType="System.String"/>
+      <Column Name="ZLYW6_ID" DataType="System.String"/>
+      <Column Name="ZLYW6_NAME" DataType="System.String"/>
+      <Column Name="ZLYW6GG_ID" DataType="System.String"/>
+      <Column Name="ZLYW6GG" DataType="System.String"/>
+      <Column Name="ZLYF61" DataType="System.String"/>
+      <Column Name="ZLYF62" DataType="System.String"/>
+      <Column Name="ZLYF63" DataType="System.String"/>
+      <Column Name="ZLJL61" DataType="System.String"/>
+      <Column Name="ZLJL62" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="BGKDZ_SHENG_ID" DataType="System.String"/>
+      <Column Name="BGKDZ_SHENG_NAME" DataType="System.String"/>
+      <Column Name="BGKDZ_SHI_ID" DataType="System.String"/>
+      <Column Name="BGKDZ_SHI_NAME" DataType="System.String"/>
+      <Column Name="BGKDZ_QU_ID" DataType="System.String"/>
+      <Column Name="BGKDZ_QU_NAME" DataType="System.String"/>
+      <Column Name="NATIONALITY_ID" DataType="System.String"/>
+      <Column Name="NATIONALITY_NAME" DataType="System.String"/>
+      <Column Name="SFWXYY_ID" DataType="System.String"/>
+      <Column Name="SFWXYY_NAME" DataType="System.String"/>
+      <Column Name="QTSM" DataType="System.String"/>
+      <Column Name="ZYYW_CXBZ1" DataType="System.String"/>
+      <Column Name="ZYYW_PCMC1" DataType="System.String"/>
+      <Column Name="ZYYW_CXBZ2" DataType="System.String"/>
+      <Column Name="ZYYW_PCMC2" DataType="System.String"/>
+      <Column Name="ZYYW_CXBZ3" DataType="System.String"/>
+      <Column Name="ZYYW_PCMC3" DataType="System.String"/>
+      <Column Name="ZYYW_CXBZ4" DataType="System.String"/>
+      <Column Name="ZYYW_PCMC4" DataType="System.String"/>
+      <Column Name="ZYYW_CXBZ5" DataType="System.String"/>
+      <Column Name="ZYYW_PCMC5" DataType="System.String"/>
+      <Column Name="ZYYW_CXBZ6" DataType="System.String"/>
+      <Column Name="ZYYW_PCMC6" DataType="System.String"/>
+      <Column Name="ZLYW_CXBZ1" DataType="System.String"/>
+      <Column Name="ZLYW_PCMC1" DataType="System.String"/>
+      <Column Name="ZLYW_CXBZ2" DataType="System.String"/>
+      <Column Name="ZLYW_PCMC2" DataType="System.String"/>
+      <Column Name="ZLYW_CXBZ3" DataType="System.String"/>
+      <Column Name="ZLYW_PCMC3" DataType="System.String"/>
+      <Column Name="ZLYW_CXBZ4" DataType="System.String"/>
+      <Column Name="ZLYW_PCMC4" DataType="System.String"/>
+      <Column Name="ZLYW_CXBZ5" DataType="System.String"/>
+      <Column Name="ZLYW_PCMC5" DataType="System.String"/>
+      <Column Name="ZLYW_CXBZ6" DataType="System.String"/>
+      <Column Name="ZLYW_PCMC6" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text429" Width="718.2" Height="37.8" Text="严重精神障碍患者出院信息报告卡" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.84" Width="718.2" Height="982.8">
+      <TableObject Name="Table1" Top="37.8" Width="718.6" Height="600.85" Border.Lines="All">
+        <TableColumn Name="Column1" Width="115.07"/>
+        <TableColumn Name="Column2" Width="124.52"/>
+        <TableColumn Name="Column3" Width="96.17"/>
+        <TableColumn Name="Column4" Width="96.17"/>
+        <TableColumn Name="Column5" Width="96.17"/>
+        <TableColumn Name="Column6" Width="190.5"/>
+        <TableRow Name="Row1" Height="42.51">
+          <TableCell Name="Cell1" Border.Lines="All" Text="患者姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell5" Border.Lines="All" Text="出生日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell26" Border.Lines="All" Text="[报告卡主表.CSRQ]" Format="Date" Format.Format="D" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="33.06">
+          <TableCell Name="Cell6" Border.Lines="All" Text="身份证号" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="[报告卡主表.SFZH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell8" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell10" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell27" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="33.06">
+          <TableCell Name="Cell11" Border.Lines="All" Text="联系人姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Text="[报告卡主表.LXR]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell13" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="联系电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell28" Border.Lines="All" Text="[报告卡主表.LXDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="33.06">
+          <TableCell Name="Cell16" Border.Lines="All" Text="户籍地" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" Text="[报告卡主表.HJD_SHENG_NAME][报告卡主表.HJD_SHI_NAME][报告卡主表.HJD_QU_NAME][报告卡主表.HJD_XZ_NAME][报告卡主表.HJD_CUN][报告卡主表.HJD_MPH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell18" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell19" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell20" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell29" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="33.06">
+          <TableCell Name="Cell21" Border.Lines="All" Text="现住址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell22" Border.Lines="All" Text="[报告卡主表.JZD_SHENG_NAME][报告卡主表.JZD_SHI_NAME][报告卡主表.JZD_QU_NAME][报告卡主表.JZD_XZ_NAME][报告卡主表.JZD_CUN][报告卡主表.JZD_MPH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell23" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell24" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell25" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell30" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="33.06">
+          <TableCell Name="Cell31" Border.Lines="All" Text="初次发病时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell32" Border.Lines="All" Text="[报告卡主表.CCFBRQ]" Format="Date" Format.Format="D" VertAlign="Center" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell33" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell34" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell35" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell36" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="33.06">
+          <TableCell Name="Cell37" Border.Lines="All" Text="入院日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell38" Border.Lines="All" Text="[报告卡主表.RYRQ]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell39" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell40" Border.Lines="All" Text="出院日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell41" Border.Lines="All" Text="[报告卡主表.CYRQ]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell42" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row8" Height="33.06">
+          <TableCell Name="Cell43" Border.Lines="All" Text="病案号" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell44" Border.Lines="All" Text="门诊：[报告卡主表.BAH_MZ]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell45" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell46" Border.Lines="All" Text="住院号：[报告卡主表.BAH_ZY]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell47" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell48" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row9" Height="33.06">
+          <TableCell Name="Cell49" Border.Lines="All" Text="既往治疗情况" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" RowSpan="2"/>
+          <TableCell Name="Cell50" Border.Lines="All" Text="门诊" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell51" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt" ColSpan="4">
+            <TextObject Name="Text532" Left="18.9" Top="5.67" Width="66.15" Height="18.9" Text="1 未治疗" VertAlign="Center" Font="Arial, 9pt"/>
+            <CheckBoxObject Name="CheckBox78" Left="9.45" Top="9.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <TextObject Name="Text533" Left="113.4" Top="5.67" Width="103.95" Height="18.9" Text="2 间断门诊治疗" VertAlign="Center" Font="Arial, 9pt"/>
+            <TextObject Name="Text534" Left="245.7" Top="5.67" Width="103.95" Height="18.9" Text="3 连续门诊治疗" VertAlign="Center" Font="Arial, 9pt"/>
+            <CheckBoxObject Name="CheckBox79" Left="103.95" Top="9.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <CheckBoxObject Name="CheckBox80" Left="236.25" Top="9.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <TextObject Name="Text391" Left="340.2" Width="94.5" Height="28.35" Visible="false" AfterDataEvent="Text391_AfterData" Text="[报告卡主表.JWZLQK_MZ_ID]" Font="宋体, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell52" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell53" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell54" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row10" Height="33.06">
+          <TableCell Name="Cell55" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell56" Border.Lines="All" Text="住院" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell57" Border.Lines="All" Text="曾在精神专科医院    次（含此次住院）" VertAlign="Center" Font="宋体, 9pt" ColSpan="4">
+            <TextObject Name="Text430" Left="103.95" Top="3.78" Width="28.35" Height="18.9" Text="[报告卡主表.JWZLQK_ZY]" AutoWidth="true" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell58" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell59" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell60" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row11" Height="33.06">
+          <TableCell Name="Cell61" Border.Lines="All" Text="诊断" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell62" Border.Lines="All" Text="出院诊断" VertAlign="Center" Font="宋体, 9pt" ColSpan="3">
+            <TextObject Name="Text522" Left="56.7" Top="9.45" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZDMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell63" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell64" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell65" Border.Lines="All" Text="确诊日期" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell66" Border.Lines="All" Text="[报告卡主表.QZRQ]" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row12" Height="33.06">
+          <TableCell Name="Cell67" Border.Lines="All" Text="住院用药" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" RowSpan="6"/>
+          <TableCell Name="Cell68" Border.Lines="All" Text="药物1：[报告卡主表.ZYYW1_NAME] 规格：[报告卡主表.ZYYW1GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell69" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell70" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell71" Border.Lines="All" AfterDataEvent="Cell71_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell72" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row13" Height="33.06">
+          <TableCell Name="Cell73" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell74" Border.Lines="All" Text="药物2：[报告卡主表.ZYYW2_NAME] 规格：[报告卡主表.ZYYW2GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell75" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell76" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell77" Border.Lines="All" AfterDataEvent="Cell77_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell78" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row14" Height="33.06">
+          <TableCell Name="Cell79" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell80" Border.Lines="All" Text="药物3：[报告卡主表.ZYYW3_NAME] 规格：[报告卡主表.ZYYW3GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell81" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell82" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell83" Border.Lines="All" AfterDataEvent="Cell83_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell84" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row22" Height="28.35">
+          <TableCell Name="Cell122" Font="宋体, 9pt"/>
+          <TableCell Name="Cell123" Border.Lines="All" Text="药物4：[报告卡主表.ZYYW4_NAME] 规格：[报告卡主表.ZYYW4GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell124" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell125" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell126" Border.Lines="All" AfterDataEvent="Cell126_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell127" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row23" Height="28.35">
+          <TableCell Name="Cell128" Font="宋体, 9pt"/>
+          <TableCell Name="Cell129" Border.Lines="All" Text="药物5：[报告卡主表.ZYYW5_NAME] 规格：[报告卡主表.ZYYW5GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell130" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell131" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell132" Border.Lines="All" AfterDataEvent="Cell132_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell133" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row24" Height="28.35">
+          <TableCell Name="Cell134" Font="宋体, 9pt"/>
+          <TableCell Name="Cell135" Border.Lines="All" Text="药物6：[报告卡主表.ZYYW6_NAME] 规格：[报告卡主表.ZYYW6GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell136" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell137" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell138" Border.Lines="All" AfterDataEvent="Cell138_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell139" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row15" Height="42.51">
+          <TableCell Name="Cell85" Border.Lines="All" Text="住院疗效" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell86" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt" ColSpan="5">
+            <CheckBoxObject Name="CheckBox73" Left="9.45" Top="12.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <CheckBoxObject Name="CheckBox74" Left="85.05" Top="12.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <TextObject Name="Text527" Left="20.79" Top="9.45" Width="47.25" Height="18.9" Text="1 治愈" VertAlign="Center" Font="Arial, 9pt"/>
+            <TextObject Name="Text528" Left="94.5" Top="9.45" Width="75.6" Height="18.9" Text="2 明显好转" VertAlign="Center" Font="Arial, 9pt"/>
+            <TextObject Name="Text529" Left="198.45" Top="9.45" Width="66.15" Height="18.9" Text="3 无变化" VertAlign="Center" Font="Arial, 9pt"/>
+            <TextObject Name="Text530" Left="292.95" Top="9.45" Width="47.25" Height="18.9" Text="4 加重" VertAlign="Center" Font="Arial, 9pt"/>
+            <CheckBoxObject Name="CheckBox75" Left="189" Top="12.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <CheckBoxObject Name="CheckBox76" Left="283.5" Top="12.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+            <TextObject Name="Text556" Left="453.6" Width="94.5" Height="28.35" Visible="false" AfterDataEvent="Text556_AfterData" Text="[报告卡主表.ZLJG_ID]" Font="宋体, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell87" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell88" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell89" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell90" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row16" Height="1">
+          <TableCell Name="Cell91" Border.Lines="Left, Right, Top" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell92" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell93" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell94" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell95" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell96" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text538" Left="9.45" Top="652.05" Width="179.55" Height="18.9" Text="下一步治疗方案及康复建议：" AutoWidth="true" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+      <TableObject Name="Table2" Top="680.4" Width="718.2" Height="224.02" Border.Lines="All">
+        <TableColumn Name="Column7" Width="120.96"/>
+        <TableColumn Name="Column8" Width="149.31"/>
+        <TableColumn Name="Column9" Width="168.21"/>
+        <TableColumn Name="Column10" Width="120.96"/>
+        <TableColumn Name="Column11" Width="158.76"/>
+        <TableRow Name="Row17" Height="41.58">
+          <TableCell Name="Cell97" Border.Lines="All" Text="出院用药" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" RowSpan="6"/>
+          <TableCell Name="Cell98" Border.Lines="All" Text="药物1：[报告卡主表.ZLYW1_NAME]  规格：[报告卡主表.ZLYW1GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell99" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell100" Border.Lines="All" AfterDataEvent="Cell100_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell101" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row18" Height="32.13">
+          <TableCell Name="Cell102" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell103" Border.Lines="All" Text="药物2：[报告卡主表.ZLYW2_NAME]  规格：[报告卡主表.ZLYW2GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell104" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell105" Border.Lines="All" AfterDataEvent="Cell105_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell106" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row19" Height="32.13">
+          <TableCell Name="Cell107" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell108" Border.Lines="All" Text="药物3：[报告卡主表.ZLYW3_NAME]  规格：[报告卡主表.ZLYW3GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell109" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell110" Border.Lines="All" AfterDataEvent="Cell110_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell111" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row25" Height="28.35">
+          <TableCell Name="Cell140" Font="宋体, 9pt"/>
+          <TableCell Name="Cell141" Border.Lines="All" Text="药物4：[报告卡主表.ZLYW4_NAME]  规格：[报告卡主表.ZLYW4GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell142" Font="宋体, 9pt"/>
+          <TableCell Name="Cell143" Border.Lines="All" AfterDataEvent="Cell143_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell144" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row26" Height="28.35">
+          <TableCell Name="Cell145" Font="宋体, 9pt"/>
+          <TableCell Name="Cell146" Border.Lines="All" Text="药物5：[报告卡主表.ZLYW5_NAME]  规格：[报告卡主表.ZLYW5GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell147" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell148" Border.Lines="All" AfterDataEvent="Cell148_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell149" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row27" Height="28.35">
+          <TableCell Name="Cell150" Font="宋体, 9pt"/>
+          <TableCell Name="Cell151" Border.Lines="All" Text="药物6：[报告卡主表.ZLYW6_NAME]  规格：[报告卡主表.ZLYW6GG]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell152" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell153" AfterDataEvent="Cell153_AfterData" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell154" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row20" Height="32.13">
+          <TableCell Name="Cell112" Border.Lines="All" Text="康复措施" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell113" Border.Lines="All" Text="[报告卡主表.KFCS_NAME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell114" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell115" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell116" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row21" Height="1">
+          <TableCell Name="Cell117" Border.Lines="All" Text="其他注意事项" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell118" Border.Lines="All" Text="[报告卡主表.QTZYSX]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell119" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell120" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell121" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text548" Top="926.1" Width="122.85" Height="18.9" Text="经治医生（签字）：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text549" Left="122.85" Top="926.1" Width="94.5" Height="18.9" Text="[报告卡主表.JZYSXM]" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text550" Left="406.35" Top="926.1" Width="75.6" Height="18.9" Text="联系电话：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text551" Left="481.95" Top="926.1" Width="141.75" Height="18.9" Text="[报告卡主表.JZYSLXDH]" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text552" Top="954.45" Width="75.6" Height="18.9" Text="医院名称：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text553" Left="66.15" Top="954.45" Width="274.05" Height="18.9" Text="[报告卡主表.YYMC]" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text554" Left="406.35" Top="954.45" Width="75.6" Height="18.9" Text="填写日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text555" Left="481.95" Top="954.45" Width="141.75" Height="18.9" Text="[报告卡主表.BGRQ]" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text1" Left="47.25" Width="94.5" Height="18.9" Text="[报告卡主表.KPBH]" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="1028.68" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

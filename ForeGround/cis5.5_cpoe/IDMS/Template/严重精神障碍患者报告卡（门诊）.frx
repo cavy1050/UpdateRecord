@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/12/2019 13:38:21" ReportInfo.Modified="09/12/2019 14:35:34" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    //送诊主体
+    private void Text391_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text391.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='60'
+        {
+          CheckBox69.Checked = true;//家属
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox70.Checked = true;//所属单位或机构
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox71.Checked = true;//乡镇（街道）办事处或村（居）民委员会
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox72.Checked = true;//公安机关
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox73.Checked = true;//患者本人
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox74.Checked = true;//其他
+        }
+      }
+    }
+    
+    //幻觉
+    private void Text608_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text608.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='42'
+        {
+          CheckBox75.Checked = true;//耳闻人语
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox76.Checked = true;//幻视
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox77.Checked = true;//幻味
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox78.Checked = true;//幻嗅
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox79.Checked = true;//幻触
+        }
+      }
+    }
+    
+    //情感
+    private void Text609_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text609.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='43'
+        {
+          CheckBox80.Checked = true;//平淡
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox82.Checked = true;//淡漠
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox84.Checked = true;//欣快
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox81.Checked = true;//兴奋
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox83.Checked = true;//紧张
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox85.Checked = true;//悲伤
+        }
+        if(i==&quot;7&quot;)
+        {
+          CheckBox86.Checked = true;//忧愁
+        }
+        if(i==&quot;8&quot;)
+        {
+          CheckBox87.Checked = true;//消极
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox88.Checked = true;//烦躁
+        }
+        if(i==&quot;10&quot;)
+        {
+          CheckBox89.Checked = true;//恐怖
+        }
+        if(i==&quot;11&quot;)
+        {
+          CheckBox90.Checked = true;//情绪不稳
+        }
+        if(i==&quot;12&quot;)
+        {
+          CheckBox91.Checked = true;//情感不协调
+        }
+      }
+    }
+    
+    //思维
+    private void Text610_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text610.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='44'
+        {
+          CheckBox92.Checked = true;//猜疑
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox94.Checked = true;//混乱
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox96.Checked = true;//言语文字难以理解
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox93.Checked = true;//散漫
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox95.Checked = true;//各种妄想
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox97.Checked = true;//思维奔逸
+        }
+        if(i==&quot;7&quot;)
+        {
+          CheckBox98.Checked = true;//思维迟缓
+        }
+        if(i==&quot;8&quot;)
+        {
+          CheckBox99.Checked = true;//思维贫乏
+        }
+      }
+    }
+    
+    //行为
+    private void Text611_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text611.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='45'
+        {
+          CheckBox100.Checked = true;//冲动
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox102.Checked = true;//外跑
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox104.Checked = true;//闭门不出
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox101.Checked = true;//不能有效工作
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox103.Checked = true;//生活不能自理
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox105.Checked = true;//强迫
+        }
+      }
+    }
+    
+    //意志
+    private void Text612_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text612.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='46'
+        {
+          CheckBox106.Checked = true;//退缩
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox108.Checked = true;//不修边幅
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox107.Checked = true;//无任何要求
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox109.Checked = true;//增强
+        }
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.String"/>
+      <Column Name="SYXH" DataType="System.String"/>
+      <Column Name="YEXH" DataType="System.String"/>
+      <Column Name="XTLB" DataType="System.String"/>
+      <Column Name="SHZT" DataType="System.String"/>
+      <Column Name="JLZT" DataType="System.String"/>
+      <Column Name="PATID" DataType="System.String"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="HZLY_ID" DataType="System.String"/>
+      <Column Name="HZLY_NAME" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="MZ_ID" DataType="System.String"/>
+      <Column Name="MZ_NAME" DataType="System.String"/>
+      <Column Name="HB_ID" DataType="System.String"/>
+      <Column Name="HB_NAME" DataType="System.String"/>
+      <Column Name="YHZGX_ID" DataType="System.String"/>
+      <Column Name="YHZGX_NAME" DataType="System.String"/>
+      <Column Name="GZDW" DataType="System.String"/>
+      <Column Name="LXR" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="HYZT_ID" DataType="System.String"/>
+      <Column Name="HYZT_NAME" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="JZZAJZS_ID" DataType="System.String"/>
+      <Column Name="JZZAJZS_NAME" DataType="System.String"/>
+      <Column Name="SFJSYWZL_ID" DataType="System.String"/>
+      <Column Name="SFJSYWZL_NAME" DataType="System.String"/>
+      <Column Name="CCFBRQ" DataType="System.String"/>
+      <Column Name="SCYWZLRQ" DataType="System.String"/>
+      <Column Name="CZRQ" DataType="System.String"/>
+      <Column Name="JWZYQK" DataType="System.String"/>
+      <Column Name="JWGSQK_ID" DataType="System.String"/>
+      <Column Name="JWGSQK_NAME" DataType="System.String"/>
+      <Column Name="JWWXXW_ID" DataType="System.String"/>
+      <Column Name="JWWXXW_NAME" DataType="System.String"/>
+      <Column Name="JWWXPG_ID" DataType="System.String"/>
+      <Column Name="JWWXPG_NAME" DataType="System.String"/>
+      <Column Name="SZZT_ID" DataType="System.String"/>
+      <Column Name="SZZT_NAME" DataType="System.String"/>
+      <Column Name="SZZT_QT" DataType="System.String"/>
+      <Column Name="QZJGID" DataType="System.String"/>
+      <Column Name="QZJGMC" DataType="System.String"/>
+      <Column Name="BZZYYYID" DataType="System.String"/>
+      <Column Name="BZZYYYMC" DataType="System.String"/>
+      <Column Name="QZRQ" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="YW1DM" DataType="System.String"/>
+      <Column Name="YW1" DataType="System.String"/>
+      <Column Name="YW1GG_ID" DataType="System.String"/>
+      <Column Name="YW1GG" DataType="System.String"/>
+      <Column Name="YF11" DataType="System.String"/>
+      <Column Name="YF12" DataType="System.String"/>
+      <Column Name="YF13" DataType="System.String"/>
+      <Column Name="JL11" DataType="System.String"/>
+      <Column Name="JL12" DataType="System.String"/>
+      <Column Name="YW2DM" DataType="System.String"/>
+      <Column Name="YW2" DataType="System.String"/>
+      <Column Name="YW2GG_ID" DataType="System.String"/>
+      <Column Name="YW2GG" DataType="System.String"/>
+      <Column Name="YF21" DataType="System.String"/>
+      <Column Name="YF22" DataType="System.String"/>
+      <Column Name="YF23" DataType="System.String"/>
+      <Column Name="JL21" DataType="System.String"/>
+      <Column Name="JL22" DataType="System.String"/>
+      <Column Name="YW3DM" DataType="System.String"/>
+      <Column Name="YW3" DataType="System.String"/>
+      <Column Name="YW3GG_ID" DataType="System.String"/>
+      <Column Name="YW3GG" DataType="System.String"/>
+      <Column Name="YF31" DataType="System.String"/>
+      <Column Name="YF32" DataType="System.String"/>
+      <Column Name="YF33" DataType="System.String"/>
+      <Column Name="JL31" DataType="System.String"/>
+      <Column Name="JL32" DataType="System.String"/>
+      <Column Name="ZQTY_ID" DataType="System.String"/>
+      <Column Name="ZQTY_NAME" DataType="System.String"/>
+      <Column Name="ZQTY_RQ" DataType="System.String"/>
+      <Column Name="MZZD" DataType="System.String"/>
+      <Column Name="ZDYSXM" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BGYSDH" DataType="System.String"/>
+      <Column Name="LRRQ" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGKSDM" DataType="System.String"/>
+      <Column Name="BGKSMC" DataType="System.String"/>
+      <Column Name="ZDYSDM" DataType="System.String"/>
+      <Column Name="ZDYSMC" DataType="System.String"/>
+      <Column Name="ZDRQ" DataType="System.String"/>
+      <Column Name="FHZDDM" DataType="System.String"/>
+      <Column Name="FHZDMC" DataType="System.String"/>
+      <Column Name="FHZDYSDM" DataType="System.String"/>
+      <Column Name="FHZDYSMC" DataType="System.String"/>
+      <Column Name="FHZDRQ" DataType="System.String"/>
+      <Column Name="HJID" DataType="System.String"/>
+      <Column Name="HJ" DataType="System.String"/>
+      <Column Name="QGID" DataType="System.String"/>
+      <Column Name="QG" DataType="System.String"/>
+      <Column Name="SWID" DataType="System.String"/>
+      <Column Name="SW" DataType="System.String"/>
+      <Column Name="XWID" DataType="System.String"/>
+      <Column Name="XW" DataType="System.String"/>
+      <Column Name="YZID" DataType="System.String"/>
+      <Column Name="YZ" DataType="System.String"/>
+      <Column Name="QT" DataType="System.String"/>
+      <Column Name="FFBZ" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.String"/>
+      <Column Name="ICD_Code" DataType="System.String"/>
+      <Column Name="ICD_Name" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text429" Width="718.2" Height="37.8" Text="严重精神障碍患者门诊病例报告卡" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2"/>
+    <DataBand Name="Data1" Top="45.8" Width="718.2" Height="1039.5">
+      <TextObject Name="Text48" Width="75.6" Height="18.9" Text="卡片编号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text49" Left="75.6" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.KPBH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text430" Left="245.7" Width="75.6" Height="18.9" Text="身份证号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text431" Left="321.3" Width="160.65" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SFZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text434" Top="28.35" Width="75.6" Height="18.9" Text="患者姓名：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text435" Left="75.6" Top="28.35" Width="85.05" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text436" Left="179.55" Top="28.35" Width="56.7" Height="18.9" Text="性别：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text437" Left="226.8" Top="28.35" Width="37.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text438" Left="283.5" Top="28.35" Width="75.6" Height="18.9" Text="出生日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text439" Left="359.1" Top="28.35" Width="85.05" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CSRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text440" Left="463.05" Top="28.35" Width="75.6" Height="18.9" Text="知情同意：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text441" Left="538.65" Top="28.35" Width="179.55" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZQTY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text442" Top="56.7" Width="47.25" Height="18.9" Text="民族：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text443" Left="47.25" Top="56.7" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.MZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text444" Left="179.55" Top="56.7" Width="47.25" Height="18.9" Text="户别：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text445" Left="226.8" Top="56.7" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HB_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text446" Left="359.1" Top="56.7" Width="75.6" Height="18.9" Text="就业情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text447" Left="425.25" Top="56.7" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text452" Top="85.05" Width="85.05" Height="18.9" Text="监护人姓名：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text453" Left="85.05" Top="85.05" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXR]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text454" Left="245.7" Top="85.05" Width="85.05" Height="18.9" Text="监护人电话：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text455" Left="330.75" Top="85.05" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text456" Left="472.5" Top="85.05" Width="85.05" Height="18.9" Text="与患者关系：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text457" Left="557.55" Top="85.05" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YHZGX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text145" Top="198.45" Width="75.6" Height="18.9" Text="户籍地：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text146" Left="56.7" Top="198.45" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text147" Left="160.65" Top="198.45" Width="113.4" Height="18.9" Text="省(自治区/直辖市)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text148" Left="274.05" Top="198.45" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text149" Left="406.35" Top="198.45" Width="85.05" Height="18.9" Text="市(地/州/盟)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text150" Left="491.4" Top="198.45" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text151" Left="614.25" Top="198.45" Width="85.05" Height="18.9" Text="县(市/区/旗)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text152" Left="56.7" Top="217.35" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text153" Left="160.65" Top="217.35" Width="113.4" Height="18.9" Text="乡镇/街道" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text154" Left="274.05" Top="217.35" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text155" Left="406.35" Top="217.35" Width="85.05" Height="18.9" Text="村(居)委员会" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text156" Left="491.4" Top="217.35" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text157" Left="614.25" Top="217.35" Width="94.5" Height="18.9" Text="村民组/门牌号" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text132" Top="141.75" Width="75.6" Height="18.9" Text="现住址：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text133" Left="56.7" Top="141.75" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text134" Left="160.65" Top="141.75" Width="113.4" Height="18.9" Text="省(自治区/直辖市)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text135" Left="274.05" Top="141.75" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text136" Left="406.35" Top="141.75" Width="85.05" Height="18.9" Text="市(地/州/盟)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text137" Left="491.4" Top="141.75" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text138" Left="614.25" Top="141.75" Width="85.05" Height="18.9" Text="县(市/区/旗)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text139" Left="56.7" Top="170.1" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text140" Left="160.65" Top="170.1" Width="113.4" Height="18.9" Text="乡镇/街道" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text141" Left="274.05" Top="170.1" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text142" Left="406.35" Top="170.1" Width="85.05" Height="18.9" Text="村(居)委员会" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text143" Left="491.4" Top="170.1" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text144" Left="614.25" Top="170.1" Width="94.5" Height="18.9" Text="村民组/门牌号" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text458" Top="245.7" Width="189" Height="18.9" Text="两系三代严重精神障碍家族史：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text459" Left="179.55" Top="245.7" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZZAJZS_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text460" Left="302.4" Top="245.7" Width="94.5" Height="18.9" Text="初次发病日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text461" Left="396.9" Top="245.7" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CCFBRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text462" Top="274.05" Width="189" Height="18.9" Text="是否已进行抗精神病药物治疗：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text463" Left="179.55" Top="274.05" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SFJSYWZL_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text464" Left="330.75" Top="274.05" Width="189" Height="18.9" Text="首次抗精神病药物治疗时间：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text465" Left="491.4" Top="274.05" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SCYWZLRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text466" Top="302.4" Width="302.4" Height="18.9" Text="既往住院情况  曾住精神专科医院/综合医院精神科：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text467" Left="292.95" Top="302.4" Width="47.25" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JWZYQK]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text468" Left="396.9" Top="302.4" Width="94.5" Height="18.9" Text="既往关锁情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text469" Left="491.4" Top="302.4" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JWGSQK_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text470" Left="340.2" Top="302.4" Width="18.9" Height="18.9" Text="次" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text471" Top="330.75" Width="94.5" Height="18.9" Text="既往危险行为：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text472" Left="94.5" Top="330.75" Width="189" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JWWXXW_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text473" Left="330.75" Top="330.75" Width="113.4" Height="18.9" Text="既往危险性评估：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text474" Left="434.7" Top="330.75" Width="94.5" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JWWXPG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text475" Top="623.7" Width="94.5" Height="18.9" Text="目前用药情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text476" Left="103.95" Top="548.1" Width="56.7" Height="18.9" Text="药物1：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text477" Left="160.65" Top="548.1" Width="160.65" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YW1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text478" Left="340.2" Top="548.1" Width="56.7" Height="18.9" Text="规格：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text479" Left="378" Top="548.1" Width="75.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YW1GG]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text480" Left="472.5" Top="548.1" Width="66.15" Height="18.9" Text="用法早：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text481" Left="519.75" Top="548.1" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF11]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text482" Left="576.45" Top="548.1" Width="47.25" Height="18.9" Text="mg;中" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text483" Left="623.7" Top="548.1" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF12]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text484" Left="680.4" Top="548.1" Width="28.35" Height="18.9" Text="mg" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text485" Left="103.95" Top="576.45" Width="37.8" Height="18.9" Text="晚:" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text486" Left="141.75" Top="576.45" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF13]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text487" Left="207.9" Top="576.45" Width="94.5" Height="18.9" Text="mg  长效药:每" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text488" Left="302.4" Top="576.45" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JL11]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text489" Left="368.55" Top="576.45" Width="85.05" Height="18.9" Text="次/周；每次" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text490" Left="453.6" Top="576.45" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JL12]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text491" Left="510.3" Top="576.45" Width="28.35" Height="18.9" Text="mg" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text492" Left="103.95" Top="604.8" Width="56.7" Height="18.9" Text="药物2：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text493" Left="160.65" Top="604.8" Width="160.65" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YW2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text494" Left="340.2" Top="604.8" Width="56.7" Height="18.9" Text="规格：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text495" Left="378" Top="604.8" Width="75.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YW2GG]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text496" Left="472.5" Top="604.8" Width="66.15" Height="18.9" Text="用法早：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text497" Left="519.75" Top="604.8" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF21]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text498" Left="576.45" Top="604.8" Width="47.25" Height="18.9" Text="mg;中" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text499" Left="623.7" Top="604.8" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF22]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text500" Left="680.4" Top="604.8" Width="28.35" Height="18.9" Text="mg" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text501" Left="103.95" Top="633.15" Width="37.8" Height="18.9" Text="晚:" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text502" Left="141.75" Top="633.15" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF23]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text503" Left="207.9" Top="633.15" Width="94.5" Height="18.9" Text="mg  长效药:每" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text504" Left="302.4" Top="633.15" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JL21]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text505" Left="368.55" Top="633.15" Width="85.05" Height="18.9" Text="次/周；每次" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text506" Left="453.6" Top="633.15" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JL22]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text507" Left="510.3" Top="633.15" Width="28.35" Height="18.9" Text="mg" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text508" Left="103.95" Top="661.5" Width="56.7" Height="18.9" Text="药物3：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text509" Left="160.65" Top="661.5" Width="160.65" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YW3]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text510" Left="340.2" Top="661.5" Width="56.7" Height="18.9" Text="规格：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text511" Left="378" Top="661.5" Width="75.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YW3GG]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text512" Left="472.5" Top="661.5" Width="66.15" Height="18.9" Text="用法早：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text513" Left="519.75" Top="661.5" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF31]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text514" Left="576.45" Top="661.5" Width="47.25" Height="18.9" Text="mg;中" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text515" Left="623.7" Top="661.5" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF32]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text516" Left="680.4" Top="661.5" Width="28.35" Height="18.9" Text="mg" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text517" Left="103.95" Top="689.85" Width="37.8" Height="18.9" Text="晚:" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text518" Left="141.75" Top="689.85" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YF33]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text519" Left="207.9" Top="689.85" Width="94.5" Height="18.9" Text="mg  长效药:每" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text520" Left="302.4" Top="689.85" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JL31]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text521" Left="368.55" Top="689.85" Width="85.05" Height="18.9" Text="次/周；每次" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text522" Left="453.6" Top="689.85" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JL32]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text523" Left="510.3" Top="689.85" Width="28.35" Height="18.9" Text="mg" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text524" Top="359.1" Width="75.6" Height="18.9" Text="送诊主体：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox69" Left="85.05" Top="361.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text310" Left="96.39" Top="359.1" Width="37.8" Height="18.9" Text="家属" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox70" Left="85.05" Top="380.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text311" Left="96.39" Top="378" Width="103.95" Height="18.9" Text="所属单位或机构" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox71" Left="85.05" Top="399.55" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text525" Left="96.39" Top="396.9" Width="255.15" Height="18.9" Text="乡镇（街道）办事处或村（居）民委员会" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox72" Left="85.05" Top="418.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text526" Left="96.39" Top="415.8" Width="66.15" Height="18.9" Text="公安机关" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox73" Left="85.05" Top="437.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text527" Left="96.39" Top="434.7" Width="66.15" Height="18.9" Text="患者本人" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox74" Left="368.55" Top="361.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text528" Left="379.89" Top="359.1" Width="37.8" Height="18.9" Text="其他" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text529" Left="368.55" Top="378" Width="349.65" Height="18.9" Text="[报告卡主表.SZZT_QT]" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text538" Top="963.9" Width="75.6" Height="18.9" Text="报告单位：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text539" Left="75.6" Top="963.9" Width="321.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGDWMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text540" Left="415.8" Top="963.9" Width="85.05" Height="18.9" Text="填卡科室：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text541" Left="491.4" Top="963.9" Width="226.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text542" Top="992.25" Width="85.05" Height="18.9" Text="联系电话：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text543" Left="75.6" Top="992.25" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text544" Left="207.9" Top="992.25" Width="85.05" Height="18.9" Text="填卡医生：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text545" Left="283.5" Top="992.25" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text546" Left="415.8" Top="992.25" Width="85.05" Height="18.9" Text="填卡日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text547" Left="491.4" Top="992.25" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBCZRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text548" Top="1020.6" Width="85.05" Height="18.9" Text="填卡病区：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text549" Left="75.6" Top="1020.6" Width="226.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text391" Left="368.55" Top="406.35" Width="94.5" Height="28.35" Visible="false" AfterDataEvent="Text391_AfterData" Text="[报告卡主表.SZZT_ID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text448" Top="113.4" Width="75.6" Height="18.9" Text="文化程度：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text449" Left="75.6" Top="113.4" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.WHCD_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text450" Left="245.7" Top="113.4" Width="75.6" Height="18.9" Text="婚姻状况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text451" Left="321.3" Top="113.4" Width="56.7" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HYZT_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text550" Left="519.75" Top="245.7" Width="75.6" Height="18.9" Text="初诊日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text551" Left="595.35" Top="245.7" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CZRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text530" Top="463.05" Width="75.6" Height="18.9" Text="疾病名称：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text531" Left="75.6" Top="463.05" Width="321.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZDMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text552" Left="406.35" Top="463.05" Width="75.6" Height="18.9" Text="诊断医生：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text553" Left="472.5" Top="463.05" Width="94.5" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZDYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text554" Left="576.45" Top="463.05" Width="75.6" Height="18.9" Text="诊断日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text555" Left="642.6" Top="463.05" Width="75.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZDRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text556" Top="491.4" Width="75.6" Height="18.9" Text="诊断复核：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text557" Left="75.6" Top="491.4" Width="321.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.FHZDMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text558" Left="406.35" Top="491.4" Width="94.5" Height="18.9" Text="复核诊断医生：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text559" Left="500.85" Top="491.4" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.FHZDYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text560" Top="519.75" Width="94.5" Height="18.9" Text="复核诊断日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text561" Left="85.05" Top="519.75" Width="75.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.FHZDRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text562" Left="198.45" Top="519.75" Width="94.5" Height="18.9" Text="确诊机构名称：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text563" Left="283.5" Top="519.75" Width="330.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.QZJGMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text564" Top="727.65" Width="66.15" Height="18.9" Text="A  幻觉：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox75" Left="66.15" Top="730.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text565" Left="77.49" Top="727.65" Width="66.15" Height="18.9" Text="耳闻人语" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox76" Left="160.65" Top="730.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text566" Left="171.99" Top="727.65" Width="37.8" Height="18.9" Text="幻视" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox77" Left="66.15" Top="749.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text567" Left="77.49" Top="746.55" Width="37.8" Height="18.9" Text="幻味" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox78" Left="160.65" Top="749.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text568" Left="171.99" Top="746.55" Width="37.8" Height="18.9" Text="幻嗅" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox79" Left="66.15" Top="768.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text569" Left="77.49" Top="765.45" Width="37.8" Height="18.9" Text="幻触" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text570" Left="292.95" Top="727.65" Width="66.15" Height="18.9" Text="B  情感：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox80" Left="359.1" Top="730.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text571" Left="370.44" Top="727.65" Width="37.8" Height="18.9" Text="平淡" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox81" Left="425.25" Top="730.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text572" Left="436.59" Top="727.65" Width="37.8" Height="18.9" Text="兴奋" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox82" Left="359.1" Top="749.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text573" Left="370.44" Top="746.55" Width="37.8" Height="18.9" Text="淡漠" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox83" Left="425.25" Top="749.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text574" Left="436.59" Top="746.55" Width="37.8" Height="18.9" Text="紧张" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox84" Left="359.1" Top="768.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text575" Left="370.44" Top="765.45" Width="37.8" Height="18.9" Text="欣快" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox85" Left="425.25" Top="768.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text576" Left="436.59" Top="765.45" Width="37.8" Height="18.9" Text="悲伤" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox86" Left="491.4" Top="730.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text577" Left="502.74" Top="727.65" Width="37.8" Height="18.9" Text="忧愁" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox87" Left="491.4" Top="749.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text578" Left="502.74" Top="746.55" Width="37.8" Height="18.9" Text="消极" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox88" Left="491.4" Top="768.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text579" Left="502.74" Top="765.45" Width="37.8" Height="18.9" Text="烦躁" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox89" Left="557.55" Top="730.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text580" Left="568.89" Top="727.65" Width="66.15" Height="18.9" Text="恐怖" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox90" Left="557.55" Top="749.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text581" Left="568.89" Top="746.55" Width="66.15" Height="18.9" Text="情绪不稳" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox91" Left="557.55" Top="768.1" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text582" Left="568.89" Top="765.45" Width="85.05" Height="18.9" Text="情感不协调" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text583" Top="803.25" Width="66.15" Height="18.9" Text="C  思维：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox92" Left="66.15" Top="805.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text584" Left="77.49" Top="803.25" Width="37.8" Height="18.9" Text="猜疑" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox93" Left="66.15" Top="843.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text585" Left="77.49" Top="841.05" Width="37.8" Height="18.9" Text="散漫" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox94" Left="66.15" Top="824.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text586" Left="77.49" Top="822.15" Width="37.8" Height="18.9" Text="混乱" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox95" Left="132.3" Top="805.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text587" Left="143.64" Top="803.25" Width="75.6" Height="18.9" Text="各种妄想" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox96" Left="217.35" Top="824.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text588" Left="228.69" Top="822.15" Width="122.85" Height="18.9" Text="言语文字难以理解" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox97" Left="132.3" Top="824.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text589" Left="143.64" Top="822.15" Width="75.6" Height="18.9" Text="思维奔逸" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox98" Left="132.3" Top="843.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text590" Left="143.64" Top="841.05" Width="66.15" Height="18.9" Text="思维迟缓" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox99" Left="217.35" Top="805.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text591" Left="228.69" Top="803.25" Width="66.15" Height="18.9" Text="思维贫乏" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text592" Left="292.95" Top="803.25" Width="66.15" Height="18.9" Text="D  行为：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox100" Left="359.1" Top="805.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text593" Left="370.44" Top="803.25" Width="37.8" Height="18.9" Text="冲动" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox101" Left="453.6" Top="805.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text594" Left="464.94" Top="803.25" Width="94.5" Height="18.9" Text="不能有效工作" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox102" Left="359.1" Top="824.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text595" Left="370.44" Top="822.15" Width="37.8" Height="18.9" Text="外跑" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox103" Left="453.6" Top="824.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text596" Left="464.94" Top="822.15" Width="94.5" Height="18.9" Text="生活不能自理" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox104" Left="359.1" Top="843.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text597" Left="370.44" Top="841.05" Width="66.15" Height="18.9" Text="闭门不出" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox105" Left="453.6" Top="843.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text598" Left="464.94" Top="841.05" Width="37.8" Height="18.9" Text="强迫" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text599" Top="878.85" Width="66.15" Height="18.9" Text="E  意志：" VertAlign="Center" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox106" Left="66.15" Top="881.5" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text600" Left="77.49" Top="878.85" Width="37.8" Height="18.9" Text="退缩" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox107" Left="66.15" Top="919.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text601" Left="77.49" Top="916.65" Width="85.05" Height="18.9" Text="无任何要求" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox108" Left="66.15" Top="900.4" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text602" Left="77.49" Top="897.75" Width="66.15" Height="18.9" Text="不修边幅" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox109" Left="66.15" Top="938.2" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text603" Left="77.49" Top="935.55" Width="75.6" Height="18.9" Text="增强" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text604" Left="292.95" Top="878.85" Width="66.15" Height="18.9" Text="F  其他：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text605" Left="359.1" Top="878.85" Width="359.1" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.QT]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text606" Left="292.95" Top="916.65" Width="75.6" Height="18.9" Text="分发备注：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text607" Left="359.1" Top="916.65" Width="359.1" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.FFBZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text608" Left="141.75" Top="765.45" Width="94.5" Height="28.35" Visible="false" AfterDataEvent="Text608_AfterData" Text="[报告卡主表.HJID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text609" Left="292.95" Top="756" Width="66.15" Height="28.35" Visible="false" AfterDataEvent="Text609_AfterData" Text="[报告卡主表.QGID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text610" Left="217.35" Top="841.05" Width="66.15" Height="28.35" Visible="false" AfterDataEvent="Text610_AfterData" Text="[报告卡主表.SWID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text611" Left="567" Top="803.25" Width="66.15" Height="28.35" Visible="false" AfterDataEvent="Text611_AfterData" Text="[报告卡主表.XWID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text612" Left="160.65" Top="878.85" Width="66.15" Height="28.35" Visible="false" AfterDataEvent="Text612_AfterData" Text="[报告卡主表.YZID]" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="1089.3" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

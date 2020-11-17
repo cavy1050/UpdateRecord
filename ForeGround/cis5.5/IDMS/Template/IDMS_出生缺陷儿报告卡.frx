@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="12/30/2019 17:04:48" ReportInfo.Modified="03/18/2020 09:33:33" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="Table1" ReferenceName="报表数据.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="XTLBMC" DataType="System.String"/>
+      <Column Name="SHZTMC" DataType="System.String"/>
+      <Column Name="JZD" DataType="System.String"/>
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="HOS_SHENG_ID" DataType="System.String"/>
+      <Column Name="HOS_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HOS_SHI_ID" DataType="System.String"/>
+      <Column Name="HOS_SHI_NAME" DataType="System.String"/>
+      <Column Name="HOS_QU_ID" DataType="System.String"/>
+      <Column Name="HOS_QU_NAME" DataType="System.String"/>
+      <Column Name="HOS_XZ_ID" DataType="System.String"/>
+      <Column Name="HOS_XZ_NAME" DataType="System.String"/>
+      <Column Name="HOSNAME_ID" DataType="System.String"/>
+      <Column Name="HOSNAME_NAME" DataType="System.String"/>
+      <Column Name="MZH" DataType="System.String"/>
+      <Column Name="ZYHM" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="MZ_ID" DataType="System.String"/>
+      <Column Name="MZ_NAME" DataType="System.String"/>
+      <Column Name="AGE" DataType="System.String"/>
+      <Column Name="HBTYPE_ID" DataType="System.String"/>
+      <Column Name="HBTYPE_NAME" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="YC" DataType="System.String"/>
+      <Column Name="CC" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="JZDURATION" DataType="System.String"/>
+      <Column Name="SFHJ_ID" DataType="System.String"/>
+      <Column Name="SFHJ_NAME" DataType="System.String"/>
+      <Column Name="SFFZSZ_ID" DataType="System.String"/>
+      <Column Name="SFFZSZ_NAME" DataType="System.String"/>
+      <Column Name="JTRJNSR_ID" DataType="System.String"/>
+      <Column Name="JTRJNSR_NAME" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="BABYCSRQ" DataType="System.String"/>
+      <Column Name="BABYSEX_ID" DataType="System.String"/>
+      <Column Name="BABYSEX_NAME" DataType="System.String"/>
+      <Column Name="BIRTHHOS_ID" DataType="System.String"/>
+      <Column Name="BIRTHHOS_NAME" DataType="System.String"/>
+      <Column Name="OUTCOME_ID" DataType="System.String"/>
+      <Column Name="OUTCOME_NAME" DataType="System.String"/>
+      <Column Name="TL" DataType="System.String"/>
+      <Column Name="Weight" DataType="System.String"/>
+      <Column Name="ZDYJ_ID" DataType="System.String"/>
+      <Column Name="ZDYJ_NAME" DataType="System.String"/>
+      <Column Name="TS_ID" DataType="System.String"/>
+      <Column Name="TS_NAME" DataType="System.String"/>
+      <Column Name="TLYL_ID" DataType="System.String"/>
+      <Column Name="TLYL_NAME" DataType="System.String"/>
+      <Column Name="CSQXHZLXYC_ID" DataType="System.String"/>
+      <Column Name="CSQXHZLXYC_NAME" DataType="System.String"/>
+      <Column Name="JXQZDATE_ID" DataType="System.String"/>
+      <Column Name="JXQZDATE_NAME" DataType="System.String"/>
+      <Column Name="CQZDYZ" DataType="System.String"/>
+      <Column Name="CQZDHOS_ID" DataType="System.String"/>
+      <Column Name="CQZDHOS_NAME" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="EL_ID" DataType="System.String"/>
+      <Column Name="EL_NAME" DataType="System.String"/>
+      <Column Name="CL_ID" DataType="System.String"/>
+      <Column Name="CL_NAME" DataType="System.String"/>
+      <Column Name="CLHBEL_ID" DataType="System.String"/>
+      <Column Name="CLHBEL_NAME" DataType="System.String"/>
+      <Column Name="XE_ID" DataType="System.String"/>
+      <Column Name="XE_NAME" DataType="System.String"/>
+      <Column Name="DZ1_ID" DataType="System.String"/>
+      <Column Name="DZ1_NAME" DataType="System.String"/>
+      <Column Name="DZ2_ID" DataType="System.String"/>
+      <Column Name="DZ2_NAME" DataType="System.String"/>
+      <Column Name="BZ1_ID" DataType="System.String"/>
+      <Column Name="BZ1_NAME" DataType="System.String"/>
+      <Column Name="BZ2_ID" DataType="System.String"/>
+      <Column Name="BZ2_NAME" DataType="System.String"/>
+      <Column Name="SZDS_ID" DataType="System.String"/>
+      <Column Name="SZDS_NAME" DataType="System.String"/>
+      <Column Name="XZDS_ID" DataType="System.String"/>
+      <Column Name="XZDS_NAME" DataType="System.String"/>
+      <Column Name="DZHPX_ID" DataType="System.String"/>
+      <Column Name="DZHPX_NAME" DataType="System.String"/>
+      <Column Name="OTHERZD" DataType="System.String"/>
+      <Column Name="FR_ID" DataType="System.String"/>
+      <Column Name="FR_NAME" DataType="System.String"/>
+      <Column Name="BDGR_ID" DataType="System.String"/>
+      <Column Name="BDGR_NAME" DataType="System.String"/>
+      <Column Name="YWTNB_ID" DataType="System.String"/>
+      <Column Name="YWTNB_NAME" DataType="System.String"/>
+      <Column Name="OTHERJB" DataType="System.String"/>
+      <Column Name="HALYWMC" DataType="System.String"/>
+      <Column Name="KSSYWMC" DataType="System.String"/>
+      <Column Name="BYYYWMC" DataType="System.String"/>
+      <Column Name="ZJYYWMC" DataType="System.String"/>
+      <Column Name="OTHERYW" DataType="System.String"/>
+      <Column Name="YJJL" DataType="System.String"/>
+      <Column Name="NYMC" DataType="System.String"/>
+      <Column Name="SXZL" DataType="System.String"/>
+      <Column Name="HXZJMC" DataType="System.String"/>
+      <Column Name="OTHERYHYS" DataType="System.String"/>
+      <Column Name="CFYCSYS_ID" DataType="System.String"/>
+      <Column Name="CFYCSYS_NAME" DataType="System.String"/>
+      <Column Name="STS" DataType="System.String"/>
+      <Column Name="ZRLCS" DataType="System.String"/>
+      <Column Name="QXM" DataType="System.String"/>
+      <Column Name="JZSQXM1" DataType="System.String"/>
+      <Column Name="JZSQXM2" DataType="System.String"/>
+      <Column Name="JZSQXM3" DataType="System.String"/>
+      <Column Name="YQXEGX1" DataType="System.String"/>
+      <Column Name="YQXEGX2" DataType="System.String"/>
+      <Column Name="YQXEGX3" DataType="System.String"/>
+      <Column Name="JQHPS_ID" DataType="System.String"/>
+      <Column Name="JQHPS_NAME" DataType="System.String"/>
+      <Column Name="JQHPGX_ID" DataType="System.String"/>
+      <Column Name="JQHPGX_NAME" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BGYSZCDM" DataType="System.String"/>
+      <Column Name="BGYSZCMC" DataType="System.String"/>
+      <Column Name="YYSBYSDM" DataType="System.String"/>
+      <Column Name="YYSBYSMC" DataType="System.String"/>
+      <Column Name="YYSBYSZCDM" DataType="System.String"/>
+      <Column Name="YYSBYSZCMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="YYSBRQ" DataType="System.String"/>
+      <Column Name="SJSBYSDM" DataType="System.String"/>
+      <Column Name="SJSBYSMC" DataType="System.String"/>
+      <Column Name="SJSBYSZCDM" DataType="System.String"/>
+      <Column Name="SJSBYSZCMC" DataType="System.String"/>
+      <Column Name="SJSBRQ" DataType="System.String"/>
+      <Column Name="JXS" DataType="System.String"/>
+      <Column Name="HEIGHT" DataType="System.String"/>
+      <Column Name="XTXXZBZDDM" DataType="System.String"/>
+      <Column Name="XTXXZBZDMC" DataType="System.String"/>
+      <Column Name="HISSYXH" DataType="System.Decimal"/>
+      <Column Name="EMRXH" DataType="System.Decimal"/>
+      <Column Name="PY" DataType="System.String"/>
+      <Column Name="WB" DataType="System.String"/>
+      <Column Name="RYCS" DataType="System.Int32"/>
+      <Column Name="BRXB" DataType="System.String"/>
+      <Column Name="BRNL" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="BRZT" DataType="System.Int32"/>
+      <Column Name="RYKS" DataType="System.String"/>
+      <Column Name="RYKSMC" DataType="System.String"/>
+      <Column Name="RYBQ" DataType="System.String"/>
+      <Column Name="RYBQMC" DataType="System.String"/>
+      <Column Name="YSDM" DataType="System.String"/>
+      <Column Name="YSXM" DataType="System.String"/>
+      <Column Name="RYCW" DataType="System.String"/>
+      <Column Name="RYRQ" DataType="System.String"/>
+      <Column Name="CYRQ" DataType="System.String"/>
+      <Column Name="RYZD" DataType="System.String"/>
+      <Column Name="RYZDMC" DataType="System.String"/>
+      <Column Name="CRBQ" DataType="System.String"/>
+      <Column Name="YEBZ" DataType="System.Int32"/>
+      <Column Name="CYKS" DataType="System.String"/>
+      <Column Name="CYKSMC" DataType="System.String"/>
+      <Column Name="CYBQ" DataType="System.String"/>
+      <Column Name="CYBQMC" DataType="System.String"/>
+      <Column Name="CYCW" DataType="System.String"/>
+      <Column Name="LXR" DataType="System.String"/>
+      <Column Name="LXRGX" DataType="System.String"/>
+      <Column Name="LXRDH" DataType="System.String"/>
+      <Column Name="LXRDZ" DataType="System.String"/>
+      <Column Name="GZDW" DataType="System.String"/>
+      <Column Name="ZYYS" DataType="System.String"/>
+      <Column Name="ZYYSMC" DataType="System.String"/>
+      <Column Name="LRLB" DataType="System.Int32"/>
+      <Column Name="YETZ" DataType="System.String"/>
+      <Column Name="CQRQ" DataType="System.String"/>
+      <Column Name="RQRQ" DataType="System.String"/>
+      <Column Name="CFZBZ" DataType="System.Int32"/>
+      <Column Name="MZCARDNO" DataType="System.String"/>
+      <Column Name="WZJBMC" DataType="System.String"/>
+      <Column Name="PATID2" DataType="System.Decimal"/>
+      <Column Name="KH" DataType="System.String"/>
+      <Column Name="BRZY" DataType="System.String"/>
+      <Column Name="MZBLH" DataType="System.String"/>
+      <Column Name="ZYBLH" DataType="System.String"/>
+      <Column Name="SYXH1" DataType="System.Decimal"/>
+      <Column Name="YEXH1" DataType="System.Decimal"/>
+      <Column Name="XTLB1" DataType="System.Int32"/>
+      <Column Name="JLZT1" DataType="System.Int32"/>
+      <Column Name="PATID1" DataType="System.Decimal"/>
+      <Column Name="SFZH1" DataType="System.String"/>
+      <Column Name="ZYHM1" DataType="System.String"/>
+      <Column Name="HZXM1" DataType="System.String"/>
+      <Column Name="LXDH1" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="37.8">
+      <TextObject Name="Text36" Width="1048.95" Height="37.8" Text="出生缺陷儿审核病人列表&#13;&#10;" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="1047.06" Height="37.8">
+      <TextObject Name="Text2" Width="66.15" Height="37.8" Border.Lines="All" Text="审核状态" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="66.15" Width="66.15" Height="37.8" Border.Lines="All" Text="系统类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="132.3" Width="66.15" Height="37.8" Border.Lines="All" Text="患者姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="481.95" Width="94.5" Height="37.8" Border.Lines="All" Text="报告科室" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="576.45" Width="94.5" Height="37.8" Border.Lines="All" Text="报告医生" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text16" Left="878.85" Width="113.4" Height="37.8" Border.Lines="All" Text="审核时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text18" Left="992.25" Width="56.7" Height="37.8" Border.Lines="All" Text="审核操作员" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text22" Left="198.45" Width="283.5" Height="37.8" Border.Lines="All" Text="现住址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text20" Left="670.95" Width="94.5" Height="37.8" Border.Lines="All" Text="联系电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="765.45" Width="113.4" Height="37.8" Border.Lines="All" Text="报告时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="83.68" Width="1047.06" Height="47.25" DataSource="Table1">
+      <TextObject Name="Text1" Width="66.15" Height="47.25" Border.Lines="All" Text="[Table1.SHZTMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Left="66.15" Width="66.15" Height="47.25" Border.Lines="All" Text="[Table1.XTLBMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="132.3" Width="66.15" Height="47.25" Border.Lines="All" Text="[Table1.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="481.95" Width="94.5" Height="47.25" Border.Lines="All" Text="[Table1.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="576.45" Width="94.5" Height="47.25" Border.Lines="All" Text="[Table1.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="992.25" Width="56.7" Height="47.25" Border.Lines="All" Text="[Table1.SHCZYMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text21" Left="198.45" Width="283.5" Height="47.25" Border.Lines="All" Text="[Table1.JZD]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text19" Left="670.95" Width="94.5" Height="47.25" Border.Lines="All" Text="[Table1.LXDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="765.45" Width="113.4" Height="47.25" Border.Lines="All" Text="[Table1.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text15" Left="878.85" Width="113.4" Height="47.25" Border.Lines="All" Text="[Table1.SHCZRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="134.97" Width="1047.06"/>
+  </ReportPage>
+</Report>

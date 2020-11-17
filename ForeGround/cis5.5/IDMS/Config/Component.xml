@@ -1,0 +1,672 @@
+<component>
+  <aliases>
+    <alias name="{9FC29F9A-87E0-3A89-8CCA-5044E70F57F7}" type="Winning.Cdr.UI.Portal.IPortalViewer,Winning.Cdr.UI.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{81530F86-0DE2-3698-8CE9-B65CC420281A}" type="Winning.Cdr.UI.Portal.View.EmrViewer,Winning.Cdr.UI.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{F0AD339D-B304-3850-B7BE-14F35D57345B}" type="Winning.Common.Application.Charge.IChargeCategoryQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E907EA58-6682-34BD-BD9B-67A5E69D7EEC}" type="Winning.Common.Application.Charge.ChargeCategoryQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A7B272B0-5EC9-3AA3-AB13-A2E82381BB5C}" type="Winning.Common.Application.Charge.IClinicalChargeProjectQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{795A852B-941D-3592-AA5D-F182327AA26B}" type="Winning.Common.Application.Charge.ClinicalChargeProjectQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{229F53B1-1609-3FD4-B950-7AA42E5DE5D2}" type="Winning.Common.Application.Charge.ISmallChargeProjectQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{21068C09-5647-371F-B567-6177BFA108A1}" type="Winning.Common.Application.Charge.SmallChargeProjectQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{9573CBA9-827A-3862-B25C-E10F1E050AFE}" type="Winning.Common.Application.IDepartmentQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{6976FF4E-A744-398D-9EC9-D360ECCE4312}" type="Winning.Common.Application.DepartmentQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C35FA710-87BB-3186-B53F-9C2767642736}" type="Winning.Common.Application.ILevel1DepartmentQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{18BEAEE2-D176-366B-B9E2-FC4164F2F648}" type="Winning.Common.Application.Level1DepartmentQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{03774D44-5DDC-3E8D-B21B-86F65AF24258}" type="Winning.Common.Application.ILevel2DepartmentQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0CA8548B-2E52-3636-9F9C-FC988A0D0554}" type="Winning.Common.Application.Level2DepartmentQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4029116B-F684-3951-BA6D-7079F15B881D}" type="Winning.Common.Application.IShortInputCodeQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{5ECA2C68-495D-3FB6-8FF2-5FC2B85088A1}" type="Winning.Common.Application.ShortInputCodeQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7B823382-927D-36DC-9357-26B16058B875}" type="Winning.Common.Application.IUserConfigQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E203070C-A541-3F6D-B092-6C2C46953826}" type="Winning.Common.Application.UserConfigQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FC3E6130-556A-3EB8-8795-CC193C29CC5C}" type="Winning.Common.Application.IWardQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3438EAAD-568C-3292-B80F-702533A72EB9}" type="Winning.Common.Application.WardQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{5BF1697B-7661-3BD6-B95F-D06486516614}" type="Winning.Common.Application.Navigate.IAddinsMenuQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{EADF62D1-16A1-31BE-AA20-1B7756EC77D1}" type="Winning.Framework.Compatible.AddinsMenuQueryService,Winning.Framework.Compatible, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A0AABFEE-CE4C-3A8E-B48E-5AC9CC8A6F10}" type="Winning.Common.Application.Navigate.INavigationQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{975750C4-51B3-3FF8-9F2A-ECB6CA0F1029}" type="Winning.Common.Application.Navigate.NavigationQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{51DDA097-B350-33B2-8DAA-499B6C757923}" type="Winning.Common.Application.News.INewsQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{9A4DF45C-AA8A-3A3B-AC9E-75C1C53E4EAE}" type="Winning.Common.Application.News.NewsQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{64E5D63F-5102-3795-A478-4125517A257D}" type="Winning.Common.Application.Security.IPostQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{DE46EF13-C8AA-3FF8-A753-14D017A8B0E6}" type="Winning.Common.Application.Security.PostQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{2EB5CDE2-2F3B-3FF8-9796-0028B69BE7F3}" type="Winning.Common.Application.Security.IRoleQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4EEA49D0-405D-3391-A29A-B47E41303045}" type="Winning.Common.Application.Security.RoleQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{5CDAB5A0-D503-3027-8BD3-5EC07487FF6C}" type="Winning.Common.Application.Security.ITitleQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0BD2A797-F462-3CA9-BE79-5D169A9E8AE5}" type="Winning.Common.Application.Security.TitleQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{50F44801-D100-3285-A943-E9547FE0FEB6}" type="Winning.Common.Application.Security.IUserQueryService,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{00CBA33E-3AFD-306B-A9F8-B87C818F1DE7}" type="Winning.Common.Application.Security.NormUserQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C1191333-A2E5-32DB-B2E9-55B93F303002}" type="Winning.Common.Application.Security.UserQueryService,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{375A9553-A91F-3729-8A66-3BD90529A82B}" type="Winning.Common.Security.SignatureUserQueryService,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3ADC9A15-F536-3DC6-8701-FF776D8FB09C}" type="Winning.Common.Security.SignatureDotNetUserQueryService,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{8E7537C3-C630-3F84-94AC-867E6FC7F80B}" type="Winning.Common.Security.SignatureExUserQueryService,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3CDAD18F-72A1-3FA4-AD66-9745F31D0CBF}" type="Winning.Common.SSO.SSOUserQueryService,Winning.Common.SSO, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{AC6D5A84-9165-3990-A7B1-8CC9FF08D637}" type="Winning.EmrOutp.UI.PrintBySelf.StartUp.PrintBySelfUserQueryService,Winning.EmrOutp.UI.PrintBySelf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{8195A49A-4411-3153-A492-F2CA5DB749B6}" type="Winning.EmrOutp.UI.PrintCenterThird.StartUp.PrintCenterThirdQueryService,Winning.EmrOutp.UI.PrintCenterThird, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" type="Winning.Common.DynamicLayout.DataModel.LayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7ED2170D-1A0B-3E60-8D57-8140720792B7}" type="Winning.Common.DynamicLayout.Display.MultiPopupLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A1259EAC-09D1-3DE2-BD6A-617A54EB7329}" type="Winning.Common.DynamicLayout.Display.ButtonLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{AF0800A0-A4ED-30DC-B5F3-481EE9588243}" type="Winning.Common.DynamicLayout.Display.NumericLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1CB57CEF-BD71-31B9-9308-3E9ABC6F69E3}" type="Winning.Common.DynamicLayout.Display.CheckLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B88AB8F1-A6B0-3AFE-9EBE-AF3770A2532A}" type="Winning.Common.DynamicLayout.Display.ComboLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{9D5472C9-8794-3D8B-BBB3-D0F724857A8E}" type="Winning.Common.DynamicLayout.Display.DateTimeLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E8DE426B-50FE-35A8-9A3C-F5BDE1551348}" type="Winning.Common.DynamicLayout.Display.GridLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4C0DBB36-460C-36D8-B83D-1895A63121D5}" type="Winning.Common.DynamicLayout.Display.GroupPanelLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FF837B46-84D9-3D87-BAD2-DA305734AC70}" type="Winning.Common.DynamicLayout.Display.LabelLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B54BB393-ED68-3128-B705-11D8952E75BD}" type="Winning.Common.DynamicLayout.Display.PanelLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3A063184-1FCE-3300-8F04-EF39FCEB7126}" type="Winning.Common.DynamicLayout.Display.SinglePopupLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{F2FE706C-6212-30AE-8C17-46FD30C2B665}" type="Winning.Common.DynamicLayout.Display.RadioLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7B9B255B-0A7A-366A-ACD9-1C162F9D2D1C}" type="Winning.Common.DynamicLayout.Display.HomeLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B9EA3F56-337D-3689-ACA1-DB2C37DEA4EA}" type="Winning.Common.DynamicLayout.Display.TextLayoutDisplay,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C8504194-D642-323B-8035-872900987B78}" type="Winning.Common.DynamicLayout.Display.Design.LayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{737EC764-DA5B-3A1B-BE1C-F0EDC3A9BF05}" type="Winning.Common.DynamicLayout.Display.Design.MultiPopupLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{EE9105D2-C909-3C94-8B37-9E49997F6625}" type="Winning.Common.DynamicLayout.Display.Design.TextLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3E15C4B9-F397-35E0-B4B9-4CA2C5128B49}" type="Winning.Common.DynamicLayout.Display.Design.RadioLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{06C27B9B-A851-3FC3-8A8D-7B1C47DF31BD}" type="Winning.Common.DynamicLayout.Display.Design.SinglePopupLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{85092CCE-C6CA-363C-A8E1-6AB675968908}" type="Winning.Common.DynamicLayout.Display.Design.PanelLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{CA537770-6370-3CE0-9417-9095C56F139F}" type="Winning.Common.DynamicLayout.Display.Design.NumericLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3B971661-89F7-33F3-9385-493739A9F78E}" type="Winning.Common.DynamicLayout.Display.Design.LabelLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{860EB681-7A5E-3A3B-9D3F-D5F3F264592A}" type="Winning.Common.DynamicLayout.Display.Design.HostLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{19CB9CD2-3437-3393-A416-D10D56A9AAB4}" type="Winning.Common.DynamicLayout.Display.Design.GroupPanelLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FA746DAB-6088-37B2-9C23-5F6B816C5D13}" type="Winning.Common.DynamicLayout.Display.Design.GridLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{46258D8D-11A6-3692-BEF3-229D556815FA}" type="Winning.Common.DynamicLayout.Display.Design.DateTimeLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FADA7162-1621-30AA-8C31-AA98571938CA}" type="Winning.Common.DynamicLayout.Display.Design.ComboLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{AECB05F3-F1C2-3ED4-8117-B87865338547}" type="Winning.Common.DynamicLayout.Display.Design.CheckLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{CE411F45-FDD4-3E8C-A1E3-5267631FCB79}" type="Winning.Common.DynamicLayout.Display.Design.ButtonLayoutPropertyExtendControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" type="Winning.Common.DynamicLayout.Display.ILayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E15B87D9-83D3-3C1D-BCBB-F9F30B4746C1}" type="Winning.Common.DynamicLayout.Display.MultiPopupLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{28614D8A-D105-3CB1-A6D1-9DE6952718A5}" type="Winning.Common.DynamicLayout.Display.ButtonLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A1C313F8-7641-386F-AC96-7A67AE7A1344}" type="Winning.Common.DynamicLayout.Display.NumericLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7840B457-3C4D-30C8-BA7E-A5FD81C7EFDD}" type="Winning.Common.DynamicLayout.Display.CheckLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{2D107BC5-259F-31DB-989E-EC3DD01024F1}" type="Winning.Common.DynamicLayout.Display.ComboLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{2C418BDE-033F-3B23-8271-E952C9459A2D}" type="Winning.Common.DynamicLayout.Display.DateTimeLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E8ADFDC1-7698-3494-8E72-E0B015A9010D}" type="Winning.Common.DynamicLayout.Display.GridLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{D28A1E7B-60F7-3939-A295-C08309A34D54}" type="Winning.Common.DynamicLayout.Display.GroupPanelLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{8DFA2DC6-0AD4-3C78-BC56-0C113A611AFF}" type="Winning.Common.DynamicLayout.Display.LabelLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{31DAE675-19C4-3F85-88FE-3EC7B49E0574}" type="Winning.Common.DynamicLayout.Display.PanelLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4588DFB3-7A46-3873-8126-7984D1622B06}" type="Winning.Common.DynamicLayout.Display.SinglePopupLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1BFBB112-F927-36D7-9F47-7D7D7EA86785}" type="Winning.Common.DynamicLayout.Display.RadioLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1A693434-3489-37AF-9054-38E0F76403AE}" type="Winning.Common.DynamicLayout.Display.HomeLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{697739DD-10A6-351F-A2FE-0790D7D27C96}" type="Winning.Common.DynamicLayout.Display.TextLayoutDisplayControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" type="Winning.Common.DynamicLayout.Display.ILayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{47FB6F8E-86C7-3669-8D30-E115F5C4527B}" type="Winning.Common.DynamicLayout.Display.MultiPopupLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C2EDEA2D-4071-361B-B82C-D95A0F35C5C0}" type="Winning.Common.DynamicLayout.Display.NumericLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{41892A9B-CEEC-3BF9-94D4-80ADD0AD32A5}" type="Winning.Common.DynamicLayout.Display.CheckLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1E306709-6AA7-3305-A5BE-5E306A7F40A4}" type="Winning.Common.DynamicLayout.Display.ComboLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1C9C455D-75A3-30E8-A37A-BC92667EBA2C}" type="Winning.Common.DynamicLayout.Display.DateTimeLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{8972AB2F-5D57-34B3-BD6C-4814B9E30D76}" type="Winning.Common.DynamicLayout.Display.SinglePopupLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{2167C36F-21EF-3753-AC8D-6D060735E96D}" type="Winning.Common.DynamicLayout.Display.TextLayoutEmbeddedControl,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{AEFA834C-9F61-32A5-8ECA-FAA3566BD5DD}" type="Winning.Common.DynamicLayout.Export.IExportConverter,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B96D7ABE-33F8-3CCF-98BA-6287CA4994DF}" type="Winning.Common.DynamicLayout.Export.DefaultExportConverter,Winning.Common.DynamicLayout, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{CB22EAED-1DF8-31BE-8594-1C1411A3386D}" type="Winning.Common.Security.ISignature,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{54E00332-48D5-3C20-89D7-16F461EF4A38}" type="Winning.Common.Security.EmptySignature,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B802107C-67BE-3F3D-AFF1-0154390D1531}" type="Winning.Common.Security.CA.CASignature,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{D1E7611F-C0DA-33C1-B6BC-1B3CD664FE7F}" type="Winning.Common.Security.CA.DotNetCASignature,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{2CFC17E4-94B5-3C53-895E-7B43CD85ED1C}" type="Winning.Common.Security.ISignatureFactory,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{6944681F-B9F8-38B6-972F-D7292CA8AAC5}" type="Winning.Common.Security.SignatureFactory,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{60E65268-A1FE-34AD-AC03-C6A171347F6F}" type="Winning.Common.This4.IThis4Interaction,Winning.Common.Core, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{59181EE0-BC91-352E-87E8-19D7AB03FB90}" type="Winning.Common.This4.This4Interaction,Winning.Common.This4, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E72CB45D-E788-3F60-B741-687C277A3E29}" type="Winning.Framework.Caching.IObjectPreCreator,Winning.Framework.Infrastructure, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{6EC6F9F1-FFBA-3EBE-8219-BFD3EDCF94EB}" type="Winning.Common.Application.Level1DepartmentCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{69235D0D-47BB-3C2B-9E02-01BA00B1912D}" type="Winning.Common.Application.Level2DepartmentCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E30412E7-6704-31BC-900B-05280CB55061}" type="Winning.Common.Application.DepartmentCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7C90577A-8215-396B-ACE7-68809E01B3CA}" type="Winning.Common.Application.WardCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{264B10CE-75D0-3684-891B-6371F086B5C8}" type="Winning.Common.Application.ShortInputCodeCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1B20CF96-DECC-3549-9371-3059D7076EA2}" type="Winning.Common.Application.UserConfigCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{803D03DF-191E-3415-8E36-FA42B46B573D}" type="Winning.Common.Application.UserConfigExCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0EC17ACE-09E6-3742-998A-C9E74006E040}" type="Winning.Common.Application.Security.RoleCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A5067445-9136-36EA-ACC9-122FA8D1A0A7}" type="Winning.Common.Application.Security.PostCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{69295BC3-3E04-3538-9613-DA12BADC703B}" type="Winning.Common.Application.Security.UserCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3B9A2B54-B77D-3B2E-90E8-0F7582F8675D}" type="Winning.Common.Application.Security.TitleCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E967563F-B954-31BA-8652-22BB387CA559}" type="Winning.Common.Application.Navigate.NavigationCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C9F5D407-E1C7-36D3-9F83-D2AD5991E29B}" type="Winning.Common.Application.Charge.ChargeCategoryCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{D194C315-9EBD-3CD2-A46E-49CD24D90BB2}" type="Winning.Common.Application.Charge.ClinicalChargeProjectCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{53078B07-4E58-31B7-B3DA-55D00531FA9C}" type="Winning.Common.Application.Charge.SmallChargeProjectCacheCreator,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{6F8CBD53-36C9-364A-9D7E-B91B2D947820}" type="Winning.Common.PageMenu.Cache.DictPAGEMENUSTRUCTURCacheCreator,Winning.Common.PageMenu, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3E07FC01-22EA-35CE-8277-C70790AE627E}" type="Winning.Common.PageMenu.Cache.DictPageMenuCacheCreator,Winning.Common.PageMenu, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1FEDDD02-3AB2-3E01-A409-44573F9C90BF}" type="Winning.Common.PageMenu.Cache.DictPAGEINFOKSXZKCacheCreator,Winning.Common.PageMenu, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A87FE2A5-BA99-3FD8-85BE-0D9BF725D4D3}" type="Winning.Common.PageMenu.Cache.DictPageMenuItemInfoCacheCreator,Winning.Common.PageMenu, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{06E0FBB9-D1EB-3E7F-B523-EDB8B3D0D6EE}" type="Winning.Framework.Command.ICommandHandler,Winning.Framework.Infrastructure, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{8584B227-B8A8-3BBB-94AC-CEFB15B0BEBD}" type="Winning.Common.Application.ComputerStatisticsCommandHandler,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4212E6E6-3C71-393D-B943-49BC7E16E493}" type="Winning.Common.Application.Security.UserCommandHandler,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B9122898-05D4-3576-BB89-2B9798228747}" type="Winning.Common.Application.Statistics.ServerTimeSyncCommandHandler,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{187BA48D-90DB-38B3-9ACB-F6C255E810EF}" type="Winning.Common.Application.Statistics.UserLockCommandHandler,Winning.Common.Application, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4FEB4D0C-3442-375E-81FA-EAEE0687675D}" type="Winning.Framework.IActionHandle,Winning.Framework.Infrastructure, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{133DC06F-CB5D-3426-BE25-C847430DB518}" type="Winning.Cdr.UI.Portal.RunPortalMzActionHandle,Winning.Cdr.UI.Portal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{792F6066-9819-3FD9-931F-E3221C0BAED3}" type="Winning.Common.Presentation.News.OneNewsActionHandle,Winning.Common.Presentation.News, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7877653E-6777-33CD-AA93-513E4819B1D1}" type="Winning.Common.Security.RegionControl.Run,Winning.Common.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{39AE4E2F-35E1-34C2-AEB0-51829EAFF5B1}" type="Winning.Common.Setting.OtherMenu.OtherMenuRunActionHandle,Winning.Common.Setting.OtherMenu, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{D169BBE5-569C-3207-A765-95C0E67198A7}" type="Winning.Framework.Presentation.IAddins,Winning.Framework.Presentation, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{865A68D1-A0BF-306B-9877-16B3B2E0EBFF}" type="Winning.Common.Authorize.UserGroup.UserGroupAddins,Winning.Common.Authorize, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B19997DD-D939-3692-8F50-DA05ABDDC720}" type="Winning.Common.Authorize.Role.RoleAddins,Winning.Common.Authorize, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{2B7212E4-68D4-3BF3-9EEC-60F64BE05931}" type="Winning.Common.PageMenu.PageMenuSettingAddin,Winning.Common.PageMenu, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{11B12160-B2D1-3FFA-94EA-756EEC72259B}" type="Winning.Common.Presentation.Manage.AboutAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{92C73D19-1BFA-3F29-8840-F1DEC7BA3B2F}" type="Winning.Common.Presentation.Manage.PrintSettingAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{5BB7018C-A3EE-3962-9461-42B295D52B6E}" type="Winning.Common.Presentation.Manage.EmbeddedPrintSettingAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{946D495F-28AE-3919-A18D-21196FA479D7}" type="Winning.Common.Presentation.Manage.RoleManageAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{F3A407E5-872D-384E-8D8B-D58ED49AB7AF}" type="Winning.Common.Presentation.Manage.RolePostManageAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4190D9F4-56A2-3DA2-AE98-A6F62E7F8E3A}" type="Winning.Common.Presentation.Manage.UserConfigAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{F0CEC564-9E26-3BFA-81BC-CF7BA80D655F}" type="Winning.Common.Presentation.Manage.WorkStationAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{998EEB56-433F-3EBD-A94B-E31EE639D1ED}" type="Winning.Common.Presentation.Manage.Workflow.WorkflowAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0BABB421-4966-32E2-87B2-EB75AA524127}" type="Winning.Common.Presentation.Manage.UserManage.UserAuthorizeItemAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1F98364E-5684-393B-9E6A-0D5A8AE70A2E}" type="Winning.Common.Presentation.Manage.UserManage.UserInfoAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FD313005-0653-306A-AE26-69CF8D9EDAEB}" type="Winning.Common.Presentation.Manage.UserManage.UserPostAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B8C35889-946A-3642-AF13-344261C4C6A4}" type="Winning.Common.Presentation.Manage.Navigate.NavigateAddins,Winning.Common.Presentation.Manage, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0E71F671-826B-3106-9E3C-45B7D651B0EB}" type="Winning.Common.Presentation.News.NewsAddins,Winning.Common.Presentation.News, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0CB49F6B-F91F-3DE0-8538-6BC0BEC3C830}" type="Winning.Common.Presentation.News.NewsEditorAddins,Winning.Common.Presentation.News, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{BABDAE4C-6291-311C-BB1F-C0E8777559B6}" type="Winning.Common.Presentation.Report.ReportAddins,Winning.Common.Presentation.Report, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7003499E-3B2D-3705-865D-71CF8BFEE77B}" type="Winning.Common.Presentation.Report.ReportsEditorAddins,Winning.Common.Presentation.Report, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{6D978C63-DE8D-391E-807C-67BB614CB588}" type="Winning.Common.Presentation.Security.ClientExitAddins,Winning.Common.Presentation.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C7ADB995-D3CB-3F2C-8CA7-F7049887BF5E}" type="Winning.Common.Presentation.Security.ClientRestartAddins,Winning.Common.Presentation.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FD6B7F94-BE12-38B5-AB81-E142D0B43374}" type="Winning.Common.Presentation.Security.LockDesktopAddins,Winning.Common.Presentation.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{58D77239-9385-3144-8913-D87E2EE5AFEA}" type="Winning.Common.Presentation.Security.ModifyPasswordAddins,Winning.Common.Presentation.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{631FE161-C438-33FE-8C69-75CB1E1F4A47}" type="Winning.Common.Presentation.Security.EmbeddedModifyPasswordAddins,Winning.Common.Presentation.Security, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{FC290BCD-2E96-398D-8727-1ABC07E194E6}" type="Winning.Common.Presentation.StatusBar.DatetimeAddins,Winning.Common.Presentation.StatusBar, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{EA739D9B-3BA6-30E0-A4EE-1B8FA50F02A9}" type="Winning.Common.Presentation.StatusBar.DepartmentAddins,Winning.Common.Presentation.StatusBar, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{3B871433-73DC-3A6C-8656-903DA44A8229}" type="Winning.Common.Presentation.StatusBar.HospitalAddins,Winning.Common.Presentation.StatusBar, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E2CF5D5B-D77C-3D14-B429-DB0E8FEF0F08}" type="Winning.Common.Presentation.StatusBar.IPAddins,Winning.Common.Presentation.StatusBar, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{546A524D-BCCD-3B23-BCFE-F5A7BC2E3490}" type="Winning.Common.Presentation.StatusBar.UserAddins,Winning.Common.Presentation.StatusBar, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7E4BEAFA-04C9-31D0-8BFE-E59690C256C8}" type="Winning.Common.Presentation.StatusBar.WardAddins,Winning.Common.Presentation.StatusBar, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{5A175530-4B38-3ADA-B3FE-4F977B350DB2}" type="Winning.Common.RequestOrder.UI.StartUp,Winning.Common.RequestOrder.UI, Version=5.13.4.25, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0F3964EA-0A1E-3F23-956D-CB1260A62630}" type="Winning.Common.Setting.OtherMenu.StartUpAddins,Winning.Common.Setting.OtherMenu, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{7185F488-20C8-34CE-AE79-32EBCC6B0AE0}" type="Winning.Common.This4.This4Addins,Winning.Common.This4, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{81496FB6-5B02-3684-A4CD-315F139467E2}" type="Winning.Framework.Presentation.Option.OptionAddins,Winning.Framework.Presentation.Option, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" type="Winning.Framework.Presentation.ILoginer,Winning.Framework.Presentation, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{B5C73CFA-851E-3403-BAC4-BD58D2AFFADB}" type="Winning.Common.Presentation.Login.NormLoginer,Winning.Common.Presentation.Login, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E386A8C4-A9B9-3D27-A89E-CFB16CF1C21F}" type="Winning.Common.SSO.SSOLoginer,Winning.Common.SSO, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{A12AE4AB-5D7D-30FD-8EBB-484C5DE919B2}" type="Winning.Cpoe.Interface.OrderPrint.RecordsViewLogin,Winning.Cpoe.Interface.OrderPrint, Version=5.14.6.16, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{AAB439DF-554C-395A-8573-766B9AF80CA2}" type="Winning.CPOE.Interface.PrintOrder2Pdf.PdfLogin,Winning.Cpoe.Interface.PrintOrder2Pdf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E12B5CF5-EEF4-34E3-A9A7-5EFF6B9718D0}" type="Winning.Emr.Interface.RecordsView.RecordsViewLogin,Winning.Emr.Interface.RecordsView, Version=5.13.4.25, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{67877C28-5CA7-3C71-8918-29E8CB445779}" type="Winning.EmrOutp.UI.PrintBySelf.StartUp.PrintSelfLoginer,Winning.EmrOutp.UI.PrintBySelf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{C1B901F1-9EEA-3E6D-A06E-D6B47B34715A}" type="Winning.EmrOutp.UI.PrintCenterThird.StartUp.PrintCenterThirdLoginer,Winning.EmrOutp.UI.PrintCenterThird, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{BEABFBE3-A4BC-39BA-AA84-21C81D69CA55}" type="Winning.Framework.Presentation.IModuleHandle,Winning.Framework.Presentation, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E9EB8772-5001-3117-BB01-0FF1757C7483}" type="Winning.Common.Presentation.Host.CommonModuleHandle,Winning.Common.Presentation.Host, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" type="Winning.Framework.Presentation.IShell,Winning.Framework.Presentation, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{8DD74D6A-53EC-33AB-9251-4EDD05A54FED}" type="Winning.Common.Presentation.RibbonModel.RibbonShell,Winning.Common.Presentation.RibbonModel, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{6DA7A388-616C-39B8-A4DE-61B71240F1C6}" type="Winning.Cpoe.Interface.OrderPrint.RecordsViewShell,Winning.Cpoe.Interface.OrderPrint, Version=5.14.6.16, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{5EE16091-3D3B-34CF-8EF3-CF785AA291D3}" type="Winning.CPOE.Interface.PrintOrder2Pdf.PDFShell,Winning.Cpoe.Interface.PrintOrder2Pdf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{DE464160-8A71-35E4-ABF8-2F917DAA1E8E}" type="Winning.Emr.Interface.RecordsView.RecordsViewShell,Winning.Emr.Interface.RecordsView, Version=5.13.4.25, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4FECBFEE-A04B-3500-9602-D53AD69673C3}" type="Winning.EmrOutp.UI.PrintBySelf.StartUp.PrintBySelfShell,Winning.EmrOutp.UI.PrintBySelf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{4CD17BF9-30B2-3BC0-B005-494684900F7F}" type="Winning.EmrOutp.UI.PrintCenterThird.StartUp.PrintCenterThirdShell,Winning.EmrOutp.UI.PrintCenterThird, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{08310340-AD02-38E3-8080-3E3BCF425039}" type="Winning.Framework.Workflow.IActivityHandle,Winning.Framework.Infrastructure, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{0AF73FA0-06D9-314A-9D13-77226B6DE0C1}" type="Winning.Common.Presentation.News.NewsActivityHandle,Winning.Common.Presentation.News, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{1DA36E8A-5E48-370C-B59E-EBB2D240F5B4}" type="Winning.Framework.Workflow.IWorkflowQueryService,Winning.Framework.Workflow, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <alias name="{BB1ECB23-1D49-3C46-BCEE-50F3F7983AB5}" type="Winning.FrameWork.Core.Logic.WorkflowQueryService,Winning.Framework.Compatible, Version=5.5.0.0, Culture=neutral, PublicKeyToken=null" />
+  </aliases>
+  <containers>
+    <container name="M">
+      <registration lifetime="Singleton" to="{81530F86-0DE2-3698-8CE9-B65CC420281A}" name="Winning.Cdr.UI.Portal.dll,Winning.Cdr.UI.Portal.View.EmrViewer,xtpemr">
+        <type name="{9FC29F9A-87E0-3A89-8CCA-5044E70F57F7}" />
+      </registration>
+      <registration lifetime="Singleton" to="{E907EA58-6682-34BD-BD9B-67A5E69D7EEC}" name="">
+        <type name="{F0AD339D-B304-3850-B7BE-14F35D57345B}" />
+      </registration>
+      <registration lifetime="Singleton" to="{795A852B-941D-3592-AA5D-F182327AA26B}" name="">
+        <type name="{A7B272B0-5EC9-3AA3-AB13-A2E82381BB5C}" />
+      </registration>
+      <registration lifetime="Singleton" to="{21068C09-5647-371F-B567-6177BFA108A1}" name="">
+        <type name="{229F53B1-1609-3FD4-B950-7AA42E5DE5D2}" />
+      </registration>
+      <registration lifetime="Singleton" to="{6976FF4E-A744-398D-9EC9-D360ECCE4312}" name="">
+        <type name="{9573CBA9-827A-3862-B25C-E10F1E050AFE}" />
+      </registration>
+      <registration lifetime="Singleton" to="{18BEAEE2-D176-366B-B9E2-FC4164F2F648}" name="">
+        <type name="{C35FA710-87BB-3186-B53F-9C2767642736}" />
+      </registration>
+      <registration lifetime="Singleton" to="{0CA8548B-2E52-3636-9F9C-FC988A0D0554}" name="">
+        <type name="{03774D44-5DDC-3E8D-B21B-86F65AF24258}" />
+      </registration>
+      <registration lifetime="Singleton" to="{5ECA2C68-495D-3FB6-8FF2-5FC2B85088A1}" name="">
+        <type name="{4029116B-F684-3951-BA6D-7079F15B881D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{E203070C-A541-3F6D-B092-6C2C46953826}" name="">
+        <type name="{7B823382-927D-36DC-9357-26B16058B875}" />
+      </registration>
+      <registration lifetime="Singleton" to="{3438EAAD-568C-3292-B80F-702533A72EB9}" name="">
+        <type name="{FC3E6130-556A-3EB8-8795-CC193C29CC5C}" />
+      </registration>
+      <registration lifetime="Singleton" to="{EADF62D1-16A1-31BE-AA20-1B7756EC77D1}" name="">
+        <type name="{5BF1697B-7661-3BD6-B95F-D06486516614}" />
+      </registration>
+      <registration lifetime="Singleton" to="{975750C4-51B3-3FF8-9F2A-ECB6CA0F1029}" name="">
+        <type name="{A0AABFEE-CE4C-3A8E-B48E-5AC9CC8A6F10}" />
+      </registration>
+      <registration lifetime="Transient" to="{9A4DF45C-AA8A-3A3B-AC9E-75C1C53E4EAE}" name="">
+        <type name="{51DDA097-B350-33B2-8DAA-499B6C757923}" />
+      </registration>
+      <registration lifetime="Singleton" to="{DE46EF13-C8AA-3FF8-A753-14D017A8B0E6}" name="">
+        <type name="{64E5D63F-5102-3795-A478-4125517A257D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{4EEA49D0-405D-3391-A29A-B47E41303045}" name="">
+        <type name="{2EB5CDE2-2F3B-3FF8-9796-0028B69BE7F3}" />
+      </registration>
+      <registration lifetime="Singleton" to="{0BD2A797-F462-3CA9-BE79-5D169A9E8AE5}" name="">
+        <type name="{5CDAB5A0-D503-3027-8BD3-5EC07487FF6C}" />
+      </registration>
+      <registration lifetime="Singleton" to="{00CBA33E-3AFD-306B-A9F8-B87C818F1DE7}" name="NORM">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{C1191333-A2E5-32DB-B2E9-55B93F303002}" name="">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{375A9553-A91F-3729-8A66-3BD90529A82B}" name="CA">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{3ADC9A15-F536-3DC6-8701-FF776D8FB09C}" name="DotNetCA">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{8E7537C3-C630-3F84-94AC-867E6FC7F80B}" name="CA_SCAN">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{3CDAD18F-72A1-3FA4-AD66-9745F31D0CBF}" name="SSO">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{AC6D5A84-9165-3990-A7B1-8CC9FF08D637}" name="PRINTBYSELF">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Singleton" to="{8195A49A-4411-3153-A492-F2CA5DB749B6}" name="PRINTCENTERTHIRD">
+        <type name="{50F44801-D100-3285-A943-E9547FE0FEB6}" />
+      </registration>
+      <registration lifetime="Transient" to="{7ED2170D-1A0B-3E60-8D57-8140720792B7}" name="MultiPopupLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{A1259EAC-09D1-3DE2-BD6A-617A54EB7329}" name="ButtonLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{AF0800A0-A4ED-30DC-B5F3-481EE9588243}" name="NumericLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{1CB57CEF-BD71-31B9-9308-3E9ABC6F69E3}" name="CheckLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{B88AB8F1-A6B0-3AFE-9EBE-AF3770A2532A}" name="ComboLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{9D5472C9-8794-3D8B-BBB3-D0F724857A8E}" name="DateTimeLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{E8DE426B-50FE-35A8-9A3C-F5BDE1551348}" name="GridLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{4C0DBB36-460C-36D8-B83D-1895A63121D5}" name="GroupPanelLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{FF837B46-84D9-3D87-BAD2-DA305734AC70}" name="LabelLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{B54BB393-ED68-3128-B705-11D8952E75BD}" name="PanelLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{3A063184-1FCE-3300-8F04-EF39FCEB7126}" name="SinglePopupLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{F2FE706C-6212-30AE-8C17-46FD30C2B665}" name="RadioLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{7B9B255B-0A7A-366A-ACD9-1C162F9D2D1C}" name="HomeLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{B9EA3F56-337D-3689-ACA1-DB2C37DEA4EA}" name="TextLayoutDisplay">
+        <type name="{0733EC28-8F69-32FF-8E4A-DC6E2C2A629B}" />
+      </registration>
+      <registration lifetime="Transient" to="{737EC764-DA5B-3A1B-BE1C-F0EDC3A9BF05}" name="MultiPopupLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{EE9105D2-C909-3C94-8B37-9E49997F6625}" name="TextLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{3E15C4B9-F397-35E0-B4B9-4CA2C5128B49}" name="RadioLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{06C27B9B-A851-3FC3-8A8D-7B1C47DF31BD}" name="SinglePopupLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{85092CCE-C6CA-363C-A8E1-6AB675968908}" name="PanelLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{CA537770-6370-3CE0-9417-9095C56F139F}" name="NumericLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{3B971661-89F7-33F3-9385-493739A9F78E}" name="LabelLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{860EB681-7A5E-3A3B-9D3F-D5F3F264592A}" name="HomeLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{19CB9CD2-3437-3393-A416-D10D56A9AAB4}" name="GroupPanelLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{FA746DAB-6088-37B2-9C23-5F6B816C5D13}" name="GridLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{46258D8D-11A6-3692-BEF3-229D556815FA}" name="DateTimeLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{FADA7162-1621-30AA-8C31-AA98571938CA}" name="ComboLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{AECB05F3-F1C2-3ED4-8117-B87865338547}" name="CheckLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{CE411F45-FDD4-3E8C-A1E3-5267631FCB79}" name="ButtonLayoutDisplay">
+        <type name="{C8504194-D642-323B-8035-872900987B78}" />
+      </registration>
+      <registration lifetime="Transient" to="{E15B87D9-83D3-3C1D-BCBB-F9F30B4746C1}" name="MultiPopupLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{28614D8A-D105-3CB1-A6D1-9DE6952718A5}" name="ButtonLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{A1C313F8-7641-386F-AC96-7A67AE7A1344}" name="NumericLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{7840B457-3C4D-30C8-BA7E-A5FD81C7EFDD}" name="CheckLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{2D107BC5-259F-31DB-989E-EC3DD01024F1}" name="ComboLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{2C418BDE-033F-3B23-8271-E952C9459A2D}" name="DateTimeLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{E8ADFDC1-7698-3494-8E72-E0B015A9010D}" name="GridLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{D28A1E7B-60F7-3939-A295-C08309A34D54}" name="GroupPanelLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{8DFA2DC6-0AD4-3C78-BC56-0C113A611AFF}" name="LabelLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{31DAE675-19C4-3F85-88FE-3EC7B49E0574}" name="PanelLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{4588DFB3-7A46-3873-8126-7984D1622B06}" name="SinglePopupLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{1BFBB112-F927-36D7-9F47-7D7D7EA86785}" name="RadioLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{1A693434-3489-37AF-9054-38E0F76403AE}" name="HomeLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{697739DD-10A6-351F-A2FE-0790D7D27C96}" name="TextLayoutDisplay">
+        <type name="{BC68FECE-12E7-3BDC-8BCA-BC40058AF6ED}" />
+      </registration>
+      <registration lifetime="Transient" to="{47FB6F8E-86C7-3669-8D30-E115F5C4527B}" name="MultiPopupLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Transient" to="{C2EDEA2D-4071-361B-B82C-D95A0F35C5C0}" name="NumericLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Transient" to="{41892A9B-CEEC-3BF9-94D4-80ADD0AD32A5}" name="CheckLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Transient" to="{1E306709-6AA7-3305-A5BE-5E306A7F40A4}" name="ComboLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Transient" to="{1C9C455D-75A3-30E8-A37A-BC92667EBA2C}" name="DateTimeLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Transient" to="{8972AB2F-5D57-34B3-BD6C-4814B9E30D76}" name="SinglePopupLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Transient" to="{2167C36F-21EF-3753-AC8D-6D060735E96D}" name="TextLayoutDisplay">
+        <type name="{3826471A-E947-3A0F-9EA4-BFBEBA665F89}" />
+      </registration>
+      <registration lifetime="Singleton" to="{B96D7ABE-33F8-3CCF-98BA-6287CA4994DF}" name="">
+        <type name="{AEFA834C-9F61-32A5-8ECA-FAA3566BD5DD}" />
+      </registration>
+      <registration lifetime="Transient" to="{54E00332-48D5-3C20-89D7-16F461EF4A38}" name="">
+        <type name="{CB22EAED-1DF8-31BE-8594-1C1411A3386D}" />
+      </registration>
+      <registration lifetime="Transient" to="{B802107C-67BE-3F3D-AFF1-0154390D1531}" name="CA">
+        <type name="{CB22EAED-1DF8-31BE-8594-1C1411A3386D}" />
+      </registration>
+      <registration lifetime="Transient" to="{D1E7611F-C0DA-33C1-B6BC-1B3CD664FE7F}" name="DotNetCA">
+        <type name="{CB22EAED-1DF8-31BE-8594-1C1411A3386D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{6944681F-B9F8-38B6-972F-D7292CA8AAC5}" name="">
+        <type name="{2CFC17E4-94B5-3C53-895E-7B43CD85ED1C}" />
+      </registration>
+      <registration lifetime="Singleton" to="{59181EE0-BC91-352E-87E8-19D7AB03FB90}" name="">
+        <type name="{60E65268-A1FE-34AD-AC03-C6A171347F6F}" />
+      </registration>
+      <registration lifetime="Singleton" to="{6EC6F9F1-FFBA-3EBE-8219-BFD3EDCF94EB}" name="Winning.Common.Application.Level1DepartmentInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{69235D0D-47BB-3C2B-9E02-01BA00B1912D}" name="Winning.Common.Application.Level2DepartmentInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{E30412E7-6704-31BC-900B-05280CB55061}" name="Winning.Common.Application.DepartmentInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{7C90577A-8215-396B-ACE7-68809E01B3CA}" name="Winning.Common.Application.WardInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{264B10CE-75D0-3684-891B-6371F086B5C8}" name="Winning.Common.Application.ShortInputCodeInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{1B20CF96-DECC-3549-9371-3059D7076EA2}" name="Winning.Common.Application.UserConfigInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{803D03DF-191E-3415-8E36-FA42B46B573D}" name="Winning.Common.Application.UserConfigInfoEx">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{0EC17ACE-09E6-3742-998A-C9E74006E040}" name="Winning.Common.Application.Security.RoleInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{A5067445-9136-36EA-ACC9-122FA8D1A0A7}" name="Winning.Common.Application.Security.PostInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{69295BC3-3E04-3538-9613-DA12BADC703B}" name="Winning.Common.Application.Security.UserInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{3B9A2B54-B77D-3B2E-90E8-0F7582F8675D}" name="Winning.Common.Application.Security.TitleInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{E967563F-B954-31BA-8652-22BB387CA559}" name="Winning.Common.Application.Navigate.NavigationNodeInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{C9F5D407-E1C7-36D3-9F83-D2AD5991E29B}" name="Winning.Common.Application.Charge.ChargeCategoryInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{D194C315-9EBD-3CD2-A46E-49CD24D90BB2}" name="Winning.Common.Application.Charge.ClinicalChargeProjectInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{53078B07-4E58-31B7-B3DA-55D00531FA9C}" name="Winning.Common.Application.Charge.SmallChargeProjectInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{6F8CBD53-36C9-364A-9D7E-B91B2D947820}" name="Winning.Model.Common.PUB_PAGE_MENUSTRUCTUR">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{3E07FC01-22EA-35CE-8277-C70790AE627E}" name="Winning.Model.Common.PUB_PAGE_MENUSETTING">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{1FEDDD02-3AB2-3E01-A409-44573F9C90BF}" name="Winning.Model.Common.PUB_PAGEINFO_KSXZK">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{A87FE2A5-BA99-3FD8-85BE-0D9BF725D4D3}" name="Winning.Common.PageMenu.MenuItemInfo">
+        <type name="{E72CB45D-E788-3F60-B741-687C277A3E29}" />
+      </registration>
+      <registration lifetime="Singleton" to="{8584B227-B8A8-3BBB-94AC-CEFB15B0BEBD}" name="Winning.Framework.Application.Command.ComputerStatisticsCommand">
+        <type name="{06E0FBB9-D1EB-3E7F-B523-EDB8B3D0D6EE}" />
+      </registration>
+      <registration lifetime="Singleton" to="{4212E6E6-3C71-393D-B943-49BC7E16E493}" name="Winning.Framework.Application.Command.UserWardCommand">
+        <type name="{06E0FBB9-D1EB-3E7F-B523-EDB8B3D0D6EE}" />
+      </registration>
+      <registration lifetime="Singleton" to="{4212E6E6-3C71-393D-B943-49BC7E16E493}" name="Winning.Framework.Application.Command.UserDepartmentCommand">
+        <type name="{06E0FBB9-D1EB-3E7F-B523-EDB8B3D0D6EE}" />
+      </registration>
+      <registration lifetime="Singleton" to="{B9122898-05D4-3576-BB89-2B9798228747}" name="Winning.Framework.Application.Command.ServerTimeSyncCommand">
+        <type name="{06E0FBB9-D1EB-3E7F-B523-EDB8B3D0D6EE}" />
+      </registration>
+      <registration lifetime="Singleton" to="{187BA48D-90DB-38B3-9ACB-F6C255E810EF}" name="Winning.Framework.Application.Command.UserLockCommand">
+        <type name="{06E0FBB9-D1EB-3E7F-B523-EDB8B3D0D6EE}" />
+      </registration>
+      <registration lifetime="Singleton" to="{133DC06F-CB5D-3426-BE25-C847430DB518}" name="RunPortalMz,Winning.Cdr.UI.Portal.StartUp,Winning.Cdr.UI.Portal.dll">
+        <type name="{4FEB4D0C-3442-375E-81FA-EAEE0687675D}" />
+      </registration>
+      <registration lifetime="Transient" to="{792F6066-9819-3FD9-931F-E3221C0BAED3}" name="OneNewsActionHandle">
+        <type name="{4FEB4D0C-3442-375E-81FA-EAEE0687675D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{7877653E-6777-33CD-AA93-513E4819B1D1}" name="Run,Winning.Common.Security.RegionControl.StartUp,Winning.Common.Security.dll">
+        <type name="{4FEB4D0C-3442-375E-81FA-EAEE0687675D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{39AE4E2F-35E1-34C2-AEB0-51829EAFF5B1}" name="OtherMenuRun,Winning.Common.Setting.OtherMenu.StartUp,Winning.Common.Setting.OtherMenu.dll">
+        <type name="{4FEB4D0C-3442-375E-81FA-EAEE0687675D}" />
+      </registration>
+      <registration lifetime="Transient" to="{865A68D1-A0BF-306B-9877-16B3B2E0EBFF}" name="{E29713F5-ED74-41D9-888E-85900902BE62}">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{B19997DD-D939-3692-8F50-DA05ABDDC720}" name="{BA7746B6-7499-4502-8245-B95E6ACA6C21}">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{2B7212E4-68D4-3BF3-9EEC-60F64BE05931}" name="Run,Winning.Common.PageMenu.PageMenuSettingAddin,Winning.Common.PageMenu.dll">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{11B12160-B2D1-3FFA-94EA-756EEC72259B}" name="783D703C-4667-47F7-BEDD-B5799EB81117">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{92C73D19-1BFA-3F29-8840-F1DEC7BA3B2F}" name="D5BE28C2-8A80-48A2-846D-1EFDE60633E4">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{5BB7018C-A3EE-3962-9461-42B295D52B6E}" name="D5BE28C2-8A80-48A2-846D-1EFDE60633E4-EMBEDDED">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{946D495F-28AE-3919-A18D-21196FA479D7}" name="C54708E4-0A76-4ED6-9F96-C8B59CB83589">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{F3A407E5-872D-384E-8D8B-D58ED49AB7AF}" name="1887B328-F4C1-4F26-BDD5-AACE72A5C75B">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{4190D9F4-56A2-3DA2-AE98-A6F62E7F8E3A}" name="55BF07D9-6618-48F4-BE02-0071E228EA06">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{F0CEC564-9E26-3BFA-81BC-CF7BA80D655F}" name="82B289E8-8715-4E43-9B33-87BAA32456C1">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{998EEB56-433F-3EBD-A94B-E31EE639D1ED}" name="B2DC81D4-43E9-492F-AE1E-DBC7149C1995">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{0BABB421-4966-32E2-87B2-EB75AA524127}" name="EDB436C6-40FC-4A6D-87C8-7824CDFE81CF">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{1F98364E-5684-393B-9E6A-0D5A8AE70A2E}" name="EF3F09A0-7591-4849-9F09-250511652351">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{FD313005-0653-306A-AE26-69CF8D9EDAEB}" name="8A213B8A-8CEE-4CA8-8F8F-C814093E53C2">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{B8C35889-946A-3642-AF13-344261C4C6A4}" name="B4245181-3FAB-47BB-BDC2-BA2B28575221">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{0E71F671-826B-3106-9E3C-45B7D651B0EB}" name="90EB0215-4CDC-4091-8C90-D4AAC41757C0">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{0CB49F6B-F91F-3DE0-8538-6BC0BEC3C830}" name="53C1C350-3C71-4605-880A-E054022AEFE8">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{BABDAE4C-6291-311C-BB1F-C0E8777559B6}" name="Run,Winning.Common.Presentation.Report.ReportAddins,Winning.Common.Presentation.Report.dll">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{7003499E-3B2D-3705-865D-71CF8BFEE77B}" name="2108C8AA-30A7-411A-A2AB-DAD9CBAC5596">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{6D978C63-DE8D-391E-807C-67BB614CB588}" name="A05C239F-5658-42DD-834A-0D79457878C2">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{C7ADB995-D3CB-3F2C-8CA7-F7049887BF5E}" name="A7DBB1CA-8E4E-4372-83F0-6F08DDC481A0">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{FD6B7F94-BE12-38B5-AB81-E142D0B43374}" name="1DC00FDF-443C-434E-ADE8-C6954F42CC5C">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{58D77239-9385-3144-8913-D87E2EE5AFEA}" name="C4ECBA2B-CCDB-4661-A7EE-7CB3AB3FE6F0">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{631FE161-C438-33FE-8C69-75CB1E1F4A47}" name="C4ECBA2B-CCDB-4661-A7EE-7CB3AB3FE6F0-EMBEDDED">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{FC290BCD-2E96-398D-8727-1ABC07E194E6}" name="575EBCD4-CC59-4A86-8286-70EBC41281BE">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{EA739D9B-3BA6-30E0-A4EE-1B8FA50F02A9}" name="F395007A-DD79-4E63-8AF0-F50D4F1D6D15">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{3B871433-73DC-3A6C-8656-903DA44A8229}" name="6FAA6C6C-8FEB-45CA-8A4E-A4E62E0687CC">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{E2CF5D5B-D77C-3D14-B429-DB0E8FEF0F08}" name="07D697AF-39D3-4DFA-9514-6879B0164575">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{546A524D-BCCD-3B23-BCFE-F5A7BC2E3490}" name="58F33EE7-57A5-4058-B8EE-77A4DAE5D794">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{7E4BEAFA-04C9-31D0-8BFE-E59690C256C8}" name="33E279ED-1544-428F-B010-3BD75887B143">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{5A175530-4B38-3ADA-B3FE-4F977B350DB2}" name="Run,Winning.Common.RequestOrder.UI.StartUp,Winning.Common.RequestOrder.UI.dll">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{0F3964EA-0A1E-3F23-956D-CB1260A62630}" name="Run,Winning.Common.Setting.OtherMenu.StartUpAddins,Winning.Common.Setting.OtherMenu.dll">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{7185F488-20C8-34CE-AE79-32EBCC6B0AE0}" name="Run,Winning.FrameWork.v4.StartUp,Winning.FrameWork.v4.X.dll">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{81496FB6-5B02-3684-A4CD-315F139467E2}" name="7A029976-EB01-4686-AAC7-D109B957A505">
+        <type name="{D169BBE5-569C-3207-A765-95C0E67198A7}" />
+      </registration>
+      <registration lifetime="Transient" to="{B5C73CFA-851E-3403-BAC4-BD58D2AFFADB}" name="NORM">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Transient" to="{E386A8C4-A9B9-3D27-A89E-CFB16CF1C21F}" name="SSO">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{A12AE4AB-5D7D-30FD-8EBB-484C5DE919B2}" name="CPOE_ORDERPRINT">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{AAB439DF-554C-395A-8573-766B9AF80CA2}" name="CPOE_ORDERPRINT2PDF">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{E12B5CF5-EEF4-34E3-A9A7-5EFF6B9718D0}" name="EMR_RECORDSVIEW">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{67877C28-5CA7-3C71-8918-29E8CB445779}" name="PRINTBYSELF">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{C1B901F1-9EEA-3E6D-A06E-D6B47B34715A}" name="PRINTCENTERTHIRD">
+        <type name="{4779D527-ABE8-3B9B-B62A-A51B652EFF4D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{E9EB8772-5001-3117-BB01-0FF1757C7483}" name="H0">
+        <type name="{BEABFBE3-A4BC-39BA-AA84-21C81D69CA55}" />
+      </registration>
+      <registration lifetime="Transient" to="{8DD74D6A-53EC-33AB-9251-4EDD05A54FED}" name="">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Transient" to="{8DD74D6A-53EC-33AB-9251-4EDD05A54FED}" name="RIBBON">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{6DA7A388-616C-39B8-A4DE-61B71240F1C6}" name="CPOE_ORDERPRINT">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{5EE16091-3D3B-34CF-8EF3-CF785AA291D3}" name="CPOE_ORDERPRINT2PDF">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{DE464160-8A71-35E4-ABF8-2F917DAA1E8E}" name="EMR_RECORDSVIEW">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{4FECBFEE-A04B-3500-9602-D53AD69673C3}" name="PRINTBYSELF">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{4CD17BF9-30B2-3BC0-B005-494684900F7F}" name="PRINTCENTERTHIRD">
+        <type name="{E2303A2E-7A30-3BDE-B381-B33BA4E6D70D}" />
+      </registration>
+      <registration lifetime="Singleton" to="{0AF73FA0-06D9-314A-9D13-77226B6DE0C1}" name="ShowNews,Winning.FrameWork.UI.News.Integration,Winning.FrameWork.UI.News.dll">
+        <type name="{08310340-AD02-38E3-8080-3E3BCF425039}" />
+      </registration>
+      <registration lifetime="Transient" to="{BB1ECB23-1D49-3C46-BCEE-50F3F7983AB5}" name="">
+        <type name="{1DA36E8A-5E48-370C-B59E-EBB2D240F5B4}" />
+      </registration>
+    </container>
+  </containers>
+</component>

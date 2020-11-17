@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/07/2019 09:14:46" ReportInfo.Modified="05/07/2019 09:20:41" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="报告卡测试示例主表" ReferenceName="Data.报告卡测试示例主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="GENDER" DataType="System.String"/>
+      <Column Name="AGE" DataType="System.String"/>
+      <Column Name="SYXH" DataType="System.String"/>
+      <Column Name="YEXH" DataType="System.String"/>
+      <Column Name="XTLB" DataType="System.String"/>
+      <Column Name="SHZT" DataType="System.String"/>
+      <Column Name="JLZT" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="报告卡测试示例扩展表" ReferenceName="Data.报告卡测试示例扩展表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.String"/>
+      <Column Name="BGKXH" DataType="System.String"/>
+      <Column Name="MEMO_KZ" DataType="System.String"/>
+      <Column Name="MEMO1_KZ" DataType="System.String"/>
+      <Column Name="MEMO2_KZ" DataType="System.String"/>
+      <Column Name="EXPLAIN_KZ" DataType="System.String"/>
+      <Column Name="BLFL_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL1_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL1_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL2_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL2_NAME_KZ" DataType="System.String"/>
+      <Column Name="JZRQ_KZ" DataType="System.String"/>
+      <Column Name="BCSM_KZ" DataType="System.String"/>
+      <Column Name="SHENG_ID_KZ" DataType="System.String"/>
+      <Column Name="SHENG_NAME_KZ" DataType="System.String"/>
+      <Column Name="SHI_ID_KZ" DataType="System.String"/>
+      <Column Name="SHI_NAME_KZ" DataType="System.String"/>
+      <Column Name="XIAN_ID_KZ" DataType="System.String"/>
+      <Column Name="XIAN_NAME_KZ" DataType="System.String"/>
+      <Column Name="XIANG_ID_KZ" DataType="System.String"/>
+      <Column Name="XIANG_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL4_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL4_NAME_KZ" DataType="System.String"/>
+      <Column Name="KS_ID_KZ" DataType="System.String"/>
+      <Column Name="KS_NAME_KZ" DataType="System.String"/>
+      <Column Name="BQ_ID_KZ" DataType="System.String"/>
+      <Column Name="BQ_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL5_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL5_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL3_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL3_NAME_KZ" DataType="System.String"/>
+      <Column Name="JZSJ_KZ" DataType="System.String"/>
+      <Column Name="JZRQSJ_KZ" DataType="System.String"/>
+      <Column Name="BLFL6_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL6_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL7_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL7_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL8_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL8_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL9_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL9_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL10_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL10_NAME_KZ" DataType="System.String"/>
+      <Column Name="HJSHENG_ID_KZ" DataType="System.String"/>
+      <Column Name="HJSHENG_NAME_KZ" DataType="System.String"/>
+      <Column Name="HJSHI_ID_KZ" DataType="System.String"/>
+      <Column Name="HJSHI_NAME_KZ" DataType="System.String"/>
+      <Column Name="HJXIAN_ID_KZ" DataType="System.String"/>
+      <Column Name="HJXIAN_NAME_KZ" DataType="System.String"/>
+      <Column Name="HJXIANG_ID_KZ" DataType="System.String"/>
+      <Column Name="HJXIANG_NAME_KZ" DataType="System.String"/>
+      <Column Name="BLFL11_ID_KZ" DataType="System.String"/>
+      <Column Name="BLFL11_NAME_KZ" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35"/>
+    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="75.6">
+      <TextObject Name="Text1" Left="75.6" Top="9.45" Width="94.5" Height="18.9" Text="[报告卡测试示例主表.HZXM]" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

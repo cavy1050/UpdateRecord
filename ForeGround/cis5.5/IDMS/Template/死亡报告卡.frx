@@ -1,0 +1,714 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/30/2019 17:07:15" ReportInfo.Modified="11/29/2019 09:38:42" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private void Data278_AfterData(object sender, EventArgs e) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='18'
+    {  
+      
+      //生前主要疾病最高诊断单位
+      if(Text278.Text.Equals(&quot;02&quot;))
+        CheckBox46.Checked=true;//三级医院
+      else if(Text278.Text.Equals(&quot;10&quot;))
+        CheckBox61.Checked=true;//二级医院
+      else if(Text278.Text.Equals(&quot;21&quot;))
+        CheckBox48.Checked=true;//乡镇卫生院/社区卫生服务机构
+      else if(Text278.Text.Equals(&quot;30&quot;))
+        CheckBox63.Checked=true;//其他医疗卫生机构
+      else if(Text278.Text.Equals(&quot;91&quot;)) 
+        CheckBox64.Checked=true;//未就诊
+      else if(Text278.Text.Equals(&quot;22&quot;))  
+        CheckBox62.Checked=true;}//村卫生室
+      
+      
+      //生前主要疾病最高诊断依据
+      private void Data279_AfterData(object sender, EventArgs e)//看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='19'
+      {  
+      
+      if(Text279.Text.Equals(&quot;105&quot;))
+        CheckBox66.Checked=true;//临床+理化
+      else if(Text279.Text.Equals(&quot;300&quot;))
+        CheckBox71.Checked=true;//手术
+      else if(Text279.Text.Equals(&quot;410&quot;))
+        CheckBox67.Checked=true;//尸检
+      else if(Text279.Text.Equals(&quot;700&quot;))
+        CheckBox72.Checked=true;//病理
+      else if(Text279.Text.Equals(&quot;802&quot;))
+        CheckBox69.Checked=true;//死后推断
+      else if(Text279.Text.Equals(&quot;900&quot;))
+        CheckBox73.Checked=true;//不详
+      else if(Text279.Text.Equals(&quot;100&quot;))
+        CheckBox68.Checked=true;//临床症状
+    }
+
+    private void Text180_AfterData(object sender, EventArgs e)
+    {
+      if(Text180.Text.Equals(&quot;1&quot;))
+        CheckBox74.Checked=true;//是
+      else if(Text180.Text.Equals(&quot;2&quot;))
+        CheckBox75.Checked=true;//否
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.String"/>
+      <Column Name="SYXH" DataType="System.String"/>
+      <Column Name="YEXH" DataType="System.String"/>
+      <Column Name="XTLB" DataType="System.String"/>
+      <Column Name="SHZT" DataType="System.String"/>
+      <Column Name="PATID" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="BGKDZ_SHENG_ID" DataType="System.String"/>
+      <Column Name="BGKDZ_SHENG_NAME" DataType="System.String"/>
+      <Column Name="BGKDZ_SHI_ID" DataType="System.String"/>
+      <Column Name="BGKDZ_SHI_NAME" DataType="System.String"/>
+      <Column Name="BGKDZ_QU_ID" DataType="System.String"/>
+      <Column Name="BGKDZ_QU_NAME" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+      <Column Name="NATIONALITY_ID" DataType="System.String"/>
+      <Column Name="NATIONALITY_NAME" DataType="System.String"/>
+      <Column Name="MZ_ID" DataType="System.String"/>
+      <Column Name="MZ_NAME" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="HYZT_ID" DataType="System.String"/>
+      <Column Name="HYZT_NAME" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="ZY_ID" DataType="System.String"/>
+      <Column Name="ZY_NAME" DataType="System.String"/>
+      <Column Name="DEATH_TIME" DataType="System.String"/>
+      <Column Name="DEAD_AGE" DataType="System.String"/>
+      <Column Name="DEATH_PLACE_NAME" DataType="System.String"/>
+      <Column Name="DEAD_GESTATE_ID" DataType="System.String"/>
+      <Column Name="DEAD_GESTATE" DataType="System.String"/>
+      <Column Name="HJD_SHENG_ID" DataType="System.String"/>
+      <Column Name="HJD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="HJD_SHI_ID" DataType="System.String"/>
+      <Column Name="HJD_SHI_NAME" DataType="System.String"/>
+      <Column Name="HJD_QU_ID" DataType="System.String"/>
+      <Column Name="HJD_QU_NAME" DataType="System.String"/>
+      <Column Name="HJD_XZ_ID" DataType="System.String"/>
+      <Column Name="HJD_XZ_NAME" DataType="System.String"/>
+      <Column Name="HJD_CUN" DataType="System.String"/>
+      <Column Name="HJD_MPH" DataType="System.String"/>
+      <Column Name="JZD_SHENG_ID" DataType="System.String"/>
+      <Column Name="JZD_SHENG_NAME" DataType="System.String"/>
+      <Column Name="JZD_SHI_ID" DataType="System.String"/>
+      <Column Name="JZD_SHI_NAME" DataType="System.String"/>
+      <Column Name="JZD_QU_ID" DataType="System.String"/>
+      <Column Name="JZD_QU_NAME" DataType="System.String"/>
+      <Column Name="JZD_XZ_ID" DataType="System.String"/>
+      <Column Name="JZD_XZ_NAME" DataType="System.String"/>
+      <Column Name="JZD_CUN" DataType="System.String"/>
+      <Column Name="JZD_MPH" DataType="System.String"/>
+      <Column Name="LXR" DataType="System.String"/>
+      <Column Name="LXR_PHONE" DataType="System.String"/>
+      <Column Name="GZDW" DataType="System.String"/>
+      <Column Name="DIRDEAD_REASON_ID" DataType="System.String"/>
+      <Column Name="DIRDEAD_REASON" DataType="System.String"/>
+      <Column Name="DIRDEAD_TIME" DataType="System.String"/>
+      <Column Name="CAUSE_A_ID" DataType="System.String"/>
+      <Column Name="CAUSE_A" DataType="System.String"/>
+      <Column Name="CAUSE_A_TIME" DataType="System.String"/>
+      <Column Name="CAUSE_B_ID" DataType="System.String"/>
+      <Column Name="CAUSE_B" DataType="System.String"/>
+      <Column Name="CAUSE_B_TIME" DataType="System.String"/>
+      <Column Name="CAUSE_C_ID" DataType="System.String"/>
+      <Column Name="CAUSE_C" DataType="System.String"/>
+      <Column Name="CAUSE_C_TIME" DataType="System.String"/>
+      <Column Name="OTHER_CAUSE_ID" DataType="System.String"/>
+      <Column Name="OTHER_CAUSE" DataType="System.String"/>
+      <Column Name="OTHER_CAUSE_TIME" DataType="System.String"/>
+      <Column Name="SQZYJBZGZDDW_ID" DataType="System.String"/>
+      <Column Name="SQZYJBZGZDDW" DataType="System.String"/>
+      <Column Name="SQZYJBZGZDYJ_ID" DataType="System.String"/>
+      <Column Name="SQZYJBZGZDYJ" DataType="System.String"/>
+      <Column Name="YLWSJGGZ_ID" DataType="System.String"/>
+      <Column Name="YLWSJGGZ_NAME" DataType="System.String"/>
+      <Column Name="ROOT_CAUSE_ID" DataType="System.String"/>
+      <Column Name="ROOT_CAUSE" DataType="System.String"/>
+      <Column Name="STATISTIC_NUM" DataType="System.String"/>
+      <Column Name="SZSQBSJZZTZ" DataType="System.String"/>
+      <Column Name="RESPONDENT_SIGN" DataType="System.String"/>
+      <Column Name="RESPONDENT_NAME" DataType="System.String"/>
+      <Column Name="YSZGX_ID" DataType="System.String"/>
+      <Column Name="YSZGX" DataType="System.String"/>
+      <Column Name="LX_TEL" DataType="System.String"/>
+      <Column Name="LXDZGZDW" DataType="System.String"/>
+      <Column Name="DEAD_INFER" DataType="System.String"/>
+      <Column Name="DC_DATE" DataType="System.String"/>
+      <Column Name="LXRGZDW" DataType="System.String"/>
+      <Column Name="JLZT" DataType="System.String"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.String"/>
+      <Column Name="DEATH_PLACE_ID" DataType="System.String"/>
+      <Column Name="REGIONID" DataType="System.String"/>
+      <Column Name="INQUIRER_ID" DataType="System.String"/>
+      <Column Name="INQUIRER_NAME" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="DOCPHONE" DataType="System.String"/>
+      <Column Name="ZYHM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="AGENT_NAME" DataType="System.String"/>
+      <Column Name="AGENT_PHONE" DataType="System.String"/>
+      <Column Name="AGENT_SFZH" DataType="System.String"/>
+      <Column Name="AGEUNIT_ID" DataType="System.String"/>
+      <Column Name="AGEUNIT_NAME" DataType="System.String"/>
+      <Column Name="DCZ_SIGN" DataType="System.String"/>
+      <Column Name="MZH" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="报告卡扩展表" ReferenceName="Data.报告卡扩展表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.String"/>
+      <Column Name="BGKXH" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text280" Width="718.2" Height="37.8" Text="居民死亡医学证明（推断）书" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="718.2"/>
+    <DataBand Name="Data1" Top="45.88" Width="718.2" Height="973.35">
+      <TextObject Name="Text146" Left="85.05" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGKDZ_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text147" Left="189" Width="113.4" Height="18.9" Text="省(自治区/直辖市)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text148" Left="302.4" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGKDZ_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text149" Left="425.25" Width="85.05" Height="18.9" Text="市(地/州/盟)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text150" Left="510.3" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGKDZ_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text151" Left="633.15" Width="85.05" Height="18.9" Text="县(市/区/旗)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text152" Top="85.05" Width="75.6" Height="18.9" Text="死者姓名：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text153" Left="66.15" Top="85.05" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text154" Left="207.9" Top="85.05" Width="47.25" Height="18.9" Text="性别：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text155" Left="274.05" Top="85.05" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text156" Left="434.7" Top="85.05" Width="85.05" Height="18.9" Text="国家或地区：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text157" Left="510.3" Top="85.05" Width="198.45" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.NATIONALITY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text158" Top="113.4" Width="56.7" Height="18.9" Text="民族：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text159" Left="66.15" Top="113.4" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.MZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text160" Left="207.9" Top="113.4" Width="75.6" Height="18.9" Text="证件类型：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text161" Left="274.05" Top="113.4" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.IDTYPE_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text162" Left="434.7" Top="113.4" Width="75.6" Height="18.9" Text="证件号码：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text163" Left="510.3" Top="113.4" Width="198.45" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SFZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text164" Top="141.75" Width="75.6" Height="18.9" Text="出生日期：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text165" Left="66.15" Top="141.75" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CSRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text166" Left="207.9" Top="141.75" Width="75.6" Height="18.9" Text="婚姻状况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text167" Left="274.05" Top="141.75" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HYZT_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text168" Left="434.7" Top="141.75" Width="75.6" Height="18.9" Text="文化程度：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text169" Left="510.3" Top="141.75" Width="198.45" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.WHCD_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text170" Top="170.1" Width="75.6" Height="18.9" Text="个人身份：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text171" Left="66.15" Top="170.1" Width="264.6" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text172" Left="368.55" Top="170.1" Width="75.6" Height="18.9" Text="死亡时间：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text173" Left="434.7" Top="170.1" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DEATH_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text174" Left="595.35" Top="170.1" Width="47.25" Height="18.9" Text="年龄：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text175" Left="642.6" Top="170.1" Width="66.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DEAD_AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text177" Top="198.45" Width="75.6" Height="18.9" Text="死亡地点：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text178" Left="66.15" Top="198.45" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DEATH_PLACE_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text179" Left="207.9" Top="198.45" Width="255.15" Height="18.9" Text="死亡时是否处于妊娠期或妊娠终止后42天内：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text180" Left="595.35" Top="198.45" Width="113.4" Height="18.9" Visible="false" Border.Lines="Bottom" AfterDataEvent="Text180_AfterData" Text="[报告卡主表.DEAD_GESTATE_ID]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text181" Top="226.8" Width="94.5" Height="18.9" Text="生前工作单位：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text182" Left="94.5" Top="226.8" Width="415.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.GZDW]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text145" Top="255.15" Width="75.6" Height="18.9" Text="户籍地址：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text183" Left="66.15" Top="255.15" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text184" Left="170.1" Top="255.15" Width="113.4" Height="18.9" Text="省(自治区/直辖市)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text185" Left="283.5" Top="255.15" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text186" Left="406.35" Top="255.15" Width="85.05" Height="18.9" Text="市(地/州/盟)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text187" Left="491.4" Top="255.15" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text188" Left="614.25" Top="255.15" Width="85.05" Height="18.9" Text="县(市/区/旗)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text189" Left="66.15" Top="283.5" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text190" Left="170.1" Top="283.5" Width="113.4" Height="18.9" Text="乡镇/街道" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text191" Left="283.5" Top="283.5" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text192" Left="406.35" Top="283.5" Width="85.05" Height="18.9" Text="村(居)委员会" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text193" Left="491.4" Top="283.5" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HJD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text194" Left="614.25" Top="283.5" Width="94.5" Height="18.9" Text="村民组/门牌号" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text132" Top="311.85" Width="75.6" Height="18.9" Text="常住地址：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text133" Left="66.15" Top="311.85" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text134" Left="170.1" Top="311.85" Width="113.4" Height="18.9" Text="省(自治区/直辖市)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text135" Left="283.5" Top="311.85" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHI_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text136" Left="406.35" Top="311.85" Width="85.05" Height="18.9" Text="市(地/州/盟)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text137" Left="491.4" Top="311.85" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_QU_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text138" Left="614.25" Top="311.85" Width="85.05" Height="18.9" Text="县(市/区/旗)" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text139" Left="66.15" Top="340.2" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_XZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text140" Left="170.1" Top="340.2" Width="113.4" Height="18.9" Text="乡镇/街道" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text141" Left="283.5" Top="340.2" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_CUN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text142" Left="406.35" Top="340.2" Width="85.05" Height="18.9" Text="村(居)委员会" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text143" Left="491.4" Top="340.2" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_MPH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text144" Left="614.25" Top="340.2" Width="94.5" Height="18.9" Text="村民组/门牌号" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text195" Top="368.55" Width="113.4" Height="18.9" Text="可联系家属姓名：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text196" Left="113.4" Top="368.55" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXR]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text197" Left="283.5" Top="368.55" Width="85.05" Height="18.9" Text="联系人电话：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text198" Left="368.55" Top="368.55" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXR_PHONE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text199" Top="396.9" Width="132.3" Height="18.9" Text="家属住址或工作单位：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text200" Left="132.3" Top="396.9" Width="378" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXRGZDW]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text201" Top="425.25" Width="132.3" Height="18.9" Text="致死的主要疾病诊断：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text202" Left="56.7" Top="453.6" Width="132.3" Height="18.9" Text="（a）直接死亡原因：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text203" Top="481.95" Width="189" Height="18.9" Text="（b）引起（a）的疾病或情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text204" Top="510.3" Width="189" Height="18.9" Text="（c）引起（b）的疾病或情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text205" Top="538.65" Width="189" Height="18.9" Text="（d）引起（c）的疾病或情况：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text206" Left="9.45" Top="557.55" Width="198.45" Height="37.8" Text="其他疾病诊断(促进死亡，但与&#13;&#10;导致死亡无关的其他重要情况）：" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Text207" Left="207.9" Top="453.6" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DIRDEAD_REASON]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text208" Left="491.4" Top="453.6" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DIRDEAD_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text209" Left="491.4" Top="481.95" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CAUSE_A_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text210" Left="491.4" Top="510.3" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CAUSE_B_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text211" Left="491.4" Top="538.65" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CAUSE_C_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text212" Left="491.4" Top="567" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.OTHER_CAUSE_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text213" Left="207.9" Top="481.95" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CAUSE_A]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text214" Left="207.9" Top="510.3" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CAUSE_B]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text215" Left="207.9" Top="538.65" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.CAUSE_C]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text216" Left="207.9" Top="567" Width="255.15" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.OTHER_CAUSE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text217" Left="302.4" Top="425.25" Width="66.15" Height="18.9" Text="疾病名称" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text218" Left="491.4" Top="425.25" Width="122.85" Height="18.9" Text="发病至死亡大概时间" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text219" Top="595.35" Width="189" Height="18.9" Text="生前主要疾病最高诊断单位：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox46" Left="181.44" Top="598" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text222" Left="192.78" Top="595.35" Width="66.15" Height="18.9" Text="三级医院" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox48" Left="296.73" Top="598" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text224" Left="308.07" Top="595.35" Width="189" Height="18.9" Text="乡镇卫生院/社区卫生服务机构" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text225" Top="652.05" Width="189" Height="18.9" Text="生前主要疾病最高诊断依据：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox61" Left="181.44" Top="626.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text231" Left="192.78" Top="623.7" Width="66.15" Height="18.9" Text="二级医院" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox62" Left="538.65" Top="626.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text232" Left="549.99" Top="623.7" Width="75.6" Height="18.9" Text="村卫生室" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox66" Left="181.44" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text236" Left="192.78" Top="652.05" Width="75.6" Height="18.9" Text="临床+理化" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox67" Left="277.83" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text237" Left="289.17" Top="652.05" Width="37.8" Height="18.9" Text="尸检" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox68" Left="410.13" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text238" Left="421.47" Top="652.05" Width="56.7" Height="18.9" Text="临床" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox69" Left="330.75" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text239" Left="342.09" Top="652.05" Width="66.15" Height="18.9" Text="死后推断" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox71" Left="474.39" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text241" Left="485.73" Top="652.05" Width="37.8" Height="18.9" Text="手术" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox72" Left="523.53" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text242" Left="534.87" Top="652.05" Width="56.7" Height="18.9" Text="病理" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox73" Left="567" Top="654.7" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text243" Left="578.34" Top="652.05" Width="37.8" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text244" Top="680.4" Width="85.05" Height="18.9" Text="报告医师：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text245" Left="75.6" Top="680.4" Width="103.95" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text248" Left="500.85" Top="680.4" Width="85.05" Height="18.9" Text="填表日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text249" Left="576.45" Top="680.4" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text250" Top="708.75" Width="103.95" Height="18.9" Text="根本死亡原因：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text251" Left="103.95" Top="708.75" Width="170.1" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ROOT_CAUSE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text254" Top="756" Width="179.55" Height="18.9" Text="死者生前病史及症状体症：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text255" Top="784.35" Width="708.75" Height="18.9" Text="[报告卡主表.SZSQBSJZZTZ]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text256" Top="812.7" Width="94.5" Height="18.9" Text="以上情况属实" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text257" Left="472.5" Top="812.7" Width="103.95" Height="18.9" Text="被调查者签字：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text258" Left="576.45" Top="812.7" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.RESPONDENT_SIGN]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text259" Top="841.05" Width="103.95" Height="18.9" Text="被调查者姓名：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text260" Left="103.95" Top="841.05" Width="85.05" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.RESPONDENT_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text261" Left="217.35" Top="841.05" Width="94.5" Height="18.9" Text="与死者关系：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text262" Left="311.85" Top="841.05" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YSZGX]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text263" Left="472.5" Top="841.05" Width="85.05" Height="18.9" Text="联系电话：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text264" Left="576.45" Top="841.05" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LX_TEL]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text265" Top="869.4" Width="151.2" Height="18.9" Text="联系地址或工作单位：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text266" Left="151.2" Top="869.4" Width="557.55" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.LXDZGZDW]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text268" Top="897.75" Width="85.05" Height="18.9" Text="死因推断：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text269" Left="75.6" Top="897.75" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DEAD_INFER]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text270" Left="217.35" Top="897.75" Width="94.5" Height="18.9" Text="调查者签名：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text271" Left="311.85" Top="897.75" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.INQUIRER_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text272" Left="472.5" Top="897.75" Width="94.5" Height="18.9" Text="调查日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text273" Left="576.45" Top="897.75" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DC_DATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text274" Top="954.45" Width="85.05" Height="18.9" Text="填表科室：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text275" Left="75.6" Top="954.45" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text276" Left="217.35" Top="954.45" Width="94.5" Height="18.9" Text="填表病区：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text277" Left="311.85" Top="954.45" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text278" Left="472.5" Top="954.45" Width="94.5" Height="18.9" Visible="false" AfterDataEvent="Data278_AfterData" Text="[报告卡主表.SQZYJBZGZDDW_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text279" Left="567" Top="954.45" Width="94.5" Height="18.9" Visible="false" AfterDataEvent="Data279_AfterData" Text="[报告卡主表.SQZYJBZGZDYJ_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox64" Left="538.65" Top="598" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text234" Left="549.99" Top="595.35" Width="56.7" Height="18.9" Text="未就诊" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox63" Left="296.73" Top="626.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text233" Left="308.07" Top="623.7" Width="122.85" Height="18.9" Text="其他医疗卫生机构" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox74" Left="472.5" Top="198.45" Width="11.34" Height="11.34" Border.Lines="All" AfterDataEvent="Text180_AfterData" Checked="false"/>
+      <TextObject Name="Text2" Left="491.4" Top="198.45" Width="28.35" Height="18.9" Text="是" Font="宋体, 9pt"/>
+      <CheckBoxObject Name="CheckBox75" Left="529.2" Top="198.45" Width="11.34" Height="11.34" Border.Lines="All" AfterDataEvent="Text180_AfterData" Checked="false"/>
+      <TextObject Name="Text299" Left="548.1" Top="198.45" Width="28.35" Height="18.9" Text="否" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Left="292.95" Top="737.1" Width="132.3" Height="18.9" Text="死亡调查记录" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text300" Top="28.35" Width="94.5" Height="18.9" Text="行政区划代码：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text301" Left="94.5" Top="28.35" Width="160.65" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.REGIONID]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text302" Left="434.7" Top="28.35" Width="113.4" Height="18.9" Text="死亡证明书编号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text303" Left="538.65" Top="28.35" Width="170.1" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.KPBH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text304" Top="56.7" Width="66.15" Height="18.9" Text="住院号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text305" Left="66.15" Top="56.7" Width="189" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZYHM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text306" Left="434.7" Top="56.7" Width="75.6" Height="18.9" Text="门诊号：" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text307" Left="500.85" Top="56.7" Width="207.9" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.MZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text308" Left="236.25" Top="680.4" Width="103.95" Height="18.9" Text="报卡医生电话：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text309" Left="340.2" Top="680.4" Width="113.4" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DOCPHONE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text310" Left="340.2" Top="708.75" Width="103.95" Height="18.9" Text="统计分类号：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text311" Left="434.7" Top="708.75" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.STATISTIC_NUM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text312" Top="926.1" Width="132.3" Height="18.9" Text="医疗卫生机构盖章：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text313" Left="122.85" Top="926.1" Width="321.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.YLWSJGGZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="1023.27" Width="718.2" Height="28.35">
+      <TextObject Name="Text4" Left="9.45" Width="699.3" Height="28.35" Text="注：1此表填写范围为在家、养老服务机构、其他场所正常死亡者；2被调查者应为死者近亲或知情人；3调查时应出具以下资料：被调查者有效身份证件，居住地居委会或村委会证明，死者身份证和/或户口簿、生前病史卡。" VertAlign="Center" Font="宋体, 8pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2" RawPaperSize="9" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15">
+    <DataBand Name="Data2" Width="718.2" Height="1067.85" DataSource="报告卡主表">
+      <TableObject Name="Table1" Left="14" Top="60" Width="718.15" Height="264.63">
+        <TableColumn Name="Column1" Width="67.52"/>
+        <TableColumn Name="Column2" Width="95.87"/>
+        <TableColumn Name="Column3" Width="48.62"/>
+        <TableColumn Name="Column4" Width="58.07"/>
+        <TableColumn Name="Column6" Width="48.62"/>
+        <TableColumn Name="Column10" Width="67.52"/>
+        <TableColumn Name="Column9" Width="67.52"/>
+        <TableColumn Name="Column8" Width="67.52"/>
+        <TableColumn Name="Column7" Width="67.52"/>
+        <TableColumn Name="Column5" Width="67.52"/>
+        <TableColumn Name="Column11" Width="61.85"/>
+        <TableRow Name="Row8" Height="37.71">
+          <TableCell Name="Cell71" Border.Lines="All" Text="死者&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell72" Border.Lines="All" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell73" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell74" Border.Lines="All" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell75" Border.Lines="All" Text="民族" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell76" Border.Lines="All" Text="[报告卡主表.MZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell77" Border.Lines="All" Text="国家或地区" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell78" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell79" Border.Lines="All" Text="[报告卡主表.NATIONALITY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell80" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell81" Border.Lines="All" Text="[报告卡主表.DEAD_AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="37.82">
+          <TableCell Name="Cell61" Border.Lines="All" Text="身份证件&#13;&#10;类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell62" Border.Lines="All" Text="[报告卡主表.IDTYPE_NAME]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell63" Border.Lines="All" Text="证件&#13;&#10;号码" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell64" Border.Lines="All" Text="[报告卡主表.SFZH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell65" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell66" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell67" Border.Lines="All" Text="常住&#13;&#10;地址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell68" Border.Lines="All" Text="[报告卡主表.JZD_SHENG_NAME][报告卡主表.JZD_SHI_NAME][报告卡主表.JZD_QU_NAME][报告卡主表.JZD_XZ_NAME][报告卡主表.JZD_CUN][报告卡主表.JZD_MPH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell69" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell70" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell82" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="37.82">
+          <TableCell Name="Cell51" Border.Lines="All" Text="出生&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell52" Border.Lines="All" Text="[报告卡主表.CSRQ]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell53" Border.Lines="All" Text="死亡&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell54" Border.Lines="All" Text="[报告卡主表.DEATH_TIME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell55" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell56" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell57" Border.Lines="All" Text="死亡&#13;&#10;地点" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell58" Border.Lines="All" Text="[报告卡主表.DEATH_PLACE_NAME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell59" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell60" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell83" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row1" Height="37.82">
+          <TableCell Name="Cell1" Border.Lines="All" Text="死亡&#13;&#10;原因" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[报告卡主表.DIRDEAD_REASON]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell3" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell4" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell26" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell46" Border.Lines="All" Text="家属&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell41" Border.Lines="All" Text="[报告卡主表.LXR]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell36" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell31" Border.Lines="All" Text="联系&#13;&#10;电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell5" Border.Lines="All" Text="[报告卡主表.LXR_PHONE]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell84" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="37.82">
+          <TableCell Name="Cell6" Border.Lines="All" Text="家属住址&#13;&#10;或单位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="[报告卡主表.LXRGZDW]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell8" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell27" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell47" Border.Lines="All" Text="医师&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell42" Border.Lines="All" Text="[报告卡主表.BGYSMC]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell37" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell32" Border.Lines="All" Text="民警&#13;&#10;签名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell10" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell85" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="37.82">
+          <TableCell Name="Cell11" Border.Lines="Left, Right, Top" Text="医疗卫生机构盖章：" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell12" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell28" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell48" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell43" Border.Lines="Left, Right, Top" Text="派出所意见(盖章)" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell38" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell33" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell86" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="37.82">
+          <TableCell Name="Cell16" Border.Lines="Left, Right, Bottom" Text="    年  月  日" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell17" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell18" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell19" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell29" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell49" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell44" Border.Lines="Left, Right, Bottom" Text="    年  月  日" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell39" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell34" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell20" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell87" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text281" Left="103.95" Top="16" Width="510.3" Height="18.9" Text="居民死亡医学证明（推断）书" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+      <TextObject Name="Text1" Left="14.45" Top="40.8" Width="236.25" Height="18.9" Text="行政区划代码：[报告卡主表.REGIONID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text282" Left="-9" Top="75.6" Width="18.9" Height="217.35" Text="第二联        公 安 部 门 保 存   " Font="宋体, 9pt"/>
+      <TextObject Name="Text283" Left="55.6" Top="335" Width="623.7" Height="18.9" Text="注：1.死者家属持此联到公安机关办理户籍注销手续；2.无医师及民警签字、医疗卫生机构及派出所盖章无效。" Font="宋体, 9pt"/>
+      <TextObject Name="Text284" Left="8.9" Top="354.9" Width="737.1" Height="18.9" Text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " Font="宋体, 9pt"/>
+      <TableObject Name="Table2" Left="13.55" Top="411.8" Width="718.15" Height="264.63">
+        <TableColumn Name="Column12" Width="67.52"/>
+        <TableColumn Name="Column13" Width="95.87"/>
+        <TableColumn Name="Column14" Width="48.62"/>
+        <TableColumn Name="Column15" Width="58.07"/>
+        <TableColumn Name="Column16" Width="48.62"/>
+        <TableColumn Name="Column17" Width="67.52"/>
+        <TableColumn Name="Column18" Width="67.52"/>
+        <TableColumn Name="Column19" Width="67.52"/>
+        <TableColumn Name="Column20" Width="67.52"/>
+        <TableColumn Name="Column21" Width="67.52"/>
+        <TableColumn Name="Column22" Width="61.85"/>
+        <TableRow Name="Row9" Height="37.71">
+          <TableCell Name="Cell88" Border.Lines="All" Text="死者&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell89" Border.Lines="All" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell90" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell91" Border.Lines="All" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell92" Border.Lines="All" Text="民族" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell93" Border.Lines="All" Text="[报告卡主表.MZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell94" Border.Lines="All" Text="国家或地区" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell95" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell96" Border.Lines="All" Text="[报告卡主表.NATIONALITY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell97" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell98" Border.Lines="All" Text="[报告卡主表.DEAD_AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row10" Height="37.82">
+          <TableCell Name="Cell99" Border.Lines="All" Text="身份证件&#13;&#10;类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell100" Border.Lines="All" Text="[报告卡主表.IDTYPE_NAME]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell101" Border.Lines="All" Text="证件&#13;&#10;号码" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell102" Border.Lines="All" Text="[报告卡主表.SFZH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell103" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell104" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell105" Border.Lines="All" Text="常住&#13;&#10;地址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell106" Border.Lines="All" Text="[报告卡主表.JZD_SHENG_NAME][报告卡主表.JZD_SHI_NAME][报告卡主表.JZD_QU_NAME][报告卡主表.JZD_XZ_NAME][报告卡主表.JZD_CUN][报告卡主表.JZD_MPH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell107" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell108" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell109" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row11" Height="37.82">
+          <TableCell Name="Cell110" Border.Lines="All" Text="出生&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell111" Border.Lines="All" Text="[报告卡主表.CSRQ]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell112" Border.Lines="All" Text="死亡&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell113" Border.Lines="All" Text="[报告卡主表.DEATH_TIME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell114" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell115" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell116" Border.Lines="All" Text="死亡&#13;&#10;地点" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell117" Border.Lines="All" Text="[报告卡主表.DEATH_PLACE_NAME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell118" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell119" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell120" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row12" Height="37.82">
+          <TableCell Name="Cell121" Border.Lines="All" Text="死亡&#13;&#10;原因" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell122" Border.Lines="All" Text="[报告卡主表.DIRDEAD_REASON]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell123" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell124" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell125" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell126" Border.Lines="All" Text="家属&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell127" Border.Lines="All" Text="[报告卡主表.LXR]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell128" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell129" Border.Lines="All" Text="联系&#13;&#10;电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell130" Border.Lines="All" Text="[报告卡主表.LXR_PHONE]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell131" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row13" Height="37.82">
+          <TableCell Name="Cell132" Border.Lines="All" Text="家属住址&#13;&#10;或单位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell133" Border.Lines="All" Text="[报告卡主表.LXRGZDW]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell134" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell135" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell136" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell137" Border.Lines="All" Text="医师&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell138" Border.Lines="All" Text="[报告卡主表.BGYSMC]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell139" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell140" Border.Lines="All" Text="民警&#13;&#10;签名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell141" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell142" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row14" Height="37.82">
+          <TableCell Name="Cell143" Border.Lines="Left, Right, Top" Text="医疗卫生机构盖章：" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell144" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell145" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell146" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell147" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell148" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell149" Border.Lines="Left, Right, Top" Text="派出所意见(盖章)" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell150" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell151" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell152" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell153" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row15" Height="37.82">
+          <TableCell Name="Cell154" Border.Lines="Left, Right, Bottom" Text="    年  月  日" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell155" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell156" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell157" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell158" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell159" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell160" Border.Lines="Left, Right, Bottom" Text="    年  月  日" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell161" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell162" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell163" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell164" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text286" Left="14" Top="391.6" Width="236.25" Height="18.9" Text="行政区划代码：[报告卡主表.REGIONID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text287" Left="-9.45" Top="425.95" Width="18.9" Height="217.35" Text="第三联        死 者 家 属 保 存   " Font="宋体, 9pt"/>
+      <TextObject Name="Text288" Left="56.15" Top="680.8" Width="623.7" Height="37.8" Text="注：1.死者家属持此联到公安机关盖章；2.无医师及民警签字、医疗卫生机构及派出所盖章无效。3.死于救治机构以外的死亡原因系死后推断。" Font="宋体, 9pt"/>
+      <TextObject Name="Text289" Left="9.45" Top="706.7" Width="737.1" Height="18.9" Text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - " Font="宋体, 9pt"/>
+      <TableObject Name="Table3" Left="13.55" Top="761.05" Width="718.15" Height="264.63">
+        <TableColumn Name="Column23" Width="67.52"/>
+        <TableColumn Name="Column24" Width="95.87"/>
+        <TableColumn Name="Column25" Width="48.62"/>
+        <TableColumn Name="Column26" Width="58.07"/>
+        <TableColumn Name="Column27" Width="48.62"/>
+        <TableColumn Name="Column28" Width="67.52"/>
+        <TableColumn Name="Column29" Width="67.52"/>
+        <TableColumn Name="Column30" Width="67.52"/>
+        <TableColumn Name="Column31" Width="67.52"/>
+        <TableColumn Name="Column32" Width="67.52"/>
+        <TableColumn Name="Column33" Width="61.85"/>
+        <TableRow Name="Row16" Height="37.71">
+          <TableCell Name="Cell165" Border.Lines="All" Text="死者&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell166" Border.Lines="All" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell167" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell168" Border.Lines="All" Text="[报告卡主表.SEX_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell169" Border.Lines="All" Text="民族" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell170" Border.Lines="All" Text="[报告卡主表.MZ_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell171" Border.Lines="All" Text="国家或地区" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell172" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell173" Border.Lines="All" Text="[报告卡主表.NATIONALITY_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell174" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell175" Border.Lines="All" Text="[报告卡主表.DEAD_AGE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row17" Height="37.82">
+          <TableCell Name="Cell176" Border.Lines="All" Text="身份证件&#13;&#10;类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell177" Border.Lines="All" Text="[报告卡主表.IDTYPE_NAME]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell178" Border.Lines="All" Text="证件&#13;&#10;号码" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell179" Border.Lines="All" Text="[报告卡主表.SFZH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell180" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell181" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell182" Border.Lines="All" Text="常住&#13;&#10;地址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell183" Border.Lines="All" Text="[报告卡主表.JZD_SHENG_NAME][报告卡主表.JZD_SHI_NAME][报告卡主表.JZD_QU_NAME][报告卡主表.JZD_XZ_NAME][报告卡主表.JZD_CUN][报告卡主表.JZD_MPH]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell184" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell185" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell186" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row18" Height="37.82">
+          <TableCell Name="Cell187" Border.Lines="All" Text="出生&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell188" Border.Lines="All" Text="[报告卡主表.CSRQ]" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell189" Border.Lines="All" Text="死亡&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell190" Border.Lines="All" Text="[报告卡主表.DEATH_TIME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell191" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell192" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell193" Border.Lines="All" Text="死亡&#13;&#10;地点" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell194" Border.Lines="All" Text="[报告卡主表.DEATH_PLACE_NAME]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell195" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell196" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell197" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row19" Height="37.82">
+          <TableCell Name="Cell198" Border.Lines="All" Text="死亡&#13;&#10;原因" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell199" Border.Lines="All" Text="[报告卡主表.DIRDEAD_REASON]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell200" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell201" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell202" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell203" Border.Lines="All" Text="家属&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell204" Border.Lines="All" Text="[报告卡主表.LXR]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell205" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell206" Border.Lines="All" Text="联系&#13;&#10;电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell207" Border.Lines="All" Text="[报告卡主表.LXR_PHONE]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell208" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row20" Height="37.82">
+          <TableCell Name="Cell209" Border.Lines="All" Text="家属住址&#13;&#10;或单位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell210" Border.Lines="All" Text="[报告卡主表.LXRGZDW]" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell211" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell212" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell213" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell214" Border.Lines="All" Text="医师&#13;&#10;姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell215" Border.Lines="All" Text="[报告卡主表.BGYSMC]" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell216" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell217" Border.Lines="All" Text="民警&#13;&#10;签名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell218" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell219" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row21" Height="37.82">
+          <TableCell Name="Cell220" Border.Lines="Left, Right, Top" Text="医疗卫生机构盖章：" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell221" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell222" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell223" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell224" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell225" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell226" Border.Lines="Left, Right, Top" Text="派出所意见(盖章)" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell227" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell228" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell229" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell230" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row22" Height="37.82">
+          <TableCell Name="Cell231" Border.Lines="Left, Right, Bottom" Text="    年  月  日" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt" ColSpan="6"/>
+          <TableCell Name="Cell232" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell233" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell234" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell235" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell236" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell237" Border.Lines="Left, Right, Bottom" Text="    年  月  日" HorzAlign="Right" VertAlign="Bottom" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell238" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell239" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell240" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+          <TableCell Name="Cell241" Border.Lines="All" HorzAlign="Right" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text291" Left="14" Top="740.85" Width="255.15" Height="18.9" Text="行政区划代码：[报告卡主表.REGIONID]" Font="宋体, 9pt"/>
+      <TextObject Name="Text292" Left="-9.45" Top="777.2" Width="18.9" Height="217.35" Text="第四联        殡 葬 管 理 部 门 保 存   " Font="宋体, 9pt"/>
+      <TextObject Name="Text293" Left="37.25" Top="1034.85" Width="623.7" Height="28.35" Text="注：1.死者家属持此联到殡仪馆办理尸体火化手续；2.死于救治机构，医师签字及医疗卫生机构盖章有效；死于非救治机构，医师及民警签字、医疗卫生机构及派出所盖章有效。" Font="宋体, 9pt"/>
+      <TextObject Name="Text294" Left="131.95" Top="365.8" Width="510.3" Height="18.9" Text="居民死亡医学证明（推断）书" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+      <TextObject Name="Text295" Left="135.55" Top="716.2" Width="510.3" Height="18.9" Text="居民死亡殡葬证" HorzAlign="Center" Font="宋体, 16pt, style=Bold"/>
+      <TextObject Name="Text296" Left="396.9" Top="40.8" Width="160.65" Height="18.9" Text="编号：[报告卡主表.KPBH]" Font="宋体, 9pt"/>
+      <TextObject Name="Text297" Left="396.9" Top="391.6" Width="189" Height="18.9" Text="编号：[报告卡主表.KPBH]" Font="宋体, 9pt"/>
+      <TextObject Name="Text298" Left="396.9" Top="740.85" Width="189" Height="18.9" Text="编号：[报告卡主表.KPBH]" Font="宋体, 9pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

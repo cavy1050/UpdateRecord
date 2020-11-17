@@ -1,0 +1,754 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/12/2020 14:22:46" ReportInfo.Modified="03/12/2020 09:15:03" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    //性别
+    private void Text951_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text951.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='9'
+        {
+          CheckBox150.Checked = true;//男性
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox151.Checked = true;//女性
+        }
+      }
+    }
+    
+    //生存情况
+    private void Text909_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text909.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;10&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='14'
+        {
+          CheckBox35.Checked = true;//生存
+        }
+        if(i==&quot;50&quot;)
+        {
+          CheckBox36.Checked = true;//死亡
+        }
+        if(i==&quot;91&quot;)
+        {
+          CheckBox37.Checked = true;//不详
+        }
+      }
+    }
+ 
+    //最高教育程度(18 岁以下)
+    private void Text911_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text911.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='258'
+        {
+          CheckBox47.Checked = true;//未就学
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox48.Checked = true;//学龄前教育
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox49.Checked = true;//一年级
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox50.Checked = true;//二年级
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox51.Checked = true;//三年级
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox52.Checked = true;//四年级
+        }
+        if(i==&quot;7&quot;)
+        {
+          CheckBox53.Checked = true;//五年级
+        }
+        if(i==&quot;8&quot;)
+        {
+          CheckBox54.Checked = true;//六年级
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox55.Checked = true;//初一
+        }
+        if(i==&quot;10&quot;)
+        {
+          CheckBox56.Checked = true;//初二
+        }
+        if(i==&quot;11&quot;)
+        {
+          CheckBox57.Checked = true;//初三
+        }
+        if(i==&quot;12&quot;)
+        {
+          CheckBox58.Checked = true;//高一
+        }
+        if(i==&quot;13&quot;)
+        {
+          CheckBox59.Checked = true;//高二
+        }
+        if(i==&quot;14&quot;)
+        {
+          CheckBox60.Checked = true;//高三
+        }
+        if(i==&quot;15&quot;)
+        {
+          CheckBox61.Checked = true;//高等职业教育
+        }
+        if(i==&quot;16&quot;)
+        {
+          CheckBox62.Checked = true;//大学
+        }
+        if(i==&quot;17&quot;)
+        {
+          CheckBox63.Checked = true;//特殊教育
+        }
+        if(i==&quot;90&quot;)
+        {
+          CheckBox64.Checked = true;//不详
+        }
+      }
+    }
+    //最高教育程度(18 岁以上)
+    private void Text912_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text912.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;43&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='38'
+        {
+          CheckBox65.Checked = true;//文盲或半文盲
+        }
+        if(i==&quot;1&quot;)
+        {
+          CheckBox66.Checked = true;//研究生
+        }
+        if(i==&quot;42&quot;)
+        {
+          CheckBox67.Checked = true;//小学
+        }
+        if(i==&quot;41&quot;)
+        {
+          CheckBox68.Checked = true;//初中
+        }
+        if(i==&quot;30&quot;)
+        {
+          CheckBox69.Checked = true;//高中/中专/技校
+        }
+        if(i==&quot;21&quot;)
+        {
+          CheckBox70.Checked = true;//大专
+        }
+        if(i==&quot;14&quot;)
+        {
+          CheckBox71.Checked = true;//大学
+        }
+        if(i==&quot;91&quot;)
+        {
+          CheckBox72.Checked = true;//不详
+        }
+      }
+    }
+    //本次就诊为
+    private void Text914_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text914.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;2&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='7'
+        {
+          CheckBox83.Checked = true;//住院
+        }
+        if(i==&quot;1&quot;)
+        {
+          CheckBox82.Checked = true;//门诊
+        }  
+      }
+    }
+
+    //诊断类型
+    private void Text916_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text916.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='261'
+        {
+          CheckBox86.Checked = true;//确诊
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox87.Checked = true;//疑诊
+        }  
+      }
+    }
+
+    //针对病因的特异性治疗（国内是否具备针对病因的特异性治疗药物或干预措施）
+    private void Text918_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text918.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='70'
+        {
+          CheckBox95.Checked = true;//有
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox96.Checked = true;//无
+        } 
+        if(i==&quot;9&quot;)
+        {
+          CheckBox97.Checked = true;//不详
+        } 
+      }
+    }
+    //非特异性治疗方式
+    private void Text919_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text919.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='262'
+        {
+          CheckBox98.Checked = true;//日常疾病管理（饮食与生活方式）
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox99.Checked = true;//康复
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox100.Checked = true;//对症药物
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox101.Checked = true;//手术
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox102.Checked = true;//器官移植
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox103.Checked = true;//其他
+        }
+      }
+    }
+    //特异性治疗方式
+    private void Text920_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text920.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='263'
+        {
+          CheckBox104.Checked = true;//酶替代
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox105.Checked = true;//器官移植
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox106.Checked = true;//基因治疗
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox107.Checked = true;//其他针对病因的药物治疗
+        }
+      }
+    }
+
+    //发病至确诊前总医疗费用
+    private void Text923_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text923.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='259'
+        {
+          CheckBox120.Checked = true;//1000元以下
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox121.Checked = true;//1000-9999元
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox122.Checked = true;//10000-29999元
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox123.Checked = true;//30000-49999元
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox124.Checked = true;//50000-99999元
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox125.Checked = true;//10-19万元
+        }
+        if(i==&quot;7&quot;)
+        {
+          CheckBox126.Checked = true;//20-29万元
+        }
+        if(i==&quot;8&quot;)
+        {
+          CheckBox127.Checked = true;//30-39万元
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox128.Checked = true;//40-49万元
+        }
+        if(i==&quot;10&quot;)
+        {
+          CheckBox129.Checked = true;//50万元以上
+        }
+      }
+    }
+    //确诊后每年医疗费用
+    private void Text924_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text924.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='259'
+        {
+          CheckBox130.Checked = true;//1000元以下
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox131.Checked = true;//1000-9999元
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox132.Checked = true;//10000-29999元
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox133.Checked = true;//30000-49999元
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox134.Checked = true;//50000-99999元
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox135.Checked = true;//10-19万元
+        }
+        if(i==&quot;7&quot;)
+        {
+          CheckBox136.Checked = true;//20-29万元
+        }
+        if(i==&quot;8&quot;)
+        {
+          CheckBox137.Checked = true;//30-39万元
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox138.Checked = true;//40-49万元
+        }
+        if(i==&quot;10&quot;)
+        {
+          CheckBox139.Checked = true;//50万元以上
+        }
+      }
+    }
+    //发病以来每年额外增加的间接费用（康复、交通、住宿等）
+    private void Text945_AfterData(object sender, EventArgs e)
+    {
+      string[] sArray = Text945.Text.Split(',') ;
+      foreach(string i in sArray)
+      {
+        // MessageBox.Show(i.ToString());  测试时候用
+        if(i==&quot;1&quot;) //看字典 SELECT * FROM IDMS_ZDFLMXK WHERE LBDM='259'
+        {
+          CheckBox140.Checked = true;//1000元以下
+        }
+        if(i==&quot;2&quot;)
+        {
+          CheckBox141.Checked = true;//1000-9999元
+        }
+        if(i==&quot;3&quot;)
+        {
+          CheckBox142.Checked = true;//10000-29999元
+        }
+        if(i==&quot;4&quot;)
+        {
+          CheckBox143.Checked = true;//30000-49999元
+        }
+        if(i==&quot;5&quot;)
+        {
+          CheckBox144.Checked = true;//50000-99999元
+        }
+        if(i==&quot;6&quot;)
+        {
+          CheckBox145.Checked = true;//10-19万元
+        }
+        if(i==&quot;7&quot;)
+        {
+          CheckBox146.Checked = true;//20-29万元
+        }
+        if(i==&quot;8&quot;)
+        {
+          CheckBox147.Checked = true;//30-39万元
+        }
+        if(i==&quot;9&quot;)
+        {
+          CheckBox148.Checked = true;//40-49万元
+        }
+        if(i==&quot;10&quot;)
+        {
+          CheckBox149.Checked = true;//50万元以上
+        }
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="报告卡主表" ReferenceName="Data.报告卡主表" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="SHZT" DataType="System.Int32"/>
+      <Column Name="JLZT" DataType="System.Int32"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="TBCZYDM" DataType="System.String"/>
+      <Column Name="TBCZYMC" DataType="System.String"/>
+      <Column Name="TBCZRQ" DataType="System.String"/>
+      <Column Name="SHCZYDM" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHCZRQ" DataType="System.String"/>
+      <Column Name="RejectReason" DataType="System.String"/>
+      <Column Name="AbandonReason" DataType="System.String"/>
+      <Column Name="TBKSDM" DataType="System.String"/>
+      <Column Name="TBKSMC" DataType="System.String"/>
+      <Column Name="TBBQDM" DataType="System.String"/>
+      <Column Name="TBBQMC" DataType="System.String"/>
+      <Column Name="SCCZYDM" DataType="System.String"/>
+      <Column Name="SCCZYMC" DataType="System.String"/>
+      <Column Name="SCCZRQ" DataType="System.String"/>
+      <Column Name="SCFHXX" DataType="System.String"/>
+      <Column Name="SCFHKPBH" DataType="System.String"/>
+      <Column Name="SCCGBZ" DataType="System.Int32"/>
+      <Column Name="BKTYPE_ID" DataType="System.String"/>
+      <Column Name="BKTYPE_NAME" DataType="System.String"/>
+      <Column Name="DiagClass2_ID" DataType="System.String"/>
+      <Column Name="DiagClass2_Name" DataType="System.String"/>
+      <Column Name="DiagClass3_ID" DataType="System.String"/>
+      <Column Name="DiagClass3_Name" DataType="System.String"/>
+      <Column Name="IDTYPE_ID" DataType="System.String"/>
+      <Column Name="IDTYPE_NAME" DataType="System.String"/>
+      <Column Name="REGISTERDATE" DataType="System.String"/>
+      <Column Name="OUTCOME_ID" DataType="System.String"/>
+      <Column Name="OUTCOME_NAME" DataType="System.String"/>
+      <Column Name="DEATH_TIME" DataType="System.String"/>
+      <Column Name="JYCD_ID" DataType="System.String"/>
+      <Column Name="JYCD_NAME" DataType="System.String"/>
+      <Column Name="WHCD_ID" DataType="System.String"/>
+      <Column Name="WHCD_NAME" DataType="System.String"/>
+      <Column Name="JZTYPE_ID" DataType="System.String"/>
+      <Column Name="JZTYPE_NAME" DataType="System.String"/>
+      <Column Name="ZDTYPE_ID" DataType="System.String"/>
+      <Column Name="ZDTYPE_NAME" DataType="System.String"/>
+      <Column Name="ZDDM" DataType="System.String"/>
+      <Column Name="ZDMC" DataType="System.String"/>
+      <Column Name="ICD_Code" DataType="System.String"/>
+      <Column Name="ICD_Name" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="YWTYXCARE_ID" DataType="System.String"/>
+      <Column Name="YWTYXCARE_NAME" DataType="System.String"/>
+      <Column Name="NOTTYXCARE_ID" DataType="System.String"/>
+      <Column Name="NOTTYXCARE_NAME" DataType="System.String"/>
+      <Column Name="NOTTYXCARE_OTHER" DataType="System.String"/>
+      <Column Name="TYXCARE_ID" DataType="System.String"/>
+      <Column Name="TYXCARE_NAME" DataType="System.String"/>
+      <Column Name="TYXCARE_OTHER" DataType="System.String"/>
+      <Column Name="TYXCARETIME" DataType="System.String"/>
+      <Column Name="FBZQZOST_ID" DataType="System.String"/>
+      <Column Name="FBZQZCOST_NAME" DataType="System.String"/>
+      <Column Name="QZHMNCOST_ID" DataType="System.String"/>
+      <Column Name="QZHMNCOST_NAME" DataType="System.String"/>
+      <Column Name="ZFZB" DataType="System.String"/>
+      <Column Name="FBHMNEWCOST_ID" DataType="System.String"/>
+      <Column Name="FBHMNEWCOST_NAME" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+      <Column Name="ZY_NO" DataType="System.String"/>
+      <Column Name="MZ_NO" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="SEX_ID" DataType="System.String"/>
+      <Column Name="SEX_NAME" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text276" Left="-9.45" Width="727.65" Height="37.8" Text="罕见病随访信息上报卡" HorzAlign="Center" Font="Arial, 16pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="718.2"/>
+    <DataBand Name="Data1" Top="45.88" Width="718.2" Height="945">
+      <TextObject Name="Text1" Left="519.75" Width="85.05" Height="18.9" Text="卡片编号：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text35" Left="595.35" Width="122.85" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.KPBH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text714" Top="66.15" Width="85.05" Height="18.9" Text="登记日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text715" Left="75.6" Top="66.15" Width="151.2" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.REGISTERDATE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text719" Top="94.5" Width="283.5" Height="18.9" Text="生存情况（请填写本次登记时的生存情况）：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox35" Left="274.05" Top="97.15" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text720" Left="285.39" Top="94.5" Width="37.8" Height="18.9" Text="生存" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox36" Left="340.2" Top="97.15" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text721" Left="351.54" Top="94.5" Width="37.8" Height="18.9" Text="死亡" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox37" Left="406.35" Top="97.15" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text722" Left="417.69" Top="94.5" Width="37.8" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text723" Left="510.3" Top="94.5" Width="85.05" Height="18.9" Text="去世时间：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text724" Left="585.9" Top="94.5" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.DEATH_TIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text748" Top="122.85" Width="170.1" Height="18.9" Text="最高教育程度(18 岁以下)：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox47" Left="75.6" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text749" Left="86.94" Top="151.2" Width="56.7" Height="18.9" Text="未就学" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox48" Left="189" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text750" Left="200.34" Top="151.2" Width="85.05" Height="18.9" Text="学龄前教育" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox49" Left="311.85" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text751" Left="323.19" Top="151.2" Width="56.7" Height="18.9" Text="一年级" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox50" Left="406.35" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text752" Left="417.69" Top="151.2" Width="56.7" Height="18.9" Text="二年级" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox51" Left="491.4" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text753" Left="502.74" Top="151.2" Width="56.7" Height="18.9" Text="三年级" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox52" Left="576.45" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text754" Left="587.79" Top="151.2" Width="56.7" Height="18.9" Text="四年级" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox53" Left="661.5" Top="153.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text755" Left="672.84" Top="151.2" Width="56.7" Height="18.9" Text="五年级" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox54" Left="75.6" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text756" Left="86.94" Top="170.1" Width="56.7" Height="18.9" Text="六年级" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox55" Left="189" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text757" Left="200.34" Top="170.1" Width="37.8" Height="18.9" Text="初一" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox56" Left="311.85" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text758" Left="323.19" Top="170.1" Width="37.8" Height="18.9" Text="初二" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox57" Left="406.35" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text759" Left="417.69" Top="170.1" Width="37.8" Height="18.9" Text="初三" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox58" Left="491.4" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text760" Left="502.74" Top="170.1" Width="37.8" Height="18.9" Text="高一" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox59" Left="576.45" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text761" Left="587.79" Top="170.1" Width="37.8" Height="18.9" Text="高二" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox60" Left="661.5" Top="172.75" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text762" Left="672.84" Top="170.1" Width="37.8" Height="18.9" Text="高三" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox61" Left="75.6" Top="191.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text763" Left="86.94" Top="189" Width="94.5" Height="18.9" Text="高等职业教育" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox62" Left="189" Top="191.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text764" Left="200.34" Top="189" Width="56.7" Height="18.9" Text="大学" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox63" Left="311.85" Top="191.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text765" Left="323.19" Top="189" Width="66.15" Height="18.9" Text="特殊教育" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox64" Left="406.35" Top="191.65" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text766" Left="417.69" Top="189" Width="37.8" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text767" Top="217.35" Width="170.1" Height="18.9" Text="最高教育程度(18 岁以上)：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox65" Left="75.6" Top="248.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text769" Left="86.94" Top="245.7" Width="94.5" Height="18.9" Text="文盲或半文盲" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox66" Left="217.35" Top="248.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text770" Left="228.69" Top="245.7" Width="56.7" Height="18.9" Text="研究生" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox67" Left="321.3" Top="248.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text771" Left="332.64" Top="245.7" Width="47.25" Height="18.9" Text="小学" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox68" Left="425.25" Top="248.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text772" Left="436.59" Top="245.7" Width="37.8" Height="18.9" Text="初中" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox69" Left="519.75" Top="248.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text773" Left="531.09" Top="245.7" Width="103.95" Height="18.9" Text="高中/中专/技校" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox70" Left="670.95" Top="248.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text774" Left="682.29" Top="245.7" Width="37.8" Height="18.9" Text="大专" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox71" Left="75.6" Top="267.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text775" Left="86.94" Top="264.6" Width="37.8" Height="18.9" Text="大学" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox72" Left="217.35" Top="267.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text776" Left="228.69" Top="264.6" Width="37.8" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text790" Top="311.85" Width="85.05" Height="28.35" Text="诊疗信息" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text797" Top="349.65" Width="94.5" Height="18.9" Text="本次就诊为：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox82" Left="94.5" Top="352.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text798" Left="105.84" Top="349.65" Width="37.8" Height="18.9" Text="门诊" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox83" Left="160.65" Top="352.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text799" Left="171.99" Top="349.65" Width="37.8" Height="18.9" Text="住院" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text807" Left="359.1" Top="349.65" Width="85.05" Height="18.9" Text="诊断类型：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox86" Left="453.6" Top="352.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text808" Left="464.94" Top="349.65" Width="37.8" Height="18.9" Text="确诊" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox87" Left="519.75" Top="352.3" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text809" Left="531.09" Top="349.65" Width="37.8" Height="18.9" Text="疑诊" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text810" Top="378" Width="85.05" Height="18.9" Text="诊断名称：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text811" Left="75.6" Top="378" Width="226.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZDMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text821" Top="406.35" Width="500.85" Height="18.9" Text="针对病因的特异性治疗（国内是否具备针对病因的特异性治疗药物或干预措施）：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox95" Left="491.4" Top="409" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text822" Left="502.74" Top="406.35" Width="28.35" Height="18.9" Text="有" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox96" Left="557.55" Top="409" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text823" Left="568.89" Top="406.35" Width="18.9" Height="18.9" Text="无" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox97" Left="614.25" Top="409" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text824" Left="625.59" Top="406.35" Width="37.8" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text825" Top="434.7" Width="132.3" Height="18.9" Text="非特异性治疗方式：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox98" Left="132.3" Top="437.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text826" Left="143.64" Top="434.7" Width="217.35" Height="18.9" Text="日常疾病管理（饮食与生活方式）" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox99" Left="368.55" Top="437.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text827" Left="379.89" Top="434.7" Width="37.8" Height="18.9" Text="康复" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox100" Left="434.7" Top="437.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text828" Left="446.04" Top="434.7" Width="66.15" Height="18.9" Text="对症药物" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox101" Left="529.2" Top="437.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text829" Left="540.54" Top="434.7" Width="37.8" Height="18.9" Text="手术" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox102" Left="595.35" Top="437.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text830" Left="606.69" Top="434.7" Width="66.15" Height="18.9" Text="器官移植" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox103" Left="132.3" Top="456.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text831" Left="143.64" Top="453.6" Width="37.8" Height="18.9" Text="其他" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text832" Left="179.55" Top="453.6" Width="226.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.NOTTYXCARE_OTHER]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text833" Top="481.95" Width="132.3" Height="18.9" Text="特异性治疗方式：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox104" Left="132.3" Top="484.6" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text834" Left="143.64" Top="481.95" Width="56.7" Height="18.9" Text="酶替代" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox105" Left="217.35" Top="484.6" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text835" Left="228.69" Top="481.95" Width="66.15" Height="18.9" Text="器官移植" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox106" Left="311.85" Top="484.6" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text836" Left="323.19" Top="481.95" Width="66.15" Height="18.9" Text="基因治疗" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox107" Left="406.35" Top="484.6" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text837" Left="417.69" Top="481.95" Width="160.65" Height="18.9" Text="其他针对病因的药物治疗" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text838" Left="576.45" Top="481.95" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TYXCARE_OTHER]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text839" Top="510.3" Width="151.2" Height="18.9" Text="特异性治疗时间：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text840" Left="141.75" Top="510.3" Width="141.75" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TYXCARETIME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text860" Top="548.1" Width="85.05" Height="28.35" Text="诊疗费用" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text861" Top="585.9" Width="179.55" Height="18.9" Text="发病至确诊前总医疗费用：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox120" Left="9.45" Top="616.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text862" Left="20.79" Top="614.25" Width="85.05" Height="18.9" Text="1000元以下" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox121" Left="141.75" Top="616.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text863" Left="153.09" Top="614.25" Width="85.05" Height="18.9" Text="1000-9999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox122" Left="274.05" Top="616.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text864" Left="285.39" Top="614.25" Width="94.5" Height="18.9" Text="10000-29999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox123" Left="406.35" Top="616.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text865" Left="417.69" Top="614.25" Width="94.5" Height="18.9" Text="30000-49999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox124" Left="538.65" Top="616.9" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text866" Left="549.99" Top="614.25" Width="94.5" Height="18.9" Text="50000-99999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox125" Left="9.45" Top="635.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text867" Left="20.79" Top="633.15" Width="94.5" Height="18.9" Text="10-19万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox126" Left="141.75" Top="635.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text868" Left="153.09" Top="633.15" Width="94.5" Height="18.9" Text="20-29万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox127" Left="274.05" Top="635.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text869" Left="285.39" Top="633.15" Width="94.5" Height="18.9" Text="30-39万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox128" Left="406.35" Top="635.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text870" Left="417.69" Top="633.15" Width="94.5" Height="18.9" Text="40-49万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox129" Left="538.65" Top="635.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text871" Left="549.99" Top="633.15" Width="94.5" Height="18.9" Text="50万元以上" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text872" Top="670.95" Width="179.55" Height="18.9" Text="确诊后每年总治疗费用：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text883" Top="784.35" Width="378" Height="18.9" Text="发病以来每年额外增加的间接费用（康复、交通、住宿等）：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text894" Top="746.55" Width="141.75" Height="18.9" Text="其中自费部分占比：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text895" Left="132.3" Top="746.55" Width="37.8" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.ZFZB]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text896" Left="170.1" Top="746.55" Width="28.35" Height="18.9" Text="％" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text897" Top="869.4" Width="85.05" Height="18.9" Text="报告单位：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text898" Left="94.5" Top="869.4" Width="179.55" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGDWMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text899" Left="368.55" Top="869.4" Width="85.05" Height="18.9" Text="报告科室：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text900" Left="444.15" Top="869.4" Width="198.45" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBKSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text901" Top="897.75" Width="103.95" Height="18.9" Text="本次诊断医师：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text902" Left="94.5" Top="897.75" Width="179.55" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGYSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text903" Left="368.55" Top="897.75" Width="85.05" Height="18.9" Text="上报人员：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text904" Left="444.15" Top="897.75" Width="198.45" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SCCZYMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text905" Top="926.1" Width="85.05" Height="18.9" Text="报告日期：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text906" Left="94.5" Top="926.1" Width="179.55" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text907" Left="368.55" Top="926.1" Width="85.05" Height="18.9" Text="报告病区：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text908" Left="444.15" Top="926.1" Width="198.45" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.TBBQMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text909" Left="453.6" Top="94.5" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text909_AfterData" Text="[报告卡主表.OUTCOME_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text911" Top="141.75" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text911_AfterData" Text="[报告卡主表.JYCD_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text912" Top="236.25" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text912_AfterData" Text="[报告卡主表.WHCD_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text914" Left="217.35" Top="349.65" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text914_AfterData" Text="[报告卡主表.JZTYPE_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text916" Left="567" Top="349.65" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text916_AfterData" Text="[报告卡主表.ZDTYPE_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text918" Left="661.5" Top="406.35" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text918_AfterData" Text="[报告卡主表.YWTYXCARE_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text919" Top="453.6" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text919_AfterData" Text="[报告卡主表.NOTTYXCARE_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text920" Left="378" Top="500.85" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text920_AfterData" Text="[报告卡主表.TYXCARE_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text923" Left="179.55" Top="585.9" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text923_AfterData" Text="[报告卡主表.FBZQZOST_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text924" Left="179.55" Top="670.95" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text924_AfterData" Text="[报告卡主表.QZHMNCOST_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox130" Left="9.45" Top="701.95" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text925" Left="20.79" Top="699.3" Width="85.05" Height="18.9" Text="1000元以下" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox131" Left="141.75" Top="701.95" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text926" Left="153.09" Top="699.3" Width="85.05" Height="18.9" Text="1000-9999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox132" Left="274.05" Top="701.95" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text927" Left="285.39" Top="699.3" Width="94.5" Height="18.9" Text="10000-29999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox133" Left="406.35" Top="701.95" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text928" Left="417.69" Top="699.3" Width="94.5" Height="18.9" Text="30000-49999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox134" Left="538.65" Top="701.95" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text929" Left="549.99" Top="699.3" Width="94.5" Height="18.9" Text="50000-99999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox135" Left="9.45" Top="720.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text930" Left="20.79" Top="718.2" Width="94.5" Height="18.9" Text="10-19万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox136" Left="141.75" Top="720.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text931" Left="153.09" Top="718.2" Width="94.5" Height="18.9" Text="20-29万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox137" Left="274.05" Top="720.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text932" Left="285.39" Top="718.2" Width="94.5" Height="18.9" Text="30-39万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox138" Left="406.35" Top="720.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text933" Left="417.69" Top="718.2" Width="94.5" Height="18.9" Text="40-49万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox139" Left="538.65" Top="720.85" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text934" Left="549.99" Top="718.2" Width="94.5" Height="18.9" Text="50万元以上" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox140" Left="9.45" Top="815.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text935" Left="20.79" Top="812.7" Width="85.05" Height="18.9" Text="1000元以下" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox141" Left="141.75" Top="815.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text936" Left="153.09" Top="812.7" Width="85.05" Height="18.9" Text="1000-9999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox142" Left="274.05" Top="815.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text937" Left="285.39" Top="812.7" Width="94.5" Height="18.9" Text="10000-29999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox143" Left="406.35" Top="815.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text938" Left="417.69" Top="812.7" Width="94.5" Height="18.9" Text="30000-49999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox144" Left="538.65" Top="815.35" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text939" Left="549.99" Top="812.7" Width="94.5" Height="18.9" Text="50000-99999元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox145" Left="9.45" Top="834.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text940" Left="20.79" Top="831.6" Width="94.5" Height="18.9" Text="10-19万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox146" Left="141.75" Top="834.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text941" Left="153.09" Top="831.6" Width="94.5" Height="18.9" Text="20-29万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox147" Left="274.05" Top="834.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text942" Left="285.39" Top="831.6" Width="94.5" Height="18.9" Text="30-39万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox148" Left="406.35" Top="834.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text943" Left="417.69" Top="831.6" Width="94.5" Height="18.9" Text="40-49万元" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox149" Left="538.65" Top="834.25" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text944" Left="549.99" Top="831.6" Width="94.5" Height="18.9" Text="50万元以上" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text945" Left="387.45" Top="784.35" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text945_AfterData" Text="[报告卡主表.FBHMNEWCOST_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text713" Width="85.05" Height="28.35" Text="一般情况" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text946" Top="37.8" Width="85.05" Height="18.9" Text="患者姓名：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text947" Left="75.6" Top="37.8" Width="151.2" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text948" Left="292.95" Top="37.8" Width="56.7" Height="18.9" Text="性别：" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox150" Left="340.2" Top="40.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text949" Left="351.54" Top="37.8" Width="37.8" Height="18.9" Text="男性" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox151" Left="406.35" Top="40.45" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text950" Left="417.69" Top="37.8" Width="37.8" Height="18.9" Text="女性" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text951" Left="349.65" Top="18.9" Width="47.25" Height="18.9" Visible="false" AfterDataEvent="Text951_AfterData" Text="[报告卡主表.SEX_ID]" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text952" Left="510.3" Top="37.8" Width="85.05" Height="18.9" Text="身份证号：" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text953" Left="585.9" Top="37.8" Width="132.3" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.SFZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="994.92" Width="718.2"/>
+  </ReportPage>
+</Report>

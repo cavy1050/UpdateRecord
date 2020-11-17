@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="12/31/2015 17:54:32" ReportInfo.Modified="11/28/2018 18:45:22" ReportInfo.CreatorVersion="2014.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="Table1" ReferenceName="报表数据.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="PATID" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="QTBLJLXH" DataType="System.Decimal"/>
+      <Column Name="KPBH" DataType="System.String"/>
+      <Column Name="SSQDM" DataType="System.String"/>
+      <Column Name="SSQMC" DataType="System.String"/>
+      <Column Name="DJSDM" DataType="System.String"/>
+      <Column Name="DJSMC" DataType="System.String"/>
+      <Column Name="XJSDM" DataType="System.String"/>
+      <Column Name="XJSMC" DataType="System.String"/>
+      <Column Name="XZDM" DataType="System.String"/>
+      <Column Name="XZMC" DataType="System.String"/>
+      <Column Name="CDM" DataType="System.String"/>
+      <Column Name="CMC" DataType="System.String"/>
+      <Column Name="MPHDM" DataType="System.String"/>
+      <Column Name="MPHMC" DataType="System.String"/>
+      <Column Name="HJSSQDM" DataType="System.String"/>
+      <Column Name="HJSSQMC" DataType="System.String"/>
+      <Column Name="HJDJSDM" DataType="System.String"/>
+      <Column Name="HJDJSMC" DataType="System.String"/>
+      <Column Name="HJXJSDM" DataType="System.String"/>
+      <Column Name="HJXJSMC" DataType="System.String"/>
+      <Column Name="HJXZDM" DataType="System.String"/>
+      <Column Name="HJHJXZMC" DataType="System.String"/>
+      <Column Name="HJCDM" DataType="System.String"/>
+      <Column Name="HJCMC" DataType="System.String"/>
+      <Column Name="HJMPHDM" DataType="System.String"/>
+      <Column Name="HJMPHMC" DataType="System.String"/>
+      <Column Name="XZQHFM" DataType="System.String"/>
+      <Column Name="SBKH" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="BRXB" DataType="System.String"/>
+      <Column Name="BRMZ" DataType="System.String"/>
+      <Column Name="BRMZDM" DataType="System.String"/>
+      <Column Name="BRGJ" DataType="System.String"/>
+      <Column Name="BRGJDM" DataType="System.String"/>
+      <Column Name="ZJLB" DataType="System.String"/>
+      <Column Name="ZJLBDM" DataType="System.String"/>
+      <Column Name="SFZH" DataType="System.String"/>
+      <Column Name="SZNL" DataType="System.String"/>
+      <Column Name="HYZK" DataType="System.String"/>
+      <Column Name="HYZKDM" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="WHCD" DataType="System.String"/>
+      <Column Name="WHCDDM" DataType="System.String"/>
+      <Column Name="GRSF" DataType="System.String"/>
+      <Column Name="GRSFDM" DataType="System.String"/>
+      <Column Name="BRZY" DataType="System.String"/>
+      <Column Name="BRZYDM" DataType="System.String"/>
+      <Column Name="SWRQ" DataType="System.String"/>
+      <Column Name="SWSJ" DataType="System.String"/>
+      <Column Name="SWDD" DataType="System.String"/>
+      <Column Name="SWDDDM" DataType="System.String"/>
+      <Column Name="SFRSQ" DataType="System.String"/>
+      <Column Name="SQGZDW" DataType="System.String"/>
+      <Column Name="HKDZ" DataType="System.String"/>
+      <Column Name="DQDZ" DataType="System.String"/>
+      <Column Name="LXR" DataType="System.String"/>
+      <Column Name="LXDH" DataType="System.String"/>
+      <Column Name="LXDZ" DataType="System.String"/>
+      <Column Name="ZJSWYY_A" DataType="System.String"/>
+      <Column Name="ZJSWYY_B" DataType="System.String"/>
+      <Column Name="ZJSWYY_C" DataType="System.String"/>
+      <Column Name="ZJSWYY_D" DataType="System.String"/>
+      <Column Name="FBSWJG_A" DataType="System.String"/>
+      <Column Name="FBSWJG_B" DataType="System.String"/>
+      <Column Name="FBSWJG_C" DataType="System.String"/>
+      <Column Name="FBSWJG_D" DataType="System.String"/>
+      <Column Name="CJSWYY_A" DataType="System.String"/>
+      <Column Name="CJFBSWJG_A" DataType="System.String"/>
+      <Column Name="ZGZDYY" DataType="System.String"/>
+      <Column Name="ZGZDYYDM" DataType="System.String"/>
+      <Column Name="SWYY" DataType="System.String"/>
+      <Column Name="ZDYJ" DataType="System.String"/>
+      <Column Name="ZDYJDM" DataType="System.String"/>
+      <Column Name="BGYS" DataType="System.String"/>
+      <Column Name="BGRQ" DataType="System.String"/>
+      <Column Name="BGDW" DataType="System.String"/>
+      <Column Name="SWICDDM" DataType="System.String"/>
+      <Column Name="SWICDMC" DataType="System.String"/>
+      <Column Name="BSZZTZ" DataType="System.String"/>
+      <Column Name="SHBZ" DataType="System.Int32"/>
+      <Column Name="SHCZYH" DataType="System.String"/>
+      <Column Name="SHCZYMC" DataType="System.String"/>
+      <Column Name="SHRQ" DataType="System.String"/>
+      <Column Name="TJYS" DataType="System.String"/>
+      <Column Name="BGYSDM" DataType="System.String"/>
+      <Column Name="BGYSMC" DataType="System.String"/>
+      <Column Name="BGDWDM" DataType="System.String"/>
+      <Column Name="BGDWMC" DataType="System.String"/>
+      <Column Name="TJSJ" DataType="System.String"/>
+      <Column Name="SHYS" DataType="System.String"/>
+      <Column Name="SHSJ" DataType="System.String"/>
+      <Column Name="DYZT" DataType="System.Int16"/>
+      <Column Name="YXJL" DataType="System.Int16"/>
+      <Column Name="BRZD" DataType="System.String"/>
+      <Column Name="SHWTGYY" DataType="System.String"/>
+      <Column Name="SHSM" DataType="System.String"/>
+      <Column Name="LXRXM" DataType="System.String"/>
+      <Column Name="LXRDH" DataType="System.String"/>
+      <Column Name="LXRZZ" DataType="System.String"/>
+      <Column Name="EntityState" DataType="System.Data.EntityState, System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+      <Column Name="EntityKey" DataType="System.Data.EntityKey, System.Data.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    </TableDataSource>
+    <TableDataSource Name="ReportMasterInfo" ReferenceName="报表数据.ReportMasterInfo" DataType="System.Int32" Enabled="true">
+      <Column Name="医院名称" DataType="System.String"/>
+      <Column Name="系统名称" DataType="System.String"/>
+      <Column Name="科室名称" DataType="System.String"/>
+      <Column Name="病区名称" DataType="System.String"/>
+      <Column Name="职工姓名" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8" Guides="37.8">
+      <TextObject Name="Text1" Left="236.25" Top="18.9" Width="245.7" Height="18.9" Text="居民死亡医学证明（推断）书&#13;&#10;" HorzAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text2" Left="9.45" Width="94.5" Height="18.9" Text="附件1&#13;&#10;" HorzAlign="Center" Font="宋体, 12pt"/>
+      <TextObject Name="Text13" Left="-9450" Top="-9450" Width="18.9" Height="18.9" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="37.8">
+      <TextObject Name="Text3" Left="9.45" Top="2.45" Width="160.65" Height="18.9" Text="省（自治区、直辖市）" HorzAlign="Right" Font="宋体, 8pt"/>
+      <TextObject Name="Text4" Left="207.9" Top="2.45" Width="132.3" Height="18.9" Text="市（地区、州、盟）" HorzAlign="Right" Font="宋体, 8pt"/>
+      <TextObject Name="Text5" Left="378" Top="2.45" Width="94.5" Height="18.9" Text="县（区、旗）" HorzAlign="Right" Font="宋体, 8pt"/>
+      <TextObject Name="Text6" Left="9.45" Top="18.9" Width="94.5" Height="18.9" Text="行政区划代码" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Text7" Left="481.95" Top="18.9" Width="189" Height="18.9" Text="编号：[Table1.KPBH]" VertAlign="Center" Font="宋体, 8pt"/>
+      <TextObject Name="Text9" Left="85.05" Top="18.9" Width="18.9" Height="18.9" Border.Lines="All" Text="6" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text10" Left="113.4" Top="18.9" Width="18.9" Height="18.9" Border.Lines="All" Text="5" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text11" Left="141.75" Top="18.9" Width="18.9" Height="18.9" Border.Lines="All" Text="9" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text12" Left="170.1" Top="18.9" Width="18.9" Height="18.9" Border.Lines="All" Text="0" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text26" Left="198.45" Top="18.9" Width="18.9" Height="18.9" Border.Lines="All" Text="0" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TextObject Name="Text27" Left="226.8" Top="18.9" Width="18.9" Height="18.9" Border.Lines="All" Text="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="83.6" Width="718.2" Height="882.85">
+      <TableObject Name="Table2" Left="9.45" Top="9.45" Width="699.3" Height="535.09">
+        <TableColumn Name="Column1" Width="85.05"/>
+        <TableColumn Name="Column2" Width="122.85"/>
+        <TableColumn Name="Column3" Width="47.25"/>
+        <TableColumn Name="Column4" Width="113.4"/>
+        <TableColumn Name="Column5" Width="47.25"/>
+        <TableColumn Name="Column6" Width="85.05"/>
+        <TableColumn Name="Column7" Width="75.6"/>
+        <TableColumn Name="Column8" Width="122.85"/>
+        <TableRow Name="Row1" Height="32.35">
+          <TableCell Name="Cell1" Border.Lines="All" Text="死者姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[Table1.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="性别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="[Table1.BRXB]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell5" Border.Lines="All" Text="名族" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell26" Border.Lines="All" Text="[Table1.BRMZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell27" Border.Lines="All" Text="国家或&#13;&#10;地区" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell28" Border.Lines="All" Text="[Table1.BRGJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="37.8">
+          <TableCell Name="Cell6" Border.Lines="All" Text="有效身份&#13;&#10;证件类别" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="[Table1.ZJLB]" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="证件&#13;&#10;号码" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="[Table1.SFZH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell29" Border.Lines="All" Text="[Table1.SZNL]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell30" Border.Lines="All" Text="婚姻&#13;&#10;状况" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell31" Border.Lines="All" Text="[Table1.HYZK]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="47.25">
+          <TableCell Name="Cell11" Border.Lines="All" Text="出生&#13;&#10;日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Text="[Table1.CSRQ]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" Text="文化&#13;&#10;程度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="[Table1.WHCD]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="个人&#13;&#10;身份" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell32" Border.Lines="All" Text="[Table1.GRSF]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell33" Font="宋体, 9pt"/>
+          <TableCell Name="Cell34" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="37.8">
+          <TableCell Name="Cell16" Border.Lines="All" Text="死亡&#13;&#10;日期" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" Text="[Table1.SWRQ]&#13;&#10;[Table1.SWSJ]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell18" Border.Lines="All" Text="死亡&#13;&#10;地点" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell19" Border.Lines="All" Text="[Table1.SWDD]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell20" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell35" Border.Lines="All" Text="死亡时是否处于妊娠期&#13;&#10;或妊娠终止后42天内" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell36" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell37" Border.Lines="All" Text="[Table1.SFRSQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="37.8">
+          <TableCell Name="Cell21" Border.Lines="All" Text="生前&#13;&#10;工作单位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell22" Border.Lines="All" Text="[Table1.SQGZDW]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell23" Border.Lines="All" Text="户籍&#13;&#10;地址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell24" Border.Lines="All" Text="[Table1.HKDZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell25" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell38" Border.Lines="All" Text="常住&#13;&#10;地址" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell39" Border.Lines="All" Text="[Table1.DQDZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell40" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="37.8">
+          <TableCell Name="Cell41" Border.Lines="All" Text="可联系的&#13;&#10;家属姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell42" Border.Lines="All" Text="[Table1.LXR]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell43" Border.Lines="All" Text="联系&#13;&#10;电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell44" Border.Lines="All" Text="[Table1.LXDH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell45" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell46" Border.Lines="All" Text="家庭住址&#13;&#10;或工作单位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell47" Border.Lines="All" Text="[Table1.LXDZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell48" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="30.24">
+          <TableCell Name="Cell49" Border.Lines="All" Text="致死的主要疾病诊断&#13;&#10;" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell50" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell51" Border.Lines="All" Text="疾病名称（勿填症状体征）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell52" Font="宋体, 9pt"/>
+          <TableCell Name="Cell53" Font="宋体, 9pt"/>
+          <TableCell Name="Cell54" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell55" Border.Lines="All" Text="发病至死亡大概间隔时间" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell56" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row8" Height="30.24">
+          <TableCell Name="Cell57" Border.Lines="All" Text="Ⅰ.（a）直接死亡原因" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell58" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell59" Border.Lines="All" Text="[Table1.ZJSWYY_A]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell60" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell61" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell62" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell63" Border.Lines="All" Text="[Table1.FBSWJG_A]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell64" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row9" Height="30.24">
+          <TableCell Name="Cell65" Border.Lines="All" Text="   （b）引起（a）的疾病或情况" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell66" Font="宋体, 9pt"/>
+          <TableCell Name="Cell67" Border.Lines="All" Text="[Table1.ZJSWYY_B]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell68" Font="宋体, 9pt"/>
+          <TableCell Name="Cell69" Font="宋体, 9pt"/>
+          <TableCell Name="Cell70" Font="宋体, 9pt"/>
+          <TableCell Name="Cell71" Border.Lines="All" Text="[Table1.FBSWJG_B]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell72" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row10" Height="30.24">
+          <TableCell Name="Cell73" Border.Lines="All" Text="   （c）引起（b）的疾病或情况" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell74" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell75" Border.Lines="All" Text="[Table1.ZJSWYY_C]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell76" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell77" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell78" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell79" Border.Lines="All" Text="[Table1.FBSWJG_C]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell80" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row11" Height="30.24">
+          <TableCell Name="Cell81" Border.Lines="All" Text="   （d）引起（c）的疾病或情况" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell82" Font="宋体, 9pt"/>
+          <TableCell Name="Cell83" Border.Lines="All" Text="[Table1.ZJSWYY_D]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell84" Font="宋体, 9pt"/>
+          <TableCell Name="Cell85" Font="宋体, 9pt"/>
+          <TableCell Name="Cell86" Font="宋体, 9pt"/>
+          <TableCell Name="Cell87" Border.Lines="All" Text="[Table1.FBSWJG_D]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell88" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row12" Height="30.24">
+          <TableCell Name="Cell89" Border.Lines="All" Text="Ⅱ.其他疾病诊断（促进死亡，但与&#13;&#10;   导致死亡无关的其他重要情况）" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell90" Font="宋体, 9pt"/>
+          <TableCell Name="Cell91" Border.Lines="All" Text="[Table1.CJSWYY_A]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell92" Font="宋体, 9pt"/>
+          <TableCell Name="Cell93" Font="宋体, 9pt"/>
+          <TableCell Name="Cell94" Font="宋体, 9pt"/>
+          <TableCell Name="Cell95" Border.Lines="All" Text="[Table1.CJFBSWJG_A]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell96" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row13" Height="37.8">
+          <TableCell Name="Cell97" Border.Lines="All" Text="生前主要疾病&#13;&#10;最高诊断单位" Font="宋体, 9pt"/>
+          <TableCell Name="Cell98" Border.Lines="All" Text="[Table1.ZGZDYY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="4"/>
+          <TableCell Name="Cell99" Font="宋体, 9pt"/>
+          <TableCell Name="Cell100" Font="宋体, 9pt"/>
+          <TableCell Name="Cell101" Font="宋体, 9pt"/>
+          <TableCell Name="Cell102" Border.Lines="All" Text="生前主要疾病&#13;&#10;最高诊断依据" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell103" Border.Lines="All" Text="[Table1.ZDYJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell104" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row14" Height="37.8">
+          <TableCell Name="Cell105" Border.Lines="All" Text="医师签名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell106" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell107" Border.Lines="All" Text="医疗卫生&#13;&#10;机构盖章" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell108" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell109" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell110" Border.Lines="Left, Top, Bottom" Text="填表日期：" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell111" Border.Lines="Right, Top, Bottom" Text="[Table1.BGRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt" ColSpan="2"/>
+          <TableCell Name="Cell112" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row15" Height="47.25">
+          <TableCell Name="Cell113" Border.Lines="All" Text="（以下由编码人员填写）根本死亡原因：[Table1.SWICDMC]" VertAlign="Center" Font="宋体, 9pt" ColSpan="5"/>
+          <TableCell Name="Cell114" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell115" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell116" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell117" Border.Lines="All" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell118" Border.Lines="All" Text="ICD编码：[Table1.SWICDDM]" VertAlign="Center" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell119" Font="宋体, 9pt"/>
+          <TableCell Name="Cell120" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text8" Left="217.35" Top="641.15" Width="198.45" Height="28.35" Text="死亡调查记录" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+      <TableObject Name="Table3" Left="9.45" Top="688.4" Width="699.12" Height="179.55">
+        <TableColumn Name="Column9" Width="77.94"/>
+        <TableColumn Name="Column10" Width="87.39"/>
+        <TableColumn Name="Column11" Width="87.39"/>
+        <TableColumn Name="Column12" Width="49.59"/>
+        <TableColumn Name="Column13" Width="77.94"/>
+        <TableColumn Name="Column14" Width="115.74"/>
+        <TableColumn Name="Column15" Width="87.39"/>
+        <TableColumn Name="Column16" Width="115.74"/>
+        <TableRow Name="Row16" Height="103.95">
+          <TableCell Name="Cell121" Border.Lines="All" Text="死者生前病史及症状体症：[Table1.BSZZTZ]" Font="宋体, 9pt" ColSpan="8"/>
+          <TableCell Name="Cell122" Font="宋体, 9pt"/>
+          <TableCell Name="Cell123" Font="宋体, 9pt"/>
+          <TableCell Name="Cell124" Font="宋体, 9pt"/>
+          <TableCell Name="Cell125" Font="宋体, 9pt"/>
+          <TableCell Name="Cell146" Font="宋体, 9pt"/>
+          <TableCell Name="Cell147" Font="宋体, 9pt"/>
+          <TableCell Name="Cell148" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row17" Height="37.8">
+          <TableCell Name="Cell126" Border.Lines="All" Text="被调查者&#13;&#10;姓    名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell127" Border.Lines="All" Text="[Table1.LXRXM]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell128" Border.Lines="All" Text="与死者&#13;&#10;关  系 " HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell129" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell130" Border.Lines="All" Text="联系&#13;&#10;电话" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell149" Border.Lines="All" Text="[Table1.LXRDH]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell150" Border.Lines="All" Text="联系地址&#13;&#10;或工作单位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell151" Border.Lines="All" Text="[Table1.LXRZZ]" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row18" Height="37.8">
+          <TableCell Name="Cell131" Border.Lines="All" Text="死因推断" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell132" Border.Lines="All" Font="宋体, 9pt" ColSpan="3"/>
+          <TableCell Name="Cell133" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell134" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell135" Border.Lines="All" Text="调查者签名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell152" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell153" Border.Lines="All" Text="调查日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell154" Border.Lines="All" Text="    年  月  日" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="970.45" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

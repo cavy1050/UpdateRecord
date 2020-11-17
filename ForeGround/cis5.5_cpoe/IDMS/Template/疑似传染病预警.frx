@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/28/2018 11:20:28" ReportInfo.Modified="11/29/2019 13:53:16" ReportInfo.CreatorVersion="2014.2.3.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Text20_AfterData(object sender, EventArgs e)
+    {
+      if(this.Text20.Text==&quot;0&quot;)
+      {
+          this.Text20.Text=&quot;无&quot;;
+      }
+      else
+      {
+         this.Text20.Text=&quot;有&quot;;
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <TableDataSource Name="Table1" ReferenceName="报表数据.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="XH" DataType="System.Decimal"/>
+      <Column Name="SYXH" DataType="System.Decimal"/>
+      <Column Name="YEXH" DataType="System.Decimal"/>
+      <Column Name="XTLB" DataType="System.Int32"/>
+      <Column Name="XTLBBZ" DataType="System.String"/>
+      <Column Name="ZYHM" DataType="System.String"/>
+      <Column Name="HZXM" DataType="System.String"/>
+      <Column Name="CSRQ" DataType="System.String"/>
+      <Column Name="CARDNO" DataType="System.String"/>
+      <Column Name="BLH" DataType="System.String"/>
+      <Column Name="CFZBZ" DataType="System.String"/>
+      <Column Name="NL" DataType="System.String"/>
+      <Column Name="HQSJRQ" DataType="System.String"/>
+      <Column Name="YSCRBDM" DataType="System.String"/>
+      <Column Name="YSCRBMC" DataType="System.String"/>
+      <Column Name="KSDM" DataType="System.String"/>
+      <Column Name="KSMC" DataType="System.String"/>
+      <Column Name="BQDM" DataType="System.String"/>
+      <Column Name="BQMC" DataType="System.String"/>
+      <Column Name="YSDM" DataType="System.String"/>
+      <Column Name="YSMC" DataType="System.String"/>
+      <Column Name="CLBZ" DataType="System.String"/>
+      <Column Name="CLYSDM" DataType="System.String"/>
+      <Column Name="CLYSMC" DataType="System.String"/>
+      <Column Name="CLRQ" DataType="System.String"/>
+      <Column Name="CLYY" DataType="System.String"/>
+      <Column Name="MEMO" DataType="System.String"/>
+      <Column Name="SHORTMSG" DataType="System.String"/>
+      <Column Name="SHORTMSGTIME" DataType="System.String"/>
+      <Column Name="EMRXH" DataType="System.Decimal"/>
+      <Column Name="CWDM" DataType="System.String"/>
+      <Column Name="CRBXH" DataType="System.Decimal"/>
+      <Column Name="CRBBGK" DataType="System.String"/>
+      <Column Name="CRBTB" DataType="System.Int32"/>
+      <Column Name="ZT" DataType="System.String"/>
+      <Column Name="GYXX" DataType="System.Int32"/>
+      <Column Name="CBZD" DataType="System.String"/>
+      <Column Name="ZS" DataType="System.String"/>
+      <Column Name="XBS" DataType="System.String"/>
+      <Column Name="XZBZ" DataType="System.Boolean" BindableControl="CheckBox"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="37.8">
+      <TextObject Name="Text36" Width="1048.95" Height="37.8" Text="疑似传染病预警病人列表&#13;&#10;" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.84" Width="1047.06" Height="28.35">
+      <TextObject Name="Text3" Width="66.15" Height="28.35" Border.Lines="All" Text="处理标志" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="66.15" Width="94.5" Height="28.35" Border.Lines="All" Text="日期" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Left="160.65" Width="94.5" Height="28.35" Border.Lines="All" Text="门诊号/住院号" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="255.15" Width="94.5" Height="28.35" Border.Lines="All" Text="科室" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="349.65" Width="56.7" Height="28.35" Border.Lines="All" Text="姓名" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="406.35" Width="47.25" Height="28.35" Border.Lines="All" Text="年龄" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text15" Left="453.6" Width="217.35" Height="28.35" Border.Lines="All" Text="主诉" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text17" Left="670.95" Width="132.3" Height="28.35" Border.Lines="All" Text="诊断" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text19" Left="803.25" Width="75.6" Height="28.35" Border.Lines="All" Text="医生" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text21" Left="878.85" Width="56.7" Height="28.35" Border.Lines="All" Text="报告卡" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text23" Left="935.55" Width="56.7" Height="28.35" Border.Lines="All" Text="操作" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text25" Left="992.25" Width="56.7" Height="28.35" Border.Lines="All" Text="备注" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="74.23" Width="1047.06" Height="37.8" DataSource="Table1">
+      <TextObject Name="Text2" Width="66.15" Height="37.8" Border.Lines="All" Text="[Table1.CLBZ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="66.15" Width="94.5" Height="37.8" Border.Lines="All" Text="[Table1.HQSJRQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="160.65" Width="94.5" Height="37.8" Border.Lines="All" Text="[Table1.BLH]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="255.15" Width="94.5" Height="37.8" Border.Lines="All" Text="[Table1.KSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="349.65" Width="56.7" Height="37.8" Border.Lines="All" Text="[Table1.HZXM]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="406.35" Width="47.25" Height="37.8" Border.Lines="All" Text="[Table1.NL]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="453.6" Width="217.35" Height="37.8" Border.Lines="All" Text="[Table1.ZS]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text16" Left="670.95" Width="132.3" Height="37.8" Border.Lines="All" Text="[Table1.CBZD]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text18" Left="803.25" Width="75.6" Height="37.8" Border.Lines="All" Text="[Table1.YSMC]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text20" Left="878.85" Width="56.7" Height="37.8" Border.Lines="All" AfterDataEvent="Text20_AfterData" Text="[Table1.CRBTB]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text22" Left="935.55" Width="56.7" Height="37.8" Border.Lines="All" Text="[Table1.CLYY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text24" Left="992.25" Width="56.7" Height="37.8" Border.Lines="All" Text="[Table1.MEMO]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="116.07" Width="1047.06"/>
+  </ReportPage>
+</Report>
