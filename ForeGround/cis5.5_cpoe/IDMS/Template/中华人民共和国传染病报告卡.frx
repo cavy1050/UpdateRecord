@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="07/29/2019 10:02:14" ReportInfo.Modified="11/20/2020 15:29:14" ReportInfo.CreatorVersion="2014.2.3.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/29/2019 10:02:14" ReportInfo.Modified="12/07/2020 15:34:29" ReportInfo.CreatorVersion="2014.2.3.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1475,11 +1475,11 @@ namespace FastReport
       <CheckBoxObject Name="CheckBox176" Left="85.05" Top="68.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
       <TextObject Name="Text3963" Left="96.39" Top="66.15" Width="47.25" Height="18.9" Text="未婚" VertAlign="Center" Font="Arial, 9pt"/>
       <CheckBoxObject Name="CheckBox177" Left="151.2" Top="68.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
-      <TextObject Name="Text3964" Left="162.54" Top="66.15" Width="47.25" Height="18.9" Text="已婚" VertAlign="Center" Font="Arial, 9pt"/>
-      <CheckBoxObject Name="CheckBox178" Left="217.35" Top="68.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
-      <TextObject Name="Text3965" Left="228.69" Top="66.15" Width="47.25" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
-      <CheckBoxObject Name="CheckBox179" Left="283.5" Top="68.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
-      <TextObject Name="Text3966" Left="294.84" Top="66.15" Width="85.05" Height="18.9" Text="离异或丧偶" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text3964" Left="162.54" Top="66.15" Width="85.05" Height="18.9" Text="已婚有配偶" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox178" Left="245.7" Top="68.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text3965" Left="257.04" Top="66.15" Width="47.25" Height="18.9" Text="不详" VertAlign="Center" Font="Arial, 9pt"/>
+      <CheckBoxObject Name="CheckBox179" Left="311.85" Top="68.8" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
+      <TextObject Name="Text3966" Left="323.19" Top="66.15" Width="85.05" Height="18.9" Text="离异或丧偶" VertAlign="Center" Font="Arial, 9pt"/>
       <TextObject Name="Text3980" Left="9.45" Top="94.5" Width="85.05" Height="18.9" Text="文化程度：" VertAlign="Center" Font="宋体, 9pt"/>
       <CheckBoxObject Name="CheckBox181" Left="160.65" Top="97.15" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
       <TextObject Name="Text3968" Left="171.99" Top="94.5" Width="37.8" Height="18.9" Text="小学" VertAlign="Center" Font="Arial, 9pt"/>
@@ -1491,7 +1491,7 @@ namespace FastReport
       <TextObject Name="Text3971" Left="96.39" Top="94.5" Width="37.8" Height="18.9" Text="文盲" VertAlign="Center" Font="Arial, 9pt"/>
       <CheckBoxObject Name="CheckBox186" Left="434.7" Top="97.15" Width="11.34" Height="11.34" Border.Lines="All" Checked="false"/>
       <TextObject Name="Text3972" Left="446.04" Top="94.5" Width="85.05" Height="18.9" Text="大专及以上" VertAlign="Center" Font="Arial, 9pt"/>
-      <TextObject Name="Text486" Left="387.45" Top="66.15" Width="75.6" Height="18.9" Visible="false" AfterDataEvent="Data486_AfterData" Text="[报告卡主表.HYZT_ID]" VertAlign="Center" Font="宋体, 9pt"/>
+      <TextObject Name="Text486" Left="415.8" Top="66.15" Width="75.6" Height="18.9" Visible="false" AfterDataEvent="Data486_AfterData" Text="[报告卡主表.HYZT_ID]" VertAlign="Center" Font="宋体, 9pt"/>
       <TextObject Name="Text487" Left="519.75" Top="75.6" Width="75.6" Height="18.9" Visible="false" AfterDataEvent="Data487_AfterData" Text="[报告卡主表.WHCD_ID]" VertAlign="Center" Font="宋体, 9pt"/>
       <TextObject Name="Text3981" Left="9.45" Top="122.85" Width="94.5" Height="18.9" Text="现住详地址：" VertAlign="Center" Font="宋体, 9pt"/>
       <TextObject Name="Text3982" Left="94.5" Top="122.85" Width="151.2" Height="18.9" Border.Lines="Bottom" Text="[报告卡主表.JZD_SHENG_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
