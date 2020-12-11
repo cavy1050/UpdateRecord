@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="04/24/2015 10:49:07" ReportInfo.Modified="06/28/2020 18:26:44" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="false">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="04/24/2015 10:49:07" ReportInfo.Modified="12/07/2020 15:19:12" ReportInfo.CreatorVersion="2014.2.3.0" PrintSettings.ShowDialog="false">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -83,15 +83,30 @@ namespace FastReport
     private void Page1_StartPage(object sender, EventArgs e)
     {
       if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;肠镜检查知情同意书&quot;)&gt;0
-        ||Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;胃镜检查知情同意书&quot;)&gt;0)
+        ||Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;胃镜检查知情同意书&quot;)&gt;0
+        ||Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;人工流产术后健康教育处方&quot;)&gt;0
+        ||Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;药物流产健康教育处方&quot;)&gt;0)
       {
         Page1.TopMargin=10;
         Page1.BottomMargin=10;
         //Page1.LeftMargin=10;
         //Page1.RightMargin=10;
-        Page1.PaperHeight=297;
-        Page1.PaperWidth=210;
+        Page1.PaperHeight=210;
+        Page1.PaperWidth=297;
+        string str=&quot;False&quot;;
+        Page1.Landscape=bool.Parse(str);
       }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;人工流产术后健康教育处方&quot;)&gt;0)
+      {
+        Text1.LineHeight=55F;
+     
+      }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;药物流产健康教育处方&quot;)&gt;0)
+      {
+        Text1.LineHeight=36F;
+     
+      }
+      
       if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;门诊“中心制”多学科联合诊疗记录&quot;)&gt;0)
       {
         
@@ -102,9 +117,30 @@ namespace FastReport
         
         Text15.Text=(&quot;中医门诊病历&quot;);
       }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;胃镜检查知情同意书&quot;)&gt;0)
+      {
+        
+        Text15.Text=(&quot;胃镜检查知情同意书&quot;);
+      }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;肠镜检查知情同意书&quot;)&gt;0)
+      {
+        
+        Text15.Text=(&quot;肠镜检查知情同意书&quot;);
+         }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;人工流产术后健康教育处方&quot;)&gt;0)
+        {
+        
+          Text15.Text=(&quot;人工流产术后健康教育处方&quot;);
+         }
+      if(Report.GetColumnValue(&quot;病历文件信息.病历名称&quot;).ToString().IndexOf(&quot;药物流产健康教育处方&quot;)&gt;0)
+          {
+        
+            Text15.Text=(&quot;药物流产健康教育处方&quot;);
+         }
+      }
     }
   }
-}
+
 </ScriptText>
   <Dictionary>
     <TableDataSource Name="病历明细" ReferenceName="报表数据.病历明细" DataType="System.Int32" Enabled="true">
@@ -300,7 +336,7 @@ namespace FastReport
       <TextObject Name="Text9" Left="245.25" Top="47.05" Width="56.7" Height="18.9" Text="性别：" HorzAlign="Right" Font="黑体, 10pt, style=Bold"/>
       <TextObject Name="Text10" Left="292.95" Top="47.05" Width="47.25" Height="18.9" Text="[PatBasicInfo.Sex]" VertAlign="Center" Font="宋体, 10pt"/>
       <TextObject Name="Text11" Left="329.75" Top="47.05" Width="56.7" Height="18.9" Text="年龄：&#13;&#10;" HorzAlign="Right" Font="黑体, 10pt, style=Bold"/>
-      <TextObject Name="Text12" Left="386.8" Top="47.05" Width="37.8" Height="18.9" Text="[PatBasicInfo.Age]" VertAlign="Center" Font="宋体, 10pt"/>
+      <TextObject Name="Text12" Left="377.35" Top="47.05" Width="56.7" Height="18.9" CanGrow="true" CanShrink="true" Text="[PatBasicInfo.Age]" VertAlign="Center" Font="宋体, 10pt"/>
       <TextObject Name="Text13" Left="557.55" Top="47.05" Width="103.95" Height="18.9" Text="就诊时间：" HorzAlign="Center" Font="黑体, 10pt, style=Bold"/>
       <TextObject Name="Text14" Left="637.6" Top="47.05" Width="94.5" Height="18.9" Text="[Replace(Replace([病历文件信息.病历创建时间],&quot;-&quot;,&quot;&quot;),&quot; &quot;,&quot;&quot;)]" AutoWidth="true" Font="宋体, 10pt"/>
       <TextObject Name="Text15" Left="222.27" Top="23.25" Width="311.85" Height="28.35" Text="门 诊 病 历" HorzAlign="Center" VertAlign="Center" Font="黑体, 12pt, style=Bold"/>
