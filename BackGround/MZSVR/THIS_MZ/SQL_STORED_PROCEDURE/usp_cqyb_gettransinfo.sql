@@ -1,6 +1,4 @@
-Text
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE proc usp_cqyb_gettransinfo
+ALTER proc usp_cqyb_gettransinfo
 (
   @code		varchar(15),	--交易代码
   @jsxh		ut_sjh,			--结算收据号
@@ -131,8 +129,8 @@ begin
 				SELECT @ryrq_old = sfrq ,@jsxh_temp = sjh from #vw_mzbrjsk_02(NOLOCK) 
 				WHERE sjh in (select tsjh from #vw_mzbrjsk_02(NOLOCK) where sjh in (select tsjh from #vw_mzbrjsk_02(NOLOCK) where sjh = @jsxh_temp))
 				--重庆地区物价调整修改
-				--if @ryrq_old > '2017090900:00:00'
-				--	select @ryrq_old = ''
+				if @ryrq_old < '2020010100:00:00'
+					select @ryrq_old = ''
 			end
 						
 			--由于附一增加调出修改的sjh取原始收据号的处方日期作为处方日期 
@@ -586,7 +584,9 @@ begin
 		yytj		VARCHAR(10)		null,    		--30用药途径
 		sypc		VARCHAR(10)		null,    		--31使用频次
 		shid		VARCHAR(50)		null,    		--32审核 ID
-		mxxh		ut_xh12		not null			--明细序号
+		mxxh		ut_xh12		not null,			--明细序号
+		syxh ut_syxh,--首页序号-add by winning_dingsong_chongqing on 20200826
+		jssjh ut_sjh--结算收据号
      )         
            
     --门诊挂号    
@@ -608,12 +608,13 @@ begin
 		    select @ysmc = name from YY_ZGBMK(nolock) where id = @ysdm
 		   
 		insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-			ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh)
+			ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh,syxh,jssjh)
 		select a.jzlsh,c.xh,CASE WHEN (@xtbz = 0) AND (isnull(@ryrq_old,'') <> '') 
 			THEN dbo.fun_convertrq_cqyb(1,@ryrq_old) ELSE dbo.fun_convertrq_cqyb(1,b.ghrq) END,
 			(case when isnull(d.dydm,'') = '' then '67790' else d.dydm end),
 			c.xmdm,c.xmmc,c.xmdj-c.yhdj,c.xmsl,'0',@ysmc,
-			@czym,d.xmdw,d.xmgg,'','',(c.xmdj-c.yhdj)*c.xmsl,b.ksdm,b.ksmc,@ysdm,'','','',a.xzlb,'',c.xh
+			@czym,d.xmdw,d.xmgg,'','',(c.xmdj-c.yhdj)*c.xmsl,b.ksdm,b.ksmc,@ysdm,'','','',a.xzlb,'',c.xh,
+			null,a.jssjh
 		from YY_CQYB_MZJZJLK a(nolock) 
 			inner join GH_GHZDK b(nolock) on a.jssjh = b.jssjh
 			inner join GH_GHMXK c(nolock) on b.xh = c.ghxh and c.xmdj>0 AND c.xmsl > 0 --0费用不上传
@@ -670,7 +671,7 @@ begin
 		select @cfrq_old = ''
 
 		insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-			ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,dcyyjl,dcyyjldw,dcyl,zxjldw,qyzl,yytj,sypc,shid,mxxh)
+			ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,dcyyjl,dcyyjldw,dcyl,zxjldw,qyzl,yytj,sypc,shid,mxxh,syxh,jssjh)
 		select a.jzlsh,(case when g.ypbz=3 then c.cfxh else c.xh end),
 			dbo.fun_convertrq_cqyb(1,case when isnull(@cfrq_old,'') <> '' then @cfrq_old else b.lrrq end),
 			(case when isnull(d.dydm,'') = '' then '197827' else d.dydm end),c.cd_idm,
@@ -691,7 +692,7 @@ begin
 			CASE ISNULL(h.pcdm,'') WHEN '' THEN '61' ELSE
 			(select TOP 1 k.ybcode FROM YY_CQYB_YBSJZD_DZ k(NOLOCK) WHERE k.zdlb = 'SYPC' AND k.hiscode = h.pcdm) END AS sypc,      --使用频次
 			ISNULL(h.shid,'9999999999') shid,
-			c.xh
+			c.xh,null,a.jssjh
 		from YY_CQYB_MZJZJLK a(nolock) 
 			inner join SF_MZCFK b(nolock) on a.jssjh = b.jssjh
 			inner join SF_CFMXK c(nolock) on b.xh = c.cfxh and c.cd_idm <> 0
@@ -705,7 +706,7 @@ begin
 		where a.jssjh = @jsxh and a.jlzt = 1
 		
 		insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-			ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,dcyyjl,dcyyjldw,dcyl,zxjldw,qyzl,yytj,sypc,shid,mxxh)
+			ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,dcyyjl,dcyyjldw,dcyl,zxjldw,qyzl,yytj,sypc,shid,mxxh,syxh,jssjh)
 		select a.jzlsh,c.xh,dbo.fun_convertrq_cqyb(1,case when isnull(@cfrq_old,'') <> '' then @cfrq_old else b.lrrq end),
 			(case when isnull(d.dydm,'') = '' then '67790' else d.dydm end),
             c.ypdm,SUBSTRING(CONVERT(VARCHAR(50),c.ypmc),1,50) xmmc,round((c.ylsj-c.yhdj)/c.ykxs,4),
@@ -716,7 +717,7 @@ begin
 				 WHEN ISNULL(dbo.fun_cqyb_getlcxmshid(h.shid,c.ypdm),'') <> '' THEN dbo.fun_cqyb_getlcxmshid(h.shid,c.ypdm)
 				 ELSE ISNULL(h.shid,'9999999999') 
 			END AS shid,--ISNULL(h.shid,'9999999999') shid,
-			c.xh
+			c.xh,null,a.jssjh
 		from YY_CQYB_MZJZJLK a(nolock) 
 			inner join SF_MZCFK b(nolock) on a.jssjh = b.jssjh
 			inner join SF_CFMXK c(nolock) on b.xh = c.cfxh and c.cd_idm = 0 
@@ -839,14 +840,14 @@ begin
 		else if @cxbz = 1	--费用明细信息
 		begin
 			insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh)
+				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh,syxh,jssjh)
 				select a.jzlsh,b.cfh,dbo.fun_convertrq_cqyb(1,b.cfrq),
 					dbo.fun_cqyb_getzydydm(b.xh,b.idm,@configCQ36,@configCQ39,@configCQ40) ,
 					b.idm,SUBSTRING(CONVERT(VARCHAR(50),b.xmmc),1,50) xmmc,b.xmdj,(CASE b.ybscbz WHEN 5 THEN b.ktsl ELSE b.xmsl END) xmsl,b.jzbz,f.name,@czym,c.zxdw,b.xmgg,d.name,'',
 					(CASE b.ybscbz WHEN 5 THEN b.ktje ELSE b.xmje END) xmje,b.ksdm,e.name,b.ysdm,
 					'','','',a.xzlb,
 					CASE WHEN @configCQ36 <> '3' THEN '0' ELSE dbo.fun_cqyb_getzyybzzfbz(b.xh) END,
-					b.xh
+					b.xh,a.syxh,null
 				from YY_CQYB_ZYJZJLK a(nolock) 
 					inner join YY_CQYB_ZYFYMXK b(nolock) on a.syxh = b.syxh and b.jsxh = @jsxh and idm <> 0 and xmje > 0
 														and isnull(b.ybscbz,0) in (0,5) and b.cfrq between @qzrq and @zzrq
@@ -859,14 +860,14 @@ begin
 				where a.syxh = @syxh and a.jlzt = 1
 			
 			insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh)
+				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh,syxh,jssjh)
 				select a.jzlsh,b.cfh,dbo.fun_convertrq_cqyb(1,b.cfrq),
 					dbo.fun_cqyb_getzydydm(b.xh,b.idm,@configCQ36,@configCQ39,@configCQ40) ,
 					b.xmdm,SUBSTRING(CONVERT(VARCHAR(50),b.xmmc),1,50) xmmc,b.xmdj,(CASE b.ybscbz WHEN 5 THEN b.ktsl ELSE b.xmsl END) xmsl,b.jzbz,e.name,@czym,c.xmdw,'','','',
 					(CASE b.ybscbz WHEN 5 THEN b.ktje ELSE b.xmje END) xmje,b.ksdm,d.name,b.ysdm,
 					'','','',a.xzlb,
 					CASE WHEN @configCQ36 <> '3' THEN '0' ELSE dbo.fun_cqyb_getzyybzzfbz(b.xh) END,
-					b.xh
+					b.xh,a.syxh,null
 				from YY_CQYB_ZYJZJLK a(nolock) 
 					inner join YY_CQYB_ZYFYMXK b(nolock) on a.syxh = b.syxh and b.jsxh = @jsxh and idm = 0 and xmje > 0
 														and isnull(b.ybscbz,0) IN (0,5) AND b.cfrq between @qzrq and @zzrq
@@ -880,13 +881,13 @@ begin
 		else if @cxbz = 2
 		begin
 			insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh)
+				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh,syxh,jssjh)
 				select a.jzlsh,b.cfh,dbo.fun_convertrq_cqyb(1,b.cfrq),
 				    dbo.fun_cqyb_getzydydm(b.xh,b.idm,@configCQ36,@configCQ39,@configCQ40),
 					b.idm,SUBSTRING(CONVERT(VARCHAR(50),b.xmmc),1,50) xmmc,b.xmdj,b.xmsl,b.jzbz,f.name,@czym,c.zxdw,b.xmgg,d.name,b.zxlsh,b.xmje,b.ksdm,e.name,b.ysdm,
 					'','','',a.xzlb,
 					CASE WHEN @configCQ36 <> '3' THEN '0' ELSE dbo.fun_cqyb_getzyybzzfbz(b.xh) END,
-					b.xh
+					b.xh,a.syxh,null
 				from YY_CQYB_ZYJZJLK a(nolock) 
 					inner join YY_CQYB_ZYFYMXK b(nolock) on a.syxh = b.syxh and b.jsxh = @jsxh and idm <> 0 and xmje < 0
 														and isnull(b.ybscbz,0) = 0 and b.cfrq between @qzrq and @zzrq
@@ -899,13 +900,13 @@ begin
 				where a.syxh = @syxh and a.jlzt = 1
 			 
 			insert into #temp_fymx(jzlsh,cfh,cfrq,ybbm,xmdm,xmmc,xmdj,xmsl,jzbz,cfys,jbr,xmdw,xmgg,xmjx,zxlsh,xmje,
-				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh)
+				ksdm,ksmc,ysbm,mcyl,yfbz,zxzq,xzlb,zzfbz,mxxh,syxh,jssjh)
 				select a.jzlsh,b.cfh,dbo.fun_convertrq_cqyb(1,b.cfrq),
 					dbo.fun_cqyb_getzydydm(b.xh,b.idm,@configCQ36,@configCQ39,@configCQ40) ,
 					b.xmdm,SUBSTRING(CONVERT(VARCHAR(50),b.xmmc),1,50) xmmc,b.xmdj,b.xmsl,b.jzbz,e.name,@czym,c.xmdw,'','',b.zxlsh,b.xmje,b.ksdm,d.name,b.ysdm,
 					'','','',a.xzlb,
 					CASE WHEN @configCQ36 <> '3' THEN '0' ELSE dbo.fun_cqyb_getzyybzzfbz(b.xh) END,
-					b.xh
+					b.xh,a.syxh,null
 				from YY_CQYB_ZYJZJLK a(nolock) 
 					inner join YY_CQYB_ZYFYMXK b(nolock) on a.syxh = b.syxh and b.jsxh = @jsxh and idm = 0 and xmje < 0
 														and isnull(b.ybscbz,0) = 0 and b.cfrq between @qzrq and @zzrq
@@ -929,7 +930,7 @@ begin
 		from #temp_fymx a INNER join YY_ZGBMK b(nolock) on a.ysbm = b.id AND (isnull(b.sfzh,'') = '' or b.cfbz <> '1')
 
 		DECLARE @i_fjl INTEGER,@count_fjl INTEGER ,@xh_fjl INTEGER,@txh INTEGER,@idm ut_xh9,@dydm VARCHAR(20),@cfrq_z VARCHAR(19),@cfrq_f VARCHAR(19) ,@cfh_z ut_xh12  
-  
+ 
 		SELECT IDENTITY(int ,1,1) i,mxxh,cfrq INTO #temp_fymx_fjl FROM #temp_fymx a WHERE a.xmje < 0
 		SELECT @i_fjl=1 ,@count_fjl = 0 
 		SELECT @count_fjl = COUNT(1) FROM #temp_fymx_fjl
@@ -1023,22 +1024,28 @@ begin
 
 	if @xtbz in (1) --1.27版本门诊的必传
 	begin
-            if @syxh in (56889)
+        if @syxh in (56889)
 		begin
-		select a.jzlsh,a.cfh,a.cfrq, a.ybbm,a.xmdm,a.xmmc,a.xmdj,a.xmsl,a.jzbz,a.cfys,a.jbr,a.xmdw,
+			select a.jzlsh,a.cfh,a.cfrq, a.ybbm,a.xmdm,a.xmmc,a.xmdj,a.xmsl,a.jzbz,a.cfys,a.jbr,a.xmdw,
 			(CONVERT(VARCHAR(20),CASE WHEN ISNULL(a.xmgg,'')= '' THEN a.xmdw ELSE a.xmgg end)) xmgg,  --万达接口不允许为空
 			(CASE WHEN ISNULL(a.xmjx,'')= '' THEN '无' ELSE a.xmjx END) xmjx,
-			a.zxlsh,a.xmje, a.ksdm,a.ksmc,(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
+			a.zxlsh,a.xmje, a.ksdm,a.ksmc,
+			--(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,--update by winning-dingsong-chongqing on 20200820
+			(case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END) ysbm,
+			a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
 			a.dcyyjl,a.dcyyjldw, a.dcyl,a.zxjldw,a.qyzl , a.yytj ,a.sypc,a.shid,a.mxxh
-		from #temp_fymx a left join YY_ZGBMK b(nolock) on a.ysbm = b.id
-	end
-	else
-	begin
-		select a.jzlsh,a.cfh,a.cfrq, a.ybbm,a.xmdm,a.xmmc,a.xmdj,a.xmsl,a.jzbz,a.cfys,a.jbr,a.xmdw,
+			from #temp_fymx a left join YY_ZGBMK b(nolock) on a.ysbm = b.id
+		end
+		else
+		begin
+			select a.jzlsh,a.cfh,a.cfrq, a.ybbm,a.xmdm,a.xmmc,a.xmdj,a.xmsl,a.jzbz,a.cfys,a.jbr,a.xmdw,
 			(CONVERT(VARCHAR(20),CASE WHEN ISNULL(a.xmgg,'')= '' THEN a.xmdw ELSE a.xmgg end)) xmgg,  --万达接口不允许为空
 			(CASE WHEN ISNULL(a.xmjx,'')= '' THEN '无' ELSE a.xmjx END) xmjx,
-			a.zxlsh,a.xmje, a.ksdm,a.ksmc,(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
-	a.dcyyjl,a.dcyyjldw, a.dcyl,a.zxjldw,a.qyzl , a.yytj ,a.sypc,a.shid,a.mxxh
+			a.zxlsh,a.xmje, a.ksdm,a.ksmc,
+			--(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,--update by winning-dingsong-chongqing on 20200820
+			(case when isnull(ltrim(dbo.fun_getyssfzh(a.jssjh,'MZ')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.jssjh,'MZ') END) ysbm,
+			a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
+			a.dcyyjl,a.dcyyjldw, a.dcyl,a.zxjldw,a.qyzl , a.yytj ,a.sypc,a.shid,a.mxxh
 			from #temp_fymx a left join YY_ZGBMK b(nolock) on a.ysbm = b.id
 		end
 	end
@@ -1049,16 +1056,22 @@ begin
 			select a.jzlsh,a.cfh,a.cfrq, a.ybbm,a.xmdm,a.xmmc,a.xmdj,a.xmsl,a.jzbz,a.cfys,a.jbr,a.xmdw,
 			(CONVERT(VARCHAR(20),CASE WHEN ISNULL(a.xmgg,'')= '' THEN a.xmdw ELSE a.xmgg end)) xmgg,  --万达接口不允许为空
 			(CASE WHEN ISNULL(a.xmjx,'')= '' THEN '无' ELSE a.xmjx END) xmjx,
-			a.zxlsh,a.xmje, a.ksdm,a.ksmc,(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
+			a.zxlsh,a.xmje, a.ksdm,a.ksmc,
+			--(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,--update by winning-dingsong-chongqing on 20200820
+			(case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END) ysbm,
+			a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
 			a.mxxh
-		from #temp_fymx a left join YY_ZGBMK b(nolock) on a.ysbm = b.id
-                end
+			from #temp_fymx a left join YY_ZGBMK b(nolock) on a.ysbm = b.id
+        end
 		else
 		begin
 			select a.jzlsh,a.cfh,a.cfrq, a.ybbm,a.xmdm,a.xmmc,a.xmdj,a.xmsl,a.jzbz,a.cfys,a.jbr,a.xmdw,
 			(CONVERT(VARCHAR(20),CASE WHEN ISNULL(a.xmgg,'')= '' THEN a.xmdw ELSE a.xmgg end)) xmgg,  --万达接口不允许为空
 			(CASE WHEN ISNULL(a.xmjx,'')= '' THEN '无' ELSE a.xmjx END) xmjx,
-			a.zxlsh,a.xmje, a.ksdm,a.ksmc,(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
+			a.zxlsh,a.xmje, a.ksdm,a.ksmc,
+			--(case when isnull(ltrim(b.sfzh),'')='' then @m_mrsfzh else b.sfzh end) as ysbm,--update by winning-dingsong-chongqing on 20200820
+			(case when isnull(ltrim(dbo.fun_getyssfzh(a.syxh,'ZY')),'')='' THEN @m_mrsfzh ELSE dbo.fun_getyssfzh(a.syxh,'ZY') END) ysbm,
+			a.mcyl,a.yfbz,a.zxzq,a.xzlb,a.zzfbz,
 			a.mxxh
 			from #temp_fymx a left join YY_ZGBMK b(nolock) on a.ysbm = b.id
 		end
@@ -1189,7 +1202,7 @@ BEGIN
 		 
 		if exists(select 1 from ZY_BRSYK(nolock) where syxh = @syxh and brzt in (2,4))
 		begin
-			--费用总额   
+			--费用总额  
 			--select @fyze = zje - yhje from ZY_BRJSK(nolock) where xh = @jsxh and jlzt = 0 and jszt = 0 and ybjszt <> 2
 			--从中间表获取总金额，在ZY_BRJSJEK增加医保与HIS的差额  
 			select @fyze = sum(isnull( case when @configCQ49='是' then ktje else  xmje end,0)) 
@@ -1270,7 +1283,7 @@ BEGIN
 			and  (isnull(ybscbz,0) = 1 or (@configCQ49='是' and isnull(ybscbz,0) = 4))
 			--明细条数
 			select @mxts = count(1) from YY_CQYB_ZYFYMXK(nolock) where syxh = @syxh and jsxh = @jsxh 
-			and  (isnull(ybscbz,0) = 1 or (@configCQ49='是' and isnull(ybscbz,0) = 4))
+			and (isnull(ybscbz,0) = 1 or (@configCQ49='是' and isnull(ybscbz,0) = 4))
 		end
 		else
 		begin
@@ -1866,6 +1879,10 @@ begin
 end;
 
 return
+
+
+
+
 
 
 
