@@ -1,4 +1,4 @@
-<Model id="b7fbf2e3-8e1b-4a8b-8029-25e86aef4cff" name="门诊病历通用模板" description="适用于重庆医科大学附属大学城医院" text="门诊病历" nodetype="Model" canprint="True" printInOddPages="False" display="11```0`1" Version="1.0.0.404" titledisplay="1`1`1" hospitalcoderange="10027" catalogcode="B+10" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" isReview="False" NodeLogicContent="" isform="False" formclass="" maxrefid="115" RelateInstanceId="0">
+<Model id="b7fbf2e3-8e1b-4a8b-8029-25e86aef4cff" name="门诊病历通用模板" description="适用于重庆医科大学附属大学城医院" text="门诊病历" nodetype="Model" canprint="True" printInOddPages="False" display="11```0`1" Version="1.0.0.409" titledisplay="1`1`1" hospitalcoderange="10027" catalogcode="B+10" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" isReview="False" NodeLogicContent="" isform="False" formclass="" maxrefid="116" RelateInstanceId="0">
   <Ref id="93">
     <node identity="10" isfixed="True" spaceholder="4" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="94f78699-0772-496a-baa1-2d554664b735" nodetype="Embeded" nodelogiccontent="" name="一般信息(出入院日期)" text="一般信息(出入院日期)" description="用于出院记录，包括出院日期和入院日期。" otherid="D-101812" display="11```0`1">
       <node embededId="8" id="4ddec028-7b7f-4cc8-9254-7379e9e237f8" nodetype="Object" nodelogiccontent="" name="就诊日期" text="就诊日期" description="日期型数据" otherid="E-1264" display="11```0`1">
@@ -327,14 +327,10 @@
       </node>
     </node>
   </Ref>
-  <Ref id="108">
+  <Ref id="116">
     <node identity="28" isfixed="True" spaceholder="4" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="2cabecba-2f9e-41aa-a4c8-b89acf446943" nodetype="Embeded" nodelogiccontent="" name="手术信息(手术持续时间和输血量)" text="手术信息(手术持续时间和输血量)" description="用于手术记录中，包括手术开始、结束和持续时间，以及输血量。" otherid="D-101529" display="11```0`1">
-      <node text=" " rtf=" " nodetype="Text" />
-      <node text=" " rtf=" " nodetype="Text" />
-      <node text=" " rtf=" " nodetype="Text" />
-      <node text=" " rtf=" " nodetype="Text" />
       <node embededId="25" id="0f160308-f7f6-4187-bc44-d2ff71aa8189" nodetype="Object" nodelogiccontent="" name="持续时间" text="持续时间" description="描述症状体征等方面的持续时间。" otherid="E-1264" display="11```0`1">
-        <node id="ad2a475d-db9e-4cb7-97ee-a0a6820fa9e8" nodetype="AtomNode" nodelogiccontent="" name="持续时间" text="时间值" description="7.104" otherid="F-71040" atomtype="Double" value="" unit="504" unitcollection="5" display="1111111```````0" embededId="26" autoeditnext="True" spaceholder="0" forbidDel="False" />
+        <node id="ad2a475d-db9e-4cb7-97ee-a0a6820fa9e8" nodetype="AtomNode" nodelogiccontent="" name="持续时间" text="时间值" description="7.104" otherid="F-71040" atomtype="Double" value="" unit="504" unitcollection="5" display="1010111``建议``内复查。```0" embededId="26" autoeditnext="True" spaceholder="0" forbidDel="False" />
       </node>
     </node>
   </Ref>
@@ -344,11 +340,51 @@
     <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
     <node refid="109" nodetype="Embeded" />
     <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
-    <node text="    注意事项：如有任何不适，请立即就诊。复诊时请携带病历、检查报告等相关资料或物品。建议" rtf="    \'d7\'a2\'d2\'e2\'ca\'c2\'cf\'ee\'a3\'ba\'c8\'e7\'d3\'d0\'c8\'ce\'ba\'ce\'b2\'bb\'ca\'ca\'a3\'ac\'c7\'eb\'c1\'a2\'bc\'b4\'be\'cd\'d5\'ef\'a1\'a3\'b8\'b4\'d5\'ef\'ca\'b1\'c7\'eb\'d0\'af\'b4\'f8\'b2\'a1\'c0\'fa\'a1\'a2\'bc\'ec\'b2\'e9\'b1\'a8\'b8\'e6\'b5\'c8\'cf\'e0\'b9\'d8\'d7\'ca\'c1\'cf\'bb\'f2\'ce\'ef\'c6\'b7\'a1\'a3\'bd\'a8\'d2\'e9" nodetype="Text" />
-    <node refid="108" nodetype="Embeded" />
-    <node text="内复查。" rtf="\'c4\'da\'b8\'b4\'b2\'e9\'a1\'a3" nodetype="Text" />
+    <node text="    注意事项：如有任何不适，请立即就诊。复诊时请携带病历、检查报告等相关资料或物品" rtf="    \'d7\'a2\'d2\'e2\'ca\'c2\'cf\'ee\'a3\'ba\'c8\'e7\'d3\'d0\'c8\'ce\'ba\'ce\'b2\'bb\'ca\'ca\'a3\'ac\'c7\'eb\'c1\'a2\'bc\'b4\'be\'cd\'d5\'ef\'a1\'a3\'b8\'b4\'d5\'ef\'ca\'b1\'c7\'eb\'d0\'af\'b4\'f8\'b2\'a1\'c0\'fa\'a1\'a2\'bc\'ec\'b2\'e9\'b1\'a8\'b8\'e6\'b5\'c8\'cf\'e0\'b9\'d8\'d7\'ca\'c1\'cf\'bb\'f2\'ce\'ef\'c6\'b7" nodetype="Text" />
+    <node text="。" rtf="\'a1\'a3" nodetype="Text" />
+    <node refid="116" nodetype="Embeded" />
     <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
-    <node text="    门诊预约流程:可通过支付宝或微信城市服务预约，也可下载医事通app预约。" rtf="    \'c3\'c5\'d5\'ef\'d4\'a4\'d4\'bc\'c1\'f7\'b3\'cc:\'bf\'c9\'cd\'a8\'b9\'fd\'d6\'a7\'b8\'b6\'b1\'a6\'bb\'f2\'ce\'a2\'d0\'c5\'b3\'c7\'ca\'d0\'b7\'fe\'ce\'f1\'d4\'a4\'d4\'bc\'a3\'ac\'d2\'b2\'bf\'c9\'cf\'c2\'d4\'d8\'d2\'bd\'ca\'c2\'cd\'a8app\'d4\'a4\'d4\'bc\'a1\'a3" nodetype="Text" />
+    <node text="    门诊预约流程:" rtf="    \'c3\'c5\'d5\'ef\'d4\'a4\'d4\'bc\'c1\'f7\'b3\'cc:" nodetype="Text" />
+    <node text="1" rtf="1" nodetype="Text" />
+    <node text="." rtf="." nodetype="Text" />
+    <node text="进入" rtf="\'bd\'f8\'c8\'eb" nodetype="Text" />
+    <node text="微信" rtf="\'ce\'a2\'d0\'c5" nodetype="Text" />
+    <node text="-" rtf="-" nodetype="Text" />
+    <node text="公众" rtf="\'b9\'ab\'d6\'da" nodetype="Text" />
+    <node text="号" rtf="\'ba\'c5" nodetype="Text" />
+    <node text="-" rtf="-" nodetype="Text" />
+    <node text="重庆" rtf="\'d6\'d8\'c7\'ec" nodetype="Text" />
+    <node text="医科" rtf="\'d2\'bd\'bf\'c6" nodetype="Text" />
+    <node text="大学" rtf="\'b4\'f3\'d1\'a7" nodetype="Text" />
+    <node text="附属" rtf="\'b8\'bd\'ca\'f4" nodetype="Text" />
+    <node text="大学城" rtf="\'b4\'f3\'d1\'a7\'b3\'c7" nodetype="Text" />
+    <node text="-" rtf="-" nodetype="Text" />
+    <node text="就" rtf="\'be\'cd" nodetype="Text" />
+    <node text="诊" rtf="\'d5\'ef" nodetype="Text" />
+    <node text="服务" rtf="\'b7\'fe\'ce\'f1" nodetype="Text" />
+    <node text="-" rtf="-" nodetype="Text" />
+    <node text="预约" rtf="\'d4\'a4\'d4\'bc" nodetype="Text" />
+    <node text="挂号" rtf="\'b9\'d2\'ba\'c5" nodetype="Text" />
+    <node text="（可扫描病历上方二维码进入）。" rtf="\'a3\'a8\'bf\'c9\'c9\'a8\'c3\'e8\'b2\'a1\'c0\'fa\'c9\'cf\'b7\'bd\'b6\'fe\'ce\'ac\'c2\'eb\'bd\'f8\'c8\'eb\'a3\'a9\'a1\'a3" nodetype="Text" />
+    <node text="2" rtf="2" nodetype="Text" />
+    <node text="." rtf="." nodetype="Text" />
+    <node text="通过" rtf="\'cd\'a8\'b9\'fd" nodetype="Text" />
+    <node text="支付宝" rtf="\'d6\'a7\'b8\'b6\'b1\'a6" nodetype="Text" />
+    <node text="或" rtf="\'bb\'f2" nodetype="Text" />
+    <node text="微信" rtf="\'ce\'a2\'d0\'c5" nodetype="Text" />
+    <node text="城市" rtf="\'b3\'c7\'ca\'d0" nodetype="Text" />
+    <node text="服务" rtf="\'b7\'fe\'ce\'f1" nodetype="Text" />
+    <node text="预约" rtf="\'d4\'a4\'d4\'bc" nodetype="Text" />
+    <node text="。" rtf="\'a1\'a3" nodetype="Text" />
+    <node text="3" rtf="3" nodetype="Text" />
+    <node text="." rtf="." nodetype="Text" />
+    <node text="下载" rtf="\'cf\'c2\'d4\'d8" nodetype="Text" />
+    <node text="医" rtf="\'d2\'bd" nodetype="Text" />
+    <node text="事" rtf="\'ca\'c2" nodetype="Text" />
+    <node text="通" rtf="\'cd\'a8" nodetype="Text" />
+    <node text="app" rtf="app" nodetype="Text" />
+    <node text="预约" rtf="\'d4\'a4\'d4\'bc" nodetype="Text" />
+    <node text="。" rtf="\'a1\'a3" nodetype="Text" />
   </node>
   <Ref id="6">
     <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="1f1ca474-f968-4cf0-a493-abd4fac072fe" nodetype="Embeded" nodelogiccontent="" name="医师签名" text="医师签名" description="病史记录者签名" display="11```0`1">
