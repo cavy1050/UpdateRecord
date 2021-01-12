@@ -1,4 +1,4 @@
-<Model id="b7fbf2e3-8e1b-4a8b-8029-25e86aef4cff" name="门诊病历通用模板" description="适用于重庆医科大学附属大学城医院" text="门诊病历" nodetype="Model" canprint="True" printInOddPages="False" display="11```0`1" Version="1.0.0.409" titledisplay="1`1`1" hospitalcoderange="10027" catalogcode="B+10" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" isReview="False" NodeLogicContent="" isform="False" formclass="" maxrefid="116" RelateInstanceId="0">
+<Model id="b7fbf2e3-8e1b-4a8b-8029-25e86aef4cff" name="门诊病历通用模板" description="适用于重庆医科大学附属大学城医院" text="门诊病历" nodetype="Model" canprint="True" printInOddPages="False" display="11```0`1" Version="1.0.0.440" titledisplay="1`1`1" hospitalcoderange="10027" catalogcode="B+10" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" isReview="False" NodeLogicContent="" isform="False" formclass="" maxrefid="117" RelateInstanceId="0">
   <Ref id="93">
     <node identity="10" isfixed="True" spaceholder="4" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="94f78699-0772-496a-baa1-2d554664b735" nodetype="Embeded" nodelogiccontent="" name="一般信息(出入院日期)" text="一般信息(出入院日期)" description="用于出院记录，包括出院日期和入院日期。" otherid="D-101812" display="11```0`1">
       <node embededId="8" id="4ddec028-7b7f-4cc8-9254-7379e9e237f8" nodetype="Object" nodelogiccontent="" name="就诊日期" text="就诊日期" description="日期型数据" otherid="E-1264" display="11```0`1">
@@ -10,7 +10,80 @@
     <node refid="93" nodetype="Embeded" />
   </node>
   <node id="63950bdc-9952-4641-98dc-05bc68b2e071" nodetype="DynamicMoleNode" nodelogiccontent="" name="主诉" signid="主诉|49" text="主诉" description="1.121" otherid="C-1111" display="20`主诉：`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" canNull="False" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0" />
-  <node id="1ce56d4d-f776-4f3c-843d-3b4d729ee6cf" nodetype="DynamicMoleNode" nodelogiccontent="" name="现病史" signid="现病史|613" text="现病史" description="1.123" otherid="C-1111" display="20`现病史：`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" canNull="False" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0" />
+  <Ref id="117">
+    <node identity="10" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="10027" id="a7829ed8-c3f0-471d-80a6-d5b524c19f86" nodetype="Embeded" nodelogiccontent="" name="新冠询问描述" text="新冠询问描述" description="有无发热等。。。" otherid="D-2281" display="11`新冠询问描述``0`1">
+      <node embededId="0" id="99363c62-02fa-4f7c-a301-cef9899c44ab" nodetype="Object" nodelogiccontent="" name="有无发热" text="有无发热" otherid="E-2204" display="11`有无发热``0`1">
+        <node id="f7d7405e-82f7-4435-87f9-34ae567446e1" nodetype="AtomNode" nodelogiccontent="" name="功能" text="有无" description="体征和症状。" otherid="F-40" atomtype="String" minrequired="1" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="功能///BiologyFunction///代码范围//F-01250,F-01255///" inputdirect="False" display="1111111```````0" embededId="1" autoeditnext="True" spaceholder="0" forbidDel="True" />
+      </node>
+      <node text="发热" rtf="\'b7\'a2\'c8\'c8" nodetype="Text" />
+      <node text="，" rtf="\'a3\'ac" nodetype="Text" />
+      <node embededId="2" id="df2d5283-c767-45c8-a43d-4623e91ac072" nodetype="Object" nodelogiccontent="" name="有无上感及消化道症状" text="有无上感及消化道症状" description="有无选择" otherid="E-2204" display="11`有无上感及消化道症状``0`1">
+        <node id="f7d7405e-82f7-4435-87f9-34ae567446e1" nodetype="AtomNode" nodelogiccontent="" name="功能" text="有无" description="体征和症状。" otherid="F-40" atomtype="String" minrequired="1" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="功能///BiologyFunction///代码范围//F-01250,F-01255///" inputdirect="False" display="1111111```````0" embededId="3" autoeditnext="True" spaceholder="0" forbidDel="True" />
+      </node>
+      <node text="上" rtf="\'c9\'cf" nodetype="Text" />
+      <node text="感" rtf="\'b8\'d0" nodetype="Text" />
+      <node text="及" rtf="\'bc\'b0" nodetype="Text" />
+      <node text="消化道" rtf="\'cf\'fb\'bb\'af\'b5\'c0" nodetype="Text" />
+      <node text="症状" rtf="\'d6\'a2\'d7\'b4" nodetype="Text" />
+      <node text="，" rtf="\'a3\'ac" nodetype="Text" />
+      <node embededId="4" id="48462c06-9423-4134-a454-bd7594e4af53" nodetype="Object" nodelogiccontent="" name="有/否认疫区居住旅游史" text="有/否认疫区居住旅游史" otherid="E-2204" display="11`有/否认疫区居住旅游史``0`1">
+        <node id="f7d7405e-82f7-4435-87f9-34ae567446e1" nodetype="AtomNode" nodelogiccontent="" name="功能" text="有/否认" description="体征和症状。" otherid="F-40" atomtype="String" minrequired="1" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="关联词(修饰词)///GeneralLinkage///代码范围//G-0002,G-0011///" inputdirect="False" display="1111111```````0" embededId="5" autoeditnext="True" spaceholder="0" forbidDel="True" />
+      </node>
+      <node text="2" rtf="2" nodetype="Text" />
+      <node text="周" rtf="\'d6\'dc" nodetype="Text" />
+      <node text="内" rtf="\'c4\'da" nodetype="Text" />
+      <node text="疫区" rtf="\'d2\'df\'c7\'f8" nodetype="Text" />
+      <node text="（" rtf="\'a3\'a8" nodetype="Text" />
+      <node text="包括境内外）" rtf="\'b0\'fc\'c0\'a8\'be\'b3\'c4\'da\'cd\'e2\'a3\'a9" nodetype="Text" />
+      <node text="或" rtf="\'bb\'f2" nodetype="Text" />
+      <node text="其他" rtf="\'c6\'e4\'cb\'fb" nodetype="Text" />
+      <node text="本地" rtf="\'b1\'be\'b5\'d8" nodetype="Text" />
+      <node text="病例" rtf="\'b2\'a1\'c0\'fd" nodetype="Text" />
+      <node text="报告" rtf="\'b1\'a8\'b8\'e6" nodetype="Text" />
+      <node text="社区" rtf="\'c9\'e7\'c7\'f8" nodetype="Text" />
+      <node text="旅行" rtf="\'c2\'c3\'d0\'d0" nodetype="Text" />
+      <node text="史" rtf="\'ca\'b7" nodetype="Text" />
+      <node text="或" rtf="\'bb\'f2" nodetype="Text" />
+      <node text="居住" rtf="\'be\'d3\'d7\'a1" nodetype="Text" />
+      <node text="史" rtf="\'ca\'b7" nodetype="Text" />
+      <node text="，" rtf="\'a3\'ac" nodetype="Text" />
+      <node embededId="6" id="6bcf7bf4-7d97-4ce7-a3e9-a045b52ce40f" nodetype="Object" nodelogiccontent="" name="有/否认" text="有/否认" description="有/否认" otherid="E-2204" display="11```0`1">
+        <node id="f7d7405e-82f7-4435-87f9-34ae567446e1" nodetype="AtomNode" nodelogiccontent="" name="功能" text="有/否认" description="体征和症状。" otherid="F-40" atomtype="String" minrequired="1" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="关联词(修饰词)///GeneralLinkage///代码范围//G-0002,G-0011///" inputdirect="False" display="1111111```````0" embededId="7" autoeditnext="True" spaceholder="0" forbidDel="True" />
+      </node>
+      <node text="新" rtf="\'d0\'c2" nodetype="Text" />
+      <node text="冠" rtf="\'b9\'da" nodetype="Text" />
+      <node text="病毒" rtf="\'b2\'a1\'b6\'be" nodetype="Text" />
+      <node text="肺炎" rtf="\'b7\'ce\'d1\'d7" nodetype="Text" />
+      <node text="确诊" rtf="\'c8\'b7\'d5\'ef" nodetype="Text" />
+      <node text="或" rtf="\'bb\'f2" nodetype="Text" />
+      <node text="疑似" rtf="\'d2\'c9\'cb\'c6" nodetype="Text" />
+      <node text="病" rtf="\'b2\'a1" nodetype="Text" />
+      <node text="例" rtf="\'c0\'fd" nodetype="Text" />
+      <node text="接触" rtf="\'bd\'d3\'b4\'a5" nodetype="Text" />
+      <node text="史" rtf="\'ca\'b7" nodetype="Text" />
+      <node text="，" rtf="\'a3\'ac" nodetype="Text" />
+      <node text="所在" rtf="\'cb\'f9\'d4\'da" nodetype="Text" />
+      <node text="社区" rtf="\'c9\'e7\'c7\'f8" nodetype="Text" />
+      <node embededId="8" id="b9d62c62-e2ca-4759-a45b-8ad8dbb672d8" nodetype="Object" nodelogiccontent="" name="有无选择" text="有无选择" otherid="E-1601" display="11```0`1">
+        <node id="f7d7405e-82f7-4435-87f9-34ae567446e1" nodetype="AtomNode" nodelogiccontent="" name="功能" text="有无" description="体征和症状。" otherid="F-4" atomtype="String" minrequired="1" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="功能///BiologyFunction///代码范围//F-01250～F-01255//开始序号//138180//结束序号//138181" inputdirect="False" display="1110111```````0" embededId="9" autoeditnext="True" spaceholder="0" forbidDel="True" />
+      </node>
+      <node text="聚集性" rtf="\'be\'db\'bc\'af\'d0\'d4" nodetype="Text" />
+      <node text="发病" rtf="\'b7\'a2\'b2\'a1" nodetype="Text" />
+      <node text="。" rtf="\'a1\'a3" nodetype="Text" />
+    </node>
+  </Ref>
+  <node id="1ce56d4d-f776-4f3c-843d-3b4d729ee6cf" nodetype="DynamicMoleNode" nodelogiccontent="" name="现病史" signid="现病史|613" text="现病史" description="1.123" otherid="C-1111" display="20`现病史：`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" canNull="False" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="&#xA;" rtf="\par&#xD;&#xA;" nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node text=" " rtf=" " nodetype="Text" />
+    <node refid="117" nodetype="Embeded" />
+  </node>
   <Ref id="89">
     <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="True" atomvisible="///S//////linshiID///1///ebbf2cb0-6634-4069-9f8d-5541ac71a666;1///String///138267`否认`G-0011///ebbf2cb0-6634-4069-9f8d-5541ac71a666;2" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="ebbf2cb0-6634-4069-9f8d-5541ac71a666" nodetype="Embeded" nodelogiccontent="" name="相关病史描述(有无高血压病史)" text="相关病史描述(有无高血压病史)" description="描述有无高血压病史及其患病时间。" display="11```0`1">
       <node embededId="0" id="cac2c1af-174d-417a-9080-550de3fcce5a" nodetype="Object" nodelogiccontent="" name="有无高血压病史" text="有无高血压病史" description="6.321" display="11```0`1">
@@ -330,7 +403,7 @@
   <Ref id="116">
     <node identity="28" isfixed="True" spaceholder="4" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="2cabecba-2f9e-41aa-a4c8-b89acf446943" nodetype="Embeded" nodelogiccontent="" name="手术信息(手术持续时间和输血量)" text="手术信息(手术持续时间和输血量)" description="用于手术记录中，包括手术开始、结束和持续时间，以及输血量。" otherid="D-101529" display="11```0`1">
       <node embededId="25" id="0f160308-f7f6-4187-bc44-d2ff71aa8189" nodetype="Object" nodelogiccontent="" name="持续时间" text="持续时间" description="描述症状体征等方面的持续时间。" otherid="E-1264" display="11```0`1">
-        <node id="ad2a475d-db9e-4cb7-97ee-a0a6820fa9e8" nodetype="AtomNode" nodelogiccontent="" name="持续时间" text="时间值" description="7.104" otherid="F-71040" atomtype="Double" value="" unit="504" unitcollection="5" display="1010111``建议``内复查。```0" embededId="26" autoeditnext="True" spaceholder="0" forbidDel="False" />
+        <node id="ad2a475d-db9e-4cb7-97ee-a0a6820fa9e8" nodetype="AtomNode" nodelogiccontent="" name="持续时间" text="建议时间值内复查" description="7.104" otherid="F-71040" atomtype="Double" value="" unit="504" unitcollection="5" display="1010111``建议``内复查。```0" embededId="26" autoeditnext="True" spaceholder="0" forbidDel="False" />
       </node>
     </node>
   </Ref>
