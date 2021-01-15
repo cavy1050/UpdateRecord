@@ -125,7 +125,9 @@ begin
     select @ybzje = @ybzje + @mzjzje --+@ybzlzfje --20181016暂时不确定，万达一级医院统筹是否包含一般诊疗支付
 END
 
-if abs(@zje - @ybzje)>0.1
+
+--TODO 跨年退费，医保返回金额都是0,所以导致金额不一致，需明确如为跨年退费，则不必判断金额一致。
+if abs(@zje - @ybzje)>0.1 and EXISTS (SELECT 1 FROM dbo.SF_BRJSK (NOLOCK) WHERE sjh=@jssjh AND ISNULL(tsjh,'')='')
 begin
 	select "F","HIS总额和医保总额不一致!"
 	return
@@ -673,5 +675,10 @@ end
 select "T", @sfje2, @qkbz, @yjzfje
 
 return
+
+
+
+
+
 
 
