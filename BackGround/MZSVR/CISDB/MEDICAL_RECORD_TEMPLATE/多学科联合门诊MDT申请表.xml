@@ -1,0 +1,232 @@
+<Model id="7ac370ba-90b2-4c21-96b0-3a662f3231a3" name="（多学科联合门诊（MDT）申请表）" description="" text="多学科联合门诊（MDT）申请表" nodetype="Model" canprint="True" printInOddPages="False" display="11`                      会诊申请单``0`1" Version="1.0.0.336" titledisplay="1`1`1" hospitalcoderange="10027" catalogcode="B+30" illnesstypecode="FFFF" scalemodelxml="" modellogiccontent="" indentEnabled="False" isReview="False" NodeLogicContent="" isform="False" formclass="" maxrefid="60" RelateInstanceId="0">
+  <Ref id="60">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="1b7608e7-9d55-4876-986e-9f8cb1687467" nodetype="Embeded" nodelogiccontent="" name="其他信息(请求会诊信息)" text="其他信息(请求会诊信息)" description="包括请求会诊科室与医生等信息。" display="11```0`1">
+      <node embededId="0" id="403cdde9-2ecf-4a71-8cb2-8c57c60e8435" nodetype="Object" nodelogiccontent="" name="请求会诊科室" signid="会诊申请科室|95" text="请求会诊科室" display="11```0`1">
+        <node id="5e39b306-e2b9-450e-ba78-3b6971652a38" nodetype="AtomNode" nodelogiccontent="" name="请求会诊科室" text="申请科室" description="医院科室字典。" atomtype="String" maxrequired="10" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="院内科室///DepartmentBook///记录状态//1" inputdirect="False" defaultvalue="#CurrentDeptName`当前科室名称`" display="1111111`请求会诊科室`：`````0" embededId="29" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="2cebc972-92bf-424b-a85d-bbe1b0e6d95c" nodetype="DynamicMoleNode" nodelogiccontent="" name="当前科室" text="当前科室" otherid="C-11F1" display="20`由申请医师填写&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="申请科室：" rtf="\'c9\'ea\'c7\'eb\'bf\'c6\'ca\'d2\'a3\'ba" nodetype="Text" />
+    <node refid="60" nodetype="Embeded" />
+  </node>
+  <Ref id="43">
+    <node identity="66" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="1b7608e7-9d55-4876-986e-9f8cb1687467" nodetype="Embeded" nodelogiccontent="" name="其他信息(请求会诊信息)" text="其他信息(请求会诊信息)" description="包括请求会诊科室与医生等信息。" otherid="D-101571" display="11```0`1">
+      <node embededId="30" id="0bca2bda-ec0b-4be7-8b59-485adb13362c" nodetype="Object" nodelogiccontent="" name="请求会诊医师" text="请求会诊医师" otherid="E-02" display="11```0`1">
+        <node id="6d779fe3-733a-4f0d-9c86-a040241deeb6" nodetype="AtomNode" nodelogiccontent="" name="职工代码库" text="申请医师" description="院内职工表。" otherid="F-3" atomtype="String" maxrequired="10" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="职工表///EmployeeBook///记录状态//1" inputdirect="False" defaultvalue="#doctorname`当前医生名称`" display="1111111`医师`：`````0" embededId="31" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="ac771b40-889a-4a58-abf9-eca3fdff3cc8" nodetype="DynamicMoleNode" nodelogiccontent="" name="申请医师" text="申请医师" otherid="C-1158" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="申请医师及联系方式：" rtf="\'c9\'ea\'c7\'eb\'d2\'bd\'ca\'a6\'bc\'b0\'c1\'aa\'cf\'b5\'b7\'bd\'ca\'bd\'a3\'ba" nodetype="Text" />
+    <node refid="43" nodetype="Embeded" />
+  </node>
+  <Ref id="41">
+    <node identity="8" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="a881d42a-7821-4cdc-ada5-dc1dfa3c8ec6" nodetype="Embeded" nodelogiccontent="" name="申请日期" text="申请日期" description="申请日期" otherid="D-82" display="11```0`1">
+      <node embededId="6" id="78d65dd5-7a89-4d87-8f88-89feb59cbbe0" nodetype="Object" nodelogiccontent="" name="申报日期" text="申报日期" description="各项文书的审批日期。" otherid="E-1264" display="11```0`1">
+        <node id="c8499f95-5517-4342-bcc4-6822448c911e" nodetype="AtomNode" nodelogiccontent="" name="绝对时间" text="申请日期" description="支持绝对时间显示格式和精度等设置。" otherid="F-8" atomtype="Time" value="" defaultvalue="156`当前日期" display="1111011`````yyyy年MM月dd日``0" embededId="7" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="c1c9bddd-1b11-4755-8f3b-6bda62517874" nodetype="DynamicMoleNode" nodelogiccontent="" name="申请日期" text="申请日期" description="申请日期" otherid="C-11F1" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="False" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="申请日期：" rtf="\'c9\'ea\'c7\'eb\'c8\'d5\'c6\'da\'a3\'ba" nodetype="Text" />
+    <node refid="41" nodetype="Embeded" />
+  </node>
+  <node id="bac0c71c-e8a7-44dd-b08e-f217072f12a8" nodetype="DynamicMoleNode" nodelogiccontent="" name="时间值" text="时间值" description="5.305" otherid="C-B1" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="根据病情本次MDT在        小时内开展" rtf="\'b8\'f9\'be\'dd\'b2\'a1\'c7\'e9\'b1\'be\'b4\'ceMDT\'d4\'da        \'d0\'a1\'ca\'b1\'c4\'da\'bf\'aa\'d5\'b9" nodetype="Text" />
+  </node>
+  <Ref id="44">
+    <node identity="60" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="235372ac-6455-4ba2-8728-c2c2a9628bc0" nodetype="Embeded" nodelogiccontent="" name="身份信息(一般信息)" text="身份信息(一般信息)" description="用于病程中对病例特点的描述，包括姓名、性别、年龄等信息。" otherid="D-1001" display="11```0`1">
+      <node embededId="18" id="c9a9b2ab-81ca-4d9a-8da7-7308e7cb90f6" nodetype="Object" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.101" otherid="E-01101" display="11```0`1">
+        <node id="6fa963d2-ab46-493e-9cf6-ff87addccf52" nodetype="AtomNode" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.000" otherid="F-01000" atomtype="String" value="``" defaultvalue="#patname`当前病人姓名`" display="1111111```````0" embededId="19" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="9a6ff28e-a294-44ba-8077-abe075b4dae4" nodetype="DynamicMoleNode" nodelogiccontent="" name="基本信息" text="基本信息" description="0.121" otherid="C-11D1" display="20`患者信息&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="姓名" rtf="\'d0\'d5\'c3\'fb" nodetype="Text" />
+    <node text="：" rtf="\'a3\'ba" nodetype="Text" />
+    <node refid="44" nodetype="Embeded" />
+  </node>
+  <Ref id="45">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="235372ac-6455-4ba2-8728-c2c2a9628bc0" nodetype="Embeded" nodelogiccontent="" name="身份信息(一般信息)" text="身份信息(一般信息)" description="用于病程中对病例特点的描述，包括姓名、性别、年龄等信息。" display="11```0`1">
+      <node embededId="0" id="c9a9b2ab-81ca-4d9a-8da7-7308e7cb90f6" nodetype="Object" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.101" display="11```0`1">
+        <node id="6fa963d2-ab46-493e-9cf6-ff87addccf52" nodetype="AtomNode" nodelogiccontent="" name="病人姓名" text="病人姓名" description="0.000" atomtype="String" value="``" defaultvalue="#PatientRecordNoOfClinic`门诊号`" display="1111111```````0" embededId="19" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="21588472-c8f5-46c8-b59b-0f77507ad44a" nodetype="DynamicMoleNode" nodelogiccontent="" name="病历号" text="病历号" otherid="C-11F1" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="病历号" rtf="\'b2\'a1\'c0\'fa\'ba\'c5" nodetype="Text" />
+    <node text="：" rtf="\'a3\'ba" nodetype="Text" />
+    <node refid="45" nodetype="Embeded" />
+  </node>
+  <Ref id="46">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="1e4a2ae9-dc8f-437e-b028-7f1e234477b7" nodetype="Embeded" nodelogiccontent="" name="门诊系统诊断" text="门诊系统诊断" description="门诊系统诊断" display="11```0`1">
+      <node embededId="0" id="5d01d7b8-a9b2-4cf8-af25-85628824bcf3" nodetype="Object" nodelogiccontent="" name="门诊系统诊断" signid="初步诊断-西医诊断名称|230" text="门诊系统诊断" description="门诊系统诊断" display="11```0`1">
+        <node id="6fa963d2-ab46-493e-9cf6-ff87addccf52" nodetype="AtomNode" nodelogiccontent="" name="门诊系统诊断" text="请点击输入诊断" description="输入自由文本的原子类型。" atomtype="Dynamic" value="``" defaultvalue="17101297-d6fc-46e8-935b-d19f7d74ad9e|[序号][Zdmc]  `17101297-d6fc-46e8-935b-d19f7d74ad9e|[序号][Zdmc]  `" display="1111111```````0" embededId="13" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="f1cec2c8-1719-4c17-9025-5a2dfe4eee10" nodetype="DynamicMoleNode" nodelogiccontent="" name="目前诊断" text="目前诊断" description="3.542" otherid="C-81" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="主要诊断：" rtf="\'d6\'f7\'d2\'aa\'d5\'ef\'b6\'cf\'a3\'ba" nodetype="Text" />
+    <node refid="46" nodetype="Embeded" />
+  </node>
+  <node id="e2641dcc-af78-411b-bbb8-acc401d639f3" nodetype="DynamicMoleNode" nodelogiccontent="" name="联系电话" text="联系电话" otherid="C-1151" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="患者联系电话（建议留2个）：" rtf="\'bb\'bc\'d5\'df\'c1\'aa\'cf\'b5\'b5\'e7\'bb\'b0\'a3\'a8\'bd\'a8\'d2\'e9\'c1\'f42\'b8\'f6\'a3\'a9\'a3\'ba" nodetype="Text" />
+  </node>
+  <Ref id="47">
+    <node identity="2" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="1b7608e7-9d55-4876-986e-9f8cb1687467" nodetype="Embeded" nodelogiccontent="" name="其他信息(请求会诊信息)" text="其他信息(请求会诊信息)" description="包括请求会诊科室与医生等信息。" display="11```0`1">
+      <node embededId="0" id="403cdde9-2ecf-4a71-8cb2-8c57c60e8435" nodetype="Object" nodelogiccontent="" name="请求会诊科室" signid="会诊申请科室|95" text="请求会诊科室" display="11```0`1">
+        <node id="5e39b306-e2b9-450e-ba78-3b6971652a38" nodetype="AtomNode" nodelogiccontent="" name="请求会诊科室" text="申请科室" description="医院科室字典。" atomtype="String" maxrequired="10" value="``" ischoiceatom="True" ChoiceType="ShowList" sqlstr="院内科室///DepartmentBook///记录状态//1" inputdirect="False" defaultvalue="`Custom`" display="1111111`请求会诊科室`：`````0" embededId="29" autoeditnext="True" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="12605025-fba6-43df-ae93-2ddcfc576516" nodetype="DynamicMoleNode" nodelogiccontent="" name="会诊申请科室" text="会诊申请科室" otherid="C-1158" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="拟申请会诊科室有  个：分别是：" rtf="\'c4\'e2\'c9\'ea\'c7\'eb\'bb\'e1\'d5\'ef\'bf\'c6\'ca\'d2\'d3\'d0  \'b8\'f6\'a3\'ba\'b7\'d6\'b1\'f0\'ca\'c7\'a3\'ba" nodetype="Text" />
+    <node refid="47" nodetype="Embeded" />
+  </node>
+  <Ref id="48">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="49">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="52db78f9-5d90-447c-bc3a-8d24fd9c56d5" nodetype="DynamicMoleNode" nodelogiccontent="" name="患者资料" text="患者资料" otherid="C-11F1" display="20`患者填写&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="医师已告知多学科联合门诊就诊意义及流程：" rtf="\'d2\'bd\'ca\'a6\'d2\'d1\'b8\'e6\'d6\'aa\'b6\'e0\'d1\'a7\'bf\'c6\'c1\'aa\'ba\'cf\'c3\'c5\'d5\'ef\'be\'cd\'d5\'ef\'d2\'e2\'d2\'e5\'bc\'b0\'c1\'f7\'b3\'cc\'a3\'ba" nodetype="Text" />
+    <node refid="48" nodetype="Embeded" />
+    <node text="同意申请    " rtf="\'cd\'ac\'d2\'e2\'c9\'ea\'c7\'eb    " nodetype="Text" />
+    <node refid="49" nodetype="Embeded" />
+    <node text="不同意申请  &#xA;                        患者或患者授权委托人签字确认：             时间：" rtf="\'b2\'bb\'cd\'ac\'d2\'e2\'c9\'ea\'c7\'eb  \par&#xD;&#xA;\pard                         \'bb\'bc\'d5\'df\'bb\'f2\'bb\'bc\'d5\'df\'ca\'da\'c8\'a8\'ce\'af\'cd\'d0\'c8\'cb\'c7\'a9\'d7\'d6\'c8\'b7\'c8\'cf\'a3\'ba             \'ca\'b1\'bc\'e4\'a3\'ba" nodetype="Text" />
+  </node>
+  <node id="602e6095-d362-4fd9-b71a-daf12243307f" nodetype="DynamicMoleNode" nodelogiccontent="" name="日期(记录日期)" text="日期(记录日期)" description="病程的记录日期" otherid="C-B1" display="20`门诊办填写&#xD;&#xA;门诊办拟定具体事宜，通知会诊医师及患者&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="多学科联合门诊具体时间：" rtf="\'b6\'e0\'d1\'a7\'bf\'c6\'c1\'aa\'ba\'cf\'c3\'c5\'d5\'ef\'be\'df\'cc\'e5\'ca\'b1\'bc\'e4\'a3\'ba" nodetype="Text" />
+  </node>
+  <node id="1c456e5c-7fd3-4332-9333-86c705d21ccc" nodetype="DynamicMoleNode" nodelogiccontent="" name="会诊地点" text="会诊地点" otherid="C-1158" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="多学科联合门诊地点：" rtf="\'b6\'e0\'d1\'a7\'bf\'c6\'c1\'aa\'ba\'cf\'c3\'c5\'d5\'ef\'b5\'d8\'b5\'e3\'a3\'ba" nodetype="Text" />
+  </node>
+  <node id="20459633-ccb7-4d49-896b-8bc903874d12" nodetype="DynamicMoleNode" nodelogiccontent="" name="会诊科室与病区" text="会诊科室与病区" otherid="C-1158" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="具体会诊科室及医师：" rtf="\'be\'df\'cc\'e5\'bb\'e1\'d5\'ef\'bf\'c6\'ca\'d2\'bc\'b0\'d2\'bd\'ca\'a6\'a3\'ba" nodetype="Text" />
+  </node>
+  <Ref id="50">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="51">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="52">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="581f3027-3a60-4e0b-9a82-c2d2dee31b73" nodetype="DynamicMoleNode" nodelogiccontent="" name="医师签名" text="医师签名" description="3.571" otherid="C-D6" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node refid="50" nodetype="Embeded" />
+    <node text="已通知会诊医师会诊时间及地点   &#xA;" rtf="\'d2\'d1\'cd\'a8\'d6\'aa\'bb\'e1\'d5\'ef\'d2\'bd\'ca\'a6\'bb\'e1\'d5\'ef\'ca\'b1\'bc\'e4\'bc\'b0\'b5\'d8\'b5\'e3   \par&#xD;&#xA;" nodetype="Text" />
+    <node refid="51" nodetype="Embeded" />
+    <node text="患者资料已发会诊医师&#xA;" rtf="\'bb\'bc\'d5\'df\'d7\'ca\'c1\'cf\'d2\'d1\'b7\'a2\'bb\'e1\'d5\'ef\'d2\'bd\'ca\'a6\par&#xD;&#xA;" nodetype="Text" />
+    <node refid="52" nodetype="Embeded" />
+    <node text="已通知患者多学科联合门诊就诊时间及注意事项&#xA;                           经办签字：              时间：" rtf="\'d2\'d1\'cd\'a8\'d6\'aa\'bb\'bc\'d5\'df\'b6\'e0\'d1\'a7\'bf\'c6\'c1\'aa\'ba\'cf\'c3\'c5\'d5\'ef\'be\'cd\'d5\'ef\'ca\'b1\'bc\'e4\'bc\'b0\'d7\'a2\'d2\'e2\'ca\'c2\'cf\'ee\par&#xD;&#xA;\pard                            \'be\'ad\'b0\'ec\'c7\'a9\'d7\'d6\'a3\'ba              \'ca\'b1\'bc\'e4\'a3\'ba" nodetype="Text" />
+  </node>
+  <Ref id="53">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="54">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="55">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="261584ef-6e5e-4f6b-be60-372c568b98d0" nodetype="DynamicMoleNode" nodelogiccontent="" name="预后及转归" text="预后及转归" otherid="C-1181" display="20`随访记录&#xD;&#xA;`&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="病情转归情况：" rtf="\'b2\'a1\'c7\'e9\'d7\'aa\'b9\'e9\'c7\'e9\'bf\'f6\'a3\'ba" nodetype="Text" />
+    <node refid="53" nodetype="Embeded" />
+    <node text="治愈   " rtf="\'d6\'ce\'d3\'fa   " nodetype="Text" />
+    <node refid="54" nodetype="Embeded" />
+    <node text="好转   " rtf="\'ba\'c3\'d7\'aa   " nodetype="Text" />
+    <node refid="55" nodetype="Embeded" />
+    <node text="无好转" rtf="\'ce\'de\'ba\'c3\'d7\'aa" nodetype="Text" />
+  </node>
+  <Ref id="56">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="57">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="58">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <Ref id="59">
+    <node identity="0" isfixed="False" spaceholder="0" atomvisibleenabled="False" atomvisible="" diagnosistype="-1" illnesstypecode="" hospitalcoderange="" id="462e3b85-2a05-4b87-b70d-10fd8bc2569c" nodetype="Embeded" nodelogiccontent="" name="勾选框(勾选框)" text="勾选框(勾选框)" display="11```0`1">
+      <node embededId="0" id="90e3d20c-b798-4ee6-9ff5-0bfcdfafedb2" nodetype="Object" nodelogiccontent="" name="复选框(勾选框)" text="复选框(勾选框)" description="适用于打勾选项" display="11```0`1">
+        <node id="7d1adc87-e5ba-4930-8233-bf1f1dfd8842" nodetype="AtomNode" nodelogiccontent="" name="勾选框" text="勾选框" description="勾选框" atomtype="Check" value="0" defaultvalue="12345" display="1111011```````0" embededId="31" autoeditnext="False" spaceholder="0" forbidDel="False" />
+      </node>
+    </node>
+  </Ref>
+  <node id="5dd97bd6-7168-4f58-a5fc-24e0c94d08db" nodetype="DynamicMoleNode" nodelogiccontent="" name="患方意见" text="患方意见" description="知情同意书中项目" otherid="C-1192" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="患者满意度：" rtf="\'bb\'bc\'d5\'df\'c2\'fa\'d2\'e2\'b6\'c8\'a3\'ba" nodetype="Text" />
+    <node refid="56" nodetype="Embeded" />
+    <node text="非常满意   " rtf="\'b7\'c7\'b3\'a3\'c2\'fa\'d2\'e2   " nodetype="Text" />
+    <node refid="57" nodetype="Embeded" />
+    <node text="较满意   " rtf="\'bd\'cf\'c2\'fa\'d2\'e2   " nodetype="Text" />
+    <node refid="58" nodetype="Embeded" />
+    <node text="满意   " rtf="\'c2\'fa\'d2\'e2   " nodetype="Text" />
+    <node refid="59" nodetype="Embeded" />
+    <node text="不满意" rtf="\'b2\'bb\'c2\'fa\'d2\'e2" nodetype="Text" />
+  </node>
+  <node id="0336ed7f-cac4-4f57-b9b1-82782ac90121" nodetype="DynamicMoleNode" nodelogiccontent="" name="随访情况" text="随访情况" otherid="C-51" display="10``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="随访时间：                       随访人签字:" rtf="\'cb\'e6\'b7\'c3\'ca\'b1\'bc\'e4\'a3\'ba                       \'cb\'e6\'b7\'c3\'c8\'cb\'c7\'a9\'d7\'d6:" nodetype="Text" />
+  </node>
+  <node id="026507aa-e61f-4bbb-aaef-19251ae9730e" nodetype="DynamicMoleNode" nodelogiccontent="" name="备注" text="备注" description="其他需要补充描述的内容" otherid="C-D6" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="备注：&#xA;    1.申请医师填写申请单，附门诊病历交于患者；&#xA;" rtf="\'b1\'b8\'d7\'a2\'a3\'ba\par&#xD;&#xA;    1.\'c9\'ea\'c7\'eb\'d2\'bd\'ca\'a6\'cc\'ee\'d0\'b4\'c9\'ea\'c7\'eb\'b5\'a5\'a3\'ac\'b8\'bd\'c3\'c5\'d5\'ef\'b2\'a1\'c0\'fa\'bd\'bb\'d3\'da\'bb\'bc\'d5\'df\'a3\'bb\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="2.患者携申请单、门诊病历及现有检查结果至门诊办预约多学科联合门诊；   &#xA;" rtf="2.\'bb\'bc\'d5\'df\'d0\'af\'c9\'ea\'c7\'eb\'b5\'a5\'a1\'a2\'c3\'c5\'d5\'ef\'b2\'a1\'c0\'fa\'bc\'b0\'cf\'d6\'d3\'d0\'bc\'ec\'b2\'e9\'bd\'e1\'b9\'fb\'d6\'c1\'c3\'c5\'d5\'ef\'b0\'ec\'d4\'a4\'d4\'bc\'b6\'e0\'d1\'a7\'bf\'c6\'c1\'aa\'ba\'cf\'c3\'c5\'d5\'ef\'a3\'bb   \par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="3.门诊办整合患者现有资料QQ形式发送会诊医师，并通知会诊时间；&#xA;" rtf="3.\'c3\'c5\'d5\'ef\'b0\'ec\'d5\'fb\'ba\'cf\'bb\'bc\'d5\'df\'cf\'d6\'d3\'d0\'d7\'ca\'c1\'cfQQ\'d0\'ce\'ca\'bd\'b7\'a2\'cb\'cd\'bb\'e1\'d5\'ef\'d2\'bd\'ca\'a6\'a3\'ac\'b2\'a2\'cd\'a8\'d6\'aa\'bb\'e1\'d5\'ef\'ca\'b1\'bc\'e4\'a3\'bb\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="4.门诊办联系电话：65715703；&#xA;" rtf="4.\'c3\'c5\'d5\'ef\'b0\'ec\'c1\'aa\'cf\'b5\'b5\'e7\'bb\'b0\'a3\'ba65715703\'a3\'bb\par&#xD;&#xA;" nodetype="Text" />
+    <node text="    " rtf="    " nodetype="Text" />
+    <node text="5.此表单最终由门诊办存档。" rtf="5.\'b4\'cb\'b1\'ed\'b5\'a5\'d7\'ee\'d6\'d5\'d3\'c9\'c3\'c5\'d5\'ef\'b0\'ec\'b4\'e6\'b5\'b5\'a1\'a3" nodetype="Text" />
+  </node>
+  <node id="f3563355-21e3-4e0e-b7f7-4ab45324a3a2" nodetype="DynamicMoleNode" nodelogiccontent="" name="其他" text="其他" description="其他补充内容" otherid="C-11F1" display="20``&#xD;&#xA;`0`1" permitobjs="" defaultobjs="" allowUserDefine="True" canNotInputText="False" canNull="True" canNullSubmit="True" permittedDoctorGradeRange="" useDiagContinuedPrint="False" nodePrintArea="None" indentLength="0">
+    <node text="制表：医务科  门诊办                                            时间：2020年7月" rtf="\'d6\'c6\'b1\'ed\'a3\'ba\'d2\'bd\'ce\'f1\'bf\'c6  \'c3\'c5\'d5\'ef\'b0\'ec                                            \'ca\'b1\'bc\'e4\'a3\'ba2020\'c4\'ea7\'d4\'c2" nodetype="Text" />
+  </node>
+</Model>
