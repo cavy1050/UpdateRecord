@@ -1,0 +1,1 @@
+alter table YK_YPCDMLKZK add   gjgbm ut_mc64
